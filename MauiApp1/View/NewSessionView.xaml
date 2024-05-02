@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SpinningTrainer.View.NewSessionView"
+             Title="Crear sesión"
+             Background="White">
+    <Grid BackgroundColor="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+
+        <ScrollView Grid.Row="1">
+            <StackLayout Margin="10">
+                <StackLayout Orientation="Horizontal" Margin="10">
+                    <Label Text="Nivel de dificultad"
+             TextColor="#030000"
+             HorizontalOptions="CenterAndExpand"
+             VerticalOptions="Start"
+             Margin="10,0,0,10"
+             FontSize="20" />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="CenterAndExpand"
+                             RadioButtonGroup.GroupName="grupo1">
+                    <RadioButton Content="Principianteasa" TextColor="{StaticResource Primary}"
+                                 Margin="0,0,4,0" />
+                    <RadioButton Content="Medio" TextColor="{StaticResource Primary}"   
+                                 Margin="0,0,15,0"/>
+                    <RadioButton Content="Alto Rendimiento" TextColor="{StaticResource Primary}"
+                                 Margin="0,0,5,0"/>
+                </StackLayout>
+
+
+
+                <StackLayout Orientation="Horizontal" Margin="30">
+                    <Entry Placeholder="Ingrese el nombre de la sesión" Text="{Binding Nombre}"
+               BackgroundColor="#EDEDED" 
+               WidthRequest="300" 
+               TextColor="#444444" 
+               PlaceholderColor="#999999" 
+               HeightRequest="50" 
+               HorizontalTextAlignment="Center"
+               VerticalOptions="Start"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="10">
+                    <Picker Title ="Fecha"
+             BackgroundColor="#EDEDED"
+             WidthRequest="150" 
+             TextColor ="#000000"
+             HorizontalOptions="Start"/>
+
+
+                    <Picker Title ="Turno"
+             BackgroundColor="#EDEDED" 
+             WidthRequest="150" 
+             TextColor ="#000000"
+             HorizontalOptions="CenterAndExpand"/>
+                </StackLayout>
+
+
+
+                <StackLayout Orientation="Horizontal" Margin="50" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Button Text ="Siguiente"
+             BackgroundColor="Orange"
+             CornerRadius ="20"
+             Command="{Binding SaveCommand}"
+             WidthRequest="200" 
+             HeightRequest="60"
+             TextColor ="White"/>
+                </StackLayout>
+
+
+                <StackLayout BackgroundColor="Orange" 
+              Grid.Row="2" 
+              Orientation="Horizontal">
+
+                </StackLayout>
+
+            </StackLayout>
+
+        </ScrollView>
+
+        <StackLayout BackgroundColor="Orange" Grid.Row="2" Orientation="Horizontal">
+
+
+            <BoxView BackgroundColor="Orange" WidthRequest="240" />
+
+            <ImageButton Source="engranajes.png"
+         Aspect="AspectFit"
+         WidthRequest="40"
+         HeightRequest="40"
+         Margin="20,0,20,10"
+         VerticalOptions="End"
+         HorizontalOptions="End"/>
+        </StackLayout>
+
+
+    </Grid>
+</ContentPage>

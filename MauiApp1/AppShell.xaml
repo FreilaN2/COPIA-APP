@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="SpinningTrainer.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:SpinningTrainer"
+    xmlns:view="clr-namespace:SpinningTrainer.View"
+    Shell.FlyoutBehavior="Flyout"
+    Shell.FlyoutBackdrop="Transparent"
+    Shell.BackgroundColor="{StaticResource Primary}"
+    Shell.ForegroundColor="White"
+    Shell.TitleColor="White"
+    Shell.FlyoutWidth="250"   
+    Shell.NavBarHasShadow="True"    
+    Shell.TabBarIsVisible="False"    
+    Title="SpinningTrainer">
+
+    <Shell.FlyoutBackground>#FF7500</Shell.FlyoutBackground>
+
+    <Shell.FlyoutHeader>
+        <VerticalStackLayout>
+            <Image Source="logoapp.png"/>
+            <Label Text="Spinning Trainer"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   FontSize="Title"
+                   Margin="0,-20,0,20"/>
+        </VerticalStackLayout>
+    </Shell.FlyoutHeader>
+
+    <ShellContent                
+        ContentTemplate="{DataTemplate view:SplashScreenView}"
+        Route="SplashScreenView"             
+        Shell.FlyoutBehavior="Disabled"
+        FlyoutItemIsVisible="False"/>
+
+    <ShellContent                    
+        ContentTemplate="{DataTemplate local:LoginView}"
+        Route="LoginView"        
+        Shell.FlyoutBehavior="Disabled"
+        FlyoutItemIsVisible="False"/>
+
+    <ShellContent            
+        ContentTemplate="{DataTemplate local:ConnectionView}"
+        Route="ConnectionView"
+        Shell.FlyoutBehavior="Disabled"
+        FlyoutItemIsVisible="False"/>
+
+    <ShellContent            
+        ContentTemplate="{DataTemplate view:NewSessionView}"
+        Route="NewSessionView"
+        Shell.FlyoutBehavior="Disabled"
+        FlyoutItemIsVisible="False"/>
+
+    <FlyoutItem Route="MainPageView" FlyoutDisplayOptions="AsMultipleItems" >
+
+        <ShellContent            
+        Title="Menu Principal"            
+        ContentTemplate="{DataTemplate local:MainPageView}"            
+        Icon="casa.png"
+        FlyoutItemIsVisible="True"/>
+
+        <ShellContent
+        Title="Perfil"
+        ContentTemplate="{DataTemplate local:MainPageView}"            
+        Icon="usuarioperfil.png"/>
+
+        <ShellContent
+        Title="Ayuda"
+        ContentTemplate="{DataTemplate local:MainPageView}"            
+        Icon="help.png"/>
+
+        <ShellContent
+        Title="Configuración"
+        ContentTemplate="{DataTemplate local:MainPageView}"            
+        Icon="engranajes.png"/>
+
+        <ShellContent
+        Title="Salir"
+        ContentTemplate="{DataTemplate local:MainPageView}"            
+        Icon="out.png"/>
+    </FlyoutItem>
+
+</Shell>

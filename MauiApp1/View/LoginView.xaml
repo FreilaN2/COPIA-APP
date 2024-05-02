@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SpinningTrainer.LoginView"
+             Background="{StaticResource Primary}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Image
+            Grid.Row="0"
+            Source="imagelogin.png"            
+            Aspect="AspectFill"               
+            SemanticProperties.Description="Ciclista decidido, montando bicicleta en tiempo nublado en la noche" />
+
+        <StackLayout
+            Grid.Row="1"
+            Padding="30,0,30,0">
+
+            <Label
+                Text="Entrenador Virtual"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" 
+                SemanticProperties.Description="Entrenador Virtual"
+                Margin="0,20,0,0"/>
+
+            <Label
+                Text="Usuario"
+                Style="{StaticResource SubHeadline}"
+                FontSize="20"
+                HorizontalOptions="Start"
+                Margin="0,40,0,0"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Usuario" />
+
+            <Frame Margin="0,5,0,0">
+                <Entry x:Name="codUsuaIngresadoEntry"
+                       Placeholder="Ingrese su usuario"
+                       MaxLength="30"/>
+            </Frame>
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Label
+                    Text="¿Olvido su usuario?  "
+                    Style="{StaticResource SubHeadline}"
+                    FontSize="15"
+                    Margin="0,5,0,0"
+                    SemanticProperties.HeadingLevel="Level2"
+                    SemanticProperties.Description="Usuario" />
+                
+                <Label
+                    Text="Recuperar"
+                    TextDecorations="Underline"                    
+                    FontAttributes="Bold"
+                    Style="{StaticResource SubHeadline}"
+                    FontSize="15"                    
+                    Margin="0,5,0,0"
+                    SemanticProperties.HeadingLevel="Level2"
+                    SemanticProperties.Description="Usuario" />
+            </HorizontalStackLayout>
+
+            <Label
+                Text="Contraseña"
+                Style="{StaticResource SubHeadline}"
+                FontSize="20"
+                HorizontalOptions="Start"
+                Margin="0,40,0,0"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Usuario" />
+            
+            <Frame BackgroundColor="{StaticResource Tertiary}"
+                CornerRadius="15"                                      
+                Padding="10,0,10,0"
+                Margin="0,5,0,0"                   
+                BorderColor="Transparent">
+                <Entry x:Name="contraIngresadaEntry"
+                       Placeholder="Ingrese su contraseña"
+                       MaxLength="30"      
+                       IsPassword="True"
+                       PlaceholderColor="{StaticResource SecondaryDarkText}"/>
+            </Frame>
+
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Label
+                    Text="¿Olvido su contraseña?  "
+                    Style="{StaticResource SubHeadline}"
+                    FontSize="15"
+                    Margin="0,5,0,0"
+                    SemanticProperties.HeadingLevel="Level2"
+                    SemanticProperties.Description="Usuario" />
+
+                <Label
+                    Text="Recuperar"
+                    TextDecorations="Underline"                    
+                    FontAttributes="Bold"
+                    Style="{StaticResource SubHeadline}"
+                    FontSize="15"                    
+                    Margin="0,5,0,0"
+                    SemanticProperties.HeadingLevel="Level2"
+                    SemanticProperties.Description="Usuario" />
+            </HorizontalStackLayout>
+
+            <Button x:Name="btnIniciarSesion"
+                Text="Iniciar sesión"
+                Margin="0,50,0,0"
+                Clicked="btnIniciarSesion_Clicked"/>
+        </StackLayout>
+    </Grid>
+
+</ContentPage>
