@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SpinningTrainer.View.NewUserView"
+             Title="NewUserView">
+    <Grid BackgroundColor="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+
+        <StackLayout BackgroundColor="{StaticResource Primary}"
+                 Grid.Row="0" 
+                 Orientation="Horizontal" 
+                 VerticalOptions="Start" 
+                 Padding="40,10,30,20">
+
+            <Label Text="Registrar usuario" 
+               TextColor="White" 
+               FontSize="26" 
+               HorizontalOptions="CenterAndExpand" 
+               VerticalOptions="Center"/>
+        </StackLayout>
+
+        <ScrollView Grid.Row="1">
+            <StackLayout Margin="10">
+
+                <StackLayout Orientation="Horizontal" Margin="30">
+                    <Entry Placeholder="Nombre de usuario" x:Name="UsuarioEntry"
+                       BackgroundColor="#EDEDED" 
+                       WidthRequest="300" 
+                       TextColor="#444444" 
+                       PlaceholderColor="#999999" 
+                       HeightRequest="50"
+                       HorizontalTextAlignment="Center"
+                       VerticalOptions="Start"/>
+                </StackLayout>
+
+
+                <StackLayout Orientation="Horizontal" 
+                         Margin="30">
+                    <Entry Placeholder="Contraseña" 
+                       IsPassword="True" x:Name="ContrasenaEntry"
+                       BackgroundColor="#EDEDED" 
+                       WidthRequest="300" 
+                       TextColor="#444444" 
+                       PlaceholderColor="#999999" 
+                       HeightRequest="50" 
+                       HorizontalTextAlignment="Center"
+                       VerticalOptions="Start"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" 
+                         Margin="30">
+                    <Entry Placeholder="Confirmar contraseña" 
+                       IsPassword="True" x:Name="ConfirmarContrasenaEntry"
+                       BackgroundColor="#EDEDED" 
+                       WidthRequest="300" 
+                       TextColor="#444444" 
+                       PlaceholderColor="#999999" 
+                       HeightRequest="50" 
+                       HorizontalTextAlignment="Center"
+                       VerticalOptions="Start"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="30">
+                    <Entry Placeholder="Nombre" x:Name="NombreEntry"
+                       BackgroundColor="#EDEDED" 
+                       WidthRequest="300" 
+                       TextColor="#444444" 
+                       PlaceholderColor="#999999" 
+                       HeightRequest="50" 
+                       HorizontalTextAlignment="Center"
+                       VerticalOptions="Start"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="30">
+                    <Entry Placeholder="Apellido" x:Name="ApellidoEntry"
+                       BackgroundColor="#EDEDED" 
+                       WidthRequest="300" 
+                       TextColor="#444444" 
+                       PlaceholderColor="#999999" 
+                       HeightRequest="50" 
+                       HorizontalTextAlignment="Center"
+                       VerticalOptions="Start"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="30">
+                    <Entry Placeholder="Correo electrónico" x:Name="EmailEntry"
+                       BackgroundColor="#EDEDED" 
+                       WidthRequest="300" 
+                       TextColor="#444444" 
+                       PlaceholderColor="#999999" 
+                       HeightRequest="50" 
+                       HorizontalTextAlignment="Center"
+                       VerticalOptions="Start"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="30">
+                    <Entry Placeholder="Teléfono" x:Name="TelefonoEntry"
+                       BackgroundColor="#EDEDED" 
+                       WidthRequest="300" 
+                       TextColor="#444444" 
+                       PlaceholderColor="#999999" 
+                       HeightRequest="50" 
+                       HorizontalTextAlignment="Center"
+                       VerticalOptions="Start"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="EsAdminCheckBox" />
+                    <Label Text="Es Admin" />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="50" 
+                         HorizontalOptions="Center" VerticalOptions="Center">
+                    <Button Text="Guardar" 
+                        Clicked="Guardar_Clicked"
+                        BackgroundColor="{StaticResource Primary}"
+                        CornerRadius="20"                        
+                        WidthRequest="200"
+                        HeightRequest="60"
+                        TextColor="White"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+
+
+        <StackLayout BackgroundColor="{StaticResource Primary}" Grid.Row="2" Orientation="Horizontal">
+
+            <BoxView BackgroundColor="{StaticResource Primary}" WidthRequest="240" />
+
+        </StackLayout>
+
+    </Grid>
+</ContentPage>

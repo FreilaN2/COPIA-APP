@@ -29,8 +29,20 @@
     </Shell.FlyoutHeader>
 
     <ShellContent                
+        ContentTemplate="{DataTemplate view:UsersList}"
+        Route="UsersList"             
+        Shell.FlyoutBehavior="Disabled"
+        FlyoutItemIsVisible="False"/>
+
+    <ShellContent                
         ContentTemplate="{DataTemplate view:SplashScreenView}"
         Route="SplashScreenView"             
+        Shell.FlyoutBehavior="Disabled"
+        FlyoutItemIsVisible="False"/>
+
+    <ShellContent                
+        ContentTemplate="{DataTemplate view:SuperUserMenuView}"
+        Route="SuperUserMenuView"             
         Shell.FlyoutBehavior="Disabled"
         FlyoutItemIsVisible="False"/>
 
@@ -49,6 +61,12 @@
     <ShellContent            
         ContentTemplate="{DataTemplate view:NewSessionView}"
         Route="NewSessionView"
+        Shell.FlyoutBehavior="Disabled"
+        FlyoutItemIsVisible="False"/>
+
+    <ShellContent                
+        ContentTemplate="{DataTemplate view:NewUserView}"
+        Route="NewUserView"             
         Shell.FlyoutBehavior="Disabled"
         FlyoutItemIsVisible="False"/>
 

@@ -18,7 +18,7 @@ namespace SpinningTrainer
             string codUsuaIngresado = codUsuaIngresadoEntry.Text;
             string contraIngresada = contraIngresadaEntry.Text;
 
-            var (inicioExitoso, mensaje) = UsersData.ValidarDatosInicioSesion(codUsuaIngresado, contraIngresada);
+            var (inicioExitoso, mensaje, tipoUsuario) = UsersData.ValidarDatosInicioSesion(codUsuaIngresado, contraIngresada);
 
             if (inicioExitoso == true)
             {
