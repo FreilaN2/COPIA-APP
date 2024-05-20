@@ -10,9 +10,14 @@ namespace SpinningTrainer.ViewModel
 {
     class EnviaCorreoRecuperacionViewModel
     {
-        public static (int, string) EnviarCorreo(string destino, string nombreArchivo, string numeroD)
+        /// <summary>
+        /// Clase para enviar correo con un código aleatorio de 8 dígitos, en caso de error retorna el número 0 y el mensaje del error.
+        /// </summary>
+        /// <param name="destino">Correo electronico de destino</param>
+        /// <returns>Devuelve el número enviado y mensaje de error en caso de que haya uno. (Si ocurre algún error el número retornara 0)</returns>
+        public static (string, string) EnviarCorreo(string destino)
         {
-            int numeroAleatorio = GenerarCodigoAleatorio();
+            string numeroAleatorio = GenerarCodigoAleatorio();
 
             SmtpClient smtpClient = new SmtpClient("smtp-mail.outlook.com");
             smtpClient.Port = 587;
@@ -26,7 +31,7 @@ namespace SpinningTrainer.ViewModel
             message.From = new MailAddress("SpinCoach@hotmail.com");
             message.To.Add(destino);
             message.Subject = "Código de Recuperación de la app SpinCoach";
-            message.Body = "Su código de recuperación es: " + numeroAleatorio.ToString();
+            message.Body = "Su código de recuperación es: " + numeroAleatorio;
 
             try
             {
@@ -37,18 +42,22 @@ namespace SpinningTrainer.ViewModel
             catch (Exception ex)
             {
                 Console.WriteLine("Error al enviar el correo electrónico: " + ex.Message);
-                return (0, ex.Message);
+                return ("0", ex.Message);
             }
         }
 
-        private static int GenerarCodigoAleatorio()
+        /// <summary>
+        /// Metodo para generar un número aleatorio.
+        /// </summary>
+        /// <returns>Devuelve un número aleatorio de 8 dígitos convertido a String</returns>
+        private static string GenerarCodigoAleatorio()
         {
             Random random = new Random();
             
             int minValue = 10000000;
             int maxValue = 99999999;
 
-            return (random.Next(minValue, maxValue + 1));
+            return (random.Next(minValue, maxValue + 1).ToString());
         }
     }
 }
