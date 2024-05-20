@@ -6,12 +6,11 @@ using Microsoft.Maui.Controls;
 
 namespace SpinningTrainer
 {
-    public partial class MenuReportView : ContentPage
+    public partial class PreviewComparativeReportView : ContentPage
     {
-        public MenuReportView()
+        public PreviewComparativeReportView()
         {
             InitializeComponent();
-        }        
+        }
     }
 }
-

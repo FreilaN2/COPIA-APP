@@ -98,6 +98,12 @@
 	  <Compile Update="View\ConnectionView.xaml.cs">
 	    <DependentUpon>ConnectionView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\PreviewComparativeReportView.xaml.cs">
+	    <DependentUpon>PreviewComparativeReportView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\PreviewSingleReportView.xaml.cs">
+	    <DependentUpon>PreviewSingleReportView.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>

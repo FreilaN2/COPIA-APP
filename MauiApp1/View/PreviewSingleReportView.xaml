@@ -1,0 +1,27 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SpinningTrainer.PreviewSingleReportView"
+             Title="Reporte de Sesión"
+             BackgroundColor="White">
+
+    <VerticalStackLayout>
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Button Text="Sí"
+            Grid.Row="0"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Clicked="OnYesButtonClicked"/>
+
+            <Button Text="No"
+            Grid.Row="1"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Clicked="OnNoButtonClicked"/>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>
