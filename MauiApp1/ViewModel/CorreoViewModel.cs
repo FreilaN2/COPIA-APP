@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace SpinningTrainer.ViewModel
 {
-    class EnviaCorreoRecuperacionViewModel
+    class EnviaCorreoViewModel
     {
         /// <summary>
         /// Clase para enviar correo con un código aleatorio de 8 dígitos, en caso de error retorna el número 0 y el mensaje del error.
         /// </summary>
         /// <param name="destino">Correo electronico de destino</param>
         /// <returns>Devuelve el número enviado y mensaje de error en caso de que haya uno. (Si ocurre algún error el número retornara 0)</returns>
-        public static (string, string) EnviarCorreo(string destino)
+        public static (string, string) EnviarCorreoCodigoRecuperacion(string destino)
         {
             string numeroAleatorio = GenerarCodigoAleatorio();
 
@@ -24,11 +24,11 @@ namespace SpinningTrainer.ViewModel
             smtpClient.EnableSsl = true; 
 
             // Autenticación
-            smtpClient.Credentials = new NetworkCredential("SpinCoach@hotmail.com", "Spin2024");
+            smtpClient.Credentials = new NetworkCredential("spincoach@hotmail.com", "Spin2024");
 
             // Creación del mensaje
             MailMessage message = new MailMessage();
-            message.From = new MailAddress("SpinCoach@hotmail.com");
+            message.From = new MailAddress("spincoach@hotmail.com");
             message.To.Add(destino);
             message.Subject = "Código de Recuperación de la app SpinCoach";
             message.Body = "Su código de recuperación es: " + numeroAleatorio;
@@ -43,6 +43,42 @@ namespace SpinningTrainer.ViewModel
             {
                 Console.WriteLine("Error al enviar el correo electrónico: " + ex.Message);
                 return ("0", ex.Message);
+            }
+        }
+        
+        /// <summary>
+        /// Envia un correo
+        /// </summary>
+        /// <param name="destino">Destinatario del correo.</param>
+        /// <param name="subject">Asunto del correo.</param>
+        /// <param name="body">Cuerpo del correo.</param>
+        /// <returns>Devuelve resultado si el envio culmino exitosamente y un mensaje de error en caso de que no.</returns>
+        public static (bool, string) EnviarCorreo(string destino, string subject, string body)
+        {            
+            SmtpClient smtpClient = new SmtpClient("smtp-mail.outlook.com");
+            smtpClient.Port = 587;
+            smtpClient.EnableSsl = true;
+
+            // Autenticación
+            smtpClient.Credentials = new NetworkCredential("SpinCoach@hotmail.com", "Spin2024");
+
+            // Creación del mensaje
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress("SpinCoach@hotmail.com");
+            message.To.Add(destino);
+            message.Subject = subject;
+            message.Body = body;
+
+            try
+            {
+                smtpClient.Send(message);
+                Console.WriteLine("Correo enviado correctamente.");
+                return (true, "");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al enviar el correo electrónico: " + ex.Message);
+                return (false, ex.Message);
             }
         }
 

@@ -25,8 +25,7 @@ public partial class SplashScreenView : ContentPage
         if (DataBaseConnection.TestConnection())
         {
             await pbLoadProgress.ProgressTo(0.7, 4000, Easing.Linear);
-
-            ///ACA TIENE QUE IR LA LOGICA DE COMPROBACION Y CREACION DE BASE DE DATOS
+           
             lblMuestraMensajeCargandoAlUsuario.Text = "Cargando... Comprobando base de datos";
             if (DataBaseConnection.CompruebaBaseDatos())
             {

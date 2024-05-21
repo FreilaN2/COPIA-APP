@@ -22,14 +22,21 @@ namespace SpinningTrainer
 
             if (inicioExitoso == true)
             {
-                await Shell.Current.GoToAsync($"//{nameof(MainPageView)}");
-
-                //                await Navigation.PushAsync(new AppShell());
+                await Shell.Current.GoToAsync($"//{nameof(MainPageView)}");                
             }
             else
             {
                 await DisplayAlert("Acceso Denegado",mensaje,"Aceptar");
             }
+        }
+
+        private async void tgrRecuperarContra_Tapped(object sender, TappedEventArgs e)
+        {            
+        }
+
+        private async void tgrRecuperarUsua_Tapped(object sender, TappedEventArgs e)
+        {
+            await Navigation.PushAsync(new UserRecoveryView());
         }
     }
 }

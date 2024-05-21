@@ -79,7 +79,7 @@ namespace Configurador_WPF.Data
                     return true;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }            
@@ -110,6 +110,7 @@ namespace Configurador_WPF.Data
             catch (Exception ex)
             {                
                 comprobacionExitosa = false;
+                Console.WriteLine(ex.Message);
             }
 
             return comprobacionExitosa;
@@ -137,16 +138,14 @@ namespace Configurador_WPF.Data
                             "[FechaC] [datetime] NULL,\n" +
                             "[FechaR] [datetime] NULL,\n" +
                             "[FechaV] [datetime] NULL,\n" +
-                            "[EsAdmin] [smallint] NULL,\n" +
+                            "[TipoUsuario] [smallint] NULL\n" +
                             "CONSTRAINT [PK_Usuarios_1] PRIMARY KEY CLUSTERED\n" +
                             "(\n" +
                             "   [ID] ASC\n" +
-                            ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, \tOPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\n" +
-                            ") ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]\n" +
-                            "GO\n" +
-                            "INSERT INTO Usuarios(CodUsua,Descrip,Contra,Email,Telef,FechaC,FechaR,FechaV,EsAdmin)\n" +
-                            "VALUES('SU', 'SUPER USUARIO', ENCRYPTBYPASSPHRASE('12345', '123456'), '', '', GETDATE(), '', '', 1)\n" +
-                            "GO\n";
+                            ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\n" +
+                            ") ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]\n" +                                                 
+                            "INSERT INTO Usuarios(CodUsua,Descrip,Contra,Email,Telef,FechaC,FechaR,FechaV,TipoUsuario)\n" +
+                            "VALUES('SU', 'SUPER USUARIO', ENCRYPTBYPASSPHRASE('12345', '123456'), '', '', GETDATE(), '', '', 0)\n";
                 }
                 
                 using (SqlCommand cmd = new SqlCommand(query, connection))

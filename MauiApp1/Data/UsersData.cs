@@ -6,67 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using Microsoft.EntityFrameworkCore.Update;
 
 namespace SpinningTrainer.Data
 {
     class UsersData
-    {
-        /*public static ObservableCollection<Usuarios> CargarUsuarios()
-        {
-            ObservableCollection<Usuarios> infoUsuarios = new ObservableCollection<Usuarios>();
-
-            using(SqlConnection connection = DataBaseConnection.OpenConnection())
-            {
-                string query = "SELECT Id,\n" +
-                               "       CodUsua,\n" +
-                               "       Descrip,\n" +
-                               "       DECRYPTBYPASSPHRASE('12345',Contra) AS Contra,\n" +
-                               "       DECRYPTBYPASSPHRASE('12345',PIN) AS PIN\n" +
-                               "       Email,\n" +
-                               "       Telef,\n" + 
-                               "       FechaC,\n" +
-                               "       FechaR,\n" +
-                               "       FechaV,\n" +
-                               "       TipoUsuario\n" +
-                               "FROM Usuarios\n" + 
-                               "WHERE TipoUsuario != 0\n";
-                using(SqlCommand cmd = new SqlCommand(query,connection))
-                {
-                    using(SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        While(reader.Read())
-                        {
-                            int id = int.Parse(reader["Id"].ToString());
-                            string codUsua = reader["CodUsua"].ToString();
-                            string descrip = reader["Descrip"].ToString();
-                            string contra = reader["Contra"].ToString();
-                            string pin = reader["PIN"].ToString();
-                            string email = reader["Email"].ToString();
-                            string telef  = reader["Telef"].ToString();
-                            DateTime FechaC = DateTime.parse(reader["FechaC"].ToString());
-                            DateTime FechaC = DateTime.parse(reader["FechaC"].ToString());
-                            
-
-                            infoUsuarios.Add(new Usuarios 
-                            { 
-                                Id=1, 
-                                CodUsua="Vellito", 
-                                Descrip="Diego Estevez", 
-                                Contra="LoMaisimo", 
-                                PIN="12345678", 
-                                Email="diegoestevz73@gmail.com",
-                                Telef="0424-5712363",
-                                FechaC=DateTime.Now,
-                                FechaR=DateTime.Now,
-                                FechaV=DateTime.Now,
-                                TipoUsuario=1 
-                            });
-                        }
-                    }
-                }
-            }
-        }*/
-
+    {        
+        /// <summary>
+        /// Valida los datos ingresados en el inicio de sesion
+        /// </summary>
+        /// <param name="codUsuaIngresado">Codigo de usuario ingresado</param>
+        /// <param name="contraIngresada">Clave ingresada</param>
+        /// <returns>Devuelve un bool que dice es true si el inicio fue exitoso, un string como mensaje de error en caso de que lo haya y el tipo de usuario</returns>
         public static (bool, string, int) ValidarDatosInicioSesion(string codUsuaIngresado, string contraIngresada)
         {           
             using (SqlConnection connection = DataBaseConnection.OpenConnection())
@@ -91,7 +42,7 @@ namespace SpinningTrainer.Data
                                 int tipoUsuario = int.Parse(reader["TipoUsuario"].ToString());
                                 DateTime fechaV = DateTime.Parse(reader["FechaV"].ToString());
 
-                                if(fechaV > DateTime.Now)
+                                if(fechaV > DateTime.Now || tipoUsuario == 0)
                                 {
                                     if (contraIngresada == contraBaseDatos) { return (true, "Inicio Exitoso", tipoUsuario); }
                                     else { return (false, "Contraseña incorrecta.", tipoUsuario); }
@@ -107,6 +58,61 @@ namespace SpinningTrainer.Data
                     }
                 }
             }
-        }                   
+        }
+        
+        /// <summary>
+        /// Valida si el codigo de usuario existe.
+        /// </summary>
+        /// <param name="codUsua">Codigo de usuario</param>
+        /// <returns>Email del usuario.</returns>
+        public static string ValidaCodigoDeUsuarioParaCambioDeClave(string codUsua)
+        {
+            using(SqlConnection connection = DataBaseConnection.OpenConnection())
+            {
+                string query = "SELECT ISNULL(Email,'') FROM Usuarios WHERE CodUsua = @codUsua";
+
+                using (SqlCommand cmd = new SqlCommand(query,connection))
+                {                    
+                    try
+                    {
+                        cmd.Parameters.AddWithValue("@codUsua", codUsua);
+                        return cmd.ExecuteScalar().ToString();
+                    }
+                    catch (Exception ex)
+                    {                        
+                        Console.WriteLine(ex.Message);
+                        return "";
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Valida si el email del usuario existe.
+        /// </summary>
+        /// <param name="email">Email del usuario</param>
+        /// <returns>Devuelve si el email existe o no.</returns>
+        public static string ValidaEmailParaCambioDeUsuario(string email)
+        {
+            using (SqlConnection connection = DataBaseConnection.OpenConnection())
+            {
+                string query = "SELECT CodUsua FROM Usuarios WHERE Email = @email";
+
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+                    try
+                    {
+                        cmd.Parameters.AddWithValue("@email", email);
+
+                        return cmd.ExecuteScalar().ToString();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        return "";
+                    }
+                }
+            }
+        }
     }
 }

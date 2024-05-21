@@ -29,20 +29,20 @@
     </Shell.FlyoutHeader>
 
     <ShellContent                
-        ContentTemplate="{DataTemplate view:UsersList}"
-        Route="UsersList"             
-        Shell.FlyoutBehavior="Disabled"
-        FlyoutItemIsVisible="False"/>
-
-    <ShellContent                
         ContentTemplate="{DataTemplate view:SplashScreenView}"
         Route="SplashScreenView"             
         Shell.FlyoutBehavior="Disabled"
         FlyoutItemIsVisible="False"/>
-
+       
     <ShellContent                
         ContentTemplate="{DataTemplate view:SuperUserMenuView}"
         Route="SuperUserMenuView"             
+        Shell.FlyoutBehavior="Disabled"
+        FlyoutItemIsVisible="False"/>
+
+    <ShellContent                
+        ContentTemplate="{DataTemplate view:UsersList}"
+        Route="UsersList"             
         Shell.FlyoutBehavior="Disabled"
         FlyoutItemIsVisible="False"/>
 
@@ -83,14 +83,9 @@
             ContentTemplate="{DataTemplate local:MainPageView}"            
             Icon="usuarioperfil.png"/>
 
-        <MenuItem Text="Help"
-                  IconImageSource="help.png"
-                  Command="{Binding HelpCommand}"
-                  CommandParameter="https://learn.microsoft.com/dotnet/maui/fundamentals/shell" />
-        
         <ShellContent
             Title="Ayuda"            
-            ContentTemplate="{DataTemplate local:MainPageView}"            
+            ContentTemplate="{DataTemplate view:WebView}"            
             Icon="help.png"/>
 
         <ShellContent

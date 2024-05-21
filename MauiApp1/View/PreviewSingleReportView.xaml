@@ -14,14 +14,12 @@
             <Button Text="Sí"
             Grid.Row="0"
             HorizontalOptions="Center"
-            VerticalOptions="Center"
-            Clicked="OnYesButtonClicked"/>
+            VerticalOptions="Center"/>
 
             <Button Text="No"
             Grid.Row="1"
             HorizontalOptions="Center"
-            VerticalOptions="Center"
-            Clicked="OnNoButtonClicked"/>
+            VerticalOptions="Center"/>
         </Grid>
     </VerticalStackLayout>
 </ContentPage>

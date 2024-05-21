@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SpinningTrainer.View.UserRecoveryView"
+             Title="Recuperación de Usuario"
+             Background="White">
+    <VerticalStackLayout
+        Padding="20">
+        <Label       
+            x:Name="lblTipoRecuperacion"
+            Text="Tipo Recuperación"
+            FontAttributes="Bold"
+            TextColor="{StaticResource Primary}"/>
+        
+        <Frame
+            x:Name="frmTipoRecuperacion"
+            Margin="0,5,0,0">
+            <Picker 
+                x:Name="pkTipoRecuperacion"
+                Title="¿Que desea recuperar?"                    
+                TitleColor="White"
+                Background="Transparent"
+                TextColor="White"
+                SelectedIndexChanged="pkTipoRecuperacion_SelectedIndexChanged">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Usuario</x:String>
+                        <x:String>Contraseña</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+        </Frame>
+        
+        <Label 
+            x:Name="lblInfoDatoAIngresar"
+            Margin="0,40,0,0"
+            Text="Tipo Recuperación"            
+            FontAttributes="Bold"
+            TextColor="{StaticResource Primary}"
+            IsVisible="False"/>
+        
+        <Frame 
+            x:Name="frmValorRecuperacion"
+            Margin="0,5,0,0"
+            IsVisible="False">
+            <Entry x:Name="entValorRecuperacion"/>
+        </Frame>
+
+        <Button x:Name="btnVerificarDatos"               
+                VerticalOptions="EndAndExpand"
+                Margin="0,100,0,0"
+                Text="Verificar"
+                IsVisible="False"
+                Clicked="btnVerificarDatos_Clicked"
+                BackgroundColor="{StaticResource Primary}"/>
+
+        <Label             
+            x:Name="lblCodigoConfirmacion"
+            Margin="0,40,0,0"
+            Text="Ingresar Código de Confirmación"            
+            FontAttributes="Bold"
+            TextColor="{StaticResource Primary}"
+            IsVisible="False"/>
+
+        <Frame 
+            x:Name="frmCodigoRecuperacion"
+            Margin="0,5,0,0"
+            IsVisible="False">
+            <Entry x:Name="entCodigoRecuperacion"/>
+        </Frame>
+
+        <Button x:Name="btnVerificarCodigo"               
+                VerticalOptions="EndAndExpand"
+                Margin="0,100,0,0"
+                Text="Verificar"
+                IsVisible="False"
+                Clicked="btnVerificarCodigo_Clicked"
+                BackgroundColor="{StaticResource Primary}"/>
+    </VerticalStackLayout>
+</ContentPage>
