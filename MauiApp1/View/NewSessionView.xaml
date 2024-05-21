@@ -11,91 +11,124 @@
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
 
-        <ScrollView Grid.Row="1">
+        <VerticalStackLayout Grid.Row="1">
             <StackLayout Margin="10">
                 <StackLayout Orientation="Horizontal" Margin="10">
                     <Label Text="Nivel de dificultad"
-             TextColor="#030000"
-             HorizontalOptions="CenterAndExpand"
-             VerticalOptions="Start"
-             Margin="10,0,0,10"
-             FontSize="20" />
+                           TextColor="#030000"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="Start"
+                           Margin="10,0,0,10"
+                           FontSize="20" />
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal"
+                <StackLayout x:Name="stltRadioButtons"
+                             Orientation="Horizontal"
                              HorizontalOptions="CenterAndExpand"
-                             RadioButtonGroup.GroupName="grupo1">
-                    <RadioButton Content="Principianteasa" TextColor="{StaticResource Primary}"
-                                 Margin="0,0,4,0" />
-                    <RadioButton Content="Medio" TextColor="{StaticResource Primary}"   
-                                 Margin="0,0,15,0"/>
-                    <RadioButton Content="Alto Rendimiento" TextColor="{StaticResource Primary}"
-                                 Margin="0,0,5,0"/>
+                             RadioButtonGroup.GroupName="grupo1"
+                             RadioButtonGroup.SelectedValue="Middle">
+                    <RadioButton x:Name="rdbtnBeginners"
+                                 Content="Principiantes" 
+                                 Value="Beginners"
+                                 TextColor="{StaticResource Primary}"
+                                 Margin="0,0,4,0" 
+                                 FontAttributes="Bold"/>
+                    <RadioButton x:Name="rdbtnMiddle"
+                                 Content="Medio" 
+                                 TextColor="{StaticResource Primary}"   
+                                 Value="Middle"
+                                 Margin="0,0,15,0"
+                                 FontAttributes="Bold"/>
+                    <RadioButton x:Name="rdbtnHighPerformance"
+                                 Content="Alto Rendimiento" 
+                                 TextColor="{StaticResource Primary}"
+                                 Value="HighPerformance"
+                                 Margin="0,0,5,0"
+                                 FontAttributes="Bold"/>
                 </StackLayout>
 
 
 
                 <StackLayout Orientation="Horizontal" Margin="30">
-                    <Entry Placeholder="Ingrese el nombre de la sesión" Text="{Binding Nombre}"
-               BackgroundColor="#EDEDED" 
-               WidthRequest="300" 
-               TextColor="#444444" 
-               PlaceholderColor="#999999" 
-               HeightRequest="50" 
-               HorizontalTextAlignment="Center"
-               VerticalOptions="Start"/>
+                    <Frame Margin="10,0,0,0"
+                           WidthRequest="300"                           
+                           Background="{StaticResource Primary}">
+                        <Entry x:Name="entSessionName"
+                               Placeholder="Ingrese el nombre de la sesión" Text="{Binding Nombre}"
+                               BackgroundColor="Transparent"                                
+                               TextColor="White" 
+                               HeightRequest="50"
+                               PlaceholderColor="White"                                
+                               HorizontalTextAlignment="Center"
+                               VerticalOptions="Start"
+                               TextChanged="entSessionName_TextChanged"/>
+                    </Frame>
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Margin="10">
-                    <Picker Title ="Fecha"
-             BackgroundColor="#EDEDED"
-             WidthRequest="150" 
-             TextColor ="#000000"
-             HorizontalOptions="Start"/>
+                    <StackLayout Grid.Row="1"
+                                 HorizontalOptions="Start">
+                        <Frame Margin="10,0,0,0"
+                               WidthRequest="150"
+                               Background="{StaticResource Primary}">
+                            <HorizontalStackLayout>
+                                <Label Text="Fecha:"
+                                       VerticalOptions="Center"/>
+
+                                <DatePicker x:Name="dpkSessionDate"
+                                            Background="Transparent"
+                                            VerticalOptions="Center"
+                                            Margin="10,0,0,0"
+                                            WidthRequest="100"/>
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </StackLayout>
 
 
-                    <Picker Title ="Turno"
-             BackgroundColor="#EDEDED" 
-             WidthRequest="150" 
-             TextColor ="#000000"
-             HorizontalOptions="CenterAndExpand"/>
+                    <StackLayout Grid.Row="1"
+                                 HorizontalOptions="Start">
+                        <Frame Margin="10,0,0,0"
+                               WidthRequest="150"
+                               Background="{StaticResource Primary}">
+                            <HorizontalStackLayout>
+                                <Label Text="Hora:"
+                                       VerticalOptions="Center"/>
+
+                                <TimePicker x:Name="dpkSessionTime"
+                                            Background="Transparent"
+                                            VerticalOptions="Center"
+                                            Margin="10,0,0,0"
+                                            WidthRequest="100"/>
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </StackLayout>
                 </StackLayout>
 
 
 
                 <StackLayout Orientation="Horizontal" Margin="50" HorizontalOptions="Center" VerticalOptions="Center">
-                    <Button Text ="Siguiente"
-             BackgroundColor="Orange"
-             CornerRadius ="20"
-             Command="{Binding SaveCommand}"
-             WidthRequest="200" 
-             HeightRequest="60"
-             TextColor ="White"/>
+                    <Button x:Name="btnNextStep"
+                            Text ="Siguiente"
+                            BackgroundColor="{StaticResource Primary}"
+                            CornerRadius ="20"
+                            WidthRequest="200" 
+                            HeightRequest="60"
+                            TextColor ="White"
+                            IsEnabled="False"
+                            Clicked="btnNextStep_Clicked"/>
                 </StackLayout>
-
-
-                <StackLayout BackgroundColor="Orange" 
-              Grid.Row="2" 
-              Orientation="Horizontal">
-
-                </StackLayout>
-
             </StackLayout>
+        </VerticalStackLayout>
 
-        </ScrollView>
-
-        <StackLayout BackgroundColor="Orange" Grid.Row="2" Orientation="Horizontal">
-
-
-            <BoxView BackgroundColor="Orange" WidthRequest="240" />
-
-            <ImageButton Source="engranajes.png"
-         Aspect="AspectFit"
-         WidthRequest="40"
-         HeightRequest="40"
-         Margin="20,0,20,10"
-         VerticalOptions="End"
-         HorizontalOptions="End"/>
+        <StackLayout BackgroundColor="{StaticResource Primary}" 
+                     Grid.Row="2">
+            <Frame Margin="0,-30,0,0"
+                   CornerRadius="150"
+                   HorizontalOptions="Center">
+                <Button x:Name="btnLoadTemplate"
+                        ImageSource="icontemplates"                        
+                        BorderWidth="0"/>
+            </Frame>
         </StackLayout>
 
 

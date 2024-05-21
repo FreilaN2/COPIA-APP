@@ -73,30 +73,35 @@
     <FlyoutItem Route="MainPageView" FlyoutDisplayOptions="AsMultipleItems" >
 
         <ShellContent            
-        Title="Menu Principal"            
-        ContentTemplate="{DataTemplate local:MainPageView}"            
-        Icon="casa.png"
-        FlyoutItemIsVisible="True"/>
+            Title="Menu Principal"            
+            ContentTemplate="{DataTemplate local:MainPageView}"            
+            Icon="casa.png"
+            FlyoutItemIsVisible="True"/>
 
         <ShellContent
-        Title="Perfil"
-        ContentTemplate="{DataTemplate local:MainPageView}"            
-        Icon="usuarioperfil.png"/>
+            Title="Perfil"
+            ContentTemplate="{DataTemplate local:MainPageView}"            
+            Icon="usuarioperfil.png"/>
+
+        <MenuItem Text="Help"
+                  IconImageSource="help.png"
+                  Command="{Binding HelpCommand}"
+                  CommandParameter="https://learn.microsoft.com/dotnet/maui/fundamentals/shell" />
+        
+        <ShellContent
+            Title="Ayuda"            
+            ContentTemplate="{DataTemplate local:MainPageView}"            
+            Icon="help.png"/>
 
         <ShellContent
-        Title="Ayuda"
-        ContentTemplate="{DataTemplate local:MainPageView}"            
-        Icon="help.png"/>
+            Title="Configuración"
+            ContentTemplate="{DataTemplate local:MainPageView}"            
+            Icon="engranajes.png"/>
 
         <ShellContent
-        Title="Configuración"
-        ContentTemplate="{DataTemplate local:MainPageView}"            
-        Icon="engranajes.png"/>
-
-        <ShellContent
-        Title="Salir"
-        ContentTemplate="{DataTemplate local:MainPageView}"            
-        Icon="out.png"/>
+            Title="Salir"
+            ContentTemplate="{DataTemplate local:MainPageView}"            
+            Icon="out.png"/>
     </FlyoutItem>
 
 </Shell>
