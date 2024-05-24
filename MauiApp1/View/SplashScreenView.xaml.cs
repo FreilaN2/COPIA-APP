@@ -11,10 +11,7 @@ public partial class SplashScreenView : ContentPage
 
     private async void ContentPage_Appearing(object sender, EventArgs e)
     {
-        var (tituloConsejo, consejo) = BuscaConsejo();
-
-        lblTituloConsejo.Text = tituloConsejo;
-        lblConsejo.Text = consejo;
+        ActualizaConsejosPantalla();
 
         lblMuestraMensajeCargandoAlUsuario.Text = "Cargando... Comprobando archivos.";
         await pbLoadProgress.ProgressTo(0.2, 4000, Easing.Linear);
@@ -24,11 +21,14 @@ public partial class SplashScreenView : ContentPage
         lblMuestraMensajeCargandoAlUsuario.Text = "Cargando... Comprobando conexión a la base de datos.";
         if (DataBaseConnection.TestConnection())
         {
+            ActualizaConsejosPantalla();
+
             await pbLoadProgress.ProgressTo(0.7, 4000, Easing.Linear);
            
             lblMuestraMensajeCargandoAlUsuario.Text = "Cargando... Comprobando base de datos";
             if (DataBaseConnection.CompruebaBaseDatos())
             {
+                ActualizaConsejosPantalla();
                 await pbLoadProgress.ProgressTo(1, 4000, Easing.Linear);
 
                 await Shell.Current.GoToAsync($"//{nameof(LoginView)}");
@@ -40,9 +40,18 @@ public partial class SplashScreenView : ContentPage
         }
         else
         {
+            ActualizaConsejosPantalla();
             await pbLoadProgress.ProgressTo(1, 500, Easing.Linear);
             await Shell.Current.GoToAsync($"//{nameof(ConnectionView)}");
         }
+    }
+
+    private void ActualizaConsejosPantalla()
+    {
+        var (tituloConsejo, consejo) = BuscaConsejo();
+
+        lblTituloConsejo.Text = tituloConsejo;
+        lblConsejo.Text = consejo;
     }
 
     private (string, string) BuscaConsejo()

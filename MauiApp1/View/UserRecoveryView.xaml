@@ -6,75 +6,121 @@
              Background="White">
     <VerticalStackLayout
         Padding="20">
-        <Label       
-            x:Name="lblTipoRecuperacion"
-            Text="Tipo Recuperación"
-            FontAttributes="Bold"
-            TextColor="{StaticResource Primary}"/>
-        
-        <Frame
-            x:Name="frmTipoRecuperacion"
-            Margin="0,5,0,0">
-            <Picker 
-                x:Name="pkTipoRecuperacion"
-                Title="¿Que desea recuperar?"                    
-                TitleColor="White"
-                Background="Transparent"
-                TextColor="White"
-                SelectedIndexChanged="pkTipoRecuperacion_SelectedIndexChanged">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Usuario</x:String>
-                        <x:String>Contraseña</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
-        </Frame>
-        
-        <Label 
-            x:Name="lblInfoDatoAIngresar"
-            Margin="0,40,0,0"
-            Text="Tipo Recuperación"            
-            FontAttributes="Bold"
-            TextColor="{StaticResource Primary}"
-            IsVisible="False"/>
-        
-        <Frame 
-            x:Name="frmValorRecuperacion"
-            Margin="0,5,0,0"
-            IsVisible="False">
-            <Entry x:Name="entValorRecuperacion"/>
-        </Frame>
+       
+        <!--PANEL DE SELECCIÓN DE TIPO DE RECUPERACIÓN-->
+        <VerticalStackLayout x:Name="vslTipoRecuperacion"
+                             IsVisible="True">
+            <Label       
+                x:Name="lblTipoRecuperacion"
+                Text="Tipo Recuperación"
+                FontAttributes="Bold"
+                TextColor="{StaticResource Primary}"/>
 
-        <Button x:Name="btnVerificarDatos"               
-                VerticalOptions="EndAndExpand"
-                Margin="0,100,0,0"
-                Text="Verificar"
-                IsVisible="False"
-                Clicked="btnVerificarDatos_Clicked"
-                BackgroundColor="{StaticResource Primary}"/>
+            <Frame
+                x:Name="frmTipoRecuperacion"
+                Margin="0,5,0,0">
+                <Picker 
+                    x:Name="pkTipoRecuperacion"
+                    Title="¿Que desea recuperar?"                    
+                    TitleColor="White"
+                    Background="Transparent"
+                    TextColor="White"
+                    SelectedIndexChanged="pkTipoRecuperacion_SelectedIndexChanged">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Usuario</x:String>
+                            <x:String>Contraseña</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </Frame>
+        </VerticalStackLayout>
 
-        <Label             
-            x:Name="lblCodigoConfirmacion"
-            Margin="0,40,0,0"
-            Text="Ingresar Código de Confirmación"            
-            FontAttributes="Bold"
-            TextColor="{StaticResource Primary}"
-            IsVisible="False"/>
+        <!--Datos de ayuda para la recuperación solicitada-->
+        <VerticalStackLayout x:Name="vslDatoRecuperacion"
+                             IsVisible="False">
+            <Label                 
+                x:Name="lblInfoDatoAIngresar"                         
+                FontAttributes="Bold"
+                Margin="0,20,0,0"
+                TextColor="{StaticResource Primary}"/>
+            
+            <Frame 
+                x:Name="frmValorRecuperacion"
+                Margin="0,5,0,0">
+                <Entry x:Name="entValorRecuperacion"/>
+            </Frame>
 
-        <Frame 
-            x:Name="frmCodigoRecuperacion"
-            Margin="0,5,0,0"
-            IsVisible="False">
-            <Entry x:Name="entCodigoRecuperacion"/>
-        </Frame>
+            <Button x:Name="btnVerificarDatos"               
+                    VerticalOptions="EndAndExpand"
+                    Margin="0,100,0,0"
+                    Text="Verificar"
+                    Clicked="btnVerificarDatos_Clicked"
+                    BackgroundColor="{StaticResource Primary}"/>
+        </VerticalStackLayout>
 
-        <Button x:Name="btnVerificarCodigo"               
-                VerticalOptions="EndAndExpand"
-                Margin="0,100,0,0"
-                Text="Verificar"
-                IsVisible="False"
-                Clicked="btnVerificarCodigo_Clicked"
-                BackgroundColor="{StaticResource Primary}"/>
+        <!--Verificación de código enviado al correo-->
+        <VerticalStackLayout x:Name="vslVerificacionCodigo"
+                             IsVisible="False">
+            <Label             
+                x:Name="lblCodigoConfirmacion"
+                Text="Ingresar Código de Confirmación"            
+                FontAttributes="Bold"
+                TextColor="{StaticResource Primary}"/>
+
+            <Frame 
+                x:Name="frmCodigoRecuperacion"
+                Margin="0,5,0,0">
+                <Entry x:Name="entCodigoRecuperacion"/>
+            </Frame>
+
+            <Button x:Name="btnVerificarCodigo"               
+                    VerticalOptions="EndAndExpand"
+                    Margin="0,50,0,0"
+                    Text="Verificar"
+                    Clicked="btnVerificarCodigo_Clicked"
+                    BackgroundColor="{StaticResource Primary}"/>
+
+            <Button x:Name="btnReenviarCodigo"
+                    VerticalOptions="EndAndExpand"
+                    Margin="0,25,0,0"
+                    Text="Reenviar Código"
+                    Clicked="btnReenviarCodigo_Clicked"
+                    BackgroundColor="{StaticResource Primary}"/>
+        </VerticalStackLayout>
+
+        <!--Actualizar Contraseña-->
+        <VerticalStackLayout x:Name="vslNuevaContra"
+                             IsVisible="False">
+            <Label Text="Nueva Contraseña"            
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource Primary}"/>
+            <Frame 
+                x:Name="frmNuevaContra"
+                Margin="0,5,0,0">
+                <Entry x:Name="entNuevaContra"
+                       Placeholder="Nueva Contraseña"
+                       IsPassword="True"/>
+            </Frame>
+
+            <Label Margin="0,20,0,0"
+                   Text="Verificar Contraseña"            
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource Primary}"/>
+            <Frame 
+                x:Name="frmVerificarNuevaContra"
+                Margin="0,5,0,0">
+                <Entry x:Name="entVerificarNuevaContra"
+                       Placeholder="Verificar Contraseña"
+                       IsPassword="True"/>
+            </Frame>
+
+            <Button x:Name="btnActualizarContra"               
+                    VerticalOptions="EndAndExpand"
+                    Margin="0,100,0,0"
+                    Text="Actualizar"
+                    Clicked="btnActualizarContra_Clicked"
+                    BackgroundColor="{StaticResource Primary}"/>
+        </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

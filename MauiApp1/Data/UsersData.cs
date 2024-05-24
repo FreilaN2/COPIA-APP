@@ -92,7 +92,7 @@ namespace SpinningTrainer.Data
         /// </summary>
         /// <param name="email">Email del usuario</param>
         /// <returns>Devuelve si el email existe o no.</returns>
-        public static string ValidaEmailParaCambioDeUsuario(string email)
+        public static string ValidaEmailParaRecuperacionDeUsuario(string email)
         {
             using (SqlConnection connection = DataBaseConnection.OpenConnection())
             {
@@ -110,6 +110,36 @@ namespace SpinningTrainer.Data
                     {
                         Console.WriteLine(ex.Message);
                         return "";
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Actualiza la contraseña del usuario.
+        /// </summary>
+        /// <param name="codUsua">Código del usuario.</param>
+        /// <param name="nuevaContra">Nueva contraseña.</param>
+        /// <returns>Retorna 2 valores, el bool que indica si se actualizo o no exitosamente, y un string con un mensaje de error en caso de lo dé.</returns>
+        public static (bool, string) ActulizaContraUsuario(string codUsua, string nuevaContra)
+        {
+            using (SqlConnection connection = DataBaseConnection.OpenConnection())
+            {
+                string query = "UPDATE Usuarios\n" +
+                               "SET Contra = ENCRYPTBYPASSPHRASE('12345', @nuevaContra)\n" +
+                               "WHERE CodUsua = @codUsua";
+
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+                    try
+                    {
+                        cmd.Parameters.AddWithValue("@nuevaContra", nuevaContra);
+
+                        return (true, "");
+                    }
+                    catch (Exception ex)
+                    {
+                        return (false, ex.Message);
                     }
                 }
             }

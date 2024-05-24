@@ -30,11 +30,7 @@ namespace SpinningTrainer
             }
         }
 
-        private async void tgrRecuperarContra_Tapped(object sender, TappedEventArgs e)
-        {            
-        }
-
-        private async void tgrRecuperarUsua_Tapped(object sender, TappedEventArgs e)
+        private async void tgrRecuperarDatos_Tapped(object sender, TappedEventArgs e)
         {
             await Navigation.PushAsync(new UserRecoveryView());
         }

@@ -32,9 +32,7 @@ public partial class UserRecoveryView : ContentPage
                 entValorRecuperacion.Placeholder = "Código de usuario";                
             }
 
-            lblInfoDatoAIngresar.IsVisible = true;
-            frmValorRecuperacion.IsVisible = true;
-            btnVerificarDatos.IsVisible = true;
+            vslDatoRecuperacion.IsVisible = true;
         }
     }
 
@@ -42,33 +40,32 @@ public partial class UserRecoveryView : ContentPage
     {
         if(TipoRecuperacion == 0)
         {
-            if (!string.IsNullOrEmpty(UsersData.ValidaEmailParaCambioDeUsuario(entValorRecuperacion.Text)))
+            string codUsua = UsersData.ValidaEmailParaRecuperacionDeUsuario(entValorRecuperacion.Text);
+
+            if (!string.IsNullOrEmpty(codUsua))
             {
+                this.CodUsua = codUsua;
+
                 var (numeroAleatorio,mensajeError) = EnviaCorreoViewModel.EnviarCorreoCodigoRecuperacion(entValorRecuperacion.Text);
 
                 if (numeroAleatorio == "0")
                 {
-                    DisplayAlert("Datos inválidos", mensajeError, "Aceptar");
+                    DisplayAlert("Fallo en el envío del correo", mensajeError, "Aceptar");
                 }
                 else
                 {
                     CodigoRecuperacion = numeroAleatorio;
                     this.Email = entValorRecuperacion.Text;
 
-                    lblTipoRecuperacion.IsVisible = false;
-                    frmTipoRecuperacion.IsVisible = false;
-                    lblInfoDatoAIngresar.IsVisible = false;
-                    frmValorRecuperacion.IsVisible = false;
-                    btnVerificarDatos.IsVisible = false;
+                    vslTipoRecuperacion.IsVisible = false;
+                    vslDatoRecuperacion.IsVisible = false;
 
-                    lblCodigoConfirmacion.IsVisible = true;
-                    frmCodigoRecuperacion.IsVisible = true;
-                    btnVerificarCodigo.IsVisible = true;
+                    vslVerificacionCodigo.IsVisible = true;
                 }
             }
             else
             {
-                DisplayAlert("Datos inválidos","El correo electonico ingresado no es valido.", "Aceptar");
+                DisplayAlert("Datos inválidos","El correo electrónico ingresado no es valido.", "Aceptar");
             }
         }
         else
@@ -77,7 +74,8 @@ public partial class UserRecoveryView : ContentPage
 
             if (!string.IsNullOrEmpty(email))
             {
-                var (numeroAleatorio, mensajeError) = EnviaCorreoViewModel.EnviarCorreoCodigoRecuperacion(entValorRecuperacion.Text);
+                this.CodUsua = entValorRecuperacion.Text;
+                var (numeroAleatorio, mensajeError) = EnviaCorreoViewModel.EnviarCorreoCodigoRecuperacion(email);
 
                 if (numeroAleatorio == "0")
                 {
@@ -88,20 +86,15 @@ public partial class UserRecoveryView : ContentPage
                     CodigoRecuperacion = numeroAleatorio;
                     this.Email = email;
 
-                    lblTipoRecuperacion.IsVisible = false;
-                    frmTipoRecuperacion.IsVisible = false;
-                    lblInfoDatoAIngresar.IsVisible = false;
-                    frmValorRecuperacion.IsVisible = false;
-                    btnVerificarDatos.IsVisible = false;
+                    vslTipoRecuperacion.IsVisible = false;
+                    vslDatoRecuperacion.IsVisible = false;
 
-                    lblCodigoConfirmacion.IsVisible = true;
-                    frmCodigoRecuperacion.IsVisible = true;
-                    btnVerificarCodigo.IsVisible = true;
+                    vslVerificacionCodigo.IsVisible = true;
                 }
             }
             else
             {
-                DisplayAlert("Datos inválidos", "El correo electonico ingresado no es valido.", "Aceptar");
+                DisplayAlert("Datos inválidos", "El usuario ingresado no es valido.", "Aceptar");
             }
         }
     }
@@ -112,14 +105,57 @@ public partial class UserRecoveryView : ContentPage
         {
             if (TipoRecuperacion == 0)
             {
-                EnviaCorreoViewModel.EnviarCorreo(this.Email, "Recuperación de código usuario", CodUsua);
+                EnviaCorreoViewModel.EnviarCorreo(this.Email, "Recuperación de código usuario", "Su código de usuario es:" + CodUsua);
                 await DisplayAlert("Proceso terminado!", "Se le ha enviado un correo electrónico en el cual se encuentra su código de usuario.", "Aceptar");
                 await Navigation.PopAsync();
+            }
+            else if (TipoRecuperacion == 1)
+            {
+                vslVerificacionCodigo.IsVisible = false;
+                vslNuevaContra.IsVisible = true;
             }
         }
         else
         {
-            DisplayAlert("Datos inválidos", "El código ingresado no coincide con el enviado.", "Aceptar");
+            await DisplayAlert("Datos inválidos", "El código ingresado no coincide con el enviado.", "Aceptar");
+        }
+    }
+
+    private void btnReenviarCodigo_Clicked(object sender, EventArgs e)
+    {
+        var (numeroAleatorio, mensajeError) = EnviaCorreoViewModel.EnviarCorreoCodigoRecuperacion(Email);
+
+        if (numeroAleatorio == "0")
+        {
+            DisplayAlert("Fallo en el envío del correo", mensajeError, "Aceptar");
+        }
+        else
+        {
+            CodigoRecuperacion = numeroAleatorio;
+            this.Email = entValorRecuperacion.Text;
+        }
+    }
+
+    private async void btnActualizarContra_Clicked(object sender, EventArgs e)
+    {
+        if((entNuevaContra.Text == entVerificarNuevaContra.Text) && !(string.IsNullOrEmpty(entNuevaContra.Text) || string.IsNullOrEmpty(entVerificarNuevaContra.Text)))
+        {
+            var(envioExitoso, mensajeError) = UsersData.ActulizaContraUsuario(CodUsua, entNuevaContra.Text);
+
+            if (envioExitoso)
+            {                
+                await DisplayAlert("Proceso terminado!", "Su contraseña se ha actualizado!", "Aceptar");
+                await Navigation.PopAsync();
+            }
+            else
+            {
+                await DisplayAlert("Falle de Actualización", mensajeError, "Aceptar");
+            }
+
+        }
+        else
+        {
+            await DisplayAlert("Datos Inconsistentes", "Las contraseña ingresada no coincide con la verificación.", "Aceptar");
         }
     }
 }

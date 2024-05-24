@@ -41,31 +41,6 @@
                        Placeholder="Ingrese su usuario"
                        MaxLength="30"/>
             </Frame>
-            <HorizontalStackLayout HorizontalOptions="Center">
-                <Label
-                    Text="¿Olvido su usuario?  "
-                    Style="{StaticResource SubHeadline}"
-                    FontSize="15"
-                    Margin="0,5,0,0"
-                    SemanticProperties.HeadingLevel="Level2"
-                    SemanticProperties.Description="Usuario" />
-
-                <Label
-                    Text="Recuperar"
-                    TextDecorations="Underline"                    
-                    FontAttributes="Bold"
-                    Style="{StaticResource SubHeadline}"
-                    FontSize="15"                    
-                    Margin="0,5,0,0"
-                    SemanticProperties.HeadingLevel="Level2"
-                    SemanticProperties.Description="Usuario">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer 
-                            x:Name="tgrRecuperarUsua"
-                            Tapped="tgrRecuperarUsua_Tapped"/>
-                    </Label.GestureRecognizers>
-                </Label>
-            </HorizontalStackLayout>
 
             <Label
                 Text="Contraseña"
@@ -90,27 +65,27 @@
 
             <HorizontalStackLayout HorizontalOptions="Center">
                 <Label
-                    Text="¿Olvido su contraseña?  "
+                    Text="¿Olvido sus Datos?  "
                     Style="{StaticResource SubHeadline}"
                     FontSize="15"
-                    Margin="0,5,0,0"
+                    Margin="0,25,0,0"
                     SemanticProperties.HeadingLevel="Level2"
                     SemanticProperties.Description="Usuario" />
 
                 <Label
-                    x:Name="lblRecuperarContra"
+                    x:Name="lblRecuerarDatos"
                     Text="Recuperar"
                     TextDecorations="Underline"                    
                     FontAttributes="Bold"
                     Style="{StaticResource SubHeadline}"
                     FontSize="15"                    
-                    Margin="0,5,0,0"
+                    Margin="0,25,0,0"
                     SemanticProperties.HeadingLevel="Level2"
                     SemanticProperties.Description="Usuario">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer 
-                            x:Name="tgrRecuperarContra"
-                            Tapped="tgrRecuperarContra_Tapped"/>
+                            x:Name="tgrRecuperarDatos"
+                            Tapped="tgrRecuperarDatos_Tapped"/>
                     </Label.GestureRecognizers>
                 </Label>
             </HorizontalStackLayout>

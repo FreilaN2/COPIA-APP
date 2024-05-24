@@ -60,11 +60,11 @@ namespace SpinningTrainer.ViewModel
             smtpClient.EnableSsl = true;
 
             // Autenticación
-            smtpClient.Credentials = new NetworkCredential("SpinCoach@hotmail.com", "Spin2024");
+            smtpClient.Credentials = new NetworkCredential("spincoach@hotmail.com", "Spin2024");
 
             // Creación del mensaje
             MailMessage message = new MailMessage();
-            message.From = new MailAddress("SpinCoach@hotmail.com");
+            message.From = new MailAddress("spincoach@hotmail.com");
             message.To.Add(destino);
             message.Subject = subject;
             message.Body = body;
