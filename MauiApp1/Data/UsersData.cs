@@ -13,7 +13,7 @@ namespace SpinningTrainer.Data
     class UsersData
     {        
         /// <summary>
-        /// Valida los datos ingresados en el inicio de sesion  este es un cambio de prueba
+        /// Valida los datos ingresados en el inicio de sesion
         /// </summary>
         /// <param name="codUsuaIngresado">Codigo de usuario ingresado</param>
         /// <param name="contraIngresada">Clave ingresada</param>
