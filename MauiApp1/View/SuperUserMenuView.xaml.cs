@@ -7,7 +7,7 @@ public partial class SuperUserMenuView : ContentPage
 		InitializeComponent();
 	}
 
-    private void btnOpenSelectionUser_Clicked(object sender, EventArgs e)
+    private void btnOpenSelectionEmpresa_Clicked(object sender, EventArgs e)
     {
 
     }
