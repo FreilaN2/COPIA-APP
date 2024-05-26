@@ -14,123 +14,90 @@
         <VerticalStackLayout Grid.Row="1">
             <StackLayout Margin="10">
                 <StackLayout Orientation="Horizontal" Margin="10">
-                    <Label Text="Nivel de dificultad"
-                           TextColor="#030000"
-                           HorizontalOptions="CenterAndExpand"
-                           VerticalOptions="Start"
-                           Margin="10,0,0,10"
-                           FontSize="20" />
+                    <Label Text="Configure su rutina"
+                      TextColor="#030000"
+                      HorizontalOptions="CenterAndExpand"
+                      VerticalOptions="Start"
+                      Margin="10,0,0,10"
+                      FontSize="20" />
                 </StackLayout>
-
-                <StackLayout x:Name="stltRadioButtons"
-                             Orientation="Horizontal"
-                             HorizontalOptions="CenterAndExpand"
-                             RadioButtonGroup.GroupName="grupo1"
-                             RadioButtonGroup.SelectedValue="Middle">
-                    <RadioButton x:Name="rdbtnBeginners"
-                                 Content="Principiantes" 
-                                 Value="Beginners"
-                                 TextColor="{StaticResource Primary}"
-                                 Margin="0,0,4,0" 
-                                 FontAttributes="Bold"/>
-                    <RadioButton x:Name="rdbtnMiddle"
-                                 Content="Medio" 
-                                 TextColor="{StaticResource Primary}"   
-                                 Value="Middle"
-                                 Margin="0,0,15,0"
-                                 FontAttributes="Bold"/>
-                    <RadioButton x:Name="rdbtnHighPerformance"
-                                 Content="Alto Rendimiento" 
-                                 TextColor="{StaticResource Primary}"
-                                 Value="HighPerformance"
-                                 Margin="0,0,5,0"
-                                 FontAttributes="Bold"/>
-                </StackLayout>
-
-
 
                 <StackLayout Orientation="Horizontal" Margin="30">
-                    <Frame Margin="10,0,0,0"
-                           WidthRequest="300"                           
-                           Background="{StaticResource Primary}">
+                    <Frame Margin="1,0,0,0"
+                      WidthRequest="300"                           
+                      Background="{StaticResource Primary}">
                         <Entry x:Name="entSessionName"
-                               Placeholder="Ingrese el nombre de la sesión" Text="{Binding Nombre}"
-                               BackgroundColor="Transparent"                                
-                               TextColor="White" 
-                               HeightRequest="50"
-                               PlaceholderColor="White"                                
-                               HorizontalTextAlignment="Center"
-                               VerticalOptions="Start"
-                               TextChanged="entSessionName_TextChanged"/>
+                          Placeholder="Ingrese el nombre de la sesión" Text="{Binding Nombre}"
+                          BackgroundColor="Transparent"                                
+                          TextColor="White" 
+                          HeightRequest="50"
+                          PlaceholderColor="White"                                
+                          HorizontalTextAlignment="Center"
+                          VerticalOptions="Start"
+                          TextChanged="entSessionName_TextChanged"/>
                     </Frame>
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Margin="10">
                     <StackLayout Grid.Row="1"
-                                 HorizontalOptions="Start">
-                        <Frame Margin="10,0,0,0"
-                               WidthRequest="150"
-                               Background="{StaticResource Primary}">
+                            HorizontalOptions="Start">
+                        <Frame Margin="13,0,0,0"
+                          WidthRequest="150"
+                          Background="{StaticResource Primary}">
                             <HorizontalStackLayout>
                                 <Label Text="Fecha:"
-                                       VerticalOptions="Center"/>
+                                  VerticalOptions="Center"/>
 
                                 <DatePicker x:Name="dpkSessionDate"
-                                            Background="Transparent"
-                                            VerticalOptions="Center"
-                                            Margin="10,0,0,0"
-                                            WidthRequest="100"/>
+                                       Background="Transparent"
+                                       VerticalOptions="Center"
+                                       Margin="10,0,0,0"
+                                       WidthRequest="100"/>
                             </HorizontalStackLayout>
                         </Frame>
                     </StackLayout>
 
 
                     <StackLayout Grid.Row="1"
-                                 HorizontalOptions="Start">
+                            HorizontalOptions="Start">
                         <Frame Margin="10,0,0,0"
-                               WidthRequest="150"
-                               Background="{StaticResource Primary}">
+                          WidthRequest="150"
+                          Background="{StaticResource Primary}">
                             <HorizontalStackLayout>
                                 <Label Text="Hora:"
-                                       VerticalOptions="Center"/>
+                                  VerticalOptions="Center"/>
 
                                 <TimePicker x:Name="dpkSessionTime"
-                                            Background="Transparent"
-                                            VerticalOptions="Center"
-                                            Margin="10,0,0,0"
-                                            WidthRequest="100"/>
+                                       Background="Transparent"
+                                       VerticalOptions="Center"
+                                       Margin="10,0,0,0"
+                                       WidthRequest="100"/>
                             </HorizontalStackLayout>
                         </Frame>
                     </StackLayout>
                 </StackLayout>
 
-
-
                 <StackLayout Orientation="Horizontal" Margin="50" HorizontalOptions="Center" VerticalOptions="Center">
                     <Button x:Name="btnNextStep"
-                            Text ="Siguiente"
-                            BackgroundColor="{StaticResource Primary}"
-                            CornerRadius ="20"
-                            WidthRequest="200" 
-                            HeightRequest="60"
-                            TextColor ="White"
-                            IsEnabled="False"
-                            Clicked="btnNextStep_Clicked"/>
+                       Text ="Siguiente"
+                       BackgroundColor="{StaticResource Primary}"
+                       CornerRadius ="20"
+                       WidthRequest="200" 
+                       HeightRequest="60"
+                       TextColor ="White"
+                       IsEnabled="False"
+                       Clicked="btnNextStep_Clicked"/>
                 </StackLayout>
             </StackLayout>
         </VerticalStackLayout>
 
         <StackLayout BackgroundColor="{StaticResource Primary}" 
-                     Grid.Row="2">
-            <Frame Margin="0,-30,0,0"
-                   CornerRadius="150"
-                   HorizontalOptions="Center">
-                <Button x:Name="btnLoadTemplate"
-                        ImageSource="icontemplates"                        
-                        BorderWidth="0"/>
-            </Frame>
+                Grid.Row="2">
+
         </StackLayout>
 
 
     </Grid>
+
+
 </ContentPage>
