@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SpinningTrainer.View.UsersDetailsView"
+             Title="UsersDetailsView">
+    <Grid BackgroundColor="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+
+        <StackLayout BackgroundColor="{StaticResource Primary}"
+         Grid.Row="0" 
+         Orientation="Horizontal" 
+         VerticalOptions="Start" 
+         Padding="40,10,30,20">
+
+            <Label Text="Registrar usuario" 
+       TextColor="White" 
+       FontSize="26" 
+       HorizontalOptions="CenterAndExpand" 
+       VerticalOptions="Center"/>
+        </StackLayout>
+        <ScrollView>
+            <StackLayout Padding="10">
+                <!-- Detalles del usuario -->
+
+                <StackLayout Spacing="10">
+                    <Frame BorderColor="{StaticResource Primary}" Padding="5,0,5,0">
+                        <Label Text="Código de Usuario:"/>
+                        <Entry Text="{Binding CodUsua}" FontSize="Medium" 
+                BackgroundColor="#EDEDED" 
+                WidthRequest="300" 
+                TextColor="#444444" 
+                PlaceholderColor="#999999" 
+                HeightRequest="50"
+                HorizontalTextAlignment="Center"
+                VerticalOptions="Start"/>
+                    </Frame>
+
+                    <Frame BorderColor="{StaticResource Primary}" Padding="5,0,5,0">
+                        <Label Text="Descripción:"/>
+                        <Entry Text="{Binding Descrip}" FontSize="Medium"
+                    BackgroundColor="#EDEDED" 
+                    WidthRequest="300" 
+                    TextColor="#444444" 
+                    PlaceholderColor="#999999" 
+                    HeightRequest="50"
+                    HorizontalTextAlignment="Center"
+                    VerticalOptions="Start"/>
+                    </Frame>
+
+
+
+                    <Frame BorderColor="{StaticResource Primary}" Padding="5,0,5,0">
+                        <Label Text="Contraseña:"/>
+                        <Entry Text="{Binding Contra}" FontSize="Medium" IsPassword="True"
+                    BackgroundColor="#EDEDED" 
+                    WidthRequest="300" 
+                     TextColor="#444444" 
+                     PlaceholderColor="#999999" 
+                     HeightRequest="50"
+                     HorizontalTextAlignment="Center"
+                     VerticalOptions="Start"/>
+                    </Frame>
+
+                    <Frame BorderColor="{StaticResource Primary}" Padding="5,0,5,0">
+                        <Label Text="PIN:"/>
+                        <Entry Text="{Binding PIN}" FontSize="Medium" IsPassword="True" 
+                    BackgroundColor="#EDEDED" 
+                     WidthRequest="300" 
+                     TextColor="#444444" 
+                     PlaceholderColor="#999999" 
+                     HeightRequest="50"
+                     HorizontalTextAlignment="Center"
+                     VerticalOptions="Start"/>
+                    </Frame>
+
+
+                    <Frame BorderColor="{StaticResource Primary}" Padding="5,0,5,0">
+                        <Label Text="Email:"/>
+                        <Entry Text="{Binding Email}" FontSize="Medium" 
+                    BackgroundColor="#EDEDED" 
+                     WidthRequest="300" 
+                     TextColor="#444444" 
+                     PlaceholderColor="#999999" 
+                     HeightRequest="50"
+                     HorizontalTextAlignment="Center"
+                     VerticalOptions="Start"/>
+                    </Frame>
+
+
+                    <Frame BorderColor="{StaticResource Primary}" Padding="5,0,5,0">
+                        <Label Text="Teléfono:"/>
+                        <Entry Text="{Binding Telef}" FontSize="Medium" 
+                   BackgroundColor="#EDEDED" 
+                     WidthRequest="300" 
+                     TextColor="#444444" 
+                     PlaceholderColor="#999999" 
+                     HeightRequest="50"
+                     HorizontalTextAlignment="Center"
+                     VerticalOptions="Start"/>
+                    </Frame>
+
+
+                    <Frame BorderColor="{StaticResource Primary}" Padding="5,0,5,0">
+                        <Label Text="Fecha de Creación:"/>
+                        <Entry Text="{Binding FechaC}" FontSize="Medium"
+                   BackgroundColor="#EDEDED" 
+                     WidthRequest="300" 
+                     TextColor="#444444" 
+                     PlaceholderColor="#999999" 
+                     HeightRequest="50"
+                     HorizontalTextAlignment="Center"
+                     VerticalOptions="Start"/>
+                    </Frame>
+
+
+                    <Frame BorderColor="{StaticResource Primary}" Padding="5,0,5,0">
+                        <Label Text="Fecha de Renovación:"/>
+                        <Entry Text="{Binding FechaR}" FontSize="Medium" 
+                   BackgroundColor="#EDEDED" 
+                     WidthRequest="300" 
+                     TextColor="#444444" 
+                     PlaceholderColor="#999999" 
+                     HeightRequest="50"
+                     HorizontalTextAlignment="Center"
+                     VerticalOptions="Start"/>
+                    </Frame>
+
+
+
+                    <Frame BorderColor="{StaticResource Primary}" Padding="5,0,5,0">
+                        <Label Text="Fecha de Vencimiento:"/>
+                        <Entry Text="{Binding FechaV}" FontSize="Medium"
+                   BackgroundColor="#EDEDED" 
+                     WidthRequest="300" 
+                     TextColor="#444444" 
+                     PlaceholderColor="#999999" 
+                     HeightRequest="50"
+                     HorizontalTextAlignment="Center"
+                     VerticalOptions="Start"/>
+                    </Frame>
+
+                    <Label Text="Tipo de Usuario:"/>
+                    <Picker x:Name="TipoUsuarioPicker" FontSize="Medium">
+                        <Picker.Items>
+                            <x:String>Super Usuario</x:String>
+                            <x:String>Administrador</x:String>
+                            <x:String>Entrenador</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </StackLayout>
+
+                <!-- Botones de Editar y Eliminar -->
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,20">
+                    <Button Text="Editar" Clicked="Editar_Clicked" />
+                    <Button Text="Eliminar" Clicked="Eliminar_Clicked" />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

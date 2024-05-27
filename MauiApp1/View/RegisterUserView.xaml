@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SpinningTrainer.View.RegisterUserView"
+             Title="RegisterUserView">
+    <ScrollView>
+        <StackLayout Padding="10">
+            <Label Text="Registro de Usuario" FontSize="Large" HorizontalOptions="CenterAndExpand" Margin="0,10,0,20"/>
+
+            <Label Text="Nombre de Usuario:"/>
+            <Entry x:Name="UsuarioEntry" FontSize="Medium" />
+
+            <Label Text="Contraseña:"/>
+            <Entry x:Name="ContrasenaEntry" FontSize="Medium" IsPassword="True" />
+
+            <Label Text="Confirmar Contraseña:"/>
+            <Entry x:Name="ConfirmarContrasenaEntry" FontSize="Medium" IsPassword="True" />
+
+            <Label Text="PIN:"/>
+            <Entry x:Name="PINEntry" FontSize="Medium" />
+
+            <Label Text="Nombre:"/>
+            <Entry x:Name="NombreEntry" FontSize="Medium" />
+
+            <Label Text="Apellido:"/>
+            <Entry x:Name="ApellidoEntry" FontSize="Medium" />
+
+            <Label Text="Email:"/>
+            <Entry x:Name="EmailEntry" FontSize="Medium" />
+
+            <Label Text="Teléfono:"/>
+            <Entry x:Name="TelefonoEntry" FontSize="Medium" />
+
+            <Label Text="Tipo de Usuario:"/>
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                <RadioButton x:Name="SuperUsuarioCheckBox" GroupName="TipoUsuario" />
+                <Label Text="Super Usuario" VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                <RadioButton x:Name="AdministradorCheckBox" GroupName="TipoUsuario" />
+                <Label Text="Administrador" VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                <RadioButton x:Name="EntrenadorCheckBox" GroupName="TipoUsuario" />
+                <Label Text="Entrenador" VerticalOptions="Center"/>
+            </StackLayout>
+
+            <Button Text="Guardar" Clicked="Guardar_Clicked" HorizontalOptions="CenterAndExpand" Margin="0,20"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
