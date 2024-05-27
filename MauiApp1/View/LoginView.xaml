@@ -1,9 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:SpinningTrainer.ViewModel"
              x:Class="SpinningTrainer.LoginView"
              Background="{StaticResource Primary}">
-
+    
+    <ContentPage.BindingContext>
+        <viewModel:LoginViewModel/>
+    </ContentPage.BindingContext>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*"/>
@@ -38,6 +43,7 @@
 
             <Frame Margin="0,5,0,0">
                 <Entry x:Name="codUsuaIngresadoEntry"
+                       Text="{Binding Username, Mode=TwoWay}"
                        Placeholder="Ingrese su usuario"
                        MaxLength="30"/>
             </Frame>
@@ -57,12 +63,20 @@
                 Margin="0,5,0,0"                   
                 BorderColor="Transparent">
                 <Entry x:Name="contraIngresadaEntry"
+                       Text="{Binding Password, Mode=TwoWay}"
                        Placeholder="Ingrese su contraseña"
                        MaxLength="30"      
                        IsPassword="True"
                        PlaceholderColor="{StaticResource SecondaryDarkText}"/>
             </Frame>
 
+            <Label Text="{Binding ErrorMessage}"
+                   TextColor="White"
+                   HorizontalTextAlignment="Center"
+                   FontAttributes="Bold"
+                   FontSize="12"
+                   Margin="0,20,0,0"/>
+            
             <HorizontalStackLayout HorizontalOptions="Center">
                 <Label
                     Text="¿Olvido sus Datos?  "
@@ -91,9 +105,10 @@
             </HorizontalStackLayout>
 
             <Button x:Name="btnIniciarSesion"
-                Text="Iniciar sesión"
-                Margin="0,50,0,0"
-                Clicked="btnIniciarSesion_Clicked"/>
+                    Text="Iniciar sesión"
+                    Margin="0,50,0,0"                    
+                    Command="{Binding LoginCommand}"
+                    Clicked="btnIniciarSesion_Clicked"/>
         </StackLayout>
     </Grid>
 

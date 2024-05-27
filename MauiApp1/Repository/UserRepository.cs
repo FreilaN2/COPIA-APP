@@ -1,4 +1,4 @@
-﻿using Configurador_WPF.Data;
+﻿using SpinningTrainer.Repository;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -7,10 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using Microsoft.EntityFrameworkCore.Update;
+using SpinningTrainer.Model;
 
-namespace SpinningTrainer.Data
+namespace SpinningTrainer.Repository
 {
-    class UsersData
+    class UserRepository: RepositoryBase, IUserRepository
     {        
         /// <summary>
         /// Valida los datos ingresados en el inicio de sesion
@@ -18,9 +19,9 @@ namespace SpinningTrainer.Data
         /// <param name="codUsuaIngresado">Codigo de usuario ingresado</param>
         /// <param name="contraIngresada">Clave ingresada</param>
         /// <returns>Devuelve un bool que dice es true si el inicio fue exitoso, un string como mensaje de error en caso de que lo haya y el tipo de usuario</returns>
-        public static (bool, string, int) ValidarDatosInicioSesion(string codUsuaIngresado, string contraIngresada)
+        public (bool, string, int) AuthenticateUser(string username, string password)
         {           
-            using (SqlConnection connection = DataBaseConnection.OpenConnection())
+            using (SqlConnection connection = OpenConnection())
             {                
                 string query = $"SELECT CONVERT(varchar,DECRYPTBYPASSPHRASE('12345', Contra)) AS Contra,\n" +
                                 "       TipoUsuario,\n" +
@@ -30,7 +31,7 @@ namespace SpinningTrainer.Data
 
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@codUsua", codUsuaIngresado);
+                    cmd.Parameters.AddWithValue("@codUsua", password);
 
                     try
                     {
@@ -44,7 +45,7 @@ namespace SpinningTrainer.Data
 
                                 if(fechaV > DateTime.Now || tipoUsuario == 0)
                                 {
-                                    if (contraIngresada == contraBaseDatos) { return (true, "Inicio Exitoso", tipoUsuario); }
+                                    if (password == contraBaseDatos) { return (true, "Inicio Exitoso", tipoUsuario); }
                                     else { return (false, "Contraseña incorrecta.", tipoUsuario); }
                                 }
                                 else { return (false, "Membresía vencida.", tipoUsuario); }
@@ -65,9 +66,9 @@ namespace SpinningTrainer.Data
         /// </summary>
         /// <param name="codUsua">Codigo de usuario</param>
         /// <returns>Email del usuario.</returns>
-        public static string ValidaCodigoDeUsuarioParaCambioDeClave(string codUsua)
+        public string ValidateUsernameforPasswordChange(string codUsua)
         {
-            using(SqlConnection connection = DataBaseConnection.OpenConnection())
+            using(SqlConnection connection = RepositoryBase.OpenConnection())
             {
                 string query = "SELECT ISNULL(Email,'') FROM Usuarios WHERE CodUsua = @codUsua";
 
@@ -92,9 +93,9 @@ namespace SpinningTrainer.Data
         /// </summary>
         /// <param name="email">Email del usuario</param>
         /// <returns>Devuelve si el email existe o no.</returns>
-        public static string ValidaEmailParaRecuperacionDeUsuario(string email)
+        public string ValidateUserEmalforPasswordChange(string email)
         {
-            using (SqlConnection connection = DataBaseConnection.OpenConnection())
+            using (SqlConnection connection = RepositoryBase.OpenConnection())
             {
                 string query = "SELECT CodUsua FROM Usuarios WHERE Email = @email";
 
@@ -121,9 +122,9 @@ namespace SpinningTrainer.Data
         /// <param name="codUsua">Código del usuario.</param>
         /// <param name="nuevaContra">Nueva contraseña.</param>
         /// <returns>Retorna 2 valores, el bool que indica si se actualizo o no exitosamente, y un string con un mensaje de error en caso de lo dé.</returns>
-        public static (bool, string) ActulizaContraUsuario(string codUsua, string nuevaContra)
+        public  (bool, string) UpdatePassword(string codUsua, string nuevaContra)
         {
-            using (SqlConnection connection = DataBaseConnection.OpenConnection())
+            using (SqlConnection connection = RepositoryBase.OpenConnection())
             {
                 string query = "UPDATE Usuarios\n" +
                                "SET Contra = ENCRYPTBYPASSPHRASE('12345', @nuevaContra)\n" +
@@ -143,6 +144,36 @@ namespace SpinningTrainer.Data
                     }
                 }
             }
+        }
+
+        public void Add(UserModel userModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(UserModel userModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(UserModel userModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public UserModel GetById(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public UserModel GetByUserName(string username)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<UserModel> GetAll()
+        {
+            throw new NotImplementedException();
         }
     }
 }

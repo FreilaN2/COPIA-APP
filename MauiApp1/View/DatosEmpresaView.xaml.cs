@@ -1,5 +1,4 @@
 using Microsoft.Maui.Controls;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -7,24 +6,25 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 
-namespace Pages
+namespace SpinningTrainer
 {
-    public partial class VerDataEmp : ContentPage
+    public partial class DatosEmpresaView : ContentPage
     {
         private string connectionString = "server=localhost;port=3307;database=gym_app;uid=root;password=";
 
         public ObservableCollection<Empresa> Empresas { get; set; }
 
-        public VerDataEmp(List<Empresa> empresas)
+        /*public DatosEmpresaView(List<Empresa> empresas)
         {
             InitializeComponent();
             Empresas = new ObservableCollection<Empresa>(empresas);
             CargarDatosEmpresa();
-        }
+        }*/
 
         private async void CargarDatosEmpresa()
         {
-            try
+            //ESTE DONDE VAYA FUE MANUEL
+            /*try
             {
                 Empresas.Clear();
 
@@ -67,12 +67,12 @@ namespace Pages
             catch (Exception ex)
             {
                 await DisplayAlert("Error", $"Error al cargar los datos: {ex.Message}", "OK");
-            }
+            }*/
         }
 
         private async void EditarClicked(object sender, EventArgs e)
         {
-            try
+           /* try
             {
                 if (Empresas.Count == 0)
                 {
@@ -89,12 +89,12 @@ namespace Pages
             catch (Exception ex)
             {
                 await DisplayAlert("Error", $"Error al intentar editar la empresa: {ex.Message}", "OK");
-            }
+            }*/
         }
 
         private async void EliminarClicked(object sender, EventArgs e)
         {
-            if (Empresas.Count == 0)
+            /*if (Empresas.Count == 0)
             {
                 await DisplayAlert("Error", "No hay empresas disponibles para eliminar.", "OK");
                 return;
@@ -139,7 +139,7 @@ namespace Pages
                 {
                     await DisplayAlert("Error", $"Error al eliminar la empresa: {ex.Message}", "OK");
                 }
-            }
+            }*/
         }
     }
 

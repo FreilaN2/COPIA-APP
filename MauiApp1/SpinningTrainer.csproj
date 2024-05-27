@@ -104,6 +104,9 @@
 	  <Compile Update="View\PreviewSingleReportView.xaml.cs">
 	    <DependentUpon>PreviewSingleReportView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\RecoveryLoginDataView.xaml.cs">
+	    <DependentUpon>RecoveryLoginDataView.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -137,7 +140,7 @@
 	  <MauiXaml Update="View\SuperUserMenuView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\UserRecoveryView.xaml">
+	  <MauiXaml Update="View\RecoveryLoginDataView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\UsersDetailsView.xaml">

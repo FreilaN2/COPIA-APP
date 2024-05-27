@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Data.SqlClient;
 
-namespace Configurador_WPF.Data
+namespace SpinningTrainer.Repository
 {
-    internal class DataBaseConnection
+    internal class RepositoryBase
     {
         //Cadena de conexión
         public static string ConnectionString { get; set; }

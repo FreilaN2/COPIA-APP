@@ -8,15 +8,15 @@ namespace SpinningTrainer;
 
 public partial class MainPageView : ContentPage
 {
-    ObservableCollection<Sesiones> infoSesiones = new ObservableCollection<Sesiones>();
+    ObservableCollection<Sessions> infoSesiones = new ObservableCollection<Sessions>();
 
 	public MainPageView()
 	{
 		InitializeComponent();
 
-		infoSesiones.Add(new Sesiones { Id = 5, Descrip = "Sesión Basica", IdEntrenador = 2, DescripEntrenador = "Diego Estevez", Fecha = DateTime.Now });
-        infoSesiones.Add(new Sesiones { Id = 3, Descrip = "Sesión Media", IdEntrenador = 2, DescripEntrenador = "Diego Estevez", Fecha = DateTime.Now });
-        infoSesiones.Add(new Sesiones { Id = 8, Descrip = "Sesión Alta Dificultad", IdEntrenador = 2, DescripEntrenador = "Diego Estevez", Fecha = DateTime.Now });
+		infoSesiones.Add(new Sessions { Id = 5, Descrip = "Sesión Basica", IdEntrenador = 2, DescripEntrenador = "Diego Estevez", Fecha = DateTime.Now });
+        infoSesiones.Add(new Sessions { Id = 3, Descrip = "Sesión Media", IdEntrenador = 2, DescripEntrenador = "Diego Estevez", Fecha = DateTime.Now });
+        infoSesiones.Add(new Sessions { Id = 8, Descrip = "Sesión Alta Dificultad", IdEntrenador = 2, DescripEntrenador = "Diego Estevez", Fecha = DateTime.Now });
 		
 		lvInfoSesiones.ItemsSource = infoSesiones;
     }

@@ -1,4 +1,4 @@
-﻿using Configurador_WPF.Data;
+﻿using SpinningTrainer.Repository;
 using SpinningTrainer.View;
 
 namespace SpinningTrainer

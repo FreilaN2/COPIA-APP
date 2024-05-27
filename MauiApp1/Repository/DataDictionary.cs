@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Configurador_WPF.Data
+namespace SpinningTrainer.Repository
 {
     internal class DataDictionary
     {

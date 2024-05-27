@@ -45,7 +45,7 @@
                 <Label Text="Entrenador" VerticalOptions="Center"/>
             </StackLayout>
 
-            <Button Text="Guardar" Clicked="Guardar_Clicked" HorizontalOptions="CenterAndExpand" Margin="0,20"/>
+            <Button Text="Guardar" HorizontalOptions="CenterAndExpand" Margin="0,20"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

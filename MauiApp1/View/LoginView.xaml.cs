@@ -1,7 +1,6 @@
-﻿using Configurador_WPF.Data;
+﻿using SpinningTrainer.Repository;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
-using SpinningTrainer.Data;
 using SpinningTrainer.View;
 
 namespace SpinningTrainer
@@ -18,21 +17,12 @@ namespace SpinningTrainer
             string codUsuaIngresado = codUsuaIngresadoEntry.Text;
             string contraIngresada = contraIngresadaEntry.Text;
 
-            var (inicioExitoso, mensaje, tipoUsuario) = UsersData.ValidarDatosInicioSesion(codUsuaIngresado, contraIngresada);
-
-            if (inicioExitoso == true)
-            {
-                await Shell.Current.GoToAsync($"//{nameof(MainPageView)}");                
-            }
-            else
-            {
-                await DisplayAlert("Acceso Denegado",mensaje,"Aceptar");
-            }
+            
         }
 
         private async void tgrRecuperarDatos_Tapped(object sender, TappedEventArgs e)
         {
-            await Navigation.PushAsync(new UserRecoveryView());
+            await Navigation.PushAsync(new RecoveryLoginDataView());
         }
     }
 }

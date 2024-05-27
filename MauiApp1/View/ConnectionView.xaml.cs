@@ -1,4 +1,4 @@
-using Configurador_WPF.Data;
+using SpinningTrainer.Repository;
 using Microsoft.Data.SqlClient;
 using Microsoft.Maui.Controls;
 using System;
@@ -106,9 +106,9 @@ public partial class ConnectionView : ContentPage
 
             File.WriteAllText(filePath, connectionStringEncriptada);
 
-            DataBaseConnection.TestConnection();
+            RepositoryBase.TestConnection();
 
-            if (DataBaseConnection.CompruebaBaseDatos())
+            if (RepositoryBase.CompruebaBaseDatos())
             {                
                 await Shell.Current.GoToAsync($"//{nameof(LoginView)}");
             }

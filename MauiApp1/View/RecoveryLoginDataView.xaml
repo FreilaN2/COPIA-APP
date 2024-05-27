@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SpinningTrainer.View.UserRecoveryView"
+             xmlns:viewModel="clr-namespace:SpinningTrainer.ViewModel"
+             x:Class="SpinningTrainer.View.RecoveryLoginDataView"             
              Title="Recuperación de Usuario"
              Background="White">
+    <ContentPage.BindingContext>
+        <viewModel:RecoveryLoginDataViewModel/>
+    </ContentPage.BindingContext>
+
     <VerticalStackLayout
         Padding="20">
        
@@ -11,18 +16,19 @@
         <VerticalStackLayout x:Name="vslTipoRecuperacion"
                              IsVisible="True">
             <Label       
-                x:Name="lblTipoRecuperacion"
+                x:Name="lblRecoveryType"
                 Text="Tipo Recuperación"
                 FontAttributes="Bold"
                 TextColor="{StaticResource Primary}"/>
 
             <Frame
-                x:Name="frmTipoRecuperacion"
+                x:Name="frmRecoveryType"
                 Margin="0,5,0,0">
                 <Picker 
-                    x:Name="pkTipoRecuperacion"
+                    x:Name="pkRecoveryType"
                     Title="¿Que desea recuperar?"                    
                     TitleColor="White"
+                    SelectedIndex="{Binding RecoveryType}"
                     Background="Transparent"
                     TextColor="White"
                     SelectedIndexChanged="pkTipoRecuperacion_SelectedIndexChanged">
@@ -37,68 +43,69 @@
         </VerticalStackLayout>
 
         <!--Datos de ayuda para la recuperación solicitada-->
-        <VerticalStackLayout x:Name="vslDatoRecuperacion"
-                             IsVisible="False">
+        <VerticalStackLayout x:Name="vslRecoveryData"
+                             IsVisible="{Binding RecoveryType, Converter={}}">
             <Label                 
-                x:Name="lblInfoDatoAIngresar"                         
+                x:Name="lblInfoRecoveryData"
                 FontAttributes="Bold"
                 Margin="0,20,0,0"
                 TextColor="{StaticResource Primary}"/>
-            
+
             <Frame 
-                x:Name="frmValorRecuperacion"
+                x:Name="frmRecoveryValue"
                 Margin="0,5,0,0">
-                <Entry x:Name="entValorRecuperacion"/>
+                <Entry x:Name="entRecoveryValue"
+                       Text="{Binding RecoveryData}"/>
             </Frame>
 
-            <Button x:Name="btnVerificarDatos"               
+            <Button x:Name="btnVerifyData"               
                     VerticalOptions="EndAndExpand"
                     Margin="0,100,0,0"
                     Text="Verificar"
-                    Clicked="btnVerificarDatos_Clicked"
+                    Clicked="btnVerifyData_Clicked"
                     BackgroundColor="{StaticResource Primary}"/>
         </VerticalStackLayout>
 
         <!--Verificación de código enviado al correo-->
-        <VerticalStackLayout x:Name="vslVerificacionCodigo"
+        <VerticalStackLayout x:Name="vslVerifyCode"
                              IsVisible="False">
             <Label             
-                x:Name="lblCodigoConfirmacion"
+                x:Name="lblConfirmationCode"
                 Text="Ingresar Código de Confirmación"            
                 FontAttributes="Bold"
                 TextColor="{StaticResource Primary}"/>
 
             <Frame 
-                x:Name="frmCodigoRecuperacion"
+                x:Name="frmConfirmationCode"
                 Margin="0,5,0,0">
-                <Entry x:Name="entCodigoRecuperacion"/>
+                <Entry x:Name="entConfirmationCode"/>
             </Frame>
 
-            <Button x:Name="btnVerificarCodigo"               
+            <Button x:Name="btnVerifyCode"               
                     VerticalOptions="EndAndExpand"
                     Margin="0,50,0,0"
                     Text="Verificar"
-                    Clicked="btnVerificarCodigo_Clicked"
+                    Clicked="btnVerifyCode_Clicked"
                     BackgroundColor="{StaticResource Primary}"/>
 
-            <Button x:Name="btnReenviarCodigo"
+            <Button x:Name="btnResendCode"
                     VerticalOptions="EndAndExpand"
                     Margin="0,25,0,0"
                     Text="Reenviar Código"
-                    Clicked="btnReenviarCodigo_Clicked"
+                    Clicked="btnResendCode_Clicked"
                     BackgroundColor="{StaticResource Primary}"/>
         </VerticalStackLayout>
 
         <!--Actualizar Contraseña-->
-        <VerticalStackLayout x:Name="vslNuevaContra"
+        <VerticalStackLayout x:Name="vslNewPassword"
                              IsVisible="False">
             <Label Text="Nueva Contraseña"            
                    FontAttributes="Bold"
                    TextColor="{StaticResource Primary}"/>
             <Frame 
-                x:Name="frmNuevaContra"
+                x:Name="frmNewPassword"
                 Margin="0,5,0,0">
-                <Entry x:Name="entNuevaContra"
+                <Entry x:Name="entNewPassword"
                        Placeholder="Nueva Contraseña"
                        IsPassword="True"/>
             </Frame>
@@ -108,19 +115,25 @@
                    FontAttributes="Bold"
                    TextColor="{StaticResource Primary}"/>
             <Frame 
-                x:Name="frmVerificarNuevaContra"
+                x:Name="frmVerifyNewPassword"
                 Margin="0,5,0,0">
-                <Entry x:Name="entVerificarNuevaContra"
+                <Entry x:Name="entVerifyNewPassword"
                        Placeholder="Verificar Contraseña"
                        IsPassword="True"/>
             </Frame>
 
-            <Button x:Name="btnActualizarContra"               
+            <Button x:Name="btnUpdatePassword"               
                     VerticalOptions="EndAndExpand"
                     Margin="0,100,0,0"
                     Text="Actualizar"
-                    Clicked="btnActualizarContra_Clicked"
+                    Clicked="btnUpdatePassword_Clicked"
                     BackgroundColor="{StaticResource Primary}"/>
         </VerticalStackLayout>
+        <Label Text="{Binding ErrorMessage}"
+               TextColor="White"
+               HorizontalTextAlignment="Center"
+               FontAttributes="Bold"
+               FontSize="12"
+               Margin="0,20,0,0"/>
     </VerticalStackLayout>
 </ContentPage>

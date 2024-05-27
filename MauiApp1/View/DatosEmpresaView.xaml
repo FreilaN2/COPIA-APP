@@ -2,12 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpinningTrainer.View.DatosEmpresaView"
-             Title="DatosEmpresaView">
+             Title="Datos Empresa">
     <StackLayout Padding="20" VerticalOptions="CenterAndExpand">
         <Frame CornerRadius="75" HeightRequest="150" WidthRequest="150" HorizontalOptions="Center" VerticalOptions="Center">
             <Image Source="{Binding Path=LogoImageSource}" HeightRequest="150" WidthRequest="150" Aspect="AspectFill" />
         </Frame>
-        <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center">
+        <!--<StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center">
             <Label Text="{Binding Rif}" FontSize="Medium" />
             <Label Text="{Binding Descrip}" FontSize="Medium" />
             <Label Text="{Binding Direccion}" FontSize="Medium" />
@@ -15,6 +15,6 @@
         <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
             <Button Text="Editar" Clicked="EditarClicked" />
             <Button Text="Eliminar" Clicked="EliminarClicked" />
-        </StackLayout>
+        </StackLayout>-->
     </StackLayout>
 </ContentPage>

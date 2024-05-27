@@ -28,44 +28,51 @@
 
                 <StackLayout Spacing="10">
                     <Frame BorderColor="{StaticResource Primary}" Padding="5,0,5,0">
-                        <Label Text="Código de Usuario:"/>
-                        <Entry Text="{Binding CodUsua}" FontSize="Medium" 
-                BackgroundColor="#EDEDED" 
-                WidthRequest="300" 
-                TextColor="#444444" 
-                PlaceholderColor="#999999" 
-                HeightRequest="50"
-                HorizontalTextAlignment="Center"
-                VerticalOptions="Start"/>
-                    </Frame>
+                        <VerticalStackLayout>
+                            <Label Text="Código de Usuario:"/>
+                            <Entry Text="{Binding CodUsua}" FontSize="Medium" 
+                                   BackgroundColor="#EDEDED" 
+                                   WidthRequest="300" 
+                                   TextColor="#444444" 
+                                   PlaceholderColor="#999999" 
+                                   HeightRequest="50"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalOptions="Start"/>
+                        </VerticalStackLayout>
+                    </Frame>                    
 
                     <Frame BorderColor="{StaticResource Primary}" Padding="5,0,5,0">
-                        <Label Text="Descripción:"/>
-                        <Entry Text="{Binding Descrip}" FontSize="Medium"
-                    BackgroundColor="#EDEDED" 
-                    WidthRequest="300" 
-                    TextColor="#444444" 
-                    PlaceholderColor="#999999" 
-                    HeightRequest="50"
-                    HorizontalTextAlignment="Center"
-                    VerticalOptions="Start"/>
+                        <VerticalStackLayout>
+                            <Label Text="Descripción:"/>
+                            <Entry Text="{Binding Descrip}" FontSize="Medium"
+                                   BackgroundColor="#EDEDED" 
+                                   WidthRequest="300" 
+                                   TextColor="#444444" 
+                                   PlaceholderColor="#999999" 
+                                   HeightRequest="50"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalOptions="Start"/>
+                        </VerticalStackLayout>
                     </Frame>
 
 
 
                     <Frame BorderColor="{StaticResource Primary}" Padding="5,0,5,0">
-                        <Label Text="Contraseña:"/>
-                        <Entry Text="{Binding Contra}" FontSize="Medium" IsPassword="True"
-                    BackgroundColor="#EDEDED" 
-                    WidthRequest="300" 
-                     TextColor="#444444" 
-                     PlaceholderColor="#999999" 
-                     HeightRequest="50"
-                     HorizontalTextAlignment="Center"
-                     VerticalOptions="Start"/>
+                        <VerticalStackLayout>
+                            <Label Text="Contraseña:"/>
+                            <Entry Text="{Binding Contra}" FontSize="Medium" IsPassword="True"
+                                   BackgroundColor="#EDEDED" 
+                                   WidthRequest="300" 
+                                   TextColor="#444444" 
+                                   PlaceholderColor="#999999" 
+                                   HeightRequest="50"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalOptions="Start"/>
+                        </VerticalStackLayout>
                     </Frame>
 
-                    <Frame BorderColor="{StaticResource Primary}" Padding="5,0,5,0">
+                    <!--<Frame BorderColor="{StaticResource Primary}" Padding="5,0,5,0">
+                        <VerticalStackLayout
                         <Label Text="PIN:"/>
                         <Entry Text="{Binding PIN}" FontSize="Medium" IsPassword="True" 
                     BackgroundColor="#EDEDED" 
@@ -141,7 +148,7 @@
                      HeightRequest="50"
                      HorizontalTextAlignment="Center"
                      VerticalOptions="Start"/>
-                    </Frame>
+                    </Frame>-->
 
                     <Label Text="Tipo de Usuario:"/>
                     <Picker x:Name="TipoUsuarioPicker" FontSize="Medium">
@@ -155,8 +162,8 @@
 
                 <!-- Botones de Editar y Eliminar -->
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,20">
-                    <Button Text="Editar" Clicked="Editar_Clicked" />
-                    <Button Text="Eliminar" Clicked="Eliminar_Clicked" />
+                    <Button Text="Editar" />
+                    <Button Text="Eliminar" />
                 </StackLayout>
             </StackLayout>
         </ScrollView>

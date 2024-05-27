@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SpinningTrainer.Model
 {
-    class Usuarios
-    {
+    public class UserModel
+    { 
         public int Id { get; set; }
         public string CodUsua { get; set; }
         public string Descrip { get; set; }

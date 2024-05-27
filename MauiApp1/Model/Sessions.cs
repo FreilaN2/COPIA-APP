@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpinningTrainer.Model
 {
-    class Sesiones
+    class Sessions
     {
         public int Id { get; set; }
         public string Descrip { get; set; }

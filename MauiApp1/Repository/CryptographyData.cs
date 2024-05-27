@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Configurador_WPF.Data
+namespace SpinningTrainer.Repository
 {
     internal class CryptographyData
     {

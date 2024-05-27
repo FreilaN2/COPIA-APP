@@ -1,4 +1,4 @@
-using Configurador_WPF.Data;
+using SpinningTrainer.Repository;
 
 namespace SpinningTrainer.View;
 
@@ -19,14 +19,14 @@ public partial class SplashScreenView : ContentPage
         await Task.Delay(1000);
 
         lblMuestraMensajeCargandoAlUsuario.Text = "Cargando... Comprobando conexión a la base de datos.";
-        if (DataBaseConnection.TestConnection())
+        if (RepositoryBase.TestConnection())
         {
             ActualizaConsejosPantalla();
 
             await pbLoadProgress.ProgressTo(0.7, 4000, Easing.Linear);
            
             lblMuestraMensajeCargandoAlUsuario.Text = "Cargando... Comprobando base de datos";
-            if (DataBaseConnection.CompruebaBaseDatos())
+            if (RepositoryBase.CompruebaBaseDatos())
             {
                 ActualizaConsejosPantalla();
                 await pbLoadProgress.ProgressTo(1, 4000, Easing.Linear);
