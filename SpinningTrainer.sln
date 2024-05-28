@@ -5,7 +5,12 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpinningTrainer", "MauiApp1\SpinningTrainer.csproj", "{62A085BE-7C9C-49CB-B522-E837596F1757}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpinningTrainerTV", "SpinningTrainerTV\SpinningTrainerTV.csproj", "{F2085448-54F8-42BD-9108-CC9180186123}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpinningTrainerTV", "SpinningTrainerTV\SpinningTrainerTV.csproj", "{F2085448-54F8-42BD-9108-CC9180186123}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Consultas SQL", "Consultas SQL", "{862F3824-17E2-4422-9CDA-DD69FB807DC1}"
+	ProjectSection(SolutionItems) = preProject
+		VerificacionLogin.sql = VerificacionLogin.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
