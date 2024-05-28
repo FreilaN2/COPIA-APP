@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
+using SpinningTrainer.Model;
+using SpinningTrainer.Repository;
 
 namespace SpinningTrainer
 {
@@ -17,6 +19,7 @@ namespace SpinningTrainer
             builder.Services.AddSingleton<LoginView>();
             builder.Services.AddSingleton<ConnectionView>();
             builder.Services.AddSingleton<MainPageView>();
+            
 #if DEBUG
             builder.Logging.AddDebug();            
 #endif

@@ -13,8 +13,8 @@
         Padding="20">
        
         <!--PANEL DE SELECCIÓN DE TIPO DE RECUPERACIÓN-->
-        <VerticalStackLayout x:Name="vslTipoRecuperacion"
-                             IsVisible="True">
+        <VerticalStackLayout x:Name="vslRecoveryType"
+                             IsVisible="{Binding ShowVslRecoveryType}">
             <Label       
                 x:Name="lblRecoveryType"
                 Text="Tipo Recuperación"
@@ -28,10 +28,9 @@
                     x:Name="pkRecoveryType"
                     Title="¿Que desea recuperar?"                    
                     TitleColor="White"
-                    SelectedIndex="{Binding RecoveryType}"
+                    SelectedIndex="{Binding RecoveryType, Mode=TwoWay}"
                     Background="Transparent"
-                    TextColor="White"
-                    SelectedIndexChanged="pkTipoRecuperacion_SelectedIndexChanged">
+                    TextColor="White">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>Usuario</x:String>
@@ -44,9 +43,10 @@
 
         <!--Datos de ayuda para la recuperación solicitada-->
         <VerticalStackLayout x:Name="vslRecoveryData"
-                             IsVisible="{Binding RecoveryType, Converter={}}">
+                             IsVisible="{Binding ShowVslRecoveryData}">
             <Label                 
                 x:Name="lblInfoRecoveryData"
+                Text="{Binding HelpMessage}"
                 FontAttributes="Bold"
                 Margin="0,20,0,0"
                 TextColor="{StaticResource Primary}"/>
@@ -55,20 +55,21 @@
                 x:Name="frmRecoveryValue"
                 Margin="0,5,0,0">
                 <Entry x:Name="entRecoveryValue"
-                       Text="{Binding RecoveryData}"/>
+                       Text="{Binding RecoveryData, Mode=TwoWay}"
+                       Placeholder="{Binding PlaceholderHelpMessage}"/>
             </Frame>
 
             <Button x:Name="btnVerifyData"               
                     VerticalOptions="EndAndExpand"
                     Margin="0,100,0,0"
                     Text="Verificar"
-                    Clicked="btnVerifyData_Clicked"
+                    Command="{Binding VerifyRecoveryData}"
                     BackgroundColor="{StaticResource Primary}"/>
         </VerticalStackLayout>
 
         <!--Verificación de código enviado al correo-->
         <VerticalStackLayout x:Name="vslVerifyCode"
-                             IsVisible="False">
+                             IsVisible="{Binding ShowVslVerifyCode}">
             <Label             
                 x:Name="lblConfirmationCode"
                 Text="Ingresar Código de Confirmación"            
@@ -78,27 +79,28 @@
             <Frame 
                 x:Name="frmConfirmationCode"
                 Margin="0,5,0,0">
-                <Entry x:Name="entConfirmationCode"/>
+                <Entry x:Name="entConfirmationCode"
+                       Text="{Binding RecoveryCodeInput, Mode=TwoWay}"/>
             </Frame>
 
             <Button x:Name="btnVerifyCode"               
                     VerticalOptions="EndAndExpand"
                     Margin="0,50,0,0"
                     Text="Verificar"
-                    Clicked="btnVerifyCode_Clicked"
+                    Command="{Binding VerifyCodeInput}"                    
                     BackgroundColor="{StaticResource Primary}"/>
 
             <Button x:Name="btnResendCode"
                     VerticalOptions="EndAndExpand"
                     Margin="0,25,0,0"
                     Text="Reenviar Código"
-                    Clicked="btnResendCode_Clicked"
+                    Command="{Binding ResendRecoveryCode}"
                     BackgroundColor="{StaticResource Primary}"/>
         </VerticalStackLayout>
 
         <!--Actualizar Contraseña-->
         <VerticalStackLayout x:Name="vslNewPassword"
-                             IsVisible="False">
+                             IsVisible="{Binding ShowVslNewPassword}">
             <Label Text="Nueva Contraseña"            
                    FontAttributes="Bold"
                    TextColor="{StaticResource Primary}"/>
@@ -106,6 +108,7 @@
                 x:Name="frmNewPassword"
                 Margin="0,5,0,0">
                 <Entry x:Name="entNewPassword"
+                       Text="{Binding NewPassword, Mode=TwoWay}"
                        Placeholder="Nueva Contraseña"
                        IsPassword="True"/>
             </Frame>
@@ -118,6 +121,7 @@
                 x:Name="frmVerifyNewPassword"
                 Margin="0,5,0,0">
                 <Entry x:Name="entVerifyNewPassword"
+                       Text="{Binding ConfirmNewPassword, Mode=TwoWay}"
                        Placeholder="Verificar Contraseña"
                        IsPassword="True"/>
             </Frame>
@@ -126,9 +130,10 @@
                     VerticalOptions="EndAndExpand"
                     Margin="0,100,0,0"
                     Text="Actualizar"
-                    Clicked="btnUpdatePassword_Clicked"
+                    Command="{Binding UpdateUserPassword, Mode=TwoWay}"                    
                     BackgroundColor="{StaticResource Primary}"/>
         </VerticalStackLayout>
+
         <Label Text="{Binding ErrorMessage}"
                TextColor="White"
                HorizontalTextAlignment="Center"

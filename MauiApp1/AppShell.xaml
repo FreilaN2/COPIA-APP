@@ -70,7 +70,7 @@
         Shell.FlyoutBehavior="Disabled"
         FlyoutItemIsVisible="False"/>
 
-    <FlyoutItem Route="MainPageView" FlyoutDisplayOptions="AsMultipleItems" >
+    <FlyoutItem Route="MainPageView" FlyoutDisplayOptions="AsMultipleItems">
 
         <ShellContent            
             Title="Menu Principal"            

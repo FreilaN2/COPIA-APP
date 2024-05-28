@@ -1,11 +1,10 @@
 ﻿using SpinningTrainer.Repository;
-using SpinningTrainer.Model;
 using System.Windows.Input;
 
 namespace SpinningTrainer.ViewModel
 {
     public class LoginViewModel : ViewModelBase
-    {
+    {        
         private string _username;
         private string _password;
         private string _errorMessage;
@@ -60,6 +59,7 @@ namespace SpinningTrainer.ViewModel
         //Constructor
         public LoginViewModel()
         {
+            userRepository = new UserRepository();
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
         }
 

@@ -1,5 +1,4 @@
-﻿using SpinningTrainer.Repository;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,15 +7,16 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using Microsoft.EntityFrameworkCore.Update;
 using SpinningTrainer.Model;
+using System.Data;
 
 namespace SpinningTrainer.Repository
 {
-    class UserRepository: RepositoryBase, IUserRepository
+    public class UserRepository: RepositoryBase, IUserRepository
     {        
         /// <summary>
-        /// Valida los datos ingresados en el inicio de sesion
+        /// Valida los datos ingresados en el inicio de sesión
         /// </summary>
-        /// <param name="codUsuaIngresado">Codigo de usuario ingresado</param>
+        /// <param name="codUsuaIngresado">Código de usuario ingresado</param>
         /// <param name="contraIngresada">Clave ingresada</param>
         /// <returns>Devuelve un bool que dice es true si el inicio fue exitoso, un string como mensaje de error en caso de que lo haya y el tipo de usuario</returns>
         public (bool, string, int) AuthenticateUser(string username, string password)
@@ -31,7 +31,7 @@ namespace SpinningTrainer.Repository
 
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@codUsua", password);
+                    cmd.Parameters.AddWithValue("@codUsua", username);
 
                     try
                     {
@@ -93,7 +93,7 @@ namespace SpinningTrainer.Repository
         /// </summary>
         /// <param name="email">Email del usuario</param>
         /// <returns>Devuelve si el email existe o no.</returns>
-        public string ValidateUserEmalforPasswordChange(string email)
+        public string ValidateUserEmalforUsernameRecovery(string email)
         {
             using (SqlConnection connection = RepositoryBase.OpenConnection())
             {
@@ -119,22 +119,25 @@ namespace SpinningTrainer.Repository
         /// <summary>
         /// Actualiza la contraseña del usuario.
         /// </summary>
-        /// <param name="codUsua">Código del usuario.</param>
-        /// <param name="nuevaContra">Nueva contraseña.</param>
+        /// <param name="username">Código del usuario.</param>
+        /// <param name="newPassword">Nueva contraseña.</param>
         /// <returns>Retorna 2 valores, el bool que indica si se actualizo o no exitosamente, y un string con un mensaje de error en caso de lo dé.</returns>
-        public  (bool, string) UpdatePassword(string codUsua, string nuevaContra)
+        public  (bool, string) UpdatePassword(string username, string newPassword)
         {
-            using (SqlConnection connection = RepositoryBase.OpenConnection())
+            using (SqlConnection connection = OpenConnection())
             {
-                string query = "UPDATE Usuarios\n" +
-                               "SET Contra = ENCRYPTBYPASSPHRASE('12345', @nuevaContra)\n" +
-                               "WHERE CodUsua = @codUsua";
+                string query = "DECLARE @NewPassworLocal varchar(60) = @newPassword\n" +
+                               "UPDATE Usuarios\n" +
+                               "SET Contra = ENCRYPTBYPASSPHRASE('12345', @NewPassworLocal)\n" +
+                               "WHERE CodUsua = @username";
 
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
                     try
                     {
-                        cmd.Parameters.AddWithValue("@nuevaContra", nuevaContra);
+                        cmd.Parameters.AddWithValue("@username", username);
+                        cmd.Parameters.AddWithValue("@newPassword", newPassword);
+                        cmd.ExecuteNonQuery();
 
                         return (true, "");
                     }

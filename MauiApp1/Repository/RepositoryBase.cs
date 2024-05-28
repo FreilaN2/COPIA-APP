@@ -12,7 +12,7 @@ using Microsoft.Data.SqlClient;
 
 namespace SpinningTrainer.Repository
 {
-    internal class RepositoryBase
+    public abstract class RepositoryBase
     {
         //Cadena de conexión
         public static string ConnectionString { get; set; }
