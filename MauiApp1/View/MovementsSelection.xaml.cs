@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 namespace SpinningTrainer.View;
 
 public partial class MovementsSelection : ContentPage
@@ -6,6 +7,8 @@ public partial class MovementsSelection : ContentPage
 	{
         InitializeComponent();
 
+        ExerciseItems = new ObservableCollection<ExerciseItem>();
+        exerciseListView.ItemsSource = ExerciseItems;
     }
 
     protected override void OnAppearing()
@@ -49,7 +52,47 @@ public partial class MovementsSelection : ContentPage
 
     private void entMinsMove_TextChanged(object sender, TextChangedEventArgs e)
     {
-        
+
+    }
+
+    private void OnAgregarButtonClicked(object sender, EventArgs e)
+    {
+        string selectedExercise = exercisePicker.SelectedItem?.ToString();
+        string duration = entMinsMove.Text;
+        string startRPM = RPMStartPicker.SelectedItem?.ToString();
+        string finalRPM = RPMFinalPicker.SelectedItem?.ToString();
+        string style = GetSelectedStyle();
+
+        if (string.IsNullOrEmpty(selectedExercise) || string.IsNullOrEmpty(duration) ||
+            string.IsNullOrEmpty(startRPM) || string.IsNullOrEmpty(finalRPM) || string.IsNullOrEmpty(style))
+        {
+            DisplayAlert("Error", "Por favor, complete todos los campos", "OK");
+            return;
         }
+
+        ExerciseItems.Add(new ExerciseItem
+        {
+            Exercise = selectedExercise,
+            Duration = duration,
+            StartRPM = startRPM,
+            FinalRPM = finalRPM,
+            Style = style
+        });
+    }
+
+    private string GetSelectedStyle()
+    {
+
+        return "Estilo ejemplo";
+    }
 }
-        
+
+public class ExerciseItem
+{
+    public string Exercise { get; set; }
+    public string Duration { get; set; }
+    public string StartRPM { get; set; }
+    public string FinalRPM { get; set; }
+    public string Style { get; set; }
+}
+}
