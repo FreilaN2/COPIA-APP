@@ -3,7 +3,8 @@ namespace SpinningTrainer.View;
 
 public partial class MovementsSelection : ContentPage
 {
-	public MovementsSelection()
+    public ObservableCollection<ExerciseItem> ExerciseItems { get; set; }
+    public MovementsSelection()
 	{
         InitializeComponent();
 
@@ -88,11 +89,11 @@ public partial class MovementsSelection : ContentPage
 }
 
 public class ExerciseItem
-{
+    {
     public string Exercise { get; set; }
     public string Duration { get; set; }
     public string StartRPM { get; set; }
     public string FinalRPM { get; set; }
     public string Style { get; set; }
-}
-}
+    }
+
