@@ -92,19 +92,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="View\LoginView.xaml.cs">
+	  <Compile Update="Views\LoginView.xaml.cs">
 	    <DependentUpon>LoginView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="View\ConnectionView.xaml.cs">
+	  <Compile Update="Views\ConnectionView.xaml.cs">
 	    <DependentUpon>ConnectionView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="View\PreviewComparativeReportView.xaml.cs">
+	  <Compile Update="Views\PreviewComparativeReportView.xaml.cs">
 	    <DependentUpon>PreviewComparativeReportView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="View\PreviewSingleReportView.xaml.cs">
+	  <Compile Update="Views\PreviewSingleReportView.xaml.cs">
 	    <DependentUpon>PreviewSingleReportView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="View\RecoveryLoginDataView.xaml.cs">
+	  <Compile Update="Views\RecoveryLoginDataView.xaml.cs">
 	    <DependentUpon>RecoveryLoginDataView.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
@@ -113,46 +113,46 @@
 	  <MauiXaml Update="Platforms\Windows\App.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\AdminMenuView.xaml">
+	  <MauiXaml Update="Views\AdminMenuView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\ConnectionView.xaml">
+	  <MauiXaml Update="Views\ConnectionView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\DatosEmpresaView.xaml">
+	  <MauiXaml Update="Views\DatosEmpresaView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\MainPageView.xaml">
+	  <MauiXaml Update="Views\MainPageView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\MovementsSelection.xaml">
+	  <MauiXaml Update="Views\MovementsSelection.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\NewSessionView.xaml">
+	  <MauiXaml Update="Views\NewSessionView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\NewUserView.xaml">
+	  <MauiXaml Update="Views\NewUserView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\RegisterUserView.xaml">
+	  <MauiXaml Update="Views\RegisterUserView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\SplashScreenView.xaml">
+	  <MauiXaml Update="Views\SplashScreenView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\SuperUserMenuView.xaml">
+	  <MauiXaml Update="Views\SuperUserMenuView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\RecoveryLoginDataView.xaml">
+	  <MauiXaml Update="Views\RecoveryLoginDataView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\UsersDetailsView.xaml">
+	  <MauiXaml Update="Views\UsersDetailsView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\UsersList.xaml">
+	  <MauiXaml Update="Views\UsersList.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\WebView.xaml">
+	  <MauiXaml Update="Views\WebView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
