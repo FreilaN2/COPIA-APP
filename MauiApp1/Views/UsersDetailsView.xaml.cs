@@ -1,11 +1,6 @@
-using Microsoft.Data.SqlClient;
-using Microsoft.Maui.Controls;
 using SpinningTrainer.Model;
-using System;
-using System.Data;
-using System.Threading.Tasks;
 
-namespace Pages
+namespace SpiinningTrainer.Views
 {
     public partial class UsersDetailsView : ContentPage
     {

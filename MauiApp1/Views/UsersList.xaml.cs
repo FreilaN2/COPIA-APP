@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Collections.ObjectModel;
 
-namespace SpinningTrainer.View
+namespace SpinningTrainer.Views
 {
     public partial class UsersList : ContentPage
     {        

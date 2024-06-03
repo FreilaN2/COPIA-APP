@@ -1,4 +1,4 @@
-namespace SpinningTrainer.View;
+namespace SpinningTrainer.Views;
 
 public partial class NewSessionView : ContentPage
 {

@@ -1,4 +1,6 @@
-namespace SpinningTrainer.View;
+using SpinningTrainer.Views;
+
+namespace SpinningTrainer.Views;
 
 public partial class AdminMenuView : ContentPage
 {
@@ -6,4 +8,9 @@ public partial class AdminMenuView : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private async void btnOpenDataManagment_Clicked(object sender, EventArgs e)
+    {
+		await Navigation.PushAsync(new CompanyDataView());
+    }
 }

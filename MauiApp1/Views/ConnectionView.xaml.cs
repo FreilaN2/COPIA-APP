@@ -1,4 +1,4 @@
-using SpinningTrainer.Repository;
+using SpinningTrainer.Repositories;
 using Microsoft.Data.SqlClient;
 using Microsoft.Maui.Controls;
 using System;
@@ -10,7 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Net.NetworkInformation;
 using Microsoft.Maui;
 
-namespace SpinningTrainer;
+namespace SpinningTrainer.Views;
 
 public partial class ConnectionView : ContentPage
 {

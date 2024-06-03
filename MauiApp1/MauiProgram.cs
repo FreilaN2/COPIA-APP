@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
-using SpinningTrainer.Model;
-using SpinningTrainer.Repository;
+using SpinningTrainer.Views;
 
 namespace SpinningTrainer
 {

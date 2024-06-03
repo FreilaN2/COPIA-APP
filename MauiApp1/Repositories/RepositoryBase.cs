@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Security;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 
-namespace SpinningTrainer.Repository
+namespace SpinningTrainer.Repositories
 {
     public abstract class RepositoryBase
     {
@@ -95,14 +85,19 @@ namespace SpinningTrainer.Repository
 
             try
             {
-                bool Usuarios;
+                bool usuarios, datosEmpresa;
 
-                Usuarios = ComprobarObjetosBaseDeDatos("Usuarios");
-                
+                usuarios = ComprobarObjetosBaseDeDatos("Usuarios");                
+                datosEmpresa = ComprobarObjetosBaseDeDatos("DatosEmpresa");
 
-                if (!Usuarios)
+
+                if (!usuarios)
                 {
                     CreaObjetosBaseDatos("Usuarios");
+                }
+                if (!datosEmpresa)
+                {
+                    CreaObjetosBaseDatos("DatosEmpresa");
                 }
 
                 comprobacionExitosa = true;
@@ -146,6 +141,14 @@ namespace SpinningTrainer.Repository
                             ") ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]\n" +                                                 
                             "INSERT INTO Usuarios(CodUsua,Descrip,Contra,Email,Telef,FechaC,FechaR,FechaV,TipoUsuario)\n" +
                             "VALUES('SU', 'SUPER USUARIO', ENCRYPTBYPASSPHRASE('12345', '123456'), '', '', GETDATE(), '', '', 0)\n";
+                }
+                else if(objeto == "DatosEmpresa")
+                {
+                    query = "CREATE TABLE DatosEmpresa(\n" +
+                            "[RIF] [varchar] (30),\n" +
+                            "[Descrip] [varchar] (80),\n" +
+                            "[Direc] [varchar] (160),\n" +
+                            "[Logo] [Image])\n";
                 }
                 
                 using (SqlCommand cmd = new SqlCommand(query, connection))

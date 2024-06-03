@@ -1,9 +1,9 @@
-﻿using SpinningTrainer.Repository;
+﻿using SpinningTrainer.Repositories;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
 using SpinningTrainer.View;
 
-namespace SpinningTrainer
+namespace SpinningTrainer.Views
 {
     public partial class LoginView : ContentPage
     {        

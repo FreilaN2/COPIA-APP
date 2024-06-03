@@ -4,7 +4,7 @@ using SpinningTrainer.View;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace SpinningTrainer;
+namespace SpinningTrainer.Views;
 
 public partial class MainPageView : ContentPage
 {

@@ -1,7 +1,7 @@
 using System.Security.Policy;
 using static System.Net.WebRequestMethods;
 
-namespace SpinningTrainer.View;
+namespace SpinningTrainer.Views;
 
 public partial class WebView : ContentPage
 {

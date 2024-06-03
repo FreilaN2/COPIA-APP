@@ -1,4 +1,4 @@
-using SpinningTrainer.Repository;
+using SpinningTrainer.Repositories;
 
 namespace SpinningTrainer.View;
 

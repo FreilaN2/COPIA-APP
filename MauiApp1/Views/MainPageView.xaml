@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             x:Class="SpinningTrainer.MainPageView"             
+             x:Class="SpinningTrainer.Views.MainPageView"             
              Title="Spinning Trainer">
     <Grid BackgroundColor="White">
         

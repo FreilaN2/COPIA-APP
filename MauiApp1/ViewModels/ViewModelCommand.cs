@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace SpinningTrainer.ViewModel
+namespace SpinningTrainer.ViewModels
 {
     public class ViewModelCommand : ICommand
     {

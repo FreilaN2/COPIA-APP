@@ -1,9 +1,5 @@
-using Microsoft.Data.SqlClient;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls;
-using System;
 
-namespace Pages
+namespace SpinningTrainer.Views
 {
     public partial class MainPage : ContentPage
     {

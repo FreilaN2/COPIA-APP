@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Update;
 using SpinningTrainer.Model;
 using System.Data;
 
-namespace SpinningTrainer.Repository
+namespace SpinningTrainer.Repositories
 {
     public class UserRepository: RepositoryBase, IUserRepository
     {        
@@ -43,7 +43,7 @@ namespace SpinningTrainer.Repository
                                 int tipoUsuario = int.Parse(reader["TipoUsuario"].ToString());
                                 DateTime fechaV = DateTime.Parse(reader["FechaV"].ToString());
 
-                                if(fechaV > DateTime.Now || tipoUsuario == 0)
+                                if(fechaV > DateTime.Now || tipoUsuario == 0 || tipoUsuario == 1)
                                 {
                                     if (password == contraBaseDatos) { return (true, "Inicio Exitoso", tipoUsuario); }
                                     else { return (false, "Contraseña incorrecta.", tipoUsuario); }

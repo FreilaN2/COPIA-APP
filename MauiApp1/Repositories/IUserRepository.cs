@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SpinningTrainer.Model;
-using SpinningTrainer.ViewModel;
+﻿using SpinningTrainer.Model;
 
-namespace SpinningTrainer.Repository
+namespace SpinningTrainer.Repositories
 {
     public interface IUserRepository
     {

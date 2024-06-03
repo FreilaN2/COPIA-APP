@@ -1,8 +1,4 @@
-using Microsoft.Data.SqlClient;
-using Microsoft.Maui.Controls;
-using System;
-
-namespace SpinningTrainer.View
+namespace SpinningTrainer.Views
 {
     public partial class NewUserView : ContentPage
     {    

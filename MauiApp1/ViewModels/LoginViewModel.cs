@@ -1,7 +1,8 @@
-﻿using SpinningTrainer.Repository;
+﻿using SpinningTrainer.Repositories;
+using SpinningTrainer.Views;
 using System.Windows.Input;
 
-namespace SpinningTrainer.ViewModel
+namespace SpinningTrainer.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {        
@@ -76,8 +77,17 @@ namespace SpinningTrainer.ViewModel
             var (inicioExitoso, mensaje, tipoUsuario) = userRepository.AuthenticateUser(Username, Password);
 
             if (inicioExitoso == true)
-            {
-                await Shell.Current.GoToAsync($"//{nameof(MainPageView)}");
+            {                
+                var appShell = (AppShell)Application.Current.MainPage;             
+                appShell.SetUserType(tipoUsuario);
+
+                if (tipoUsuario == 0) // Super Usuario                    
+                    await Shell.Current.GoToAsync($"//{nameof(MainPageView)}");
+                else if(tipoUsuario == 1) // Administrador
+                    await Shell.Current.GoToAsync($"//{nameof(AdminMenuView)}");
+                else if (tipoUsuario == 2) // Entrenador
+                    await Shell.Current.GoToAsync($"//{nameof(MainPageView)}");
+
             }
             else
             {

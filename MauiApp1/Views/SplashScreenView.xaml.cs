@@ -1,63 +1,63 @@
-using SpinningTrainer.Repository;
+using SpinningTrainer.Repositories;
 
-namespace SpinningTrainer.View;
-
-public partial class SplashScreenView : ContentPage
+namespace SpinningTrainer.Views
 {
-	public SplashScreenView()
-	{
-		InitializeComponent();
-	}
-
-    private async void ContentPage_Appearing(object sender, EventArgs e)
+    public partial class SplashScreenView : ContentPage
     {
-        ActualizaConsejosPantalla();
+        public SplashScreenView()
+        {
+            InitializeComponent();
+        }
 
-        lblMuestraMensajeCargandoAlUsuario.Text = "Cargando... Comprobando archivos.";
-        await pbLoadProgress.ProgressTo(0.2, 4000, Easing.Linear);
-        
-        await Task.Delay(1000);
-
-        lblMuestraMensajeCargandoAlUsuario.Text = "Cargando... Comprobando conexión a la base de datos.";
-        if (RepositoryBase.TestConnection())
+        private async void ContentPage_Appearing(object sender, EventArgs e)
         {
             ActualizaConsejosPantalla();
 
-            await pbLoadProgress.ProgressTo(0.7, 4000, Easing.Linear);
-           
-            lblMuestraMensajeCargandoAlUsuario.Text = "Cargando... Comprobando base de datos";
-            if (RepositoryBase.CompruebaBaseDatos())
+            lblMuestraMensajeCargandoAlUsuario.Text = "Cargando... Comprobando archivos.";
+            await pbLoadProgress.ProgressTo(0.2, 4000, Easing.Linear);
+
+            await Task.Delay(1000);
+
+            lblMuestraMensajeCargandoAlUsuario.Text = "Cargando... Comprobando conexión a la base de datos.";
+            if (RepositoryBase.TestConnection())
             {
                 ActualizaConsejosPantalla();
-                await pbLoadProgress.ProgressTo(1, 4000, Easing.Linear);
 
-                await Shell.Current.GoToAsync($"//{nameof(LoginView)}");
+                await pbLoadProgress.ProgressTo(0.7, 4000, Easing.Linear);
+
+                lblMuestraMensajeCargandoAlUsuario.Text = "Cargando... Comprobando base de datos";
+                if (RepositoryBase.CompruebaBaseDatos())
+                {
+                    ActualizaConsejosPantalla();
+                    await pbLoadProgress.ProgressTo(1, 4000, Easing.Linear);
+
+                    await Shell.Current.GoToAsync($"//{nameof(LoginView)}");
+                }
+                else
+                {
+                    await DisplayAlert("Error en Creación de Base de Datos", "Ha ocurrido un error al crear la base de datos, por favor verifique que la conexión es realizada de manera correcta.", "Aceptar");
+                }
             }
             else
             {
-                await DisplayAlert("Error en Creación de Base de Datos", "Ha ocurrido un error al crear la base de datos, por favor verifique que la conexión es realizada de manera correcta.", "Aceptar");
+                ActualizaConsejosPantalla();
+                await pbLoadProgress.ProgressTo(1, 500, Easing.Linear);
+                await Shell.Current.GoToAsync($"//{nameof(ConnectionView)}");
             }
         }
-        else
+
+        private void ActualizaConsejosPantalla()
         {
-            ActualizaConsejosPantalla();
-            await pbLoadProgress.ProgressTo(1, 500, Easing.Linear);
-            await Shell.Current.GoToAsync($"//{nameof(ConnectionView)}");
+            var (tituloConsejo, consejo) = BuscaConsejo();
+
+            lblTituloConsejo.Text = tituloConsejo;
+            lblConsejo.Text = consejo;
         }
-    }
 
-    private void ActualizaConsejosPantalla()
-    {
-        var (tituloConsejo, consejo) = BuscaConsejo();
-
-        lblTituloConsejo.Text = tituloConsejo;
-        lblConsejo.Text = consejo;
-    }
-
-    private (string, string) BuscaConsejo()
-    {        
-        string[,] arrayConsejos = new string[,]
+        private (string, string) BuscaConsejo()
         {
+            string[,] arrayConsejos = new string[,]
+            {
             {"Individuos Inactivos", "Vigílalos de cerca para asegurar que entrenen a un nivel adecuado (puedes guiarlos desde fuera de la bicicleta)." },
             {"Individuos Inactivos", "Corrige su postura para que desarrollen una técnica de pedaleo adecuada." },
             {"Individuos Inactivos", "Mantén las clases sencillas, enfocándote en lo básico (posición, movimientos, manos, intensidad) para que no se sobrecarguen." },
@@ -73,11 +73,12 @@ public partial class SplashScreenView : ContentPage
             {"Preparacion", "No des por sentado que todo está en orden. Comprueba la configuración adecuada de las bicicletas para alumnos nuevos y experimentados. Haz los ajustes necesarios para garantizar una postura cómoda y segura." },
             {"Preparacion", "Refresca la memoria de los alumnos. Diles que no olviden traer una toalla y una botella de agua llena para mantenerse hidratados durante la clase." },
             {"Preparacion", "Pide a los alumnos que comiencen a pedalear tan pronto como sea posible para calentar sus piernas y prepararse para la sesión." },
-        };
+            };
 
-        Random random = new Random(); // Crea una instancia de la clase Random
-        int numeroAleatorio = random.Next(0, 14); // Genera un número aleatorio entre 0 y 14 (inclusive)
+            Random random = new Random(); // Crea una instancia de la clase Random
+            int numeroAleatorio = random.Next(0, 14); // Genera un número aleatorio entre 0 y 14 (inclusive)
 
-        return (arrayConsejos[numeroAleatorio, 0], arrayConsejos[numeroAleatorio, 1]);
+            return (arrayConsejos[numeroAleatorio, 0], arrayConsejos[numeroAleatorio, 1]);
+        }
     }
 }

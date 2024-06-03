@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.Mail;
 using Microsoft.Maui.Controls;
 
-namespace SpinningTrainer
+namespace SpinningTrainer.Views
 {
     public partial class MenuReportView : ContentPage
     {

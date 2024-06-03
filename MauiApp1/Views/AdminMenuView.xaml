@@ -1,39 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SpinningTrainer.View.AdminMenuView"
-             Title="AdminMenuView">
+             x:Class="SpinningTrainer.Views.AdminMenuView"
+             Title="Administrador">
     <Grid BackgroundColor="White">
+        
+        <StackLayout HorizontalOptions="Center" 
+                     Spacing="75">
 
-        <BoxView Background="{StaticResource Primary}"
-           HeightRequest="60" 
-           VerticalOptions="Start"/>
-
-        <Label Text="Administrador" 
-         HorizontalOptions="Center" 
-         VerticalOptions="Start" 
-         FontSize="26" 
-         Margin="0,15,0,0"/>
-
-        <StackLayout VerticalOptions="CenterAndExpand" 
-               HorizontalOptions="Center" 
-               Spacing="75">
-
-            <Button Text="Gestión de empresa" 
-              Background="{StaticResource Primary}" 
-              TextColor="White" 
-              FontSize="26" 
-              CornerRadius="20" 
-              WidthRequest="300" 
-              HeightRequest="80" 
-              HorizontalOptions="Center"
-              x:Name="btnOpenSelectionEmpresa"/>
-              <!--Clicked="btnOpenSelectionEmpresa_Clicked"--> 
-
+            <Button Text="Gestión de Empresa" 
+                    Background="{StaticResource Primary}" 
+                    TextColor="White" 
+                    FontSize="26" 
+                    CornerRadius="20" 
+                    WidthRequest="300" 
+                    HeightRequest="80" 
+                    HorizontalOptions="Center"
+                    x:Name="btnOpenDataManagment"
+                    Clicked="btnOpenDataManagment_Clicked"/>
         </StackLayout>
 
-        <BoxView  Background="{StaticResource Primary}"
-           HeightRequest="50" 
-           VerticalOptions="End"/>
+        <BoxView Background="{StaticResource Primary}"
+                 HeightRequest="50" 
+                 VerticalOptions="End"/>
     </Grid>
 </ContentPage>

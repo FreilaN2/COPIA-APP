@@ -2,9 +2,8 @@
 <Shell
     x:Class="SpinningTrainer.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:SpinningTrainer"
-    xmlns:view="clr-namespace:SpinningTrainer.View"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"    
+    xmlns:view="clr-namespace:SpinningTrainer.Views"
     Shell.FlyoutBehavior="Flyout"
     Shell.FlyoutBackdrop="Transparent"
     Shell.BackgroundColor="{StaticResource Primary}"
@@ -33,12 +32,6 @@
         Route="SplashScreenView"             
         Shell.FlyoutBehavior="Disabled"
         FlyoutItemIsVisible="False"/>
-       
-    <ShellContent                
-        ContentTemplate="{DataTemplate view:SuperUserMenuView}"
-        Route="SuperUserMenuView"             
-        Shell.FlyoutBehavior="Disabled"
-        FlyoutItemIsVisible="False"/>
 
     <ShellContent                
         ContentTemplate="{DataTemplate view:UsersList}"
@@ -47,13 +40,13 @@
         FlyoutItemIsVisible="False"/>
 
     <ShellContent                    
-        ContentTemplate="{DataTemplate local:LoginView}"
+        ContentTemplate="{DataTemplate view:LoginView}"
         Route="LoginView"        
         Shell.FlyoutBehavior="Disabled"
         FlyoutItemIsVisible="False"/>
 
     <ShellContent            
-        ContentTemplate="{DataTemplate local:ConnectionView}"
+        ContentTemplate="{DataTemplate view:ConnectionView}"
         Route="ConnectionView"
         Shell.FlyoutBehavior="Disabled"
         FlyoutItemIsVisible="False"/>
@@ -70,17 +63,37 @@
         Shell.FlyoutBehavior="Disabled"
         FlyoutItemIsVisible="False"/>
 
-    <FlyoutItem Route="MainPageView" FlyoutDisplayOptions="AsMultipleItems">
+    <FlyoutItem x:Name="AdminMenu" Route="AdminMenuView" FlyoutDisplayOptions="AsMultipleItems">
+
+        <ShellContent            
+        Title="Menu Administrador"            
+        ContentTemplate="{DataTemplate view:AdminMenuView}"            
+        Icon="casa.png"
+        FlyoutItemIsVisible="True"/>
+
+        <ShellContent
+        Title="Ayuda"            
+        ContentTemplate="{DataTemplate view:WebView}"            
+        Icon="help.png"/>
+
+        <ShellContent
+        Title="Salir"
+        ContentTemplate="{DataTemplate view:MainPageView}"            
+        Icon="out.png"/>
+
+    </FlyoutItem>
+
+    <FlyoutItem x:Name="TrainerMenu" Route="MainPageView" FlyoutDisplayOptions="AsMultipleItems">
 
         <ShellContent            
             Title="Menu Principal"            
-            ContentTemplate="{DataTemplate local:MainPageView}"            
+            ContentTemplate="{DataTemplate view:MainPageView}"            
             Icon="casa.png"
             FlyoutItemIsVisible="True"/>
 
         <ShellContent
             Title="Perfil"
-            ContentTemplate="{DataTemplate local:MainPageView}"            
+            ContentTemplate="{DataTemplate view:MainPageView}"            
             Icon="usuarioperfil.png"/>
 
         <ShellContent
@@ -89,13 +102,8 @@
             Icon="help.png"/>
 
         <ShellContent
-            Title="Configuración"
-            ContentTemplate="{DataTemplate local:MainPageView}"            
-            Icon="engranajes.png"/>
-
-        <ShellContent
             Title="Salir"
-            ContentTemplate="{DataTemplate local:MainPageView}"            
+            ContentTemplate="{DataTemplate view:MainPageView}"            
             Icon="out.png"/>
     </FlyoutItem>
 
