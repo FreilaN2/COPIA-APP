@@ -1,25 +1,60 @@
-﻿namespace SpinningTrainerTV
+using Microsoft.Maui.Controls;
+using System;
+using System.Collections.ObjectModel;
+using System.Data.SqlClient;
+
+namespace SpinningTrainerTV
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
+        public ObservableCollection<string> UserNames { get; set; }
 
         public MainPage()
         {
             InitializeComponent();
+            UserNames = new ObservableCollection<string>();
+            ltvUsers.ItemsSource = UserNames;
+            LoadUserNamesFromDatabase();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        private void LoadUserNamesFromDatabase()
         {
-            count++;
+            string connectionString = "Server=localhost;Database=gym_app;User Id=your_username;Password=your_password;"; // Conexión con la base de datos SQL Server
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "SELECT CodUsua FROM usuario WHERE TipoUsuario = 2"; // Seleccionar usuarios con tipo entrenador
+                    using (var command = new SqlCommand(query, connection))
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string codUsua = reader.GetString(reader.GetOrdinal("CodUsua"));
+                            UserNames.Add(codUsua);
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine($"Error de conexión a la base de datos: {ex.Message}");
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                
+            }
+        }
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+        async void OnItemSelected(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.CurrentSelection.FirstOrDefault() is string selectedUser)
+            {
+                await Navigation.PushAsync(new PedirPIN(selectedUser)); // Almacenar y pasa al archivo "PedirPIN" el nombre del usuario que se selecciono
+            }
         }
     }
-
 }
