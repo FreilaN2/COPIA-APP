@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SpinningTrainerTV.PedirPIN"
+             BackgroundColor="DarkOrange">
+    <ScrollView>
+        <StackLayout VerticalOptions="CenterAndExpand">
+        <Grid Padding="20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Iconos en las esquinas -->
+            <Image Source="regresar.png" WidthRequest="40" HeightRequest="40" Grid.Row="0" Grid.Column="0" VerticalOptions="Start" HorizontalOptions="Start"/>
+            <Image Source="menu.png" WidthRequest="40" HeightRequest="40" Grid.Row="0" Grid.Column="1" VerticalOptions="Start" HorizontalOptions="End"/>
+
+            <!-- Imagen de usuario -->
+            <Image Source="usuario.png" WidthRequest="150" HeightRequest="150" Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+
+            <!-- Nombre del usuario seleccionado -->
+            <Label x:Name="lblUserName" Text="Nombre del Usuario" Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" FontSize="24" Margin="0,10,0,10" TextColor="White"/>
+
+            <!-- Texto "Escriba su PIN de ingreso" -->
+            <Label Text="Escriba su PIN de ingreso" Grid.Row="3" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" FontSize="24" Margin="0,20,0,10" TextColor="White"/>
+
+            <!-- Entradas para el PIN -->
+            <StackLayout Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                <Entry x:Name="pin1" WidthRequest="50" MaxLength="1" Keyboard="Numeric" TextColor="White" BackgroundColor="Transparent" HeightRequest="40" Completed="OnPinEntryCompleted" TextChanged="OnPinEntryTextChanged"/>
+                <Entry x:Name="pin2" WidthRequest="50" MaxLength="1" Keyboard="Numeric" Margin="10,0,0,0" TextColor="White" BackgroundColor="Transparent" HeightRequest="40" Completed="OnPinEntryCompleted" TextChanged="OnPinEntryTextChanged"/>
+                <Entry x:Name="pin3" WidthRequest="50" MaxLength="1" Keyboard="Numeric" Margin="10,0,0,0" TextColor="White" BackgroundColor="Transparent" HeightRequest="40" Completed="OnPinEntryCompleted" TextChanged="OnPinEntryTextChanged"/>
+                <Entry x:Name="pin4" WidthRequest="50" MaxLength="1" Keyboard="Numeric" Margin="10,0,0,0" TextColor="White" BackgroundColor="Transparent" HeightRequest="40" Completed="OnPinEntryCompleted" TextChanged="OnPinEntryTextChanged"/>
+            </StackLayout>
+
+            <!-- Label para mostrar el resultado -->
+            <Label x:Name="lblResultado" Grid.Row="5" Grid.ColumnSpan="2" FontSize="18" TextColor="Red" HorizontalOptions="Center" Margin="0,10,0,0"/>
+        </Grid>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

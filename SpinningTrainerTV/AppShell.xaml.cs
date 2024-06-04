@@ -1,4 +1,4 @@
-﻿namespace SpinningTrainerTV
+namespace SpinningTrainerTV
 {
     public partial class AppShell : Shell
     {
