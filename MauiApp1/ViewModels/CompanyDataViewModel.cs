@@ -1,11 +1,7 @@
 ﻿using SpinningTrainer.Models;
 using SpinningTrainer.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.Maui.Media;
 
 namespace SpinningTrainer.ViewModels
 {
@@ -13,8 +9,9 @@ namespace SpinningTrainer.ViewModels
     {
         private string _rif;
         private string _descrip;
-        private string _direc;
-        private Image _logo;
+        private string _direc;        
+        private ImageSource _logo;
+        private bool _editEnable = false;        
 
         private ICompanyDataRepository _companyDataRepository;
 
@@ -48,7 +45,7 @@ namespace SpinningTrainer.ViewModels
                 ((ViewModelCommand)SaveDataCommand).RaiseCanExecuteChanged();
             }
         }
-        public Image Logo 
+        public ImageSource Logo 
         {
             get => _logo; 
             set 
@@ -57,15 +54,30 @@ namespace SpinningTrainer.ViewModels
                 OnPropertyChanged(nameof(Logo));
             }
         }
+        public bool EditEnable
+        {
+            get => _editEnable;
+            set
+            {
+                _editEnable = value;
+                OnPropertyChanged(nameof(EditEnable));
+            }
+        }
 
-        public ICommand SaveDataCommand;
+        public ICommand EnableEditCommand { get; }
+        public ICommand CancelEditCommand { get; }
+        public ICommand SaveDataCommand { get; }
+        public ICommand SearchImageCommand { get; }        
 
         public CompanyDataViewModel()
         {
             _companyDataRepository = new CompanyDataRepository();
 
             SaveDataCommand = new ViewModelCommand(ExecuteSaveDataCommand, CanExecuteSaveDataCommand);
-        }
+            SearchImageCommand = new ViewModelCommand(ExecuteSearchImageCommand);
+            EnableEditCommand = new ViewModelCommand(ExecuteEnableEditCommand);
+            CancelEditCommand = new ViewModelCommand(ExecuteCancelEditCommand);
+        }        
 
         private bool CanExecuteSaveDataCommand(object obj)
         {
@@ -85,6 +97,39 @@ namespace SpinningTrainer.ViewModels
             companyData.Logo = this.Logo;
 
             _companyDataRepository.SaveCompanyData(companyData);
-        }        
+        }
+
+        private async void ExecuteSearchImageCommand(object obj)
+        {
+            try
+            {
+                var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
+                {
+                    Title = "Selecciona una imagen"
+                });
+
+                if (result != null)
+                {
+                    // Open the file stream and return an ImageSource
+                    var stream = await result.OpenReadAsync();
+                    Logo = ImageSource.FromStream(() => stream);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                Console.WriteLine($"Error picking photo: {ex.Message}");
+            }
+        }
+        
+        private void ExecuteEnableEditCommand(object obj)
+        {
+            EditEnable = true;
+        }
+
+        private void ExecuteCancelEditCommand(object obj)
+        {
+            EditEnable = false;
+        }
     }
 }

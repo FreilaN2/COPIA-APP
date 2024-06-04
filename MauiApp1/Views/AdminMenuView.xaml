@@ -6,7 +6,8 @@
     <Grid BackgroundColor="White">
         
         <StackLayout HorizontalOptions="Center" 
-                     Spacing="75">
+                     Spacing="75"
+                     Margin="0,40,0,0">
 
             <Button Text="Gestión de Empresa" 
                     Background="{StaticResource Primary}" 

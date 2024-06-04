@@ -5,5 +5,6 @@ namespace SpinningTrainer.Repositories
     interface ICompanyDataRepository
     {
         void SaveCompanyData(CompanyDataModel companyData);
+        CompanyDataModel LoadCompanyData();
     }
 }

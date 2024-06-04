@@ -1,20 +1,119 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:SpinningTrainer.ViewModels"
+             xmlns:converter="clr-namespace:SpinningTrainer.Resources.Converters"
              x:Class="SpinningTrainer.Views.CompanyDataView"
-             Title="Datos Empresa">
-    <StackLayout Padding="20" VerticalOptions="CenterAndExpand">
-        <Frame CornerRadius="75" HeightRequest="150" WidthRequest="150" HorizontalOptions="Center" VerticalOptions="Center">
-            <Image Source="{Binding Path=LogoImageSource}" HeightRequest="150" WidthRequest="150" Aspect="AspectFill" />
-        </Frame>
-        <!--<StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center">
-            <Label Text="{Binding Rif}" FontSize="Medium" />
-            <Label Text="{Binding Descrip}" FontSize="Medium" />
-            <Label Text="{Binding Direccion}" FontSize="Medium" />
-        </StackLayout>
-        <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
-            <Button Text="Editar" Clicked="EditarClicked" />
-            <Button Text="Eliminar" Clicked="EliminarClicked" />
-        </StackLayout>-->
-    </StackLayout>
+             Title="Datos Empresa"
+             Background="White">
+
+    <ContentPage.Resources>
+        <converter:NotConverter x:Key="NotConverter"/>
+    </ContentPage.Resources>
+    
+    <ContentPage.BindingContext>
+        <viewModel:CompanyDataViewModel/>
+    </ContentPage.BindingContext>
+    
+    <Grid Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout Grid.Row="0">
+            <Label Text="RIF"
+                   Style="{StaticResource SubHeadline}"
+                   FontSize="20"
+                   HorizontalOptions="StartAndExpand"
+                   TextColor="{StaticResource Primary}"
+                   SemanticProperties.HeadingLevel="Level2"
+                   SemanticProperties.Description="Usuario"/>
+
+            <Frame Margin="0,5,0,0"
+                   VerticalOptions="Center">
+                <Entry Text="{Binding Rif, Mode=TwoWay}"
+                       Placeholder="RIF"                       
+                       MaxLength="30"
+                       PlaceholderColor="White"
+                       IsEnabled="{Binding EditEnable}"/>
+            </Frame>
+            
+            <Label Text="Descripción Fiscal"
+                   Style="{StaticResource SubHeadline}"
+                   Margin="0,25,0,0"
+                   FontSize="20"
+                   HorizontalOptions="StartAndExpand"
+                   TextColor="{StaticResource Primary}"
+                   SemanticProperties.HeadingLevel="Level2"
+                   SemanticProperties.Description="Usuario" />
+
+            <Frame Margin="0,5,0,0"
+                   VerticalOptions="Center"
+                   HeightRequest="60">
+                <Editor Text="{Binding Descrip, Mode=TwoWay}"
+                        Placeholder="Descripción Fiscal"                        
+                        PlaceholderColor="White"
+                        MaxLength="80"
+                        IsEnabled="{Binding EditEnable}"/>
+            </Frame>
+
+            <Label Text="Dirección Fiscal"
+                   Style="{StaticResource SubHeadline}"
+                   Margin="0,25,0,0"
+                   FontSize="20"
+                   HorizontalOptions="StartAndExpand"
+                   TextColor="{StaticResource Primary}"
+                   SemanticProperties.HeadingLevel="Level2"
+                   SemanticProperties.Description="Usuario" />
+
+            <Frame Margin="0,5,0,0"
+                   VerticalOptions="Center"
+                   HeightRequest="90">
+                <Editor Text="{Binding Direc, Mode=TwoWay}"
+                        Placeholder="Dirección Fiscal"                        
+                        PlaceholderColor="White"
+                        MaxLength="120"
+                        IsEnabled="{Binding EditEnable}"/>
+            </Frame>
+
+            <Button Command="{Binding SearchImageCommand}"
+                    Margin="0,20,0,0"                    
+                    Text="Buscar logo"
+                    Background="{StaticResource Primary}"
+                    IsEnabled="{Binding EditEnable}"/>
+            <Image Source="{Binding Logo}"
+                   WidthRequest="220"
+                   HeightRequest="220"/>
+        </VerticalStackLayout>
+
+        <Grid Grid.Row="1">
+            <Button Text="Editar"
+                    TextColor="White"
+                    BackgroundColor="{StaticResource Primary}"
+                    IsVisible="{Binding EditEnable, Converter={StaticResource Key=NotConverter}}"
+                    Command="{Binding EnableEditCommand}"/>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <Button Text="Aceptar"
+                        TextColor="White"
+                        BackgroundColor="Green"
+                        IsVisible="{Binding EditEnable}"
+                        Command="{Binding SaveDataCommand}"
+                        Grid.Column="0"/>
+
+                <Button Text="Cancelar"
+                        TextColor="White"
+                        BackgroundColor="Red"
+                        IsVisible="{Binding EditEnable}"
+                        Command="{Binding CancelEditCommand}"
+                        Grid.Column="1"/>
+            </Grid>
+        </Grid>
+    </Grid>
 </ContentPage>
