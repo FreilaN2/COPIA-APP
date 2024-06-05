@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using SpinningTrainer.Models;
+using System.Data;
 
 namespace SpinningTrainer.Repositories
 {
@@ -36,55 +37,38 @@ namespace SpinningTrainer.Repositories
             }
         }
 
-        public async Task SaveCompanyDataAsync(CompanyDataModel companyData, byte[] imageData)
+        public async Task SaveCompanyDataAsync(CompanyDataModel companyData, byte[] imageBytes)
         {
-            using (SqlConnection connection = OpenConnection())
+            try
             {
                 string query = "TRUNCATE TABLE DatosEmpresa;\n" +
-                               "INSERT INTO DatosEmpresa(RIF, Descrip, Direc" + (imageData != null ? ", Logo" : "") + ") \n" +
-                               "VALUES (@rif, @descrip, @direc" + (imageData != null ? ", @logo" : "") + ");\n";
+                                   "INSERT INTO DatosEmpresa(RIF, Descrip, Direc" + (imageBytes != null ? ", Logo" : "") + ") \n" +
+                                   "VALUES (@rif, @descrip, @direc" + (imageBytes != null ? ", @logo" : "") + ");\n";
 
-                using (SqlCommand cmd = new SqlCommand(query, connection))
-                {
-                    cmd.CommandTimeout = 0; // Aumenta el timeout del comando
-
-                    cmd.Parameters.AddWithValue("@rif", companyData.RIF);
-                    cmd.Parameters.AddWithValue("@descrip", companyData.Descrip);
-                    cmd.Parameters.AddWithValue("@direc", companyData.Direc);
-
-                    if (imageData != null)
+                using (SqlConnection connection = OpenConnection())
+                {                    
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
-                        cmd.Parameters.AddWithValue("@logo", imageData);
-                    }
+                        cmd.CommandTimeout = 0;
 
-                    int retryCount = 3;
-                    for (int i = 0; i < retryCount; i++)
-                    {
-                        try
+                        cmd.Parameters.AddWithValue("@rif", companyData.RIF);
+                        cmd.Parameters.AddWithValue("@descrip", companyData.Descrip);
+                        cmd.Parameters.AddWithValue("@direc", companyData.Direc);
+
+                        if (imageBytes != null)
                         {
-                            await cmd.ExecuteNonQueryAsync();
-                            break; // Salir del bucle si la ejecución es exitosa
+                            cmd.Parameters.Add("@logo", SqlDbType.VarBinary).Value = (object)imageBytes ?? DBNull.Value;
                         }
-                        catch (SqlException ex) when (ex.InnerException is IOException)
-                        {
-                            Console.WriteLine($"Error de red: {ex.Message}. Reintentando ({i + 1}/{retryCount})...");
-                            if (i == retryCount - 1)
-                            {
-                                throw; // Re-lanzar la excepción si se ha alcanzado el número máximo de reintentos
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine($"Error al ejecutar el comando SQL: {ex.Message}");
-                            if (ex.InnerException != null)
-                            {
-                                Console.WriteLine($"Excepción interna: {ex.InnerException.Message}");
-                            }
-                            throw;
-                        }
+
+                        cmd.ExecuteNonQuery();
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }            
         }
     }
 }

@@ -39,9 +39,10 @@ public partial class ConnectionView : ContentPage
             try
             {
 
-                SqlConnection connection = new SqlConnection("Server=" + entNombreServidor.Text + ";" +
-                                                             "Database=" + entNombreBaseDatos.Text + ";" +
+                SqlConnection connection = new SqlConnection("Data Source=" + entNombreServidor.Text + ";" +
+                                                             "Initial Catalog=" + entNombreBaseDatos.Text + ";" +
                                                              "TrustServerCertificate=True;" +
+                                                             "Persist Security Info=True;" +
                                                              "User Id=" + entUsuario.Text + ";" +
                                                              "Password=" + entClave.Text+";");                
                 
@@ -94,9 +95,10 @@ public partial class ConnectionView : ContentPage
             string filePath = System.IO.Path.Combine(executablePath, fileName);
 
 
-            string connectionString = "Server=" + entNombreServidor.Text + ";" +
-                                      "Database=" + entNombreBaseDatos.Text + ";" +
+            string connectionString = "Data Source=" + entNombreServidor.Text + ";" +
+                                      "Initial Catalog=" + entNombreBaseDatos.Text + ";" +
                                       "TrustServerCertificate=True;" +
+                                      "Persist Security Info=True;" +
                                       "User Id=" + entUsuario.Text + ";" +
                                       "Password=" + entClave.Text + ";";
 

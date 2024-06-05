@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using SpinningTrainer.Models;
-using System.Configuration;
+﻿using SpinningTrainer.Models;
+using Microsoft.Data.SqlClient;
 
 namespace SpinningTrainer.Repositories
 {
@@ -11,7 +8,7 @@ namespace SpinningTrainer.Repositories
 
         public SessionMovementModel Add(SessionMovementModel sessionMovement)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = OpenConnection())
             {
                 string query = @"INSERT INTO MovimientosSesion (IDSesion, IDMovimiento, IDPosicionMano, TipoEjercicio, Fase, RPMMed, RPMFin, DuracionSeg)
                                  VALUES (@IDSesion, @IDMovimiento, @IDPosicionMano, @TipoEjercicio, @Fase, @RPMMed, @RPMFin, @DuracionSeg);
@@ -37,7 +34,7 @@ namespace SpinningTrainer.Repositories
 
         public SessionMovementModel Update(SessionMovementModel sessionMovement)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = OpenConnection())
             {
                 string query = @"UPDATE MovimientosSesion 
                                  SET IDSesion = @IDSesion, IDMovimiento = @IDMovimiento, IDPosicionMano = @IDPosicionMano,
@@ -64,7 +61,7 @@ namespace SpinningTrainer.Repositories
 
         public void Delete(int id)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = OpenConnection())
             {
                 string query = @"DELETE FROM MovimientosSesion WHERE ID = @ID";
 
@@ -80,7 +77,7 @@ namespace SpinningTrainer.Repositories
         {
             List<SessionMovementModel> sessionMovements = new List<SessionMovementModel>();
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = OpenConnection())
             {
                 string query = @"SELECT * FROM MovimientosSesion WHERE IDSesion = @IDSesion";
 
@@ -118,7 +115,7 @@ namespace SpinningTrainer.Repositories
         {
             List<SessionMovementModel> sessionMovements = new List<SessionMovementModel>();
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = OpenConnection())
             {
                 string query = @"SELECT * FROM MovimientosSesion";
 

@@ -3,6 +3,7 @@ using SpinningTrainer.Repositories;
 using System.Windows.Input;
 using Microsoft.Maui.Media;
 using Microsoft.Maui.Controls;
+using SpinningTrainer.Views;
 
 namespace SpinningTrainer.ViewModels
 {
@@ -26,6 +27,7 @@ namespace SpinningTrainer.ViewModels
             SearchImageCommand = new Command(async () => await ExecuteSearchImageCommand());
             EnableEditCommand = new Command(ExecuteEnableEditCommand);
             CancelEditCommand = new Command(ExecuteCancelEditCommand);
+            LoadData();
         }
 
         public string Rif
@@ -114,6 +116,8 @@ namespace SpinningTrainer.ViewModels
 
                 await _companyDataRepository.SaveCompanyDataAsync(companyData, LogoBytes);
                 Console.WriteLine("Datos de la empresa guardados correctamente.");
+                await App.Current.MainPage.Navigation.PopAsync();
+
             }
             catch (Exception ex)
             {
@@ -132,34 +136,23 @@ namespace SpinningTrainer.ViewModels
 
                 if (result != null)
                 {
-                    using (var stream = await result.OpenReadAsync())
+                    var stream = await result.OpenReadAsync();
+                    using (var memoryStream = new MemoryStream())
                     {
-                        // Verifica las propiedades del stream
-                        if (!stream.CanRead)
-                        {
-                            throw new Exception("El stream no es legible.");
-                        }
-
-                        // Verifica el tamaño del archivo de imagen
-                        var memoryStream = new MemoryStream();
                         await stream.CopyToAsync(memoryStream);
-                        var imageBytes = memoryStream.ToArray();
-                        if (imageBytes.Length > 4000)
+                        LogoBytes = memoryStream.ToArray();
+                        if (LogoBytes.Length > 2048 )
                         {
                             throw new Exception("La imagen seleccionada es demasiado grande. Por favor, elige una imagen más pequeña.");
                         }
-
-                        // Si el tamaño es aceptable, procesa la imagen
-                        LogoBytes = imageBytes;
-                        stream.Position = 0; // Reset the stream position
-                        Logo = ImageSource.FromStream(() => new MemoryStream(LogoBytes));
                     }
+                    Logo = ImageSource.FromStream(() => new MemoryStream(LogoBytes));                     
                 }
             }
             catch (Exception ex)
             {
-                // Maneja las excepciones
-                Console.WriteLine($"Error al seleccionar la foto: {ex.Message}");
+                Console.WriteLine(ex.Message);
+
             }
         }
 
@@ -173,27 +166,23 @@ namespace SpinningTrainer.ViewModels
             EditEnable = false;
         }
 
-        private async Task<byte[]> ConvertImageSourceToByteArrayAsync(ImageSource imageSource)
+        private void LoadData()
         {
-            if (imageSource is StreamImageSource streamImageSource)
+            try
             {
-                using (var stream = await streamImageSource.Stream(CancellationToken.None))
-                    {
-                    if (stream == null)
-                    {
-                        throw new Exception("El stream de la imagen es nulo.");
-                    }
+                var companyData = _companyDataRepository.LoadCompanyData();
 
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        await stream.CopyToAsync(memoryStream);
-                        return memoryStream.ToArray();
-                    }
+                if (companyData != null)
+                {
+                    Rif = companyData.RIF;
+                    Descrip = companyData.Descrip;
+                    Direc = companyData.Direc;
+                    Logo = companyData.Logo;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                throw new Exception("El origen de la imagen no es un StreamImageSource.");
+                Console.WriteLine($"Error al cargar los datos de la empresa: {ex.Message}");
             }
         }
     }

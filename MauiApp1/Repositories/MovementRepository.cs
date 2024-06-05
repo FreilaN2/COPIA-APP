@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Configuration;
+﻿using Microsoft.Data.SqlClient;
 using SpinningTrainer.Models;
 
 namespace SpinningTrainer.Repositories
@@ -11,7 +8,8 @@ namespace SpinningTrainer.Repositories
 
         public MovementModel Add(MovementModel movement)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = OpenConnection())
+
             {
                 string query = @"INSERT INTO Movimientos (Descrip, TipoMov, RPMMin, RPMMax, PosicionesDeManos)
                                  VALUES (@Descrip, @TipoMov, @RPMMin, @RPMMax, @PosicionesDeManos);
@@ -34,7 +32,7 @@ namespace SpinningTrainer.Repositories
 
         public MovementModel Update(MovementModel movement)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = OpenConnection())
             {
                 string query = @"UPDATE Movimientos 
                                  SET Descrip = @Descrip, TipoMov = @TipoMov, RPMMin = @RPMMin, RPMMax = @RPMMax, PosicionesDeManos = @PosicionesDeManos
@@ -57,7 +55,7 @@ namespace SpinningTrainer.Repositories
 
         public void Delete(int id)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = OpenConnection())
             {
                 string query = @"DELETE FROM Movimientos WHERE ID = @ID";
 
@@ -73,7 +71,7 @@ namespace SpinningTrainer.Repositories
         {
             MovementModel movement = null;
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = OpenConnection())
             {
                 string query = @"SELECT * FROM Movimientos WHERE ID = @ID";
 
@@ -106,7 +104,7 @@ namespace SpinningTrainer.Repositories
         {
             List<MovementModel> movimientos = new List<MovementModel>();
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = OpenConnection())
             {
                 string query = @"SELECT * FROM Movimientos";
 
