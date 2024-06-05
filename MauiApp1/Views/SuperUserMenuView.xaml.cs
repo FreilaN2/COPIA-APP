@@ -6,10 +6,10 @@ namespace SpinningTrainer.Views
         {
             InitializeComponent();
         }
-
-        private void btnOpenSelectionEmpresa_Clicked(object sender, EventArgs e)
+        
+        private async void btnOpenSelectionUser_Clicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new UserListView());
         }
     }
 }

@@ -82,7 +82,7 @@ namespace SpinningTrainer.ViewModels
                 appShell.SetUserType(tipoUsuario);
 
                 if (tipoUsuario == 0) // Super Usuario                    
-                    await Shell.Current.GoToAsync($"//{nameof(MainPageView)}");
+                    await Shell.Current.GoToAsync($"//{nameof(SuperUserMenuView)}");
                 else if(tipoUsuario == 1) // Administrador
                     await Shell.Current.GoToAsync($"//{nameof(AdminMenuView)}");
                 else if (tipoUsuario == 2) // Entrenador

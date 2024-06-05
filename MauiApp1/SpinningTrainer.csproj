@@ -66,6 +66,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Views\UsersList.xaml.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Remove="Views\UsersList.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Resources\Images\casa.png" />
 	  <None Remove="Resources\Images\charticon.png" />
 	  <None Remove="Resources\Images\help.png" />
@@ -110,6 +118,9 @@
 	  <Compile Update="Views\RecoveryLoginDataView.xaml.cs">
 	    <DependentUpon>RecoveryLoginDataView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\UserListView.xaml.cs">
+	    <DependentUpon>UserListView.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -137,9 +148,6 @@
 	  <MauiXaml Update="Views\NewUserView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\RegisterUserView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Views\SplashScreenView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -149,10 +157,10 @@
 	  <MauiXaml Update="Views\RecoveryLoginDataView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\UsersDetailsView.xaml">
+	  <MauiXaml Update="Views\UserDetailsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\UsersList.xaml">
+	  <MauiXaml Update="Views\UserListView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\WebView.xaml">

@@ -45,8 +45,8 @@
 
                 <StackLayout Orientation="Horizontal" Margin="10">
                     <StackLayout Grid.Row="1"
-                            HorizontalOptions="Start">
-                        <Frame Margin="13,0,0,0"
+                            HorizontalOptions="CenterAndExpand">
+                        <Frame Margin="0,0,0,0"
                           WidthRequest="150"
                           Background="{StaticResource Primary}">
                             <HorizontalStackLayout>

@@ -5,19 +5,9 @@
              Title="Super Usuario">
     <Grid BackgroundColor="White">
 
-        <BoxView Background="{StaticResource Primary}"
-                 HeightRequest="60" 
-                 VerticalOptions="Start"/>
-
-        <Label Text="Super usuario" 
-               HorizontalOptions="Center" 
-               VerticalOptions="Start" 
-               FontSize="26" 
-               Margin="0,15,0,0"/>
-
-        <StackLayout VerticalOptions="CenterAndExpand" 
-                     HorizontalOptions="Center" 
-                     Spacing="75">
+        <StackLayout HorizontalOptions="Center" 
+                     Spacing="75"
+                     Margin="0,50,0,0">
 
             <Button Text="Gestión de usuarios" 
                     Background="{StaticResource Primary}" 
@@ -27,13 +17,9 @@
                     WidthRequest="300" 
                     HeightRequest="80" 
                     HorizontalOptions="Center"
-                    x:Name="btnOpenSelectionUser"/>
-                    <!--Clicked="btnOpenSelectionUser_Clicked"--> 
+                    x:Name="btnOpenSelectionUser"
+                    Clicked="btnOpenSelectionUser_Clicked"/>
 
         </StackLayout>
-
-        <BoxView  Background="{StaticResource Primary}"
-                 HeightRequest="50" 
-                 VerticalOptions="End"/>
     </Grid>
 </ContentPage>

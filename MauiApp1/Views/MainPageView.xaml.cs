@@ -1,9 +1,5 @@
-using Microsoft.Maui.Controls.PlatformConfiguration;
-using SpinningTrainer.Model;
 using SpinningTrainer.Models;
-using SpinningTrainer.View;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace SpinningTrainer.Views;
 

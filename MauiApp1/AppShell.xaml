@@ -33,12 +33,6 @@
         Shell.FlyoutBehavior="Disabled"
         FlyoutItemIsVisible="False"/>
 
-    <ShellContent                
-        ContentTemplate="{DataTemplate view:UsersList}"
-        Route="UsersList"             
-        Shell.FlyoutBehavior="Disabled"
-        FlyoutItemIsVisible="False"/>
-
     <ShellContent                    
         ContentTemplate="{DataTemplate view:LoginView}"
         Route="LoginView"        
@@ -62,6 +56,26 @@
         Route="NewUserView"             
         Shell.FlyoutBehavior="Disabled"
         FlyoutItemIsVisible="False"/>
+
+    <FlyoutItem x:Name="SuperUserMenu" Route="SuperUserMenuView" FlyoutDisplayOptions="AsMultipleItems">
+
+        <ShellContent            
+            Title="Menu Super Usuario"            
+            ContentTemplate="{DataTemplate view:SuperUserMenuView}"            
+            Icon="casa.png"
+            FlyoutItemIsVisible="True"/>
+
+        <ShellContent
+            Title="Ayuda"            
+            ContentTemplate="{DataTemplate view:WebView}"            
+            Icon="help.png"/>
+
+        <ShellContent
+            Title="Salir"
+            ContentTemplate="{DataTemplate view:MainPageView}"            
+            Icon="out.png"/>
+
+    </FlyoutItem>
 
     <FlyoutItem x:Name="AdminMenu" Route="AdminMenuView" FlyoutDisplayOptions="AsMultipleItems">
 

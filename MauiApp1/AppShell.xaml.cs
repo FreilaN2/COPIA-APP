@@ -14,13 +14,21 @@ namespace SpinningTrainer
         {
             if (userType == 0) // Super Usuario
             {
+                SuperUserMenu.IsVisible = true;
                 AdminMenu.IsVisible = false;
-                TrainerMenu.IsVisible = true;
+                TrainerMenu.IsVisible = false;
             }
             else if (userType == 1) // Administrador
             {
+                SuperUserMenu.IsVisible = false;
                 AdminMenu.IsVisible = true;
                 TrainerMenu.IsVisible = false;
+            }
+            else if (userType == 2) // Entrenador
+            {
+                SuperUserMenu.IsVisible = false;
+                AdminMenu.IsVisible = false;
+                TrainerMenu.IsVisible = true;
             }
         }
     }
