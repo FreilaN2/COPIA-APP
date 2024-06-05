@@ -2,6 +2,7 @@
 using SpinningTrainer.Repositories;
 using System.Windows.Input;
 using Microsoft.Maui.Media;
+using Microsoft.Maui.Controls;
 
 namespace SpinningTrainer.ViewModels
 {
@@ -9,51 +10,77 @@ namespace SpinningTrainer.ViewModels
     {
         private string _rif;
         private string _descrip;
-        private string _direc;        
+        private string _direc;
         private ImageSource _logo;
-        private bool _editEnable = false;        
+        private byte[] _logoBytes;
+            
+        private bool _editEnable;
 
-        private ICompanyDataRepository _companyDataRepository;
+        private readonly ICompanyDataRepository _companyDataRepository;
 
-        public string Rif 
+        public CompanyDataViewModel()
+        {
+            _companyDataRepository = new CompanyDataRepository();
+
+            SaveDataCommand = new Command(async () => await ExecuteSaveDataCommand(), CanExecuteSaveDataCommand);
+            SearchImageCommand = new Command(async () => await ExecuteSearchImageCommand());
+            EnableEditCommand = new Command(ExecuteEnableEditCommand);
+            CancelEditCommand = new Command(ExecuteCancelEditCommand);
+        }
+
+        public string Rif
         {
             get => _rif;
-            set 
+            set
             {
                 _rif = value;
                 OnPropertyChanged(nameof(Rif));
-                ((ViewModelCommand)SaveDataCommand).RaiseCanExecuteChanged();
+                ((Command)SaveDataCommand).ChangeCanExecute();
             }
         }
-        public string Descrip 
+
+        public string Descrip
         {
             get => _descrip;
-            set 
+            set
             {
-                _descrip = value; 
+                _descrip = value;
                 OnPropertyChanged(nameof(Descrip));
-                ((ViewModelCommand)SaveDataCommand).RaiseCanExecuteChanged();
+                ((Command)SaveDataCommand).ChangeCanExecute();
             }
         }
+
         public string Direc
-        { 
+        {
             get => _direc;
-            set 
+            set
             {
-                _direc = value; 
+                _direc = value;
                 OnPropertyChanged(nameof(Direc));
-                ((ViewModelCommand)SaveDataCommand).RaiseCanExecuteChanged();
+                ((Command)SaveDataCommand).ChangeCanExecute();
             }
         }
-        public ImageSource Logo 
+
+        public ImageSource Logo
         {
-            get => _logo; 
-            set 
+            get => _logo;
+            set
             {
-                _logo = value; 
+                _logo = value;
                 OnPropertyChanged(nameof(Logo));
             }
         }
+
+        public byte[] LogoBytes
+        {
+            get => _logoBytes;
+            set
+            {
+                _logoBytes = value;
+                OnPropertyChanged(nameof(LogoBytes));
+            }
+        }
+
         public bool EditEnable
         {
             get => _editEnable;
@@ -67,39 +94,34 @@ namespace SpinningTrainer.ViewModels
         public ICommand EnableEditCommand { get; }
         public ICommand CancelEditCommand { get; }
         public ICommand SaveDataCommand { get; }
-        public ICommand SearchImageCommand { get; }        
+        public ICommand SearchImageCommand { get; }
 
-        public CompanyDataViewModel()
+        private bool CanExecuteSaveDataCommand()
         {
-            _companyDataRepository = new CompanyDataRepository();
-
-            SaveDataCommand = new ViewModelCommand(ExecuteSaveDataCommand, CanExecuteSaveDataCommand);
-            SearchImageCommand = new ViewModelCommand(ExecuteSearchImageCommand);
-            EnableEditCommand = new ViewModelCommand(ExecuteEnableEditCommand);
-            CancelEditCommand = new ViewModelCommand(ExecuteCancelEditCommand);
-        }        
-
-        private bool CanExecuteSaveDataCommand(object obj)
-        {
-            if (string.IsNullOrWhiteSpace(Rif) || string.IsNullOrWhiteSpace(Descrip) || string.IsNullOrWhiteSpace(Direc))
-                return false;
-            else
-                return true;
+            return !string.IsNullOrWhiteSpace(Rif) && !string.IsNullOrWhiteSpace(Descrip) && !string.IsNullOrWhiteSpace(Direc);
         }
 
-        private void ExecuteSaveDataCommand(object obj)
+        private async Task ExecuteSaveDataCommand()
         {
-            CompanyDataModel companyData = new CompanyDataModel();
+            try
+            {
+                var companyData = new CompanyDataModel
+                {
+                    RIF = Rif,
+                    Descrip = Descrip,
+                    Direc = Direc
+                };
 
-            companyData.RIF = this.Rif;
-            companyData.Descrip = this.Descrip;
-            companyData.Direc = this.Direc;
-            companyData.Logo = this.Logo;
-
-            _companyDataRepository.SaveCompanyData(companyData);
+                await _companyDataRepository.SaveCompanyDataAsync(companyData, LogoBytes);
+                Console.WriteLine("Datos de la empresa guardados correctamente.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al guardar los datos de la empresa: {ex.Message}");
+            }
         }
 
-        private async void ExecuteSearchImageCommand(object obj)
+        private async Task ExecuteSearchImageCommand()
         {
             try
             {
@@ -110,26 +132,69 @@ namespace SpinningTrainer.ViewModels
 
                 if (result != null)
                 {
-                    // Open the file stream and return an ImageSource
-                    var stream = await result.OpenReadAsync();
-                    Logo = ImageSource.FromStream(() => stream);
+                    using (var stream = await result.OpenReadAsync())
+                    {
+                        // Verifica las propiedades del stream
+                        if (!stream.CanRead)
+                        {
+                            throw new Exception("El stream no es legible.");
+                        }
+
+                        // Verifica el tamaño del archivo de imagen
+                        var memoryStream = new MemoryStream();
+                        await stream.CopyToAsync(memoryStream);
+                        var imageBytes = memoryStream.ToArray();
+                        if (imageBytes.Length > 4000)
+                        {
+                            throw new Exception("La imagen seleccionada es demasiado grande. Por favor, elige una imagen más pequeña.");
+                        }
+
+                        // Si el tamaño es aceptable, procesa la imagen
+                        LogoBytes = imageBytes;
+                        stream.Position = 0; // Reset the stream position
+                        Logo = ImageSource.FromStream(() => new MemoryStream(LogoBytes));
+                    }
                 }
             }
             catch (Exception ex)
             {
-                // Handle exceptions
-                Console.WriteLine($"Error picking photo: {ex.Message}");
+                // Maneja las excepciones
+                Console.WriteLine($"Error al seleccionar la foto: {ex.Message}");
             }
         }
-        
-        private void ExecuteEnableEditCommand(object obj)
+
+        private void ExecuteEnableEditCommand()
         {
             EditEnable = true;
         }
 
-        private void ExecuteCancelEditCommand(object obj)
+        private void ExecuteCancelEditCommand()
         {
             EditEnable = false;
+        }
+
+        private async Task<byte[]> ConvertImageSourceToByteArrayAsync(ImageSource imageSource)
+        {
+            if (imageSource is StreamImageSource streamImageSource)
+            {
+                using (var stream = await streamImageSource.Stream(CancellationToken.None))
+                    {
+                    if (stream == null)
+                    {
+                        throw new Exception("El stream de la imagen es nulo.");
+                    }
+
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await stream.CopyToAsync(memoryStream);
+                        return memoryStream.ToArray();
+                    }
+                }
+            }
+            else
+            {
+                throw new Exception("El origen de la imagen no es un StreamImageSource.");
+            }
         }
     }
 }

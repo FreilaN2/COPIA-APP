@@ -148,7 +148,7 @@ namespace SpinningTrainer.Repositories
                             "[RIF] [varchar] (30),\n" +
                             "[Descrip] [varchar] (80),\n" +
                             "[Direc] [varchar] (160),\n" +
-                            "[Logo] [Image])\n";
+                            "[Logo] [varbinary] (MAX))\n";
                 }
                 
                 using (SqlCommand cmd = new SqlCommand(query, connection))

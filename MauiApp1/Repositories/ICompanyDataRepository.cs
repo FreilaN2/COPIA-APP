@@ -4,7 +4,7 @@ namespace SpinningTrainer.Repositories
 {
     interface ICompanyDataRepository
     {
-        void SaveCompanyData(CompanyDataModel companyData);
+        Task SaveCompanyDataAsync(CompanyDataModel companyData, byte[] imageData);
         CompanyDataModel LoadCompanyData();
     }
 }
