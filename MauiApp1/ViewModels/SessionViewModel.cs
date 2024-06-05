@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using SpinningTrainer.Models;
 using SpinningTrainer.Repositories;
-using Microsoft.Maui.Controls;
+using SpinningTrainer.ViewModels;
 
 namespace SpinningTrainer.ViewModel
 {
@@ -14,9 +13,9 @@ namespace SpinningTrainer.ViewModel
         private ISessionRepository _sessionRepository;
 
         private string _descrip;
-        private DateTime _fechaC;
         private DateTime _fechaI;
-        private TimeSpan _duracion;
+        private DateTime _timeI;
+        private int _duracion;
 
         public string Descrip
         {
@@ -25,17 +24,6 @@ namespace SpinningTrainer.ViewModel
             {
                 _descrip = value;
                 OnPropertyChanged(nameof(Descrip));
-                ((Command)AddSessionCommand).ChangeCanExecute();
-            }
-        }
-
-        public DateTime FechaC
-        {
-            get => _fechaC;
-            set
-            {
-                _fechaC = value;
-                OnPropertyChanged(nameof(FechaC));
                 ((Command)AddSessionCommand).ChangeCanExecute();
             }
         }
@@ -51,7 +39,17 @@ namespace SpinningTrainer.ViewModel
             }
         }
 
-        public TimeSpan Duracion
+        public DateTime TimeI
+        {
+            get => _timeI;
+            set 
+            {
+                _timeI = value;
+                OnPropertyChanged(nameof(FechaI));
+            }
+        }
+
+        public int Duracion
         {
             get => _duracion;
             set
@@ -62,14 +60,18 @@ namespace SpinningTrainer.ViewModel
             }
         }
 
+
+
         public ObservableCollection<SessionModel> Sessions { get; set; }
 
-        public ICommand AddSessionCommand { get; }
+        public ICommand AddSessionCommand { get; }        
 
         public SessionViewModel()
         {
             _sessionRepository = new SessionRepository();
             AddSessionCommand = new Command(ExecuteAddSessionCommand, CanExecuteAddSessionCommand);
+            FechaI = DateTime.Now;
+            TimeI = DateTime.Now;
 
             LoadSessions();
         }
@@ -81,10 +83,8 @@ namespace SpinningTrainer.ViewModel
 
         private bool CanExecuteAddSessionCommand()
         {
-            return !string.IsNullOrWhiteSpace(Descrip) &&
-                   FechaC != default &&
-                   FechaI != default &&
-                   Duracion != default;
+            return !string.IsNullOrWhiteSpace(Descrip) &&                                      
+                   Duracion > 0;
         }
 
         private void ExecuteAddSessionCommand()
@@ -92,32 +92,21 @@ namespace SpinningTrainer.ViewModel
             var newSession = new SessionModel
             {
                 IDEntrenador = 1, // Example value
-                Descrip = Descrip,
-                FechaC = FechaC,
-                FechaI = FechaI,
+                Descrip = Descrip,                
+                FechaI = new DateTime(
+                            FechaI.Year,
+                            FechaI.Month,
+                            FechaI.Day,
+                            TimeI.Hour,
+                            TimeI.Minute,
+                            TimeI.Second
+                                     ),
                 Duracion = Duracion,
                 EsPlantilla = 0 // Example value
             };
 
             var addedSession = _sessionRepository.Add(newSession);
             Sessions.Add(addedSession);
-        }
-
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-    }
-
-    public abstract class ViewModelBase : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

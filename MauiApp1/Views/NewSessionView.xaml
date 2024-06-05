@@ -33,7 +33,7 @@
                       Background="{StaticResource Primary}">
                         <Entry x:Name="entSessionName"
                           Placeholder="Ingrese el nombre de la sesión" 
-                          Text="{Binding Descrip}"
+                          Text="{Binding Descrip, Mode=TwoWay}"
                           BackgroundColor="Transparent"                                
                           TextColor="White" 
                           HeightRequest="50"
@@ -58,7 +58,7 @@
                                        VerticalOptions="Center"
                                        Margin="10,0,0,0"
                                        WidthRequest="100"
-                                       Date="{Binding FechaC}"/>
+                                       Date="{Binding FechaI}"/>
                             </HorizontalStackLayout>
                         </Frame>
                     </StackLayout>
@@ -73,26 +73,48 @@
                                   VerticalOptions="Center"/>
 
                                 <TimePicker x:Name="dpkSessionTime"
-                                       Background="Transparent"
-                                       VerticalOptions="Center"
-                                       Margin="10,0,0,0"
-                                       WidthRequest="100"
-                                       Time="{Binding Duracion}"/>
+                                            Background="Transparent"
+                                            VerticalOptions="Center"
+                                            Margin="10,0,0,0"
+                                            WidthRequest="100"
+                                            Time="{Binding TimeI}"/>
                             </HorizontalStackLayout>
                         </Frame>
                     </StackLayout>
                 </StackLayout>
 
+                <StackLayout Grid.Row="1"
+                             HorizontalOptions="Start"
+                             Margin="23">
+                    <Frame WidthRequest="200"
+                           Background="{StaticResource Primary}">
+                        <HorizontalStackLayout>
+                            <Label Text="Duración:"
+                                   VerticalOptions="Center"/>
+
+                            <Entry x:Name="entSessionDuration"
+                                   Background="Transparent"
+                                   VerticalOptions="Center"
+                                   Margin="10,0,0,0"
+                                   WidthRequest="80"
+                                   Placeholder="Min."
+                                   Text="{Binding Duracion}"
+                                   HorizontalTextAlignment="End"/>
+                            <Label Text="Min."
+                                   VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                    </Frame>
+                </StackLayout>
+
                 <StackLayout Orientation="Horizontal" Margin="50" HorizontalOptions="Center" VerticalOptions="Center">
                     <Button x:Name="btnNextStep"
-                       Text ="Siguiente"
-                       BackgroundColor="{StaticResource Primary}"
-                       CornerRadius ="20"
-                       WidthRequest="200" 
-                       HeightRequest="60"
-                       TextColor ="White"
-                       Command="{Binding AddSessionCommand}"
-                       IsEnabled="{Binding Path=AddSessionCommand.CanExecute, Source={RelativeSource Self}}"/>
+                            Text ="Siguiente"
+                            BackgroundColor="{StaticResource Primary}"
+                            CornerRadius ="20"
+                            WidthRequest="200" 
+                            HeightRequest="60"
+                            TextColor ="White"
+                            Command="{Binding AddSessionCommand}"/>
                 </StackLayout>
             </StackLayout>
         </VerticalStackLayout>

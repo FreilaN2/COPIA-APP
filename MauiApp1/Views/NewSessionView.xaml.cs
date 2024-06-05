@@ -18,7 +18,7 @@ public partial class NewSessionView : ContentPage
     {
         string sessionName = entSessionName.Text;
         DateTime sessionDate = dpkSessionDate.Date;
-        TimeSpan sessionTime = dpkSessionTime.Time;
+        // TimeSpan sessionTime = dpkSessionTime.Time;
 
         //string sessionLevel =;
     }

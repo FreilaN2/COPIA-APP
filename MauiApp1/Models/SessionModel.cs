@@ -17,7 +17,7 @@ namespace SpinningTrainer.Models
 
         //  Como en la base de datos este campo es de tipo TIME,
         //  en C# podemos representarlo con TimeSpan.
-        public TimeSpan Duracion { get; set; }
+        public int Duracion { get; set; }
 
         public int EsPlantilla { get; set; }
 
