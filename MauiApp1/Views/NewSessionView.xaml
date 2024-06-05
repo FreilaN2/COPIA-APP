@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SpinningTrainer.ViewModel"
              x:Class="SpinningTrainer.Views.NewSessionView"
              Title="Crear sesión"
              Background="White">
+    <ContentPage.BindingContext>
+        <vm:SessionViewModel />
+    </ContentPage.BindingContext>
+
     <Grid BackgroundColor="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"/>
@@ -27,14 +32,14 @@
                       WidthRequest="300"                           
                       Background="{StaticResource Primary}">
                         <Entry x:Name="entSessionName"
-                          Placeholder="Ingrese el nombre de la sesión" Text="{Binding Nombre}"
+                          Placeholder="Ingrese el nombre de la sesión" 
+                          Text="{Binding Descrip}"
                           BackgroundColor="Transparent"                                
                           TextColor="White" 
                           HeightRequest="50"
                           PlaceholderColor="White"                                
                           HorizontalTextAlignment="Center"
-                          VerticalOptions="Start"
-                          TextChanged="entSessionName_TextChanged"/>
+                          VerticalOptions="Start"/>
                     </Frame>
                 </StackLayout>
 
@@ -52,11 +57,11 @@
                                        Background="Transparent"
                                        VerticalOptions="Center"
                                        Margin="10,0,0,0"
-                                       WidthRequest="100"/>
+                                       WidthRequest="100"
+                                       Date="{Binding FechaC}"/>
                             </HorizontalStackLayout>
                         </Frame>
                     </StackLayout>
-
 
                     <StackLayout Grid.Row="1"
                             HorizontalOptions="Start">
@@ -71,7 +76,8 @@
                                        Background="Transparent"
                                        VerticalOptions="Center"
                                        Margin="10,0,0,0"
-                                       WidthRequest="100"/>
+                                       WidthRequest="100"
+                                       Time="{Binding Duracion}"/>
                             </HorizontalStackLayout>
                         </Frame>
                     </StackLayout>
@@ -85,19 +91,14 @@
                        WidthRequest="200" 
                        HeightRequest="60"
                        TextColor ="White"
-                       IsEnabled="False"
-                       Clicked="btnNextStep_Clicked"/>
+                       Command="{Binding AddSessionCommand}"
+                       IsEnabled="{Binding Path=AddSessionCommand.CanExecute, Source={RelativeSource Self}}"/>
                 </StackLayout>
             </StackLayout>
         </VerticalStackLayout>
 
         <StackLayout BackgroundColor="{StaticResource Primary}" 
                 Grid.Row="2">
-
         </StackLayout>
-
-
     </Grid>
-
-
 </ContentPage>
