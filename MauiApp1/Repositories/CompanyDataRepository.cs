@@ -1,8 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Maui.Devices.Sensors;
 using SpinningTrainer.Models;
-using System;
 
 namespace SpinningTrainer.Repositories
 {

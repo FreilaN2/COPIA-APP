@@ -1,5 +1,6 @@
 using Microsoft.Maui.Controls.PlatformConfiguration;
 using SpinningTrainer.Model;
+using SpinningTrainer.Models;
 using SpinningTrainer.View;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -8,15 +9,15 @@ namespace SpinningTrainer.Views;
 
 public partial class MainPageView : ContentPage
 {
-    ObservableCollection<Sessions> infoSesiones = new ObservableCollection<Sessions>();
+    ObservableCollection<SessionModel> infoSesiones = new ObservableCollection<SessionModel>();
 
 	public MainPageView()
 	{
 		InitializeComponent();
 
-		infoSesiones.Add(new Sessions { Id = 5, Descrip = "Sesión Basica", IdEntrenador = 2, DescripEntrenador = "Diego Estevez", Fecha = DateTime.Now });
-        infoSesiones.Add(new Sessions { Id = 3, Descrip = "Sesión Media", IdEntrenador = 2, DescripEntrenador = "Diego Estevez", Fecha = DateTime.Now });
-        infoSesiones.Add(new Sessions { Id = 8, Descrip = "Sesión Alta Dificultad", IdEntrenador = 2, DescripEntrenador = "Diego Estevez", Fecha = DateTime.Now });
+		infoSesiones.Add(new SessionModel { ID = 5, Descrip = "Sesión Basica", IDEntrenador = 2 });
+        infoSesiones.Add(new SessionModel { ID = 3, Descrip = "Sesión Media", IDEntrenador = 2 });
+        infoSesiones.Add(new SessionModel { ID = 8, Descrip = "Sesión Alta Dificultad", IDEntrenador = 2 });
 		
 		lvInfoSesiones.ItemsSource = infoSesiones;
     }

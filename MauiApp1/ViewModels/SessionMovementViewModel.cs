@@ -105,12 +105,12 @@ namespace SpinningTrainer.ViewModels
 
         public ICommand AddSessionMovementCommand { get; }
 
-        public SessionMovementViewModel()
+        /*public SessionMovementViewModel()
         {
             _sessionMovementRepository = new SessionMovementRepository();
             SessionMovements = new ObservableCollection<SessionMovementModel>();
             AddSessionMovementCommand = new ViewModelCommand(ExecuteAddSessionMovementCommand, CanExecuteAddSessionMovementCommand);
-        }
+        }*/
 
         private bool CanExecuteAddSessionMovementCommand(object obj)
         {
@@ -131,8 +131,8 @@ namespace SpinningTrainer.ViewModels
                 DuracionSeg = DuracionSeg
             };
 
-            SessionMovementModel addedSessionMovement = _sessionMovementRepository.Add(newSessionMovement);
-            SessionMovements.Add(addedSessionMovement);
+            //SessionMovementModel addedSessionMovement = _sessionMovementRepository.Add(newSessionMovement);
+            //SessionMovements.Add(addedSessionMovement);
         }
     }
 }
