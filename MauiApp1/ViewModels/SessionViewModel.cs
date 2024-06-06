@@ -5,6 +5,7 @@ using System.Windows.Input;
 using SpinningTrainer.Models;
 using SpinningTrainer.Repositories;
 using SpinningTrainer.ViewModels;
+using SpinningTrainer.Views;
 
 namespace SpinningTrainer.ViewModel
 {
@@ -83,11 +84,10 @@ namespace SpinningTrainer.ViewModel
 
         private bool CanExecuteAddSessionCommand()
         {
-            return !string.IsNullOrWhiteSpace(Descrip) &&                                      
-                   Duracion > 0;
+            return !string.IsNullOrWhiteSpace(Descrip) && Duracion > 0;
         }
 
-        private void ExecuteAddSessionCommand()
+        private async void ExecuteAddSessionCommand()
         {
             var newSession = new SessionModel
             {
@@ -107,6 +107,8 @@ namespace SpinningTrainer.ViewModel
 
             var addedSession = _sessionRepository.Add(newSession);
             Sessions.Add(addedSession);
+
+            await Application.Current.MainPage.Navigation.PushAsync(new NewSessionMovementsSelectionView());
         }
     }
 }
