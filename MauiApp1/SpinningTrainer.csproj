@@ -109,8 +109,8 @@
 	  <Compile Update="Views\ConnectionView.xaml.cs">
 	    <DependentUpon>ConnectionView.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\NewSessionMovementsSelectionView.xaml.cs">
-	    <DependentUpon>NewSessionMovementsSelectionView.xaml</DependentUpon>
+	  <Compile Update="Views\NewSessionExercisesSelectionView.xaml.cs">
+	    <DependentUpon>NewSessionExercisesSelectionView.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\PreviewComparativeReportView.xaml.cs">
 	    <DependentUpon>PreviewComparativeReportView.xaml</DependentUpon>
@@ -142,7 +142,7 @@
 	  <MauiXaml Update="Views\MainPageView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\NewSessionMovementsSelectionView.xaml">
+	  <MauiXaml Update="Views\NewSessionExercisesSelectionView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\NewSessionView.xaml">

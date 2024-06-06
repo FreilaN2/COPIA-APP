@@ -58,8 +58,8 @@
         FlyoutItemIsVisible="False"/>
 
     <ShellContent                
-    ContentTemplate="{DataTemplate view:NewSessionMovementsSelectionView}"
-    Route="NewSessionMovementsSelectionView"             
+    ContentTemplate="{DataTemplate view:NewSessionExercisesSelectionView}"
+    Route="NewSessionExercisesSelectionView"             
     Shell.FlyoutBehavior="Disabled"
     FlyoutItemIsVisible="False"/>
 
