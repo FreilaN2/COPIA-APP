@@ -19,7 +19,7 @@ namespace SpinningTrainerTV
 
         private void LoadUserNamesFromDatabase()
         {
-            string connectionString = "Server=localhost;Database=gym_app;User Id=your_username;Password=your_password;"; // Conexión con la base de datos SQL Server
+            /*string connectionString = "Server=localhost;Database=gym_app;User Id=your_username;Password=your_password;"; // Conexión con la base de datos SQL Server
             try
             {
                 using (var connection = new SqlConnection(connectionString))
@@ -46,7 +46,7 @@ namespace SpinningTrainerTV
             {
                 Console.WriteLine($"Error: {ex.Message}");
                 
-            }
+            }*/
         }
 
         async void OnItemSelected(object sender, SelectionChangedEventArgs e)

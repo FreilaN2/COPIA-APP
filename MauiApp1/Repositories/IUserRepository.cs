@@ -1,4 +1,5 @@
-﻿using SpinningTrainer.Model;
+﻿using SpinningTrainer.Models;
+using System.Collections.ObjectModel;
 
 namespace SpinningTrainer.Repositories
 {
@@ -8,11 +9,13 @@ namespace SpinningTrainer.Repositories
         void Add(UserModel userModel);
         void Update(UserModel userModel);
         (bool, string) UpdatePassword(string username, string password);
-        void Delete(UserModel userModel);
+        bool Delete(int id);
         UserModel GetById(int Id);
         UserModel GetByUserName(string username);
         string ValidateUsernameforPasswordChange(string username);
         string ValidateUserEmalforUsernameRecovery(string email);
-        IEnumerable<UserModel> GetAll();
+        bool VerifyMembershipValidity(int id);
+        ObservableCollection<UserModel> GetAll();
+
     }
 }

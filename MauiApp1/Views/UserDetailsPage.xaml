@@ -2,56 +2,99 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpinningTrainer.Views.UserDetailsView"
-             BackgroundColor="#FF8C00"> 
+             BackgroundColor="White"
+             Title="Detalles Usuario">
 
-    <ScrollView BackgroundColor="#FF8C00">
-        <StackLayout Padding="20" Spacing="20">
-            <Label Text="Detalles del Usuario" FontSize="Large" HorizontalOptions="Center" TextColor="#FFFFFF"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
 
-            <StackLayout Spacing="10">
-                <Label Text="Usuario:" TextColor="#FFFFFF"/> 
-                <Entry x:Name="entUsuario" Text="{Binding CodUsua}" FontSize="Medium" Placeholder="Ingrese nombre de usuario" BackgroundColor="#FFFFFF" TextColor="#000000"/>
+        <ScrollView BackgroundColor="Transparent" Grid.Row="0">
+            <StackLayout Padding="20" Spacing="20">
+                <StackLayout Spacing="10">
+                    <Label Text="Usuario:" TextColor="{StaticResource Primary}"/>
+                    <Frame>
+                        <Entry x:Name="entUsuario" Text="{Binding CodUsua}" FontSize="Medium" Placeholder="Ingrese nombre de usuario" BackgroundColor="Transparent" TextColor="White"/>
+                    </Frame>
 
-                <Label Text="Nombre y Apellido:" TextColor="#FFFFFF"/> 
-                <Entry x:Name="entNombreApellido" Text="{Binding Descrip}" FontSize="Medium" Placeholder="Ingrese nombre y apellido" BackgroundColor="#FFFFFF" TextColor="#000000"/> 
+                    <Label Text="Nombre y Apellido:" TextColor="{StaticResource Primary}"/>
+                    <Frame>
+                        <Entry x:Name="entNombreApellido" Text="{Binding Descrip}" FontSize="Medium" Placeholder="Ingrese nombre y apellido" BackgroundColor="Transparent" TextColor="White"/>
+                    </Frame>
 
-                <Label Text="Contraseña:" TextColor="#FFFFFF"/> 
-                <Entry x:Name="entContra" Text="{Binding Contra}" FontSize="Medium" IsPassword="True" Placeholder="Ingrese la contraseña" BackgroundColor="#FFFFFF" TextColor="#000000"/>
+                    <Label Text="Contraseña:" TextColor="{StaticResource Primary}"/>
+                    <Frame>
+                        <Entry x:Name="entContra" Text="{Binding Contra}" FontSize="Medium" IsPassword="True" Placeholder="Ingrese la contraseña" BackgroundColor="Transparent" TextColor="White"/>
+                    </Frame>
 
-                <Label Text="Confirmar Contraseña:" TextColor="#FFFFFF"/>
-                <Entry x:Name="entConfirmarContra" Text="{Binding ConfirmarContra}" FontSize="Medium" IsPassword="True" Placeholder="Confirme la contraseña" BackgroundColor="#FFFFFF" TextColor="#000000"/> 
+                    <Label Text="Confirmar Contraseña:" TextColor="{StaticResource Primary}"/>
+                    <Frame>
+                        <Entry x:Name="entConfirmarContra" Text="{Binding ConfirmarContra}" FontSize="Medium" IsPassword="True" Placeholder="Confirme la contraseña" BackgroundColor="Transparent" TextColor="White"/>
+                    </Frame>
 
-                <Label Text="PIN:" TextColor="#FFFFFF"/> 
-                <Entry x:Name="entPIN" Text="{Binding PIN}" FontSize="Medium" MaxLength="4" Keyboard="Numeric" Placeholder="Ingrese el PIN" BackgroundColor="#FFFFFF" TextColor="#000000"/> 
+                    <Label Text="PIN:" TextColor="{StaticResource Primary}"/>
+                    <Frame>
+                        <Entry x:Name="entPIN" Text="{Binding PIN}" FontSize="Medium" MaxLength="4" Keyboard="Numeric" Placeholder="Ingrese el PIN" BackgroundColor="Transparent" TextColor="White"/>
+                    </Frame>
 
-                <Label Text="Email:" TextColor="#FFFFFF"/> 
-                <Entry x:Name="entEmail" Text="{Binding Email}" FontSize="Medium" Placeholder="Ingrese el email" BackgroundColor="#FFFFFF" TextColor="#000000"/> 
+                    <Label Text="Email:" TextColor="{StaticResource Primary}"/>
+                    <Frame>
+                        <Entry x:Name="entEmail" Text="{Binding Email}" FontSize="Medium" Placeholder="Ingrese el email" BackgroundColor="Transparent" TextColor="White"/>
+                    </Frame>
 
-                <Label Text="Teléfono:" TextColor="#FFFFFF"/> 
-                <Entry x:Name="entTelef" Text="{Binding Telef}" FontSize="Medium" Placeholder="Ingrese el teléfono" BackgroundColor="#FFFFFF" TextColor="#000000"/> 
+                    <Label Text="Teléfono:" TextColor="{StaticResource Primary}"/>
+                    <Frame>
+                        <Entry x:Name="entTelef" Text="{Binding Telef}" FontSize="Medium" Placeholder="Ingrese el teléfono" BackgroundColor="Transparent" TextColor="White"/>
+                    </Frame>                    
 
-                <Label Text="Fecha de Creación:" TextColor="#FFFFFF"/> 
-                <Entry x:Name="entFechaC" Text="{Binding FechaC}" FontSize="Medium" Placeholder="Ingrese la fecha de creación" BackgroundColor="#FFFFFF" TextColor="#000000"/> 
+                    <Label Text="Fecha de Renovación:" TextColor="{StaticResource Primary}"/>
+                    <Frame>
+                        <DatePicker x:Name="entFechaR" FontSize="Medium" BackgroundColor="Transparent" TextColor="White"/>
+                    </Frame>
 
-                <Label Text="Fecha de Renovación:" TextColor="#FFFFFF"/> 
-                <Entry x:Name="entFechaR" Text="{Binding FechaR}" FontSize="Medium" Placeholder="Ingrese la fecha de renovación" BackgroundColor="#FFFFFF" TextColor="#000000"/>
+                    <Label Text="Fecha de Vencimiento:" TextColor="{StaticResource Primary}"/>
+                    <Frame>
+                        <DatePicker x:Name="entFechaV"  FontSize="Medium" BackgroundColor="Transparent" TextColor="White"/>
+                    </Frame>
 
-                <Label Text="Fecha de Vencimiento:" TextColor="#FFFFFF"/>
-                <Entry x:Name="entFechaV" Text="{Binding FechaV}" FontSize="Medium" Placeholder="Ingrese la fecha de vencimiento" BackgroundColor="#FFFFFF" TextColor="#000000"/> 
-
-                <Label Text="Tipo de Usuario:" TextColor="#FFFFFF"/>
-                <Picker x:Name="pkTipoUsuario" FontSize="Medium" BackgroundColor="#FFFFFF" TextColor="#000000">
-                    <Picker.Items>
-                        <x:String>Super Usuario</x:String>
-                        <x:String>Administrador</x:String>
-                        <x:String>Entrenador</x:String>
-                    </Picker.Items>
-                </Picker>
+                    <Label Text="Tipo de Usuario:" TextColor="{StaticResource Primary}"/>
+                    <Frame>
+                        <Picker x:Name="pkTipoUsuario" FontSize="Medium" BackgroundColor="Transparent" TextColor="White">
+                            <Picker.Items>
+                                <x:String>Super Usuario</x:String>
+                                <x:String>Administrador</x:String>
+                                <x:String>Entrenador</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </Frame>
+                </StackLayout>
             </StackLayout>
-
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Button Text="Guardar" Clicked="btnEditar_Clicked" BackgroundColor="#008000" TextColor="#FFFFFF"/> 
-            </StackLayout>
-        </StackLayout>
-    </ScrollView>
+        </ScrollView>
+        <Grid Grid.Row="1" 
+              Background="{StaticResource Primary}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <Button Text="Guardar"                     
+                    BackgroundColor="#008000" 
+                    BorderColor="Transparent"
+                    TextColor="#FFFFFF"
+                    HorizontalOptions="CenterAndExpand"                    
+                    HeightRequest="60"
+                    WidthRequest="120"
+                    Grid.Column="0"/>
+            <Button Text="Eliminar"                     
+                    BackgroundColor="Red" 
+                    BorderColor="Transparent"
+                    TextColor="#FFFFFF"
+                    HorizontalOptions="CenterAndExpand"                    
+                    HeightRequest="60"
+                    WidthRequest="120"
+                    Grid.Column="1"/>
+        </Grid>
+    </Grid>
 </ContentPage>

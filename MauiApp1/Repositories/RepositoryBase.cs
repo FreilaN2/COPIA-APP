@@ -128,6 +128,7 @@ namespace SpinningTrainer.Repositories
                             "[CodUsua] [varchar](20) NOT NULL,\n" +
                             "[Descrip] [varchar](300) NOT NULL,\n" +
                             "[Contra] [varbinary](max) NULL,\n" +
+                            "[PIN] [varbinary](max) NULL,\n" +
                             "[Email] [varchar](120) NULL,\n" +
                             "[Telef] [varchar](20) NULL,\n" +
                             "[FechaC] [datetime] NULL,\n" +

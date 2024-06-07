@@ -1,55 +1,146 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:converters="clr-namespace:SpinningTrainer.Resources.Converters"
+             xmlns:viewModel="clr-namespace:SpinningTrainer.ViewModels"
+             Title="Lista de Usuarios"
              x:Class="SpinningTrainer.Views.UserListView">
+
+    <ContentPage.BindingContext>
+        <viewModel:UserListViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <converters:UserTypeConverter x:Key="UserTyperConverter"/>
+        <converters:IsTrainerConverter x:Key="IsTrainerConverter"/>
+    </ContentPage.Resources>
+    
     <!-- Contenedor principal con Grid -->
-    <Grid BackgroundColor="#FFFFFF" Padding="0">
+    <Grid BackgroundColor="#FFFFFF" 
+          Padding="0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" /> 
-            <RowDefinition Height="*" />    
-            <RowDefinition Height="Auto" /> 
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <BoxView HeightRequest="50" Color="#FFA500" Grid.Row="0" Margin="0,-50,0,0"/>
-
-        <StackLayout BackgroundColor="#FFFFFF" Padding="10" Grid.Row="1">
-            <Label Text="Lista de Usuarios" FontSize="Large" HorizontalOptions="Center" Margin="0,10,0,20" TextColor="#FFA500"/>
-            <ListView x:Name="ltvUserListView" Margin="0,0,0,10" ItemTapped="ltvUserListView_ItemTapped" BackgroundColor="#FFFFFF">
+        <StackLayout BackgroundColor="#FFFFFF"
+                     Padding="10" 
+                     Grid.Row="1">
+            <ListView x:Name="ltvUserListView" 
+                      Margin="0,0,0,10" 
+                      SelectionMode="Single"                      
+                      ItemsSource="{Binding Users}"
+                      SelectedItem="{Binding SelectedUser}"
+                      BackgroundColor="Transparent"
+                      RowHeight="100">
+                <ListView.Behaviors>
+                    <toolkit:EventToCommandBehavior EventName="ItemTapped"
+                                                    Command="{Binding EditUserCommand}"/>
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal" Margin="0,0,0,10">
-                                <Label VerticalOptions="Center" HorizontalOptions="StartAndExpand" TextColor="#FFA500">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="{Binding ID}" />
-                                            <Span Text=" - " />
-                                            <Span Text="{Binding CodUsua}" />
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-                                <RadioButton GroupName="UserSelection" IsChecked="{Binding IsSelected}" VerticalOptions="Center" HorizontalOptions="End" WidthRequest="30" HeightRequest="30"/>
-                            </StackLayout>
+                            <Grid BackgroundColor="White">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="0.5*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Orientation="Vertical" 
+                                             Margin="0,0,0,10"
+                                             Grid.Column="0">
+                                    <Label VerticalOptions="Center" 
+                                           HorizontalOptions="StartAndExpand" 
+                                           TextColor="#FFA500"
+                                           Margin="0,10,0,0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding CodUsua}" 
+                                                      FontAttributes="Bold"
+                                                      TextColor="{StaticResource Tertiary}"/>
+                                                <Span Text=" - " 
+                                                      FontAttributes="Bold"
+                                                      TextColor="{StaticResource Tertiary}"/>
+                                                <Span Text="{Binding Descrip}" 
+                                                      FontAttributes="Bold"
+                                                      TextColor="{StaticResource Tertiary}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label VerticalOptions="Center" 
+                                           HorizontalOptions="StartAndExpand" 
+                                           TextColor="#FFA500"
+                                           Margin="0,5,0,0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Tipo de Usuario: "                                                       
+                                                      TextColor="{StaticResource Tertiary}"/>
+                                                <Span Text="{Binding TipoUsuario, Converter={StaticResource UserTyperConverter}}" 
+                                                      TextColor="{StaticResource Tertiary}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label VerticalOptions="Center" 
+                                           HorizontalOptions="StartAndExpand" 
+                                           TextColor="#FFA500"
+                                           Margin="0,5,0,0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Email: " 
+                                                      TextColor="{StaticResource Tertiary}"/>
+                                                <Span Text="{Binding Email}" 
+                                                      TextColor="{StaticResource Tertiary}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Vertical" 
+                                             Margin="0,0,0,10"
+                                             Grid.Column="1"
+                                             HorizontalOptions="EndAndExpand">
+                                    <Label VerticalOptions="Center"                                            
+                                           TextColor="{StaticResource Tertiary}"
+                                           Margin="0,10,0,0"
+                                           HorizontalOptions="CenterAndExpand"
+                                           IsVisible="{Binding TipoUsuario, Converter={StaticResource IsTrainerConverter }}"
+                                           Text="Membresia"/>
+                                    <Label VerticalOptions="Center"                                           
+                                           TextColor="#FFA500"
+                                           Margin="0,10,0,0"
+                                           IsVisible="{Binding TipoUsuario, Converter={StaticResource IsTrainerConverter }}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding FechaV, StringFormat='{0:dd/MM/yyyy}'}" 
+                                                      TextColor="{StaticResource Tertiary}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
 
-        <Grid HeightRequest="50" BackgroundColor="#FFA500" Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <ImageButton x:Name="btnAgregarUsers" Clicked="btnAgregarUsers_Clicked" WidthRequest="40" HeightRequest="40" Grid.Column="0" HorizontalOptions="Center" BackgroundColor="Transparent">
-                <ImageButton.Source>
-                    <FileImageSource File="agregar_usuario.png" />
-                </ImageButton.Source>
-            </ImageButton>
-            <ImageButton x:Name="btnEliminarUsers" Clicked="btnEliminarUsers_Clicked" WidthRequest="40" HeightRequest="40" Grid.Column="1" HorizontalOptions="Center" BackgroundColor="Transparent">
-                <ImageButton.Source>
-                    <FileImageSource File="eliminar.png" />
-                </ImageButton.Source>
-            </ImageButton>
-        </Grid>
+        <StackLayout HeightRequest="50" 
+                     BackgroundColor="{StaticResource Primary}" 
+                     Grid.Row="2">
+
+            <Frame Margin="0,-30,0,0"
+                   CornerRadius="150"
+                   WidthRequest="90"
+                   HeightRequest="90">
+                <Button ImageSource="mas"
+                        WidthRequest="50"
+                        HeightRequest="50"
+                        BorderWidth="0"/>
+            </Frame>
+
+        </StackLayout>
     </Grid>
 </ContentPage>

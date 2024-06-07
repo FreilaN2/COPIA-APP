@@ -57,11 +57,11 @@
         Shell.FlyoutBehavior="Disabled"
         FlyoutItemIsVisible="False"/>
 
-    <ShellContent                
+    <!--<ShellContent                
     ContentTemplate="{DataTemplate view:NewSessionExercisesSelectionView}"
     Route="NewSessionExercisesSelectionView"             
     Shell.FlyoutBehavior="Disabled"
-    FlyoutItemIsVisible="False"/>
+    FlyoutItemIsVisible="False"/>-->
 
     <FlyoutItem x:Name="SuperUserMenu" Route="SuperUserMenuView" FlyoutDisplayOptions="AsMultipleItems">
 

@@ -74,7 +74,7 @@ namespace SpinningTrainer.Repositories
                             FechaC = reader.GetDateTime(reader.GetOrdinal("FechaC")),
                             FechaI = reader.GetDateTime(reader.GetOrdinal("FechaI")),
                             Duracion = reader.GetInt32(reader.GetOrdinal("Duracion")),
-                            EsPlantilla = reader.GetBoolean(reader.GetOrdinal("EsPlantilla"))
+                            EsPlantilla = 0//reader.GetBoolean(reader.GetOrdinal("EsPlantilla"))
                         };
                         sessions.Add(session);
                     }
@@ -108,7 +108,7 @@ namespace SpinningTrainer.Repositories
                             FechaC = reader.GetDateTime(reader.GetOrdinal("FechaC")),
                             FechaI = reader.GetDateTime(reader.GetOrdinal("FechaI")),
                             Duracion = reader.GetInt32(reader.GetOrdinal("Duracion")),
-                            EsPlantilla = reader.GetBoolean(reader.GetOrdinal("EsPlantilla"))
+                            EsPlantilla = 0//reader.GetBoolean(reader.GetOrdinal("EsPlantilla"))
                         };
                     }
                 }
@@ -141,7 +141,7 @@ namespace SpinningTrainer.Repositories
                             FechaC = reader.GetDateTime(reader.GetOrdinal("FechaC")),
                             FechaI = reader.GetDateTime(reader.GetOrdinal("FechaI")),
                             Duracion = reader.GetInt32(reader.GetOrdinal("Duracion")),
-                            EsPlantilla = reader.GetBoolean(reader.GetOrdinal("EsPlantilla"))
+                            EsPlantilla = 0//reader.GetBoolean(reader.GetOrdinal("EsPlantilla"))
                         };
                     }
                 }
