@@ -1,12 +1,12 @@
 ﻿using System;
 using Microsoft.Maui.Controls;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 
 namespace SpinningTrainerTV
 {
     public partial class PedirPIN : ContentPage
     {
-        private const string connectionString = "Server=localhost;Database=gym_app;User Id=your_username;Password=your_password;"; // Conexión con la base de datos SQL Server
+        string connectionString = "Server=localhost;Database=TambocaPruebas;User Id=sa;Password=200519;TrustServerCertificate=True;Persist Security Info=True;"; // Conexión con la base de datos SQL Server
         private string codUsua;
 
         public PedirPIN(string codUsua)
@@ -75,7 +75,7 @@ namespace SpinningTrainerTV
 
         private async void ValidatePIN()
         {
-            /*string pin = $"{pin1.Text}{pin2.Text}{pin3.Text}{pin4.Text}";
+            string pin = $"{pin1.Text}{pin2.Text}{pin3.Text}{pin4.Text}";
 
             if (string.IsNullOrWhiteSpace(pin) || pin.Length != 4)
             {
@@ -88,12 +88,12 @@ namespace SpinningTrainerTV
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     await conn.OpenAsync();
-                    string query = "SELECT CodUsua FROM usuario WHERE CodUsua = @codUsua AND PIN = @pin";
+                    string query = "SELECT CodUsua FROM Usuarios WHERE CodUsua = @codUsua AND CONVERT(varchar(4),DECRYPTBYPASSPHRASE('12345',PIN)) = @pin";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@codUsua", codUsua);
                         cmd.Parameters.AddWithValue("@pin", pin);
-                        var result = await cmd.ExecuteScalarAsync();
+                        var result = cmd.ExecuteScalar();
 
                         if (result != null)
                         {
@@ -114,7 +114,7 @@ namespace SpinningTrainerTV
             catch (Exception ex)
             {
                 lblResultado.Text = $"Error: {ex.Message}";
-            }*/
+            }
         }
     }
 }

@@ -1,7 +1,5 @@
-using Microsoft.Maui.Controls;
-using System;
 using System.Collections.ObjectModel;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 
 namespace SpinningTrainerTV
 {
@@ -19,13 +17,13 @@ namespace SpinningTrainerTV
 
         private void LoadUserNamesFromDatabase()
         {
-            /*string connectionString = "Server=localhost;Database=gym_app;User Id=your_username;Password=your_password;"; // Conexión con la base de datos SQL Server
+            string connectionString = "Server=localhost;Database=TambocaPruebas;User Id=sa;Password=200519;TrustServerCertificate=True;Persist Security Info=True;"; // Conexión con la base de datos SQL Server
             try
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "SELECT CodUsua FROM usuario WHERE TipoUsuario = 2"; // Seleccionar usuarios con tipo entrenador
+                    string query = "SELECT CodUsua FROM Usuarios WHERE TipoUsuario = 2"; // Seleccionar usuarios con tipo entrenador
                     using (var command = new SqlCommand(query, connection))
                     using (var reader = command.ExecuteReader())
                     {
@@ -46,7 +44,7 @@ namespace SpinningTrainerTV
             {
                 Console.WriteLine($"Error: {ex.Message}");
                 
-            }*/
+            }
         }
 
         async void OnItemSelected(object sender, SelectionChangedEventArgs e)

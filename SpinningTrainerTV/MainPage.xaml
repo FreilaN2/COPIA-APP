@@ -14,7 +14,8 @@
                     <DataTemplate>
                         <StackLayout Orientation="Vertical" Padding="10" HorizontalOptions="Center">
                             <Image Source="usuario.png" WidthRequest="140" HeightRequest="140" HorizontalOptions="Center"/>
-                            <Label Text="{Binding}" FontSize="Medium" HorizontalOptions="Center"/>
+                            <Label Text="{Binding}" FontSize="Medium" HorizontalOptions="Center"
+                                   TextColor="White"/>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
