@@ -28,6 +28,7 @@ namespace SpinningTrainer.ViewModels
             {
                 _idSesion = value;
                 OnPropertyChanged(nameof(IDSesion));
+                ((ViewModelCommand)AddSessionExerciseCommand).RaiseCanExecuteChanged();
             }
         }
 
@@ -38,6 +39,7 @@ namespace SpinningTrainer.ViewModels
             {
                 _idMovimiento = value;
                 OnPropertyChanged(nameof(IDMovimiento));
+                ((ViewModelCommand)AddSessionExerciseCommand).RaiseCanExecuteChanged();
             }
         }
 
@@ -48,6 +50,7 @@ namespace SpinningTrainer.ViewModels
             {
                 _idPosicionMano = value;
                 OnPropertyChanged(nameof(IDPosicionMano));
+                ((ViewModelCommand)AddSessionExerciseCommand).RaiseCanExecuteChanged();
             }
         }
 
@@ -58,6 +61,7 @@ namespace SpinningTrainer.ViewModels
             {
                 _tipoEjercicio = value;
                 OnPropertyChanged(nameof(TipoEjercicio));
+                ((ViewModelCommand)AddSessionExerciseCommand).RaiseCanExecuteChanged();
             }
         }
 
@@ -68,6 +72,7 @@ namespace SpinningTrainer.ViewModels
             {
                 _fase = value;
                 OnPropertyChanged(nameof(Fase));
+                ((ViewModelCommand)AddSessionExerciseCommand).RaiseCanExecuteChanged();
             }
         }
 
@@ -78,6 +83,7 @@ namespace SpinningTrainer.ViewModels
             {
                 _rpmMed = value;
                 OnPropertyChanged(nameof(RPMMed));
+                ((ViewModelCommand)AddSessionExerciseCommand).RaiseCanExecuteChanged();
             }
         }
 
@@ -88,6 +94,7 @@ namespace SpinningTrainer.ViewModels
             {
                 _rpmFin = value;
                 OnPropertyChanged(nameof(RPMFin));
+                ((ViewModelCommand)AddSessionExerciseCommand).RaiseCanExecuteChanged();
             }
         }
 
@@ -97,7 +104,8 @@ namespace SpinningTrainer.ViewModels
             set
             {
                 _duracionSeg = value;
-                OnPropertyChanged(nameof(DuracionSeg  ));
+                OnPropertyChanged(nameof(DuracionSeg));
+                ((ViewModelCommand)AddSessionExerciseCommand).RaiseCanExecuteChanged();
             }
         }
 
@@ -114,12 +122,20 @@ namespace SpinningTrainer.ViewModels
 
         private bool CanExecuteAddSessionExerciseCommand(object obj)
         {
-            return true;
+  
+            return IDSesion > 0 &&
+                   IDMovimiento > 0 &&
+                   IDPosicionMano > 0 &&
+                   TipoEjercicio > 0 &&
+                   Fase > 0 &&
+                   RPMMed >= 0 &&
+                   RPMFin >= 0 &&
+                   DuracionSeg > 0;
         }
 
         private void ExecuteAddSessionExerciseCommand(object obj)
         {
-            SessionExerciseModel newSessionMovement = new SessionExerciseModel
+            SessionExerciseModel newSessionExercise = new SessionExerciseModel
             {
                 IDSesion = IDSesion,
                 IDMovimiento = IDMovimiento,
@@ -131,8 +147,20 @@ namespace SpinningTrainer.ViewModels
                 DuracionSeg = DuracionSeg
             };
 
-            //SessionMovementModel addedSessionMovement = _sessionMovementRepository.Add(newSessionMovement);
-            //SessionMovements.Add(addedSessionMovement);
+            SessionExerciseModel addedSessionMovement = _sessionExerciseRepository.Add(newSessionExercise);
+        }
+
+        private void LoadSessionExercises()
+        {
+            if (IDSesion > 0)
+            {
+                var exercises = _sessionExerciseRepository.GetAllBySessionID(IDSesion);
+                SessionExercises.Clear();
+                foreach (var exercise in exercises)
+                {
+                    SessionExercises.Add(exercise);
+                }
+            }
         }
     }
 }

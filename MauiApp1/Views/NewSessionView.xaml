@@ -5,9 +5,6 @@
              x:Class="SpinningTrainer.Views.NewSessionView"
              Title="Crear sesión"
              Background="White">
-    <ContentPage.BindingContext>
-        <vm:SessionViewModel />
-    </ContentPage.BindingContext>
 
     <Grid BackgroundColor="White">
         <Grid.RowDefinitions>

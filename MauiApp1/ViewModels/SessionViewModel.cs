@@ -1,6 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using SpinningTrainer.Models;
 using SpinningTrainer.Repositories;
@@ -74,20 +72,20 @@ namespace SpinningTrainer.ViewModel
             FechaI = DateTime.Now;
             TimeI = DateTime.Now;
 
-            LoadSessions();
+            //LoadSessions();
         }
 
-        private void LoadSessions()
+        /*private void LoadSessions()
         {
             Sessions = new ObservableCollection<SessionModel>(_sessionRepository.GetAll());
-        }
+        }*/
 
-        private bool CanExecuteAddSessionCommand()
+        private bool CanExecuteAddSessionCommand(object obj)
         {
             return !string.IsNullOrWhiteSpace(Descrip) && Duracion > 0;
         }
 
-        private async void ExecuteAddSessionCommand()
+        private async void ExecuteAddSessionCommand(object obj)
         {
             var newSession = new SessionModel
             {

@@ -73,43 +73,6 @@ namespace SpinningTrainer.Repositories
             }
         }
 
-        public IEnumerable<SessionExerciseModel> GetAll()
-        {
-            List<SessionExerciseModel> sessionExercises = new List<SessionExerciseModel>();
-
-            using (SqlConnection connection = OpenConnection())
-            {
-                string query = @"SELECT * FROM MovimientosSesion";
-
-                SqlCommand command = new SqlCommand(query, connection);
-
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    SessionExerciseModel sessionExercise = new SessionExerciseModel
-                    {
-                        ID = Convert.ToInt32(reader["ID"]),
-                        IDSesion = Convert.ToInt32(reader["IDSesion"]),
-                        IDMovimiento = Convert.ToInt32(reader["IDMovimiento"]),
-                        IDPosicionMano = Convert.ToInt32(reader["IDPosicionMano"]),
-                        TipoEjercicio = Convert.ToInt16(reader["TipoEjercicio"]),
-                        Fase = Convert.ToInt32(reader["Fase"]),
-                        RPMMed = Convert.ToInt32(reader["RPMMed"]),
-                        RPMFin = Convert.ToInt32(reader["RPMFin"]),
-                        DuracionSeg = Convert.ToInt32(reader["DuracionSeg"])
-                    };
-
-                    sessionExercises.Add(sessionExercise);
-                }
-
-                reader.Close();
-            }
-
-            return sessionExercises;
-        }
-
         public SessionExerciseModel GetByID(int id)
         {
             SessionExerciseModel sessionExercise = null;
