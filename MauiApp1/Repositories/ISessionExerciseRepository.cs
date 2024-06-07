@@ -13,8 +13,6 @@ namespace SpinningTrainer.Repositories
         SessionExerciseModel Update(SessionExerciseModel sessionExercise);
         void Delete(int id);
 
-        IEnumerable<SessionExerciseModel> GetAll();
-
         IEnumerable<SessionExerciseModel> GetAllBySessionID(int sessionID);
         
         SessionExerciseModel GetByID(int id);
