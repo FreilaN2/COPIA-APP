@@ -7,7 +7,7 @@
              x:Class="SpinningTrainer.Views.UserListView">
 
     <ContentPage.BindingContext>
-        <viewModel:UserListViewModel/>
+        <viewModel:UsersViewModel/>
     </ContentPage.BindingContext>
 
     <ContentPage.Resources>
@@ -30,14 +30,11 @@
             <ListView x:Name="ltvUserListView" 
                       Margin="0,0,0,10" 
                       SelectionMode="Single"                      
+                      ItemTapped="ltvUserListView_ItemTapped"
                       ItemsSource="{Binding Users}"
                       SelectedItem="{Binding SelectedUser}"
                       BackgroundColor="Transparent"
                       RowHeight="100">
-                <ListView.Behaviors>
-                    <toolkit:EventToCommandBehavior EventName="ItemTapped"
-                                                    Command="{Binding EditUserCommand}"/>
-                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -135,10 +132,12 @@
                    CornerRadius="150"
                    WidthRequest="90"
                    HeightRequest="90">
-                <Button ImageSource="mas"
+                <Button x:Name="btnAgregarUsers"
+                        ImageSource="mas.png"
                         WidthRequest="50"
                         HeightRequest="50"
-                        BorderWidth="0"/>
+                        BorderWidth="0"
+                        Clicked="btnAgregarUsers_Clicked"/>
             </Frame>
 
         </StackLayout>

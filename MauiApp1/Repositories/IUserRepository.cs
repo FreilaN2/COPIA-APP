@@ -6,8 +6,8 @@ namespace SpinningTrainer.Repositories
     public interface IUserRepository
     {
         (bool, string, int) AuthenticateUser(string username, string password);
-        void Add(UserModel userModel);
-        void Update(UserModel userModel);
+        bool Add(UserModel userModel);
+        bool Update(UserModel userModel);
         (bool, string) UpdatePassword(string username, string password);
         bool Delete(int id);
         UserModel GetById(int Id);
@@ -15,6 +15,7 @@ namespace SpinningTrainer.Repositories
         string ValidateUsernameforPasswordChange(string username);
         string ValidateUserEmalforUsernameRecovery(string email);
         bool VerifyMembershipValidity(int id);
+        bool IncrementMembership(int id);
         ObservableCollection<UserModel> GetAll();
 
     }

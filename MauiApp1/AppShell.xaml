@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"    
     xmlns:view="clr-namespace:SpinningTrainer.Views"
+    xmlns:viewModel="clr-namespace:SpinningTrainer.ViewModels"
     Shell.FlyoutBehavior="Flyout"
     Shell.FlyoutBackdrop="Transparent"
     Shell.BackgroundColor="{StaticResource Primary}"
@@ -13,6 +14,10 @@
     Shell.NavBarHasShadow="True"    
     Shell.TabBarIsVisible="False"    
     Title="SpinningTrainer">
+
+    <Shell.BindingContext>
+        <viewModel:AppShellViewModel/>
+    </Shell.BindingContext>
 
     <Shell.FlyoutBackground>#FF7500</Shell.FlyoutBackground>
 
@@ -75,12 +80,6 @@
             Title="Ayuda"            
             ContentTemplate="{DataTemplate view:WebView}"            
             Icon="help.png"/>
-
-        <ShellContent
-            Title="Salir"
-            ContentTemplate="{DataTemplate view:MainPageView}"            
-            Icon="out.png"/>
-
     </FlyoutItem>
 
     <FlyoutItem x:Name="AdminMenu" Route="AdminMenuView" FlyoutDisplayOptions="AsMultipleItems">
@@ -95,11 +94,6 @@
         Title="Ayuda"            
         ContentTemplate="{DataTemplate view:WebView}"            
         Icon="help.png"/>
-
-        <ShellContent
-        Title="Salir"
-        ContentTemplate="{DataTemplate view:MainPageView}"            
-        Icon="out.png"/>
 
     </FlyoutItem>
 
@@ -120,11 +114,11 @@
             Title="Ayuda"            
             ContentTemplate="{DataTemplate view:WebView}"            
             Icon="help.png"/>
-
-        <ShellContent
-            Title="Salir"
-            ContentTemplate="{DataTemplate view:MainPageView}"            
-            Icon="out.png"/>
     </FlyoutItem>
+
+    <MenuItem
+        Text="Salir"
+        IconImageSource="out.png"
+        Command="{Binding LogoutCommand}" />
 
 </Shell>

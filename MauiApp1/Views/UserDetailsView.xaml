@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:SpinningTrainer.ViewModels"
+             xmlns:converters="clr-namespace:SpinningTrainer.Resources.Converters"
+             x:Class="SpinningTrainer.Views.UserDetailsView"
+             BackgroundColor="White"
+             Title="Detalles Usuario">
+    <ContentPage.Resources>
+        <converters:IsTrainerConverter x:Key="IsTrainerConverter"/>
+        <converters:NotIsSuperUserConverter x:Key="NotIsSuperUserConverter"/>
+    </ContentPage.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+
+        <ScrollView BackgroundColor="Transparent" Grid.Row="0">
+            <StackLayout Padding="20" Spacing="20">
+                <StackLayout Spacing="10">
+                    <Label Text="Código Usuario:" TextColor="{StaticResource Primary}"/>
+                    <Frame>
+                        <Entry x:Name="entUsuario" Text="{Binding NewCodUsua}" FontSize="Medium" Placeholder="Ingrese código de usuario" BackgroundColor="Transparent" TextColor="White"/>
+                    </Frame>
+                    <Label x:Name="lblMensajeYaExisteCodUsua"
+                           TextColor="Red"
+                           Text="*Código de cliente ya existe*"
+                           HorizontalTextAlignment="Center"
+                           IsVisible="{Binding CodExists}"/>
+
+                    <Label Text="Nombre y Apellido:" TextColor="{StaticResource Primary}"/>
+                    <Frame>
+                        <Entry x:Name="entNombreApellido" Text="{Binding NewDescrip}" FontSize="Medium" Placeholder="Ingrese nombre y apellido" BackgroundColor="Transparent" TextColor="White"/>
+                    </Frame>
+
+                    <Label Text="Contraseña:" TextColor="{StaticResource Primary}"/>
+                    <Frame>
+                        <Entry x:Name="entContra" Text="{Binding NewContra}" FontSize="Medium" IsPassword="True" Placeholder="Ingrese la contraseña" BackgroundColor="Transparent" TextColor="White"/>
+                    </Frame>
+
+                    <Label Text="Confirmar Contraseña:" TextColor="{StaticResource Primary}"/>
+                    <Frame>
+                        <Entry x:Name="entConfirmarContra" Text="{Binding NewConfirmContra}" FontSize="Medium" IsPassword="True" Placeholder="Confirme la contraseña" BackgroundColor="Transparent" TextColor="White"/>
+                    </Frame>
+
+                    <Label Text="PIN:" TextColor="{StaticResource Primary}"
+                           IsVisible="{Binding NewTipoUsuario, Converter={StaticResource IsTrainerConverter}}"/>
+                    <Frame IsVisible="{Binding NewTipoUsuario, Converter={StaticResource IsTrainerConverter}}">
+                        <Entry x:Name="entPIN" Text="{Binding NewPIN}" FontSize="Medium" MaxLength="4" Keyboard="Numeric" Placeholder="Ingrese el PIN" BackgroundColor="Transparent" TextColor="White"/>
+                    </Frame>
+
+                    <Label Text="Email:" TextColor="{StaticResource Primary}"/>
+                    <Frame>
+                        <Entry x:Name="entEmail" Text="{Binding NewEmail}" FontSize="Medium" Placeholder="Ingrese el email" BackgroundColor="Transparent" TextColor="White"/>
+                    </Frame>
+
+                    <Label Text="Teléfono:" TextColor="{StaticResource Primary}"/>
+                    <Frame>
+                        <Entry x:Name="entTelef" Text="{Binding NewTelef}" FontSize="Medium" Placeholder="Ingrese el teléfono" BackgroundColor="Transparent" TextColor="White"/>
+                    </Frame>
+
+                    <Grid IsVisible="{Binding NewTipoUsuario, Converter={StaticResource IsTrainerConverter}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <VerticalStackLayout Grid.Column="0">
+                            <Label Text="Fecha de Renovación:" TextColor="{StaticResource Primary}"/>
+                            <Frame>
+                                <DatePicker x:Name="entFechaR" FontSize="Medium" BackgroundColor="Transparent" TextColor="White" Date="{Binding NewFechaR}" IsEnabled="False"/>
+                            </Frame>
+
+                            <Label Text="Fecha de Vencimiento:" TextColor="{StaticResource Primary}"/>
+                            <Frame>
+                                <DatePicker x:Name="entFechaV"  FontSize="Medium" BackgroundColor="Transparent" TextColor="White" Date="{Binding NewFechaV}" IsEnabled="False"/>
+                            </Frame>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="1"
+                                             VerticalOptions="Center"
+                                             Margin="0,16,0,0"
+                                             IsEnabled="{Binding EditionEnable}">
+                            <Button Text="Recargar"
+                                    Background="{StaticResource Primary}"
+                                    VerticalOptions="CenterAndExpand"
+                                    HeightRequest="100"
+                                    WidthRequest="150"
+                                    Command="{Binding IncrementMembershipCommand}"/>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Label Text="Tipo de Usuario:" TextColor="{StaticResource Primary}"/>
+                    <Frame>
+                        <Picker x:Name="pkTipoUsuario" 
+                                FontSize="Medium" 
+                                BackgroundColor="Transparent" 
+                                TextColor="White"
+                                SelectedIndex="{Binding NewTipoUsuario}">
+                            <Picker.Items>
+                                <x:String>Super Usuario</x:String>
+                                <x:String>Administrador</x:String>
+                                <x:String>Entrenador</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+        <Grid Grid.Row="1" 
+              Background="{StaticResource Primary}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <Button Text="Guardar"                     
+                    BackgroundColor="#008000" 
+                    BorderColor="Transparent"
+                    TextColor="#FFFFFF"
+                    HorizontalOptions="CenterAndExpand"                    
+                    HeightRequest="60"
+                    WidthRequest="120"
+                    Grid.Column="0"
+                    Command="{Binding SaveUserCommand}"/>
+            <Button Text="Eliminar"                     
+                    BackgroundColor="Red" 
+                    BorderColor="Transparent"
+                    TextColor="#FFFFFF"
+                    HorizontalOptions="CenterAndExpand"                    
+                    HeightRequest="60"
+                    WidthRequest="120"
+                    Grid.Column="1"
+                    Command="{Binding DeleteUserCommand}"
+                    IsVisible="{Binding EditionEnable}"
+                    IsEnabled="{Binding NewTipoUsuario, Converter={StaticResource NotIsSuperUserConverter}}"/>
+        </Grid>
+    </Grid>
+</ContentPage>

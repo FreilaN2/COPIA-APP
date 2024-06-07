@@ -122,6 +122,9 @@
 	  <Compile Update="Views\RecoveryLoginDataView.xaml.cs">
 	    <DependentUpon>RecoveryLoginDataView.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\UserDetailsView.xaml.cs">
+	    <DependentUpon>UserDetailsView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\UserListView.xaml.cs">
 	    <DependentUpon>UserListView.xaml</DependentUpon>
 	  </Compile>
@@ -161,7 +164,7 @@
 	  <MauiXaml Update="Views\RecoveryLoginDataView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\UserDetailsPage.xaml">
+	  <MauiXaml Update="Views\UserDetailsView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\UserListView.xaml">
