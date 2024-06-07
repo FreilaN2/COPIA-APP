@@ -1,13 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
-using Microsoft.EntityFrameworkCore.Update;
-using SpinningTrainer.Model;
-using System.Data;
+using SpinningTrainer.Models;
 
 namespace SpinningTrainer.Repositories
 {
@@ -149,24 +142,165 @@ namespace SpinningTrainer.Repositories
             }
         }
 
-        public void Add(UserModel userModel)
+        public bool Update(UserModel userModel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection connection = OpenConnection())
+                {
+                    string query = "UPDATE Usuarios\n" +
+                                   "SET CodUsua = @codUsua,\n" +
+                                   "    Descrip = @descrip,\n" +
+                                   "    Contra = ENCRYPTBYPASSPHRASE('12345', convert(varchar(60),@contra)),\n" +
+                                   "    PIN = ENCRYPTBYPASSPHRASE('12345', convert(varchar(60),@pin)),\n" +
+                                   "    Email = @email,\n" +
+                                   "    Telef = @telef,\n" +
+                                   "    TipoUsuario = @tipoUsuario\n" +
+                                   "WHERE ID = @id\n";
+
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@codUsua", userModel.CodUsua);
+                        cmd.Parameters.AddWithValue("@descrip", userModel.Descrip);
+                        cmd.Parameters.AddWithValue("@contra", userModel.Contra);
+                        cmd.Parameters.AddWithValue("@pin", userModel.PIN);
+                        cmd.Parameters.AddWithValue("@email", userModel.Email);
+                        cmd.Parameters.AddWithValue("@telef", userModel.Telef);
+                        cmd.Parameters.AddWithValue("@tipoUsuario", userModel.TipoUsuario);
+                        cmd.Parameters.AddWithValue("@id", userModel.Id);
+
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al actualizar usuario: " + ex.Message);
+                return false;
+            }
         }
 
-        public void Update(UserModel userModel)
+        public bool Add(UserModel userModel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection connection = OpenConnection())
+                {
+                    string query = "INSERT INTO Usuarios(CodUsua,Descrip,Contra,PIN,Email,Telef,FechaC,FechaR,FechaV,TipoUsuario)\n" +
+                                   "VALUES(@codUsua, @descrip, ENCRYPTBYPASSPHRASE('12345', convert(varchar(60),@contra)),ENCRYPTBYPASSPHRASE('12345', convert(varchar(60),@pin)), @email, @telef, GETDATE(), GETDATE(), DATEADD(MONTH, 1, GETDATE()), @tipoUsuario)\n";
+
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@codUsua", userModel.CodUsua);
+                        cmd.Parameters.AddWithValue("@descrip", userModel.Descrip);
+                        cmd.Parameters.AddWithValue("@contra", userModel.Contra);
+                        cmd.Parameters.AddWithValue("@pin", userModel.PIN);
+                        cmd.Parameters.AddWithValue("@email", userModel.Email);
+                        cmd.Parameters.AddWithValue("@telef", userModel.Telef);
+                        cmd.Parameters.AddWithValue("@tipoUsuario", userModel.TipoUsuario);                        
+
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al ingresar usuario: " + ex.Message);
+                return false;
+            }            
         }
 
-        public void Delete(UserModel userModel)
+        public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = OpenConnection())
+            {
+                string query = "DELETE FROM Usuarios WHERE ID=@id";
+
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+                    try
+                    {
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Error al borrar usuario de la base de datos: " + ex.Message);
+                        return false;
+                    }
+                }
+            }
         }
 
         public UserModel GetById(int Id)
         {
-            throw new NotImplementedException();
+            ObservableCollection<UserModel> users = new ObservableCollection<UserModel>();
+            try
+            {
+                using (SqlConnection connection = OpenConnection())
+                {
+                    string query = "SELECT ID,\n" +
+                                   "       CodUsua,\n" +
+                                   "       Descrip,\n" +
+                                   "       ISNULL(CONVERT(varchar,DECRYPTBYPASSPHRASE('12345', Contra)),'') AS Contra,\n" +
+                                   "       ISNULL(CONVERT(varchar,DECRYPTBYPASSPHRASE('12345', PIN)),'') AS PIN,\n" +
+                                   "       ISNULL(Email,'') AS Email,\n" +
+                                   "       ISNULL(Telef,'') AS Telef,\n" +
+                                   "       FechaC,\n" +
+                                   "       FechaR,\n" +
+                                   "       FechaV,\n" +
+                                   "       TipoUsuario\n" +
+                                   "FROM Usuarios\n";
+
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int id = reader.GetInt32(0);
+                                string codUsua = reader.GetString(1);
+                                string descrip = reader.GetString(2);
+                                string contra = reader.GetString(3);
+                                string pin = reader.GetString(4);
+                                string email = reader.GetString(5);
+                                string telef = reader.GetString(6);
+                                DateTime fechaC = reader.GetDateTime(7);
+                                DateTime fechaR = reader.GetDateTime(8);
+                                DateTime fechaV = reader.GetDateTime(9);
+                                int tipoUsuario = reader.GetInt16(10);
+
+                                UserModel userModel = new UserModel()
+                                {
+                                    Id = id,
+                                    CodUsua = codUsua,
+                                    Descrip = descrip,
+                                    Contra = contra,
+                                    PIN = pin,
+                                    Email = email,
+                                    Telef = telef,
+                                    FechaC = fechaC,
+                                    FechaR = fechaR,
+                                    FechaV = fechaV,
+                                    TipoUsuario = tipoUsuario
+                                };
+
+                                return userModel;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+
+            return null;
         }
 
         public UserModel GetByUserName(string username)
@@ -174,9 +308,121 @@ namespace SpinningTrainer.Repositories
             throw new NotImplementedException();
         }
 
-        public IEnumerable<UserModel> GetAll()
+        /// <summary>
+        /// Este método busca y retorna una lista de todos los usuarios en la base de datos.
+        /// </summary>
+        /// <returns>IEnumerable con la lista de los usuarios.</returns>
+        public ObservableCollection<UserModel> GetAll()
         {
-            throw new NotImplementedException();
+            ObservableCollection<UserModel> users = new ObservableCollection<UserModel>();
+            try
+            {
+                using (SqlConnection connection = OpenConnection())
+                {
+                    string query = "SELECT ID,\n" +
+                                   "       CodUsua,\n" +
+                                   "       Descrip,\n" +
+                                   "       ISNULL(CONVERT(varchar,DECRYPTBYPASSPHRASE('12345', Contra)),'') AS Contra,\n" +
+                                   "       ISNULL(CONVERT(varchar,DECRYPTBYPASSPHRASE('12345', PIN)),'') AS PIN,\n" +
+                                   "       ISNULL(Email,'') AS Email,\n" +
+                                   "       ISNULL(Telef,'') AS Telef,\n" +
+                                   "       FechaC,\n" +
+                                   "       FechaR,\n" +
+                                   "       FechaV,\n" +
+                                   "       TipoUsuario\n" +
+                                   "FROM Usuarios\n";
+
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int id = reader.GetInt32(0);
+                                string codUsua = reader.GetString(1);
+                                string descrip = reader.GetString(2);
+                                string contra = reader.GetString(3);
+                                string pin = reader.GetString(4);
+                                string email = reader.GetString(5);
+                                string telef = reader.GetString(6);
+                                DateTime fechaC = reader.GetDateTime(7);
+                                DateTime fechaR = reader.GetDateTime(8);
+                                DateTime fechaV = reader.GetDateTime(9);
+                                int tipoUsuario = reader.GetInt16(10);
+
+                                UserModel userModel = new UserModel()
+                                {
+                                    Id = id,
+                                    CodUsua = codUsua,
+                                    Descrip = descrip,
+                                    Contra = contra,
+                                    PIN = pin,
+                                    Email = email,
+                                    Telef = telef,
+                                    FechaC = fechaC,
+                                    FechaR = fechaR,
+                                    FechaV = fechaV,
+                                    TipoUsuario = tipoUsuario
+                                };
+
+                                users.Add(userModel);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+
+            return users;
+        }
+
+        public bool VerifyMembershipValidity(int id)
+        {
+            using (SqlConnection connection = OpenConnection())
+            {
+                string query = "SELECT FechaV FROM Usuarios WHERE ID = @id";
+
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    DateTime fechaV = DateTime.Parse(cmd.ExecuteScalar().ToString());
+                    if (fechaV > DateTime.Now)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+        }
+
+        public bool IncrementMembership(int id)
+        {
+            try
+            {
+                using (SqlConnection connection = OpenConnection())
+                {
+                    string query = "UPDATE Usuarios\n" +
+                                   "SET FechaR = GETDATE(),\n" +
+                                   "    FechaV = DATEADD(MONTH, 1, FechaV)\n" +
+                                   "WHERE ID = @id\n";
+
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@id",id);
+                        
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                }                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al incrementar la membresia: " + ex.Message);
+                return false;
+            }            
         }
     }
 }

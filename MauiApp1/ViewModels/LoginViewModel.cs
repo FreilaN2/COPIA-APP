@@ -81,6 +81,8 @@ namespace SpinningTrainer.ViewModels
                 var appShell = (AppShell)Application.Current.MainPage;             
                 appShell.SetUserType(tipoUsuario);
 
+                Username = "";
+                Password = "";
                 if (tipoUsuario == 0) // Super Usuario                    
                     await Shell.Current.GoToAsync($"//{nameof(SuperUserMenuView)}");
                 else if(tipoUsuario == 1) // Administrador

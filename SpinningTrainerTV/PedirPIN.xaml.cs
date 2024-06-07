@@ -75,7 +75,7 @@ namespace SpinningTrainerTV
 
         private async void ValidatePIN()
         {
-            string pin = $"{pin1.Text}{pin2.Text}{pin3.Text}{pin4.Text}";
+            /*string pin = $"{pin1.Text}{pin2.Text}{pin3.Text}{pin4.Text}";
 
             if (string.IsNullOrWhiteSpace(pin) || pin.Length != 4)
             {
@@ -114,7 +114,7 @@ namespace SpinningTrainerTV
             catch (Exception ex)
             {
                 lblResultado.Text = $"Error: {ex.Message}";
-            }
+            }*/
         }
     }
 }

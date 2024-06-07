@@ -1,14 +1,8 @@
 using SpinningTrainer.Repositories;
 using Microsoft.Data.SqlClient;
-using Microsoft.Maui.Controls;
-using System;
 using System.Data;
-using System.Diagnostics;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
-using Microsoft.IdentityModel.Tokens;
-using System.Net.NetworkInformation;
-using Microsoft.Maui;
 
 namespace SpinningTrainer.Views;
 

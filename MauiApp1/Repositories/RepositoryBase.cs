@@ -128,6 +128,7 @@ namespace SpinningTrainer.Repositories
                             "[CodUsua] [varchar](20) NOT NULL,\n" +
                             "[Descrip] [varchar](300) NOT NULL,\n" +
                             "[Contra] [varbinary](max) NULL,\n" +
+                            "[PIN] [varbinary](max) NULL,\n" +
                             "[Email] [varchar](120) NULL,\n" +
                             "[Telef] [varchar](20) NULL,\n" +
                             "[FechaC] [datetime] NULL,\n" +
@@ -139,8 +140,8 @@ namespace SpinningTrainer.Repositories
                             "   [ID] ASC\n" +
                             ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\n" +
                             ") ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]\n" +                                                 
-                            "INSERT INTO Usuarios(CodUsua,Descrip,Contra,Email,Telef,FechaC,FechaR,FechaV,TipoUsuario)\n" +
-                            "VALUES('SU', 'SUPER USUARIO', ENCRYPTBYPASSPHRASE('12345', '123456'), '', '', GETDATE(), '', '', 0)\n";
+                            "INSERT INTO Usuarios(CodUsua,Descrip,Contra,PIN,Email,Telef,FechaC,FechaR,FechaV,TipoUsuario)\n" +
+                            "VALUES('SU', 'SUPER USUARIO', ENCRYPTBYPASSPHRASE('12345', '123456'),ENCRYPTBYPASSPHRASE('12345', '1234'), '', '', GETDATE(), '', '', 0)\n";
                 }
                 else if(objeto == "DatosEmpresa")
                 {

@@ -68,7 +68,7 @@ namespace SpinningTrainer.ViewModels
             }
         }
 
-        public ObservableCollection<ExerciseModel> Movements { get; }
+        public ObservableCollection<ExerciseModel> Exercises { get; }
 
         public ICommand AddExerciseCommand { get; }
 

@@ -31,7 +31,7 @@ namespace SpinningTrainer.Repositories
             return session;
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             using (SqlConnection connection = OpenConnection())
             {
@@ -43,6 +43,11 @@ namespace SpinningTrainer.Repositories
                 connection.Open();
                 command.ExecuteNonQuery();
             }
+        }
+
+        public IEnumerable<SessionModel> GetAll()
+        {
+            return new List<SessionModel>();
         }
 
         public IEnumerable<SessionModel> GetAllByIDEntrenador(int IDEntrenador)
@@ -69,7 +74,7 @@ namespace SpinningTrainer.Repositories
                             FechaC = reader.GetDateTime(reader.GetOrdinal("FechaC")),
                             FechaI = reader.GetDateTime(reader.GetOrdinal("FechaI")),
                             Duracion = reader.GetInt32(reader.GetOrdinal("Duracion")),
-                            EsPlantilla = reader.GetBoolean(reader.GetOrdinal("EsPlantilla"))
+                            EsPlantilla = 0//reader.GetBoolean(reader.GetOrdinal("EsPlantilla"))
                         };
                         sessions.Add(session);
                     }
@@ -103,7 +108,40 @@ namespace SpinningTrainer.Repositories
                             FechaC = reader.GetDateTime(reader.GetOrdinal("FechaC")),
                             FechaI = reader.GetDateTime(reader.GetOrdinal("FechaI")),
                             Duracion = reader.GetInt32(reader.GetOrdinal("Duracion")),
-                            EsPlantilla = reader.GetBoolean(reader.GetOrdinal("EsPlantilla"))
+                            EsPlantilla = 0//reader.GetBoolean(reader.GetOrdinal("EsPlantilla"))
+                        };
+                    }
+                }
+            }
+
+            return session;
+        }
+
+        public SessionModel GetByIDEntrenador(int IDEntrenador)
+        {
+            SessionModel session = null;
+
+            using (SqlConnection connection = OpenConnection())
+            {
+                string query = @"SELECT TOP 1 * FROM Sesiones WHERE IDEntrenador = @IDEntrenador";
+
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@IDEntrenador", IDEntrenador);
+
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        session = new SessionModel
+                        {
+                            ID = reader.GetInt32(reader.GetOrdinal("ID")),
+                            IDEntrenador = reader.GetInt32(reader.GetOrdinal("IDEntrenador")),
+                            Descrip = reader.GetString(reader.GetOrdinal("Descrip")),
+                            FechaC = reader.GetDateTime(reader.GetOrdinal("FechaC")),
+                            FechaI = reader.GetDateTime(reader.GetOrdinal("FechaI")),
+                            Duracion = reader.GetInt32(reader.GetOrdinal("Duracion")),
+                            EsPlantilla = 0//reader.GetBoolean(reader.GetOrdinal("EsPlantilla"))
                         };
                     }
                 }

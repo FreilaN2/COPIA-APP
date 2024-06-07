@@ -152,7 +152,6 @@ namespace SpinningTrainer.ViewModels
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-
             }
         }
 
