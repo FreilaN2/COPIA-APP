@@ -7,7 +7,7 @@ namespace SpinningTrainer.Views
     {
         public UserListView()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }        
 
         private async void btnAgregarUsers_Clicked(object sender, EventArgs e)

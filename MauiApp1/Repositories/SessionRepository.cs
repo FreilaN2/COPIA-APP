@@ -22,8 +22,7 @@ namespace SpinningTrainer.Repositories
                 command.Parameters.AddWithValue("@Duracion", session.Duracion);
                 command.Parameters.AddWithValue("@EsPlantilla", session.EsPlantilla);
 
-
-                connection.Open();
+                
                 int id = Convert.ToInt32(command.ExecuteScalar());
                 session.ID = id;
             }
@@ -31,7 +30,7 @@ namespace SpinningTrainer.Repositories
             return session;
         }
 
-        public void Delete(string id)
+        public void Delete(int id)
         {
             using (SqlConnection connection = OpenConnection())
             {
@@ -40,7 +39,6 @@ namespace SpinningTrainer.Repositories
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ID", id);
 
-                connection.Open();
                 command.ExecuteNonQuery();
             }
         }
@@ -60,8 +58,7 @@ namespace SpinningTrainer.Repositories
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@IDEntrenador", IDEntrenador);
-
-                connection.Open();
+               
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -95,7 +92,6 @@ namespace SpinningTrainer.Repositories
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ID", id);
 
-                connection.Open();
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
@@ -128,7 +124,6 @@ namespace SpinningTrainer.Repositories
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@IDEntrenador", IDEntrenador);
 
-                connection.Open();
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
@@ -172,7 +167,6 @@ namespace SpinningTrainer.Repositories
                 command.Parameters.AddWithValue("@Duracion", session.Duracion);
                 command.Parameters.AddWithValue("@EsPlantilla", session.EsPlantilla);
 
-                connection.Open();
                 int rowsAffected = command.ExecuteNonQuery();
 
                 if (rowsAffected == 0)

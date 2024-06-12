@@ -160,7 +160,8 @@ namespace SpinningTrainer.ViewModels
 
         public ICommand SaveUserCommand { get; }
         public ICommand IncrementMembershipCommand { get; }
-        public ICommand DeleteUserCommand { get; }        
+        public ICommand DeleteUserCommand { get; }     
+        public ICommand RefreshUserListCommand { get; }
 
         public UsersViewModel()
         {
@@ -168,6 +169,8 @@ namespace SpinningTrainer.ViewModels
             DeleteUserCommand = new ViewModelCommand(ExecuteDeleteUserCommand);
             SaveUserCommand = new ViewModelCommand(ExecuteSaveUserCommand, CanExecuteSaveUserCommand);
             IncrementMembershipCommand = new ViewModelCommand(ExecuteIncrementMembershipCommand);
+            RefreshUserListCommand = new ViewModelCommand(ExecuteRefreshUserListCommand);
+
             LoadUsers();
         }
 
@@ -214,7 +217,7 @@ namespace SpinningTrainer.ViewModels
                 await App.Current.MainPage.Navigation.PopAsync();
             }
 
-            LoadUsers();
+            RefreshUserListCommand.Execute(null);
         }
 
         private async void ExecuteIncrementMembershipCommand(object obj)
@@ -306,6 +309,12 @@ namespace SpinningTrainer.ViewModels
                 Console.WriteLine("Error: " + ex.Message);
                 await Application.Current.MainPage.DisplayAlert("Error", "No se pudo verificar la membresía del usuario: " + ex.Message, "OK");
             }                       
+        }
+
+        private void ExecuteRefreshUserListCommand(object obj)
+        {
+            Users.Clear();
+            LoadUsers();
         }
 
         private void VerifyCodUsuaExists()

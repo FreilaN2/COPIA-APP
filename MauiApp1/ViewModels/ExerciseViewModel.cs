@@ -74,6 +74,7 @@ namespace SpinningTrainer.ViewModels
 
         public ExerciseViewModel()
         {
+
             _exerciseRepository = new ExerciseRepository();
             Exercises = new ObservableCollection<ExerciseModel>();
             AddExerciseCommand = new ViewModelCommand(ExecuteAddExerciseCommand, CanExecuteAddExerciseCommand);

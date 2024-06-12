@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpinningTrainer.Views.NewSessionMovementsSelectionView"
-             Title="MovementsSelection">
+             Title="Insertar Movimientos">
     <Grid BackgroundColor="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"/>
@@ -10,26 +10,20 @@
             <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
 
-        <StackLayout BackgroundColor="{StaticResource Primary}" Grid.Row="0">
-            <Label Text="Crear sesión" 
-            FontSize="26" 
-            HorizontalOptions="Center" 
-            VerticalOptions="Center"
-            Margin="0,13,0,0"
-            TextColor="White"/>
-        </StackLayout>
-
         <ScrollView Grid.Row="1">
             <StackLayout Margin="10">
                 <StackLayout Orientation="Horizontal" Margin="30">
                     <Picker x:Name="exercisePicker" 
-                     Title="Seleccione ejercicio"
-                     BackgroundColor="{StaticResource Primary}"
-                     WidthRequest="300"
-                     TextColor="White"
-                     HeightRequest="50"
-                     HorizontalTextAlignment="Center"
-                     HorizontalOptions="Start"/>
+                            Title="Seleccione ejercicio"
+                            BackgroundColor="{StaticResource Primary}"
+                            WidthRequest="300"
+                            TextColor="White"
+                            HeightRequest="50"
+                            ItemsSource="{Binding ExercisesList}"                            
+                            ItemDisplayBinding="{Binding Descrip}"
+                            SelectedItem="{Binding ExerciseSelected}"
+                            HorizontalTextAlignment="Center"
+                            HorizontalOptions="Start"/>
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Margin="30">
@@ -43,77 +37,48 @@
                         HeightRequest="50"
                         PlaceholderColor="White"
                         HorizontalTextAlignment="Center"
-                        VerticalOptions="Start"
-                        TextChanged="entMinsMove_TextChanged"/>
+                        VerticalOptions="Start"/>
                     </Frame>
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Margin="10">
-                    <Picker x:Name="RPMStartPicker"
-                     Title="Cadencia Inicial"
-                     BackgroundColor="{StaticResource Primary}"
-                     WidthRequest="150"
-                     TextColor="White"
-                     HorizontalTextAlignment="Center"
-                     HorizontalOptions="Start"/>
-                    <Picker x:Name="RPMFinalPicker"
-                     Title="Cadencia Final"
-                     BackgroundColor="{StaticResource Primary}"
-                     WidthRequest="150"
-                     TextColor="White"
-                     HorizontalTextAlignment="Center"
-                     HorizontalOptions="CenterAndExpand"/>
+                    <Entry x:Name="entRMPMed"
+                           BackgroundColor="{StaticResource Primary}"
+                           WidthRequest="150"
+                           TextColor="White"                           
+                           Text="{Binding RPMMed}"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="Start"/>
+                    <Entry x:Name="entRPMEnd"                     
+                           BackgroundColor="{StaticResource Primary}"
+                           WidthRequest="150"
+                           TextColor="White"
+                           Text="{Binding RPMFin}"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="CenterAndExpand"/>
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal" Margin="10">
-                    <Label Text="Estilo del ejercicio"
-                    TextColor="#030000"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Start"
-                    Margin="89,15,0,5"
-                    FontSize="20"
-                    FontAttributes="Bold"/>
-                </StackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-                <StackLayout Orientation="Horizontal" Margin="10">
-                    <Button BackgroundColor="White"
-                     BorderColor="#000000"
-                     BorderWidth="2"
-                     Padding="10"
-                     HorizontalOptions="Center"
-                     WidthRequest="20"
-                     HeightRequest="20"
-                     CornerRadius="20"
-                     Margin="70,5,1,5" />
-                    <Label Text="Sentado"
-                    TextColor="#000000"
-                    VerticalOptions="Center"
-                    HorizontalOptions="StartAndExpand"
-                    Margin="10,5,20,5" />
-                    <Button BackgroundColor="White"
-                     BorderColor="#000000"
-                     BorderWidth="2"
-                     Padding="10"
-                     HorizontalOptions="Fill"
-                     WidthRequest="20"
-                     HeightRequest="20"
-                     CornerRadius="20"
-                     Margin="0"/>
-                    <Label Text="De pie"
-                    TextColor="#000000"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Fill"
-                    Margin="10,5,70,5" />
-                </StackLayout>
+                    <Picker>
+                        
+                    </Picker>
+                </Grid>
 
                 <StackLayout Orientation="Horizontal" Margin="30,10,30,10">
+                    
                     <Button Text="Agregar"
-                     BackgroundColor="{StaticResource Primary}"
-                     TextColor="White"
-                     FontSize="20"
-                     CornerRadius="10"
-                     HorizontalOptions="FillAndExpand"
-                     Clicked="OnAgregarButtonClicked"/>
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="White"
+                            FontSize="20"
+                            CornerRadius="10"
+                            HorizontalOptions="FillAndExpand"
+                            Clicked="OnAgregarButtonClicked"/>
+                
                 </StackLayout>
 
                 <StackLayout Orientation="Vertical" Margin="10,10,10,0">

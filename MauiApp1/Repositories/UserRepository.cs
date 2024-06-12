@@ -5,7 +5,9 @@ using SpinningTrainer.Models;
 namespace SpinningTrainer.Repositories
 {
     public class UserRepository: RepositoryBase, IUserRepository
-    {        
+    {
+        private static UserModel CurrentUser { get; set; }
+
         /// <summary>
         /// Valida los datos ingresados en el inicio de sesión
         /// </summary>
@@ -305,7 +307,70 @@ namespace SpinningTrainer.Repositories
 
         public UserModel GetByUserName(string username)
         {
-            throw new NotImplementedException();
+            UserModel user = new UserModel();
+            try
+            {
+                using (SqlConnection connection = OpenConnection())
+                {
+                    string query = "SELECT ID,\n" +
+                                   "       CodUsua,\n" +
+                                   "       Descrip,\n" +
+                                   "       ISNULL(CONVERT(varchar,DECRYPTBYPASSPHRASE('12345', Contra)),'') AS Contra,\n" +
+                                   "       ISNULL(CONVERT(varchar,DECRYPTBYPASSPHRASE('12345', PIN)),'') AS PIN,\n" +
+                                   "       ISNULL(Email,'') AS Email,\n" +
+                                   "       ISNULL(Telef,'') AS Telef,\n" +
+                                   "       FechaC,\n" +
+                                   "       FechaR,\n" +
+                                   "       FechaV,\n" +
+                                   "       TipoUsuario\n" +
+                                   "FROM Usuarios\n";
+
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int id = reader.GetInt32(0);
+                                string codUsua = reader.GetString(1);
+                                string descrip = reader.GetString(2);
+                                string contra = reader.GetString(3);
+                                string pin = reader.GetString(4);
+                                string email = reader.GetString(5);
+                                string telef = reader.GetString(6);
+                                DateTime fechaC = reader.GetDateTime(7);
+                                DateTime fechaR = reader.GetDateTime(8);
+                                DateTime fechaV = reader.GetDateTime(9);
+                                int tipoUsuario = reader.GetInt16(10);
+
+                                user = new UserModel()
+                                {
+                                    Id = id,
+                                    CodUsua = codUsua,
+                                    Descrip = descrip,
+                                    Contra = contra,
+                                    PIN = pin,
+                                    Email = email,
+                                    Telef = telef,
+                                    FechaC = fechaC,
+                                    FechaR = fechaR,
+                                    FechaV = fechaV,
+                                    TipoUsuario = tipoUsuario
+                                };
+
+                                return(user);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);                
+                throw;                
+            }
+
+            return user;
         }
 
         /// <summary>
@@ -423,6 +488,16 @@ namespace SpinningTrainer.Repositories
                 Console.WriteLine("Error al incrementar la membresia: " + ex.Message);
                 return false;
             }            
+        }
+
+        public void SetCurrentUser(UserModel currentUser)
+        {
+            CurrentUser = currentUser;
+        }
+
+        public UserModel GetCurrentUser()
+        {
+            return CurrentUser;
         }
     }
 }

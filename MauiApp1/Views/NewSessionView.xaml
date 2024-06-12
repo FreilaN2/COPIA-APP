@@ -29,14 +29,14 @@
                       WidthRequest="300"                           
                       Background="{StaticResource Primary}">
                         <Entry x:Name="entSessionName"
-                          Placeholder="Ingrese el nombre de la sesión" 
-                          Text="{Binding Descrip, Mode=TwoWay}"
-                          BackgroundColor="Transparent"                                
-                          TextColor="White" 
-                          HeightRequest="50"
-                          PlaceholderColor="White"                                
-                          HorizontalTextAlignment="Center"
-                          VerticalOptions="Start"/>
+                              Placeholder="Ingrese el nombre de la sesión" 
+                              Text="{Binding Descrip, Mode=TwoWay}"
+                              BackgroundColor="Transparent"                                
+                              TextColor="White" 
+                              HeightRequest="50"
+                              PlaceholderColor="White"                                
+                              HorizontalTextAlignment="Center"
+                              VerticalOptions="Start"/>
                     </Frame>
                 </StackLayout>
 

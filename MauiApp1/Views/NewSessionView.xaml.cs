@@ -1,3 +1,5 @@
+using SpinningTrainer.ViewModel;
+
 namespace SpinningTrainer.Views;
 
 public partial class NewSessionView : ContentPage
@@ -5,6 +7,7 @@ public partial class NewSessionView : ContentPage
 	public NewSessionView()
 	{
 		InitializeComponent();
+        this.BindingContext = new SessionViewModel();
 	}
 
     private void entSessionName_TextChanged(object sender, TextChangedEventArgs e)

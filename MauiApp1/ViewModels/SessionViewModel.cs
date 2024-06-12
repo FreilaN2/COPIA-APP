@@ -4,12 +4,16 @@ using SpinningTrainer.Models;
 using SpinningTrainer.Repositories;
 using SpinningTrainer.ViewModels;
 using SpinningTrainer.Views;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+
 
 namespace SpinningTrainer.ViewModel
 {
     public class SessionViewModel : ViewModelBase
     {
         private ISessionRepository _sessionRepository;
+        private IUserRepository _userRepository;
 
         private string _descrip;
         private DateTime _fechaI;
@@ -59,8 +63,6 @@ namespace SpinningTrainer.ViewModel
             }
         }
 
-
-
         public ObservableCollection<SessionModel> Sessions { get; set; }
 
         public ICommand AddSessionCommand { get; }        
@@ -68,7 +70,9 @@ namespace SpinningTrainer.ViewModel
         public SessionViewModel()
         {
             _sessionRepository = new SessionRepository();
+            _userRepository = new UserRepository();
             AddSessionCommand = new Command(ExecuteAddSessionCommand, CanExecuteAddSessionCommand);
+            Sessions = new ObservableCollection<SessionModel>();
             FechaI = DateTime.Now;
             TimeI = DateTime.Now;
 
@@ -87,26 +91,44 @@ namespace SpinningTrainer.ViewModel
 
         private async void ExecuteAddSessionCommand(object obj)
         {
-            var newSession = new SessionModel
+            try 
             {
-                IDEntrenador = 1, // Example value
-                Descrip = Descrip,                
-                FechaI = new DateTime(
-                            FechaI.Year,
-                            FechaI.Month,
-                            FechaI.Day,
-                            TimeI.Hour,
-                            TimeI.Minute,
-                            TimeI.Second
-                                     ),
-                Duracion = Duracion,
-                EsPlantilla = 0 // Example value
-            };
+                var currentUser = _userRepository.GetCurrentUser();
 
-            var addedSession = _sessionRepository.Add(newSession);
-            Sessions.Add(addedSession);
+                var newSession = new SessionModel
+                {
+                    IDEntrenador = currentUser.Id,
+                    Descrip = Descrip,
+                    FechaC = DateTime.Now,
+                    FechaI = new DateTime(
+                                FechaI.Year,
+                                FechaI.Month,
+                                FechaI.Day,
+                                TimeI.Hour,
+                                TimeI.Minute,
+                                TimeI.Second
+                                         ),
+                    Duracion = Duracion,
+                    EsPlantilla = 0,
+                };
 
-            await Application.Current.MainPage.Navigation.PushAsync(new NewSessionMovementsSelectionView());
+                var addedSession = _sessionRepository.Add(newSession);
+                Sessions.Add(addedSession);
+
+                if (addedSession != null)
+                {
+                    await Application.Current.MainPage.Navigation.PushAsync(new NewSessionMovementsSelectionView(addedSession.ID));
+                }
+
+            }
+            catch(Exception ex) {
+
+                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                ToastDuration duration = ToastDuration.Long;                
+                var toast = Toast.Make("Ocurrió un error al crear la sesión", duration, 14);
+
+                await toast.Show(cancellationTokenSource.Token);
+            }
         }
     }
 }

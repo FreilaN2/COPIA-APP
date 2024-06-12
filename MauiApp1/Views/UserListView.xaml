@@ -33,6 +33,8 @@
                       ItemTapped="ltvUserListView_ItemTapped"
                       ItemsSource="{Binding Users}"
                       SelectedItem="{Binding SelectedUser}"
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding RefreshUserListCommand}"
                       BackgroundColor="Transparent"
                       RowHeight="100">
                 <ListView.ItemTemplate>

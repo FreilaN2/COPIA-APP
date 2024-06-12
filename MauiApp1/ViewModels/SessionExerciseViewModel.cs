@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using SpinningTrainer.Models;
 using SpinningTrainer.Repositories;
@@ -14,7 +11,7 @@ namespace SpinningTrainer.ViewModels
 
         private int _idSesion;
         private int _idMovimiento;
-        private int _idPosicionMano;
+        private int _posicionManos;
         private short _tipoEjercicio;
         private int _fase;
         private int _rpmMed;
@@ -43,13 +40,13 @@ namespace SpinningTrainer.ViewModels
             }
         }
 
-        public int IDPosicionMano
+        public int PosicionManos
         {
-            get => _idPosicionMano;
+            get => _posicionManos;
             set
             {
-                _idPosicionMano = value;
-                OnPropertyChanged(nameof(IDPosicionMano));
+                _posicionManos = value;
+                OnPropertyChanged(nameof(PosicionManos));
                 ((ViewModelCommand)AddSessionExerciseCommand).RaiseCanExecuteChanged();
             }
         }
@@ -113,19 +110,21 @@ namespace SpinningTrainer.ViewModels
 
         public ICommand AddSessionExerciseCommand { get; }
 
-        /*public SessionMovementViewModel()
+        public SessionExerciseViewModel(int idSession)
         {
-            _sessionMovementRepository = new SessionMovementRepository();
-            SessionMovements = new ObservableCollection<SessionMovementModel>();
-            AddSessionMovementCommand = new ViewModelCommand(ExecuteAddSessionMovementCommand, CanExecuteAddSessionMovementCommand);
-        }*/
+            AddSessionExerciseCommand = new ViewModelCommand(ExecuteAddSessionExerciseCommand, CanExecuteAddSessionExerciseCommand);
+            IDSesion = idSession;
+            _sessionExerciseRepository = new SessionExerciseRepository();
+            SessionExercises = new ObservableCollection<SessionExerciseModel>();
+            LoadSessionExercises();            
+        }
 
         private bool CanExecuteAddSessionExerciseCommand(object obj)
         {
   
             return IDSesion > 0 &&
                    IDMovimiento > 0 &&
-                   IDPosicionMano > 0 &&
+                   PosicionManos > 0 &&
                    TipoEjercicio > 0 &&
                    Fase > 0 &&
                    RPMMed >= 0 &&
@@ -137,9 +136,9 @@ namespace SpinningTrainer.ViewModels
         {
             SessionExerciseModel newSessionExercise = new SessionExerciseModel
             {
-                IDSesion = IDSesion,
+                IDSesion = this.IDSesion,
                 IDMovimiento = IDMovimiento,
-                IDPosicionMano = IDPosicionMano,
+                PosicionManos = PosicionManos,
                 TipoEjercicio = TipoEjercicio,
                 Fase = Fase,
                 RPMMed = RPMMed,
@@ -154,12 +153,20 @@ namespace SpinningTrainer.ViewModels
         {
             if (IDSesion > 0)
             {
-                var exercises = _sessionExerciseRepository.GetAllBySessionID(IDSesion);
-                SessionExercises.Clear();
-                foreach (var exercise in exercises)
+                try
                 {
-                    SessionExercises.Add(exercise);
+                    var exercises = _sessionExerciseRepository.GetAllBySessionID(IDSesion);
+                    SessionExercises.Clear();
+                    foreach (var exercise in exercises)
+                    {
+                        SessionExercises.Add(exercise);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    throw;
+                }                
             }
         }
     }

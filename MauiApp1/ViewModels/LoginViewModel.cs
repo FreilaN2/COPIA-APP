@@ -81,6 +81,9 @@ namespace SpinningTrainer.ViewModels
                 var appShell = (AppShell)Application.Current.MainPage;             
                 appShell.SetUserType(tipoUsuario);
 
+                var currentUser = userRepository.GetByUserName(Username);
+                userRepository.SetCurrentUser(currentUser);
+
                 Username = "";
                 Password = "";
                 if (tipoUsuario == 0) // Super Usuario                    

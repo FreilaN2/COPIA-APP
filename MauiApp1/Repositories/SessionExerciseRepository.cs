@@ -24,7 +24,6 @@ namespace SpinningTrainer.Repositories
                 command.Parameters.AddWithValue("@RPMFin", sessionExercise.RPMFin);
                 command.Parameters.AddWithValue("@DuracionSeg", sessionExercise.DuracionSeg);
 
-                connection.Open();
                 int id = Convert.ToInt32(command.ExecuteScalar());
                 sessionExercise.ID = id;
             }
@@ -51,8 +50,7 @@ namespace SpinningTrainer.Repositories
                 command.Parameters.AddWithValue("@RPMMed", sessionExercise.RPMMed);
                 command.Parameters.AddWithValue("@RPMFin", sessionExercise.RPMFin);
                 command.Parameters.AddWithValue("@DuracionSeg", sessionExercise.DuracionSeg);
-
-                connection.Open();
+                
                 command.ExecuteNonQuery();
             }
 
@@ -67,8 +65,7 @@ namespace SpinningTrainer.Repositories
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ID", id);
-
-                connection.Open();
+                
                 command.ExecuteNonQuery();
             }
         }
@@ -83,8 +80,7 @@ namespace SpinningTrainer.Repositories
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ID", id);
-
-                connection.Open();
+                
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
@@ -107,6 +103,7 @@ namespace SpinningTrainer.Repositories
 
             return sessionExercise;
         }
+        
         public IEnumerable<SessionExerciseModel> GetAllBySessionID(int sessionID)
         {
             List<SessionExerciseModel> sessionExercises = new List<SessionExerciseModel>();
@@ -117,8 +114,7 @@ namespace SpinningTrainer.Repositories
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@IDSesion", sessionID);
-
-                connection.Open();
+                
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())

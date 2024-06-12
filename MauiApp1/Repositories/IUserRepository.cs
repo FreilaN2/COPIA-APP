@@ -17,6 +17,7 @@ namespace SpinningTrainer.Repositories
         bool VerifyMembershipValidity(int id);
         bool IncrementMembership(int id);
         ObservableCollection<UserModel> GetAll();
-
+        void SetCurrentUser(UserModel currentUser);
+        UserModel GetCurrentUser();
     }
 }
