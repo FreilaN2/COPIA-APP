@@ -21,8 +21,7 @@ namespace SpinningTrainer.Repositories
                 command.Parameters.AddWithValue("@RPMMin", exercise.RPMMin);
                 command.Parameters.AddWithValue("@RPMMax", exercise.RPMMax);
                 command.Parameters.AddWithValue("@PosicionesDeManos", exercise.PosicionesDeManos);
-
-                connection.Open();
+                
                 int id = Convert.ToInt32(command.ExecuteScalar());
                 exercise.ID = id;
             }
@@ -46,7 +45,6 @@ namespace SpinningTrainer.Repositories
                 command.Parameters.AddWithValue("@RPMMax", exercise.RPMMax);
                 command.Parameters.AddWithValue("@PosicionesDeManos", exercise.PosicionesDeManos);
 
-                connection.Open();
                 command.ExecuteNonQuery();
             }
 
@@ -61,8 +59,7 @@ namespace SpinningTrainer.Repositories
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ID", id);
-
-                connection.Open();
+                
                 command.ExecuteNonQuery();
             }
         }
@@ -77,8 +74,7 @@ namespace SpinningTrainer.Repositories
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ID", id);
-
-                connection.Open();
+                
                 SqlDataReader reader = command.ExecuteReader();
 
                 if (reader.Read())
@@ -110,7 +106,6 @@ namespace SpinningTrainer.Repositories
 
                 SqlCommand command = new SqlCommand(query, connection);
 
-                connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
