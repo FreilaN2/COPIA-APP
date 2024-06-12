@@ -15,8 +15,6 @@ namespace SpinningTrainer.Models
         public DateTime FechaC { get; set; }
         public DateTime FechaI { get; set; }
 
-        //  Como en la base de datos este campo es de tipo TIME,
-        //  en C# podemos representarlo con TimeSpan.
         public int Duracion { get; set; }
 
         public int EsPlantilla { get; set; }
