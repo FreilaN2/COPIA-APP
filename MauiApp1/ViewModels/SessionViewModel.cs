@@ -6,6 +6,7 @@ using SpinningTrainer.ViewModels;
 using SpinningTrainer.Views;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
+using System.Runtime.CompilerServices;
 
 
 namespace SpinningTrainer.ViewModel
@@ -19,6 +20,8 @@ namespace SpinningTrainer.ViewModel
         private DateTime _fechaI;
         private DateTime _timeI;
         private int _duracion;
+        private bool _isEditing;
+        private int _editingSessionID;
 
         public string Descrip
         {
@@ -67,14 +70,18 @@ namespace SpinningTrainer.ViewModel
 
         public ICommand AddSessionCommand { get; }        
 
-        public SessionViewModel()
+        public SessionViewModel(bool isEditing, int editingSessionID)
         {
             _sessionRepository = new SessionRepository();
             _userRepository = new UserRepository();
+
             AddSessionCommand = new Command(ExecuteAddSessionCommand, CanExecuteAddSessionCommand);
             Sessions = new ObservableCollection<SessionModel>();
+
             FechaI = DateTime.Now;
             TimeI = DateTime.Now;
+            _isEditing = isEditing;
+            _editingSessionID = editingSessionID;
 
             //LoadSessions();
         }
@@ -94,8 +101,8 @@ namespace SpinningTrainer.ViewModel
             try 
             {
                 var currentUser = _userRepository.GetCurrentUser();
-
-                var newSession = new SessionModel
+                
+                var session = new SessionModel
                 {
                     IDEntrenador = currentUser.Id,
                     Descrip = Descrip,
@@ -112,20 +119,17 @@ namespace SpinningTrainer.ViewModel
                     EsPlantilla = 0,
                 };
 
-                var addedSession = _sessionRepository.Add(newSession);
-                Sessions.Add(addedSession);
+                if (_isEditing)
+                    session.ID = _editingSessionID;
 
-                if (addedSession != null)
-                {
-                    await Application.Current.MainPage.Navigation.PushAsync(new NewSessionMovementsSelectionView(addedSession.ID));
-                }
+                await Application.Current.MainPage.Navigation.PushAsync(new NewSessionExerciseList(session, _isEditing));                
 
             }
             catch(Exception ex) {
 
                 CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
                 ToastDuration duration = ToastDuration.Long;                
-                var toast = Toast.Make("Ocurrió un error al crear la sesión", duration, 14);
+                var toast = Toast.Make("Ocurrió un error al crear la sesión.", duration, 14);
 
                 await toast.Show(cancellationTokenSource.Token);
             }
