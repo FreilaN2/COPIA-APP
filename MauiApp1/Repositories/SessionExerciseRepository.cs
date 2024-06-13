@@ -10,14 +10,14 @@ namespace SpinningTrainer.Repositories
         {
             using (SqlConnection connection = OpenConnection())
             {
-                string query = @"INSERT INTO MovimientosSesion (IDSesion, IDMovimiento, IDPosicionMano, TipoEjercicio, Fase, RPMMed, RPMFin, DuracionSeg)
-                                 VALUES (@IDSesion, @IDMovimiento, @IDPosicionMano, @TipoEjercicio, @Fase, @RPMMed, @RPMFin, @DuracionSeg);
+                string query = @"INSERT INTO MovimientosSesion (IDSesion, IDMovimiento, PosicionManos, TipoEjercicio, Fase, RPMMed, RPMFin, DuracionSeg)
+                                 VALUES (@IDSesion, @IDMovimiento, @PosicionManos, @TipoEjercicio, @Fase, @RPMMed, @RPMFin, @DuracionSeg);
                                  SELECT SCOPE_IDENTITY();";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@IDSesion", sessionExercise.IDSesion);
                 command.Parameters.AddWithValue("@IDMovimiento", sessionExercise.IDMovimiento);
-                command.Parameters.AddWithValue("@IDPosicionMano", sessionExercise.IDPosicionMano);
+                command.Parameters.AddWithValue("@PosicionManos", sessionExercise.PosicionManos);
                 command.Parameters.AddWithValue("@TipoEjercicio", sessionExercise.TipoEjercicio);
                 command.Parameters.AddWithValue("@Fase", sessionExercise.Fase);
                 command.Parameters.AddWithValue("@RPMMed", sessionExercise.RPMMed);
@@ -36,7 +36,7 @@ namespace SpinningTrainer.Repositories
             using (SqlConnection connection = OpenConnection())
             {
                 string query = @"UPDATE MovimientosSesion 
-                                 SET IDSesion = @IDSesion, IDMovimiento = @IDMovimiento, IDPosicionMano = @IDPosicionMano,
+                                 SET IDSesion = @IDSesion, IDMovimiento = @IDMovimiento, PosicionManos = @PosicionManos,
                                      TipoEjercicio = @TipoEjercicio, Fase = @Fase, RPMMed = @RPMMed, RPMFin = @RPMFin, DuracionSeg = @DuracionSeg
                                  WHERE ID = @ID";
 
@@ -44,7 +44,7 @@ namespace SpinningTrainer.Repositories
                 command.Parameters.AddWithValue("@ID", sessionExercise.ID);
                 command.Parameters.AddWithValue("@IDSesion", sessionExercise.IDSesion);
                 command.Parameters.AddWithValue("@IDMovimiento", sessionExercise.IDMovimiento);
-                command.Parameters.AddWithValue("@IDPosicionMano", sessionExercise.IDPosicionMano);
+                command.Parameters.AddWithValue("@PosicionManos", sessionExercise.PosicionManos);
                 command.Parameters.AddWithValue("@TipoEjercicio", sessionExercise.TipoEjercicio);
                 command.Parameters.AddWithValue("@Fase", sessionExercise.Fase);
                 command.Parameters.AddWithValue("@RPMMed", sessionExercise.RPMMed);
@@ -90,7 +90,7 @@ namespace SpinningTrainer.Repositories
                             ID = Convert.ToInt32(reader["ID"]),
                             IDSesion = Convert.ToInt32(reader["IDSesion"]),
                             IDMovimiento = Convert.ToInt32(reader["IDMovimiento"]),
-                            IDPosicionMano = Convert.ToInt32(reader["IDPosicionMano"]),
+                            PosicionManos = Convert.ToInt32(reader["PosicionManos"]),
                             TipoEjercicio = Convert.ToInt16(reader["TipoEjercicio"]),
                             Fase = Convert.ToInt32(reader["Fase"]),
                             RPMMed = Convert.ToInt32(reader["RPMMed"]),
@@ -124,7 +124,7 @@ namespace SpinningTrainer.Repositories
                             ID = Convert.ToInt32(reader["ID"]),
                             IDSesion = Convert.ToInt32(reader["IDSesion"]),
                             IDMovimiento = Convert.ToInt32(reader["IDMovimiento"]),
-                            IDPosicionMano = Convert.ToInt32(reader["IDPosicionMano"]),
+                            PosicionManos = Convert.ToInt32(reader["PosicionManos"]),
                             TipoEjercicio = Convert.ToInt16(reader["TipoEjercicio"]),
                             Fase = Convert.ToInt32(reader["Fase"]),
                             RPMMed = Convert.ToInt32(reader["RPMMed"]),
