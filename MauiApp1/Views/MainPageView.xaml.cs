@@ -1,3 +1,4 @@
+using MauiIcons.Core;
 using SpinningTrainer.Models;
 using System.Collections.ObjectModel;
 
@@ -10,8 +11,10 @@ public partial class MainPageView : ContentPage
 	public MainPageView()
 	{
 		InitializeComponent();
+        
+        _ = new MauiIcon();
 
-		infoSesiones.Add(new SessionModel { ID = 5, Descrip = "Sesión Basica", IDEntrenador = 2 });
+        infoSesiones.Add(new SessionModel { ID = 5, Descrip = "Sesión Basica", IDEntrenador = 2 });
         infoSesiones.Add(new SessionModel { ID = 3, Descrip = "Sesión Media", IDEntrenador = 2 });
         infoSesiones.Add(new SessionModel { ID = 8, Descrip = "Sesión Alta Dificultad", IDEntrenador = 2 });
 		
@@ -57,6 +60,6 @@ public partial class MainPageView : ContentPage
 
     private async void btnCreateNewSession_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new NewSessionView());
+        await Navigation.PushAsync(new NewSessionView(false, 0));
     }
 }

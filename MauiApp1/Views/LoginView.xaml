@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModel="clr-namespace:SpinningTrainer.ViewModels"
              x:Class="SpinningTrainer.Views.LoginView"
-             Background="{StaticResource Primary}">
+             Background="{StaticResource PrimaryDark}">
     
     <ContentPage.BindingContext>
         <viewModel:LoginViewModel/>
@@ -57,17 +57,15 @@
                 SemanticProperties.HeadingLevel="Level2"
                 SemanticProperties.Description="Usuario" />
             
-            <Frame BackgroundColor="{StaticResource Tertiary}"
-                CornerRadius="15"                                      
-                Padding="10,0,10,0"
-                Margin="0,5,0,0"                   
-                BorderColor="Transparent">
+            <Frame CornerRadius="15"                                      
+                   Padding="10,0,10,0"
+                   Margin="0,5,0,0"                   
+                   BorderColor="Transparent">
                 <Entry x:Name="contraIngresadaEntry"
                        Text="{Binding Password, Mode=TwoWay}"
                        Placeholder="Ingrese su contraseña"
                        MaxLength="30"      
-                       IsPassword="True"
-                       PlaceholderColor="{StaticResource SecondaryDarkText}"/>
+                       IsPassword="True"/>
             </Frame>
 
             <Label Text="{Binding ErrorMessage}"

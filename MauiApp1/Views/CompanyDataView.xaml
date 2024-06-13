@@ -5,7 +5,8 @@
              xmlns:converter="clr-namespace:SpinningTrainer.Resources.Converters"
              x:Class="SpinningTrainer.Views.CompanyDataView"
              Title="Datos Empresa"
-             Background="White">
+             
+Background="White">
 
     <ContentPage.Resources>
         <converter:NotConverter x:Key="NotConverter"/>
