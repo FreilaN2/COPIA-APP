@@ -6,7 +6,8 @@
     xmlns:local="clr-namespace:SpinningTrainerTV"
     xmlns:views="clr-namespace:SpinningTrainerTV.ViewTV"
     Shell.FlyoutBehavior="Disabled"
-    Title="SpinningTrainerTV">
+    Title="SpinningTrainerTV"
+    BackgroundColor="{StaticResource Primary}">
 
     <ShellContent
         ContentTemplate="{DataTemplate views:PlaySessionView}"

@@ -1,3 +1,4 @@
+using MauiIcons.Material;
 using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
@@ -11,6 +12,7 @@ namespace SpinningTrainerTV
             builder
                 .UseMauiApp<App>()
                 .UseSkiaSharp()
+                .UseMaterialMauiIcons()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
