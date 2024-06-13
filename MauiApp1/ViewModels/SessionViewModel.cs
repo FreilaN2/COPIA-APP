@@ -122,7 +122,7 @@ namespace SpinningTrainer.ViewModel
                 if (_isEditing)
                     session.ID = _editingSessionID;
 
-                await Application.Current.MainPage.Navigation.PushAsync(new SessionMovementsListView(session, _isEditing));                
+                await Application.Current.MainPage.Navigation.PushAsync(new SessionExercisesListView(session, _isEditing));                
 
             }
             catch(Exception ex) {
