@@ -257,7 +257,10 @@ namespace SpinningTrainer.ViewModels
 
         public void EnableEdit(SessionExerciseModel sessionExercise)
         {
-            //HABILITAR EDICION DE MOVIMIENTO
+            this.SelectedExercise = _exerciseRepository.GetById(sessionExercise.ID);            
+            this.RPMMed = sessionExercise.RPMMed;
+            this.RPMFin = sessionExercise.RPMFin;
+            this.SelectedHandsPosition = sessionExercise.PosicionManos.ToString();
         }
     }
 }

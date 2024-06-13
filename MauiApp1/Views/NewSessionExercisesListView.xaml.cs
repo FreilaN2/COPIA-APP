@@ -31,7 +31,7 @@ namespace SpinningTrainer.Views
                 if (this.BindingContext is SessionExerciseViewModel viewModel)
                 {
                     // Llamar al método SeleccionarCliente del ViewModel
-                    viewModel.Edit(selectedSessionExercise);
+                    viewModel.EnableEdit(selectedSessionExercise);
                     Navigation.PushAsync(new SessionExerciseFormView(viewModel));
                 }
             }
