@@ -5,9 +5,9 @@ using SpinningTrainer.ViewModels;
 
 namespace SpinningTrainer.Views
 {
-    public partial class SessionMovementsListView : ContentPage
+    public partial class SessionExercisesListView : ContentPage
     {        
-        public SessionMovementsListView(SessionModel session, bool isEditing)
+        public SessionExercisesListView(SessionModel session, bool isEditing)
         {
             InitializeComponent();
             this.BindingContext = new SessionExerciseViewModel(session, isEditing);            
