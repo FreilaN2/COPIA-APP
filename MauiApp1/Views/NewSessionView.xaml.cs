@@ -4,10 +4,10 @@ namespace SpinningTrainer.Views;
 
 public partial class NewSessionView : ContentPage
 {
-	public NewSessionView()
+	public NewSessionView(bool isEditing, int editingSessionID)
 	{
 		InitializeComponent();
-        this.BindingContext = new SessionViewModel();
+        this.BindingContext = new SessionViewModel(false, editingSessionID);
 	}
 
     private void entSessionName_TextChanged(object sender, TextChangedEventArgs e)
