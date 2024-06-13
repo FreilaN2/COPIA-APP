@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SpinningTrainer.Views.SessionMovementsListView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
+    Title="Insertar Movimientos">
+    <Grid BackgroundColor="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <Button
+            x:Name="btnAddSessionExercise"
+            Grid.Row="0"
+            BackgroundColor="{StaticResource Primary}"
+            Clicked="btnAddSessionExercise_Clicked"
+            CornerRadius="10"
+            FontSize="20"
+            HorizontalOptions="FillAndExpand"
+            Text="Agregar"
+            TextColor="White" />
+
+        <ScrollView Grid.Row="1">
+            <StackLayout Margin="10,10,10,0" Orientation="Vertical">
+                <Label
+                    Margin="0,10,0,10"
+                    FontSize="20"
+                    HorizontalOptions="Center"
+                    Text="Lista de Ejercicios"
+                    TextColor="Black" />
+
+                <ListView
+                    x:Name="lvSessionExercises"
+                    Margin="10,0"
+                    BackgroundColor="Transparent"
+                    HeightRequest="200"
+                    ItemTapped="lvSessionExercises_ItemTapped"
+                    VerticalOptions="FillAndExpand">
+                    <ListView.Header>
+                        <Grid Padding="5" BackgroundColor="{StaticResource PrimaryDark}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="{mi:Material Icon=DirectionsBike}" />
+                            <Image Grid.Column="1" Source="{mi:Material Icon=Timer}" />
+                            <HorizontalStackLayout Grid.Column="2">
+                                <Image Source="{mi:Material Icon=ShutterSpeed}" />
+                                <Label
+                                    Grid.Column="3"
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="Center"
+                                    Text="Min" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="3">
+                                <Image Source="{mi:Material Icon=ShutterSpeed}" />
+                                <Label
+                                    Grid.Column="3"
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="Center"
+                                    Text="Max" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label HorizontalOptions="Center" Text="{Binding Exercise}" />
+                                    <Label
+                                        Grid.Column="1"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Duration}" />
+                                    <Label
+                                        Grid.Column="2"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding StartRPM}" />
+                                    <Label
+                                        Grid.Column="3"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding FinalRPM}" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
