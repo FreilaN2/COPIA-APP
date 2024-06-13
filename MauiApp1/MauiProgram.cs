@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
 using SpinningTrainer.Views;
+using MauiIcons.FontAwesome;
+using MauiIcons.Material;
 
 namespace SpinningTrainer
 {
@@ -13,7 +15,9 @@ namespace SpinningTrainer
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-            }).UseMauiCommunityToolkit();
+            })
+            .UseMauiCommunityToolkit()
+            .UseMaterialMauiIcons();
 
             builder.Services.AddSingleton<LoginView>();
             builder.Services.AddSingleton<ConnectionView>();
