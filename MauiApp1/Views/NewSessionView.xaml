@@ -4,7 +4,7 @@
              xmlns:vm="clr-namespace:SpinningTrainer.ViewModel"
              x:Class="SpinningTrainer.Views.NewSessionView"
              Title="Crear sesión"
-             Background="White">
+             Background="{StaticResource PrimaryDark}">
 
     <Grid BackgroundColor="White">
         <Grid.RowDefinitions>

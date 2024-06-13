@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
     Title="Insertar Movimientos">
-    <Grid BackgroundColor="White">
+    <Grid BackgroundColor="{StaticResource PrimaryDark}">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*" />
             <RowDefinition Height="1*" />
@@ -15,6 +15,7 @@
             x:Name="btnAddSessionExercise"
             Grid.Row="0"
             BackgroundColor="{StaticResource Primary}"
+            BorderColor="Transparent"
             Clicked="btnAddSessionExercise_Clicked"
             CornerRadius="10"
             FontSize="20"
