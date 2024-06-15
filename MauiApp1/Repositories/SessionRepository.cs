@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Microsoft.Data.SqlClient;
 using SpinningTrainer.Models;
 
@@ -43,14 +44,9 @@ namespace SpinningTrainer.Repositories
             }
         }
 
-        public IEnumerable<SessionModel> GetAll()
+        public ObservableCollection<SessionModel> GetAllByIDEntrenador(int IDEntrenador)
         {
-            return new List<SessionModel>();
-        }
-
-        public IEnumerable<SessionModel> GetAllByIDEntrenador(int IDEntrenador)
-        {
-            List<SessionModel> sessions = new List<SessionModel>();
+            ObservableCollection<SessionModel> sessions = new ObservableCollection<SessionModel>();
 
             using (SqlConnection connection = OpenConnection())
             {
@@ -145,7 +141,75 @@ namespace SpinningTrainer.Repositories
             return session;
         }
 
-        public SessionModel Update(SessionModel session)
+        public ObservableCollection<SessionModel> GetSessionsByTitle(string searchTerm)
+        {
+            ObservableCollection<SessionModel> sessions = new ObservableCollection<SessionModel>();
+
+            using (SqlConnection connection = OpenConnection())
+            {
+                string query = @"SELECT * FROM Sesiones WHERE Descrip LIKE @searchTerm";
+
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%");
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        SessionModel session = new SessionModel
+                        {
+                            ID = reader.GetInt32(reader.GetOrdinal("ID")),
+                            IDEntrenador = reader.GetInt32(reader.GetOrdinal("IDEntrenador")),
+                            Descrip = reader.GetString(reader.GetOrdinal("Descrip")),
+                            FechaC = reader.GetDateTime(reader.GetOrdinal("FechaC")),
+                            FechaI = reader.GetDateTime(reader.GetOrdinal("FechaI")),
+                            Duracion = reader.GetInt32(reader.GetOrdinal("Duracion")),
+                            EsPlantilla = reader.GetInt16(reader.GetOrdinal("EsPlantilla"))
+                        };
+                        sessions.Add(session);
+                    }
+                }
+            }
+
+            return sessions;
+        }
+
+        public ObservableCollection<SessionModel> GetSessionsByCreationDate(DateTime fechaC)
+        {
+            ObservableCollection<SessionModel> sessions = new ObservableCollection<SessionModel>();
+
+            using (SqlConnection connection = OpenConnection())
+            {
+                string query = @"SELECT * FROM Sesiones WHERE FechaC = @FechaC";
+
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@FechaC", fechaC);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        SessionModel session = new SessionModel
+                        {
+                            ID = reader.GetInt32(reader.GetOrdinal("ID")),
+                            IDEntrenador = reader.GetInt32(reader.GetOrdinal("IDEntrenador")),
+                            Descrip = reader.GetString(reader.GetOrdinal("Descrip")),
+                            FechaC = reader.GetDateTime(reader.GetOrdinal("FechaC")),
+                            FechaI = reader.GetDateTime(reader.GetOrdinal("FechaI")),
+                            Duracion = reader.GetInt32(reader.GetOrdinal("Duracion")),
+                            EsPlantilla = reader.GetInt16(reader.GetOrdinal("EsPlantilla"))
+                        };
+                        sessions.Add(session);
+                    }
+                }
+            }
+
+            return sessions;
+        }
+
+
+
+        public void Update(SessionModel session)
         {
             using (SqlConnection connection = OpenConnection())
             {
@@ -173,11 +237,9 @@ namespace SpinningTrainer.Repositories
                 {
                     // Handle the case where no rows were updated, if necessary
                     // For example, you could throw an exception or return null
-                    return null;
                 }
             }
 
-            return session;
         }
     }
 }

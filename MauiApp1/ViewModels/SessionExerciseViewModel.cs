@@ -11,6 +11,7 @@ namespace SpinningTrainer.ViewModels
     {
         private readonly IExerciseRepository _exerciseRepository;
         private ISessionExerciseRepository _sessionExerciseRepository;
+
         private ObservableCollection<ExerciseModel> _exercisesList;
         private ExerciseModel _selectedExercise;
 
@@ -18,6 +19,7 @@ namespace SpinningTrainer.ViewModels
         private ObservableCollection<string> _handsPositions;
 
         private SessionModel _session;
+
         private int _idMovimiento;
         private int _posicionManos;
         private short _tipoEjercicio;
@@ -225,7 +227,7 @@ namespace SpinningTrainer.ViewModels
                 {
                     CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
                     ToastDuration duration = ToastDuration.Long;
-                    var toast = Toast.Make("Ocurrió un error al cargar los ejercicios de la sesión.", duration, 14);
+                    var toast = Toast.Make("Ocurrió un error al cargar los Ejercicios de la Sesión.", duration, 14);
 
                     await toast.Show(cancellationTokenSource.Token);
                 }                

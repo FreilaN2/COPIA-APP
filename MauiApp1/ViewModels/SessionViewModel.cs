@@ -17,11 +17,24 @@ namespace SpinningTrainer.ViewModel
         private IUserRepository _userRepository;
 
         private string _descrip;
+        private DateTime _selectedCreationDate;
         private DateTime _fechaI;
         private DateTime _timeI;
         private int _duracion;
         private bool _isEditing;
         private int _editingSessionID;
+
+        private string _searchTerm;
+
+        public string searchTerm
+        {
+            get => _searchTerm;
+            set
+            {
+                _descrip = value;
+                OnPropertyChanged(nameof(_searchTerm));
+            }
+        }
 
         public string Descrip
         {
@@ -48,7 +61,7 @@ namespace SpinningTrainer.ViewModel
         public DateTime TimeI
         {
             get => _timeI;
-            set 
+            set
             {
                 _timeI = value;
                 OnPropertyChanged(nameof(FechaI));
@@ -68,7 +81,11 @@ namespace SpinningTrainer.ViewModel
 
         public ObservableCollection<SessionModel> Sessions { get; set; }
 
-        public ICommand AddSessionCommand { get; }        
+        // Commands
+        public ICommand AddSessionCommand { get; }
+        public ICommand GetSessionsByTitleCommand { get; }
+        public ICommand GetSessionsByCreationDateCommand { get; }
+        public ICommand DeleteSessionCommand { get; }
 
         public SessionViewModel(bool isEditing, int editingSessionID)
         {
@@ -76,26 +93,41 @@ namespace SpinningTrainer.ViewModel
             _userRepository = new UserRepository();
 
             AddSessionCommand = new Command(ExecuteAddSessionCommand, CanExecuteAddSessionCommand);
-            Sessions = new ObservableCollection<SessionModel>();
+            GetSessionsByTitleCommand = new Command(ExecuteGetSessionsByTitleCommand, CanExecuteGetSessionsByTitleCommand);
+            GetSessionsByCreationDateCommand = new Command(ExecuteGetSessionsByCreationDateCommand, CanExecuteGetSessionsByCreationDateCommand);
+            DeleteSessionCommand = new Command(ExecuteDeleteSessionCommand, CanExecuteDeleteSessionCommand);
 
+            Sessions = new ObservableCollection<SessionModel>();
+            
             FechaI = DateTime.Now;
             TimeI = DateTime.Now;
             _isEditing = isEditing;
             _editingSessionID = editingSessionID;
-
-            //LoadSessions();
+            
         }
 
-        /*private void LoadSessions()
-        {
-            Sessions = new ObservableCollection<SessionModel>(_sessionRepository.GetAll());
-        }*/
-
+        // CanExecute
         private bool CanExecuteAddSessionCommand(object obj)
         {
             return !string.IsNullOrWhiteSpace(Descrip) && Duracion > 0;
         }
 
+        private bool CanExecuteGetSessionsByTitleCommand()
+        {
+            return !string.IsNullOrWhiteSpace(searchTerm);
+        }
+
+        private bool CanExecuteGetSessionsByCreationDateCommand()
+        {
+            return _selectedCreationDate is DateTime;
+        }
+
+        private bool CanExecuteDeleteSessionCommand()
+        {
+            return _editingSessionID > 0;
+        }
+
+        // Execute Commands
         private async void ExecuteAddSessionCommand(object obj)
         {
             try 
@@ -129,7 +161,62 @@ namespace SpinningTrainer.ViewModel
 
                 CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
                 ToastDuration duration = ToastDuration.Long;                
-                var toast = Toast.Make("Ocurrió un error al crear la sesión.", duration, 14);
+                var toast = Toast.Make("Ocurrió un error al crear la Sesión.", duration, 14);
+
+                await toast.Show(cancellationTokenSource.Token);
+            }
+        }
+
+        private async void ExecuteGetSessionsByTitleCommand()
+        {
+            try {
+
+               // Sessions = await _sessionRepository.GetSessionsByTitle(_searchTerm);
+            
+            }
+            catch (Exception ex) {
+
+                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                ToastDuration duration = ToastDuration.Long;
+                var toast = Toast.Make("Ocurrió un error al intentar encontrar las Sesiones con ese término.", duration, 14);
+
+                await toast.Show(cancellationTokenSource.Token);
+
+            }
+        }
+
+        private async void ExecuteGetSessionsByCreationDateCommand()
+        {
+            try
+            {
+
+                //Sessions = await _sessionRepository.GetSessionsByCreationDate(_selectedCreationDate);
+
+            }
+            catch (Exception ex)
+            {
+
+                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                ToastDuration duration = ToastDuration.Long;
+                var toast = Toast.Make("Ocurrió un error al intentar encontrar las Sesiones con esa fecha de creación.", duration, 14);
+
+                await toast.Show(cancellationTokenSource.Token);
+
+            }
+        }
+
+        private async void ExecuteDeleteSessionCommand()
+        {
+            try {
+
+                _sessionRepository.Delete(_editingSessionID);
+            
+            }
+            catch(Exception ex)
+            {
+                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                ToastDuration duration = ToastDuration.Long;
+                var toast = Toast.Make("Ocurrió un error al intentar eliminar la Sesión especificada.", duration, 14);
 
                 await toast.Show(cancellationTokenSource.Token);
             }
