@@ -7,8 +7,8 @@
     Title="Insertar Movimientos">
     <Grid BackgroundColor="{StaticResource PrimaryDark}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Button
@@ -30,42 +30,25 @@
                     FontSize="20"
                     HorizontalOptions="Center"
                     Text="Lista de Ejercicios"
-                    TextColor="Black" />
+                    TextColor="White" />
 
                 <ListView
                     x:Name="lvSessionExercises"
                     Margin="10,0"
                     BackgroundColor="Transparent"
-                    HeightRequest="200"
-                    ItemTapped="lvSessionExercises_ItemTapped"
                     VerticalOptions="FillAndExpand">
                     <ListView.Header>
-                        <Grid Padding="5" BackgroundColor="{StaticResource PrimaryDark}">
+                        <Grid Padding="5" BackgroundColor="{StaticResource Primary}">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="2*" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="{mi:Material Icon=DirectionsBike}" />
-                            <Image Grid.Column="1" Source="{mi:Material Icon=Timer}" />
-                            <HorizontalStackLayout Grid.Column="2">
-                                <Image Source="{mi:Material Icon=ShutterSpeed}" />
-                                <Label
-                                    Grid.Column="3"
-                                    FontAttributes="Bold"
-                                    HorizontalOptions="Center"
-                                    Text="Min" />
-                            </HorizontalStackLayout>
-                            <HorizontalStackLayout Grid.Column="3">
-                                <Image Source="{mi:Material Icon=ShutterSpeed}" />
-                                <Label
-                                    Grid.Column="3"
-                                    FontAttributes="Bold"
-                                    HorizontalOptions="Center"
-                                    Text="Max" />
-                            </HorizontalStackLayout>
+                            <Image Grid.Column="0" Source="{mi:Material Icon=DirectionsBike}" HeightRequest="24" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="Duración (min)" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" />
+                            <Label Grid.Column="2" Text="RPM Inicial" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" />
+                            <Label Grid.Column="3" Text="RPM Final" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" />
                         </Grid>
                     </ListView.Header>
                     <ListView.ItemTemplate>
@@ -73,25 +56,15 @@
                             <ViewCell>
                                 <Grid Padding="5">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="2*" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Label HorizontalOptions="Center" Text="{Binding Exercise}" />
-                                    <Label
-                                        Grid.Column="1"
-                                        HorizontalOptions="Center"
-                                        Text="{Binding Duration}" />
-                                    <Label
-                                        Grid.Column="2"
-                                        HorizontalOptions="Center"
-                                        Text="{Binding StartRPM}" />
-                                    <Label
-                                        Grid.Column="3"
-                                        HorizontalOptions="Center"
-                                        Text="{Binding FinalRPM}" />
+                                    <Image Grid.Column="0" Source="{mi:Material Icon=DirectionsBike}" HeightRequest="24" VerticalOptions="Center" />
+                                    <Label Grid.Column="1" Text="{Binding Duration}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                    <Label Grid.Column="2" Text="{Binding StartRPM}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                    <Label Grid.Column="3" Text="{Binding FinalRPM}" HorizontalOptions="Center" VerticalOptions="Center" />
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
