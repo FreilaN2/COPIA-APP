@@ -11,7 +11,7 @@ namespace SpinningTrainer.Repositories
             using (SqlConnection connection = OpenConnection())
 
             {
-                string query = @"INSERT INTO Movimientos (Descrip, TipoMov, RPMMin, RPMMax, PosicionesDeManos)
+                string query = @"INSERT INTO Movimiento (Descrip, TipoMov, RPMMin, RPMMax, PosicionesDeManos)
                                  VALUES (@Descrip, @TipoMov, @RPMMin, @RPMMax, @PosicionesDeManos);
                                  SELECT SCOPE_IDENTITY();";
 
@@ -33,7 +33,7 @@ namespace SpinningTrainer.Repositories
         {
             using (SqlConnection connection = OpenConnection())
             {
-                string query = @"UPDATE Movimientos 
+                string query = @"UPDATE Movimiento 
                                  SET Descrip = @Descrip, TipoMov = @TipoMov, RPMMin = @RPMMin, RPMMax = @RPMMax, PosicionesDeManos = @PosicionesDeManos
                                  WHERE ID = @ID";
 
@@ -55,7 +55,7 @@ namespace SpinningTrainer.Repositories
         {
             using (SqlConnection connection = OpenConnection())
             {
-                string query = @"DELETE FROM Movimientos WHERE ID = @ID";
+                string query = @"DELETE FROM Movimiento WHERE ID = @ID";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ID", id);
@@ -70,7 +70,7 @@ namespace SpinningTrainer.Repositories
 
             using (SqlConnection connection = OpenConnection())
             {
-                string query = @"SELECT * FROM Movimientos WHERE ID = @ID";
+                string query = @"SELECT * FROM Movimiento WHERE ID = @ID";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ID", id);
@@ -102,7 +102,7 @@ namespace SpinningTrainer.Repositories
 
             using (SqlConnection connection = OpenConnection())
             {
-                string query = @"SELECT * FROM Movimientos";
+                string query = @"SELECT * FROM Movimiento";
 
                 SqlCommand command = new SqlCommand(query, connection);
 

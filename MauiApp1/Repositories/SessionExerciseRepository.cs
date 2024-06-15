@@ -10,7 +10,7 @@ namespace SpinningTrainer.Repositories
         {
             using (SqlConnection connection = OpenConnection())
             {
-                string query = @"INSERT INTO MovimientosSesion (IDSesion, IDMovimiento, PosicionManos, TipoEjercicio, Fase, RPMMed, RPMFin, DuracionSeg)
+                string query = @"INSERT INTO MovimientoSesion (IDSesion, IDMovimiento, PosicionManos, TipoEjercicio, Fase, RPMMed, RPMFin, DuracionSeg)
                                  VALUES (@IDSesion, @IDMovimiento, @PosicionManos, @TipoEjercicio, @Fase, @RPMMed, @RPMFin, @DuracionSeg);
                                  SELECT SCOPE_IDENTITY();";
 
@@ -35,7 +35,7 @@ namespace SpinningTrainer.Repositories
         {
             using (SqlConnection connection = OpenConnection())
             {
-                string query = @"UPDATE MovimientosSesion 
+                string query = @"UPDATE MovimientoSesion 
                                  SET IDSesion = @IDSesion, IDMovimiento = @IDMovimiento, PosicionManos = @PosicionManos,
                                      TipoEjercicio = @TipoEjercicio, Fase = @Fase, RPMMed = @RPMMed, RPMFin = @RPMFin, DuracionSeg = @DuracionSeg
                                  WHERE ID = @ID";
@@ -61,7 +61,7 @@ namespace SpinningTrainer.Repositories
         {
             using (SqlConnection connection = OpenConnection())
             {
-                string query = @"DELETE FROM MovimientosSesion WHERE ID = @ID";
+                string query = @"DELETE FROM MovimientoSesion WHERE ID = @ID";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ID", id);
@@ -76,7 +76,7 @@ namespace SpinningTrainer.Repositories
 
             using (SqlConnection connection = OpenConnection())
             {
-                string query = @"SELECT * FROM MovimientosSesion WHERE ID = @ID";
+                string query = @"SELECT * FROM MovimientoSesion WHERE ID = @ID";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ID", id);
@@ -110,7 +110,7 @@ namespace SpinningTrainer.Repositories
 
             using (SqlConnection connection = OpenConnection())
             {
-                string query = @"SELECT * FROM MovimientosSesion WHERE IDSesion = @IDSesion";
+                string query = @"SELECT * FROM MovimientoSesion WHERE IDSesion = @IDSesion";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@IDSesion", sessionID);

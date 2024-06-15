@@ -21,7 +21,7 @@ namespace SpinningTrainer.Repositories
                 string query = $"SELECT CONVERT(varchar,DECRYPTBYPASSPHRASE('12345', Contra)) AS Contra,\n" +
                                 "       TipoUsuario,\n" +
                                 "       FechaV\n" +
-                                "FROM Usuarios\n" +
+                                "FROM Usuario\n" +
                                 "WHERE CodUsua = @codUsua\n";
 
                 using (SqlCommand cmd = new SqlCommand(query, connection))
@@ -65,7 +65,7 @@ namespace SpinningTrainer.Repositories
         {
             using(SqlConnection connection = RepositoryBase.OpenConnection())
             {
-                string query = "SELECT ISNULL(Email,'') FROM Usuarios WHERE CodUsua = @codUsua";
+                string query = "SELECT ISNULL(Email,'') FROM Usuario WHERE CodUsua = @codUsua";
 
                 using (SqlCommand cmd = new SqlCommand(query,connection))
                 {                    
@@ -92,7 +92,7 @@ namespace SpinningTrainer.Repositories
         {
             using (SqlConnection connection = RepositoryBase.OpenConnection())
             {
-                string query = "SELECT CodUsua FROM Usuarios WHERE Email = @email";
+                string query = "SELECT CodUsua FROM Usuario WHERE Email = @email";
 
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
@@ -122,7 +122,7 @@ namespace SpinningTrainer.Repositories
             using (SqlConnection connection = OpenConnection())
             {
                 string query = "DECLARE @NewPassworLocal varchar(60) = @newPassword\n" +
-                               "UPDATE Usuarios\n" +
+                               "UPDATE Usuario\n" +
                                "SET Contra = ENCRYPTBYPASSPHRASE('12345', @NewPassworLocal)\n" +
                                "WHERE CodUsua = @username";
 
@@ -150,7 +150,7 @@ namespace SpinningTrainer.Repositories
             {
                 using (SqlConnection connection = OpenConnection())
                 {
-                    string query = "UPDATE Usuarios\n" +
+                    string query = "UPDATE Usuario\n" +
                                    "SET CodUsua = @codUsua,\n" +
                                    "    Descrip = @descrip,\n" +
                                    "    Contra = ENCRYPTBYPASSPHRASE('12345', convert(varchar(60),@contra)),\n" +
@@ -189,7 +189,7 @@ namespace SpinningTrainer.Repositories
             {
                 using (SqlConnection connection = OpenConnection())
                 {
-                    string query = "INSERT INTO Usuarios(CodUsua,Descrip,Contra,PIN,Email,Telef,FechaC,FechaR,FechaV,TipoUsuario)\n" +
+                    string query = "INSERT INTO Usuario(CodUsua,Descrip,Contra,PIN,Email,Telef,FechaC,FechaR,FechaV,TipoUsuario)\n" +
                                    "VALUES(@codUsua, @descrip, ENCRYPTBYPASSPHRASE('12345', convert(varchar(60),@contra)),ENCRYPTBYPASSPHRASE('12345', convert(varchar(60),@pin)), @email, @telef, GETDATE(), GETDATE(), DATEADD(MONTH, 1, GETDATE()), @tipoUsuario)\n";
 
                     using (SqlCommand cmd = new SqlCommand(query, connection))
@@ -218,7 +218,7 @@ namespace SpinningTrainer.Repositories
         {
             using (SqlConnection connection = OpenConnection())
             {
-                string query = "DELETE FROM Usuarios WHERE ID=@id";
+                string query = "DELETE FROM Usuario WHERE ID=@id";
 
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
@@ -255,7 +255,7 @@ namespace SpinningTrainer.Repositories
                                    "       FechaR,\n" +
                                    "       FechaV,\n" +
                                    "       TipoUsuario\n" +
-                                   "FROM Usuarios\n";
+                                   "FROM Usuario\n";
 
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
@@ -323,7 +323,7 @@ namespace SpinningTrainer.Repositories
                                    "       FechaR,\n" +
                                    "       FechaV,\n" +
                                    "       TipoUsuario\n" +
-                                   "FROM Usuarios\n";
+                                   "FROM Usuario\n";
 
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
@@ -395,7 +395,7 @@ namespace SpinningTrainer.Repositories
                                    "       FechaR,\n" +
                                    "       FechaV,\n" +
                                    "       TipoUsuario\n" +
-                                   "FROM Usuarios\n";
+                                   "FROM Usuario\n";
 
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
@@ -449,7 +449,7 @@ namespace SpinningTrainer.Repositories
         {
             using (SqlConnection connection = OpenConnection())
             {
-                string query = "SELECT FechaV FROM Usuarios WHERE ID = @id";
+                string query = "SELECT FechaV FROM Usuario WHERE ID = @id";
 
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
@@ -469,7 +469,7 @@ namespace SpinningTrainer.Repositories
             {
                 using (SqlConnection connection = OpenConnection())
                 {
-                    string query = "UPDATE Usuarios\n" +
+                    string query = "UPDATE Usuario\n" +
                                    "SET FechaR = GETDATE(),\n" +
                                    "    FechaV = DATEADD(MONTH, 1, FechaV)\n" +
                                    "WHERE ID = @id\n";

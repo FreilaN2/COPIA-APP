@@ -11,7 +11,7 @@ namespace SpinningTrainer.Repositories
         {
             using (SqlConnection connection = OpenConnection())
             {
-                string query = @"INSERT INTO Sesiones (IDEntrenador, Descrip, FechaC, FechaI, Duracion, EsPlantilla)
+                string query = @"INSERT INTO Sesion (IDEntrenador, Descrip, FechaC, FechaI, Duracion, EsPlantilla)
                                  VALUES (@IDEntrenador, @Descrip, @FechaC, @FechaI, @Duracion, @EsPlantilla);
                                  SELECT SCOPE_IDENTITY();";
 
@@ -35,7 +35,7 @@ namespace SpinningTrainer.Repositories
         {
             using (SqlConnection connection = OpenConnection())
             {
-                string query = @"DELETE FROM Sesiones WHERE ID = @ID";
+                string query = @"DELETE FROM Sesion WHERE ID = @ID";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ID", id);
@@ -50,7 +50,7 @@ namespace SpinningTrainer.Repositories
 
             using (SqlConnection connection = OpenConnection())
             {
-                string query = @"SELECT * FROM Sesiones WHERE IDEntrenador = @IDEntrenador";
+                string query = @"SELECT * FROM Sesion WHERE IDEntrenador = @IDEntrenador";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@IDEntrenador", IDEntrenador);
@@ -83,7 +83,7 @@ namespace SpinningTrainer.Repositories
 
             using (SqlConnection connection = OpenConnection())
             {
-                string query = @"SELECT * FROM Sesiones WHERE ID = @ID";
+                string query = @"SELECT * FROM Sesion WHERE ID = @ID";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ID", id);
@@ -115,7 +115,7 @@ namespace SpinningTrainer.Repositories
 
             using (SqlConnection connection = OpenConnection())
             {
-                string query = @"SELECT TOP 1 * FROM Sesiones WHERE IDEntrenador = @IDEntrenador";
+                string query = @"SELECT TOP 1 * FROM Sesion WHERE IDEntrenador = @IDEntrenador";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@IDEntrenador", IDEntrenador);
@@ -147,7 +147,7 @@ namespace SpinningTrainer.Repositories
 
             using (SqlConnection connection = OpenConnection())
             {
-                string query = @"SELECT * FROM Sesiones WHERE Descrip LIKE @searchTerm";
+                string query = @"SELECT * FROM Sesion WHERE Descrip LIKE @searchTerm";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%");
@@ -180,7 +180,7 @@ namespace SpinningTrainer.Repositories
 
             using (SqlConnection connection = OpenConnection())
             {
-                string query = @"SELECT * FROM Sesiones WHERE FechaC = @FechaC";
+                string query = @"SELECT * FROM Sesion WHERE FechaC = @FechaC";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@FechaC", fechaC);
@@ -213,7 +213,7 @@ namespace SpinningTrainer.Repositories
         {
             using (SqlConnection connection = OpenConnection())
             {
-                string query = @"UPDATE Sesiones 
+                string query = @"UPDATE Sesion 
                          SET IDEntrenador = @IDEntrenador, 
                              Descrip = @Descrip, 
                              FechaC = @FechaC, 
