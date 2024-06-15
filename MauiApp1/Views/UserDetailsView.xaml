@@ -127,18 +127,16 @@
             </Grid.ColumnDefinitions>
             
             <Button Text="Guardar"                     
-                    BackgroundColor="#008000" 
+                    BackgroundColor="#16a34a" 
                     BorderColor="Transparent"
-                    TextColor="#FFFFFF"
+                    TextColor="white"
                     HorizontalOptions="CenterAndExpand"                    
                     HeightRequest="60"
                     WidthRequest="120"
                     Grid.Column="0"
                     Margin="0,-2,28,0"
                     Command="{Binding SaveUserCommand}"/>
-            <Button Text="Eliminar"                     
-                    BackgroundColor="{StaticResource PrimaryDark}" 
-                    BorderColor="{StaticResource Primary}"
+            <Button Text="Eliminar"                                         
                     TextColor="#FFFFFF"
                     HorizontalOptions="CenterAndExpand"                    
                     HeightRequest="60"
