@@ -15,133 +15,136 @@
         <converters:IsTrainerConverter x:Key="IsTrainerConverter"/>
     </ContentPage.Resources>
 
-    <!-- Contenedor principal con Grid -->
     <Grid BackgroundColor="#FFFFFF" 
       Padding="0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <StackLayout BackgroundColor="{StaticResource PrimaryDark}"
+            <StackLayout BackgroundColor="{StaticResource PrimaryDark}"
                  Padding="10"
                  Grid.Row="1">
-            <ListView x:Name="ltvUserListView" 
-                  Margin="0,20,0,10" 
-                  SeparatorColor="White"
-                  SelectionMode="Single"                      
-                  ItemTapped="ltvUserListView_ItemTapped"
-                  ItemsSource="{Binding Users}"
-                  SelectedItem="{Binding SelectedUser}"
-                  IsPullToRefreshEnabled="True"
-                  RefreshCommand="{Binding RefreshUserListCommand}"
-                  BackgroundColor="Transparent"
-                  RowHeight="100">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid BackgroundColor="{StaticResource Primary}">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="0.5*"/>
-                                </Grid.ColumnDefinitions>
-                                <StackLayout Orientation="Vertical" 
-                                         Margin="10,0,0,10"
-                                         Grid.Column="0">
-                                    <Label VerticalOptions="Center" 
-                                       HorizontalOptions="StartAndExpand" 
-                                       TextColor="White"
-                                       Margin="0,10,0,0">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="{Binding CodUsua}" 
-                                                  FontAttributes="Bold"
-                                                  TextColor="White"/>
-                                                <Span Text=" - " 
-                                                  FontAttributes="Bold"
-                                                  TextColor="White"/>
-                                                <Span Text="{Binding Descrip}" 
-                                                  FontAttributes="Bold"
-                                                  TextColor="White"/>
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
+                <ListView x:Name="ltvUserListView" 
+                  Margin="0,10,0,10" 
+                  SeparatorColor="{StaticResource Primary}"
+                      SelectionMode="None"                      
+                      ItemTapped="ltvUserListView_ItemTapped"
+                      ItemsSource="{Binding Users}"
+                      SelectedItem="{Binding SelectedUser}"
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding RefreshUserListCommand}"
+                      BackgroundColor="Transparent"
+                      RowHeight="120">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame Margin="0,10,0,0" 
+                                        Padding="5"
+                                   HasShadow="False"
+                                   >
+                                    <Grid BackgroundColor="{StaticResource BackgroundFrame}"
+                                  Padding="-20">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="0.5*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout Orientation="Vertical" 
+                                             Margin="30,10,0,10"
+                                             Grid.Column="0">
+                                            <Label VerticalOptions="Center" 
+                                           HorizontalOptions="StartAndExpand" 
+                                           TextColor="White"
+                                           Margin="0,10,0,5">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding CodUsua}" 
+                                                      FontAttributes="Bold"
+                                                      TextColor="White"/>
+                                                        <Span Text=" - " 
+                                                      FontAttributes="Bold"
+                                                      TextColor="White"/>
+                                                        <Span Text="{Binding Descrip}" 
+                                                      FontAttributes="Bold"
+                                                      TextColor="White"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
 
-                                    <Label VerticalOptions="Center" 
-                                       HorizontalOptions="StartAndExpand" 
-                                       TextColor="White"
-                                       Margin="0,5,0,0">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="Tipo de Usuario: "                                                       
-                                                  TextColor="White"/>
-                                                <Span Text="{Binding TipoUsuario, Converter={StaticResource UserTyperConverter}}" 
-                                                  TextColor="White"/>
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
+                                            <Label VerticalOptions="Center" 
+                                           HorizontalOptions="StartAndExpand" 
+                                           TextColor="White"
+                                           Margin="0,10,0,5">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="Tipo de Usuario: "                                                       
+                                                      TextColor="White"/>
+                                                        <Span Text="{Binding TipoUsuario, Converter={StaticResource UserTyperConverter}}" 
+                                                      TextColor="White"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
 
-                                    <Label VerticalOptions="Center" 
-                                       HorizontalOptions="StartAndExpand" 
-                                       TextColor="White"
-                                       Margin="0,5,0,0">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="Email: " 
-                                                  TextColor="White"/>
-                                                <Span Text="{Binding Email}" 
-                                                  TextColor="White"/>
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                </StackLayout>
-                                <StackLayout Orientation="Vertical" 
-                                         Margin="0,0,10,10"
-                                         Grid.Column="1"
-                                         HorizontalOptions="EndAndExpand">
-                                    <Label VerticalOptions="Center"                                            
-                                       TextColor="White"
-                                       Margin="0,10,0,0"
-                                       HorizontalOptions="CenterAndExpand"
-                                       IsVisible="{Binding TipoUsuario, Converter={StaticResource IsTrainerConverter }}"
-                                       Text="Membresia"/>
-                                    <Label VerticalOptions="Center"                                           
-                                       TextColor="White"
-                                       Margin="0,10,0,0"
-                                       IsVisible="{Binding TipoUsuario, Converter={StaticResource IsTrainerConverter }}">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="{Binding FechaV, StringFormat='{0:dd/MM/yyyy}'}" 
-                                                  TextColor="White"/>
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                </StackLayout>
+                                            <Label VerticalOptions="Center" 
+                                           HorizontalOptions="StartAndExpand" 
+                                           TextColor="White"
+                                           Margin="0,10,0,10">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="Email: " 
+                                                      TextColor="White"/>
+                                                        <Span Text="{Binding Email}" 
+                                                      TextColor="White"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Vertical" 
+                                             Margin="0,10,30,10"
+                                             Grid.Column="1"
+                                             HorizontalOptions="EndAndExpand">
+                                            <Label VerticalOptions="Center"                                            
+                                           TextColor="White"
+                                           Margin="0,10,0,10"
+                                           HorizontalOptions="CenterAndExpand"
+                                           IsVisible="{Binding TipoUsuario, Converter={StaticResource IsTrainerConverter }}"
+                                           Text="Membresia"/>
+                                            <Label VerticalOptions="Center"                                           
+                                           TextColor="White"
+                                           Margin="0,10,0,10"
+                                           IsVisible="{Binding TipoUsuario, Converter={StaticResource IsTrainerConverter }}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding FechaV, StringFormat='{0:dd/MM/yyyy}'}" 
+                                                      TextColor="White"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
 
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
-
-        <StackLayout HeightRequest="50" 
+            <StackLayout HeightRequest="50" 
                  BackgroundColor="{StaticResource PrimaryDark}" 
                  Grid.Row="2">
-
-            <Frame Margin="0,-30,0,0"
+                <Frame Margin="0,-50,0,0"
                CornerRadius="150"
                WidthRequest="90"
-               HeightRequest="90">
-                <Button x:Name="btnAgregarUsers"
-                    ImageSource="mas.png"
+               HeightRequest="90"
+               BackgroundColor="{StaticResource Primary}">
+                    <Button x:Name="btnAgregarUsers"
+                    ImageSource="mas"
                     WidthRequest="50"
                     HeightRequest="50"
                     BorderWidth="0"
                     Clicked="btnAgregarUsers_Clicked"/>
-            </Frame>
-
-        </StackLayout>
-    </Grid>
+                </Frame>
+            </StackLayout>
+        </Grid>
 </ContentPage>

@@ -45,12 +45,31 @@
                         <Entry x:Name="entConfirmarContra" Text="{Binding NewConfirmContra}" FontSize="Medium" IsPassword="True" Placeholder="Confirme la contraseña" BackgroundColor="Transparent" TextColor="White"/>
                     </Frame>
 
+                    
+                    
+                    
+                    
                     <Label Text="PIN:" TextColor="White"
                            IsVisible="{Binding NewTipoUsuario, Converter={StaticResource IsTrainerConverter}}"/>
+
                     <Frame IsVisible="{Binding NewTipoUsuario, Converter={StaticResource IsTrainerConverter}}">
                         <Entry x:Name="entPIN" Text="{Binding NewPIN}" FontSize="Medium" MaxLength="4" Keyboard="Numeric" Placeholder="Ingrese el PIN" BackgroundColor="Transparent" TextColor="White"/>
                     </Frame>
 
+                    <Label Text="Tipo de Usuario:" TextColor="White"/>
+                    <Frame>
+                        <Picker x:Name="pkTipoUsuario" 
+                                FontSize="Medium" 
+                                BackgroundColor="Transparent" 
+                                TextColor="White"
+                                SelectedIndex="{Binding NewTipoUsuario}">   
+                            <Picker.Items>
+                                <x:String>Super Usuario</x:String>
+                                <x:String>Administrador</x:String>
+                                <x:String>Entrenador</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </Frame>
                     <Label Text="Email:" TextColor="White"/>
                     <Frame>
                         <Entry x:Name="entEmail" Text="{Binding NewEmail}" FontSize="Medium" Placeholder="Ingrese el email" BackgroundColor="Transparent" TextColor="White"/>
@@ -61,11 +80,15 @@
                         <Entry x:Name="entTelef" Text="{Binding NewTelef}" FontSize="Medium" Placeholder="Ingrese el teléfono" BackgroundColor="Transparent" TextColor="White"/>
                     </Frame>
 
+                    
+
                     <Grid IsVisible="{Binding NewTipoUsuario, Converter={StaticResource IsTrainerConverter}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
+                        
+                        
 
                         <VerticalStackLayout Grid.Column="0">
                             <Label Text="Fecha de Renovación:" TextColor="White"/>
@@ -81,31 +104,18 @@
 
                         <VerticalStackLayout Grid.Column="1"
                                              VerticalOptions="Center"
-                                             Margin="0,16,0,0"
+                                             Margin="13,16,0,0"
                                              IsEnabled="{Binding EditionEnable}">
                             <Button Text="Recargar"
                                     Background="{StaticResource Primary}"
                                     VerticalOptions="CenterAndExpand"
-                                    HeightRequest="100"
+                                    HeightRequest="110"
                                     WidthRequest="150"
                                     Command="{Binding IncrementMembershipCommand}"/>
                         </VerticalStackLayout>
                     </Grid>
 
-                    <Label Text="Tipo de Usuario:" TextColor="White"/>
-                    <Frame>
-                        <Picker x:Name="pkTipoUsuario" 
-                                FontSize="Medium" 
-                                BackgroundColor="Transparent" 
-                                TextColor="White"
-                                SelectedIndex="{Binding NewTipoUsuario}">
-                            <Picker.Items>
-                                <x:String>Super Usuario</x:String>
-                                <x:String>Administrador</x:String>
-                                <x:String>Entrenador</x:String>
-                            </Picker.Items>
-                        </Picker>
-                    </Frame>
+                   
                 </StackLayout>
             </StackLayout>
         </ScrollView>
@@ -124,6 +134,7 @@
                     HeightRequest="60"
                     WidthRequest="120"
                     Grid.Column="0"
+                    Margin="0,-2,28,0"
                     Command="{Binding SaveUserCommand}"/>
             <Button Text="Eliminar"                     
                     BackgroundColor="{StaticResource PrimaryDark}" 
@@ -133,6 +144,7 @@
                     HeightRequest="60"
                     WidthRequest="120"
                     Grid.Column="1"
+                    Margin="45,0,24,0"
                     Command="{Binding DeleteUserCommand}"
                     IsVisible="{Binding EditionEnable}"
                     IsEnabled="{Binding NewTipoUsuario, Converter={StaticResource NotIsSuperUserConverter}}"/>

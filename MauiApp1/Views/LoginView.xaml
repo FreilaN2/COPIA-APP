@@ -57,7 +57,7 @@
                 SemanticProperties.HeadingLevel="Level2"
                 SemanticProperties.Description="Usuario" />
             
-            <Frame CornerRadius="15"                                      
+            <Frame CornerRadius="8"                                      
                    Padding="10,0,10,0"
                    Margin="0,5,0,0"                   
                    BorderColor="Transparent">
