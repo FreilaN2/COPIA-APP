@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
              xmlns:vm="clr-namespace:SpinningTrainer.ViewModel"
              x:Class="SpinningTrainer.Views.NewSessionView"
              Title="Crear sesión"
@@ -13,127 +14,101 @@
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
 
-        <VerticalStackLayout Grid.Row="1">
-            <StackLayout Margin="10">
-                <StackLayout Orientation="Horizontal" Margin="10">
-                    <Label Text="Ingrese los datos de la sesión"
-                      TextColor="White"
-                      HorizontalOptions="CenterAndExpand"
-                      VerticalOptions="Start"
-                      Margin="10,0,10,0"
-                      FontSize="20" />
-                </StackLayout>
+        <!-- Contenido principal -->
+        <VerticalStackLayout Grid.Row="1" Margin="10">
 
-                <StackLayout Orientation="Horizontal" Margin="30">
-                    <Frame Margin="-10,0,0,0"
-                      WidthRequest="320"                           
-                      Background="{StaticResource BackgroundFrame}">
+            <!-- Título de la sección -->
+            <Label Text="Datos de la Sesión"
+                   TextColor="White"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Start"
+                   Margin="0"
+                   FontSize="24" FontAttributes="Bold" />
+
+            <!-- Sección: Nombre de la sesión -->
+            <StackLayout Orientation="Vertical" Margin="0,20,0,20">
+                <Label Text="Nombre" Margin="0,10,0,5" TextColor="White" FontSize="18"/>
+                <Frame Margin="0"
+                       Background="{StaticResource BackgroundFrame}">
+                    <HorizontalStackLayout >
+                        <Image Source="{mi:Material Icon=Description}" />
                         <Entry x:Name="entSessionName"
-                              Placeholder="Ingrese el nombre de la sesión" 
-                              Text="{Binding Descrip, Mode=TwoWay}"
-                              BackgroundColor="Transparent"                                
-                              TextColor="White" 
-                              HeightRequest="50"
-                              PlaceholderColor="White"                                
-                              HorizontalTextAlignment="Center"
-                              VerticalOptions="Start"/>
-                    </Frame>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal" Margin="10">
-                    <Label Text="¿Cuándo será la sesión?"
-                              TextColor="White"
-                              HorizontalOptions="CenterAndExpand"
-                              VerticalOptions="Start"
-                              Margin="1,0,10,0"
-                              FontSize="20" />  
-                </StackLayout>
-                <StackLayout Orientation="Horizontal" Margin="10">
-                    <StackLayout Grid.Row="1"
-                            HorizontalOptions="CenterAndExpand">
-                        <Frame Margin="1,0,0,0"
-                          WidthRequest="150"
-                          Background="{StaticResource BackgroundFrame}">
-                            <HorizontalStackLayout>
-                                <Label Text="Fecha:"
-                                  VerticalOptions="Center"/>
+                               Placeholder="Ingresa el nombre de la Sesión" 
+                               Text="{Binding Descrip, Mode=TwoWay}"
+                               BackgroundColor="Transparent"                                
+                               TextColor="White" 
+                               HeightRequest="50"
+                               PlaceholderColor="White"/>
+                    </HorizontalStackLayout>
+                </Frame>
+            </StackLayout>
 
-                                <DatePicker x:Name="dpkSessionDate"
-                                       Background="Transparent"
-                                       VerticalOptions="Center"
-                                       Margin="10,0,0,0"
-                                       WidthRequest="100"
-                                       Date="{Binding FechaI}"/>
-                            </HorizontalStackLayout>
-                        </Frame>
-                    </StackLayout>
-
-                    <StackLayout Grid.Row="1"
-                            HorizontalOptions="Start">
-                        <Frame Margin="0,0,18,0"
-                          WidthRequest="150"
-                          Background="{StaticResource BackgroundFrame}">
-                            <HorizontalStackLayout>
-                                <Label Text="Hora:"
-                                  VerticalOptions="Center"/>
-
-                                <TimePicker x:Name="dpkSessionTime"
-                                            Background="Transparent"
-                                            VerticalOptions="Center"
-                                            Margin="10,0,0,0"
-                                            WidthRequest="100"
-                                            Time="{Binding TimeI}"/>
-                            </HorizontalStackLayout>
-                        </Frame>
-                    </StackLayout>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal" Margin="10">
-                    <Label Text="¿Cuanto durará la sesión?"
-                      TextColor="White"
-                      HorizontalOptions="CenterAndExpand"
-                      VerticalOptions="Start"
-                      Margin="10,20,20,-10"
-                      FontSize="20" />
-                </StackLayout>
-                <StackLayout Grid.Row="1"
-                             HorizontalOptions="Start"
-                             Margin="23">
-                    <Frame Margin="55,0,18,0"
-                        WidthRequest="200"
-                           Background="{StaticResource BackgroundFrame}">
+            <!-- Sección: Fecha y hora de inicio -->
+            <StackLayout Orientation="Vertical" Margin="0,0,0,20">
+                <Label Text="Fecha y hora de inicio"
+                       TextColor="White"
+                       FontSize="18"
+                       Margin="0,10,0,5"/>
+                <StackLayout Orientation="Horizontal">
+                    <!-- Input Fecha -->
+                    <Frame Margin="0,0,10,0"
+                           Background="{StaticResource BackgroundFrame}"
+                           HorizontalOptions="FillAndExpand">
                         <HorizontalStackLayout>
-                            <Label Text="Duración:"
-                                   VerticalOptions="Center"/>
+                            <Image Source="{mi:Material Icon=Event}" />
+                            <DatePicker x:Name="dpkSessionDate"
+                                        Background="Transparent"
+                                        WidthRequest="100"
+                                        Date="{Binding FechaI}"/>
+                        </HorizontalStackLayout>
+                    </Frame>
 
-                            <Entry x:Name="entSessionDuration"
-                                   Background="Transparent"
-                                   VerticalOptions="Center"
-                                   Margin="10,0,0,0"
-                                   WidthRequest="80"
-                                   Placeholder="Min."
-                                   Text="{Binding Duracion}"
-                                   HorizontalTextAlignment="End"/>
-                            <Label Text="Min."
-                                   VerticalOptions="Center"/>
+                    <!-- Input Hora -->
+                    <Frame Margin="0"
+                           Background="{StaticResource BackgroundFrame}"
+                           HorizontalOptions="FillAndExpand">
+                        <HorizontalStackLayout>
+                            <Image Source="{mi:Material Icon=Schedule}" />
+                            <TimePicker x:Name="dpkSessionTime"
+                                        Background="Transparent"
+                                        Time="{Binding TimeI}"/>
                         </HorizontalStackLayout>
                     </Frame>
                 </StackLayout>
-
-                <StackLayout Orientation="Horizontal" Margin="50" HorizontalOptions="Center" VerticalOptions="Center">
-                    <Button x:Name="btnNextStep"
-                            Text ="Siguiente"
-                            BackgroundColor="{StaticResource Primary}"
-                            CornerRadius ="20"
-                            WidthRequest="200" 
-                            HeightRequest="60"
-                            TextColor ="White"
-                            Margin="0,10,-2,0"
-                            Command="{Binding AddSessionCommand}"/>
-                </StackLayout>
             </StackLayout>
+
+            <!-- Sección: Duración en minutos -->
+            <StackLayout Orientation="Vertical" Margin="0,0,0,20">
+                <Label Text="Duración (en minutos)"
+                       TextColor="White"
+                       FontSize="18"
+                       Margin="0,10,0,5"/>
+                <Frame Margin="0"
+                       Background="{StaticResource BackgroundFrame}"
+                       HorizontalOptions="StartAndExpand">
+                    <HorizontalStackLayout>
+                        <Image Source="{mi:Material Icon=Timelapse}" />
+                        <Entry x:Name="entSessionDuration"
+                               Background="Transparent"
+                               WidthRequest="100"
+                               HorizontalTextAlignment="End"
+                               Placeholder="Ingresa Min."
+                               Text="{Binding Duracion}"/>
+                    </HorizontalStackLayout>
+                </Frame>
+            </StackLayout>
+
+            <!-- Botón Siguiente -->
+            <Button x:Name="btnNextStep"
+                    Text="Siguiente"
+                    BackgroundColor="{StaticResource Primary}"
+                    CornerRadius="20"
+                    HeightRequest="60"
+                    TextColor="White"
+                    Margin="0,30,0,0"
+                    HorizontalOptions="FillAndExpand"
+                    Command="{Binding AddSessionCommand}"/>
         </VerticalStackLayout>
 
-        <StackLayout BackgroundColor="{StaticResource PrimaryDark}" 
-                Grid.Row="2">
-        </StackLayout>
     </Grid>
 </ContentPage>
