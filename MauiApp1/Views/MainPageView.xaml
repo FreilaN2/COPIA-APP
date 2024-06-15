@@ -5,44 +5,62 @@
              x:Class="SpinningTrainer.Views.MainPageView"             
              Title="Spinning Trainer"
              Background="{StaticResource PrimaryDark}">
-    <Grid>
+
+    <Grid Padding="0" BackgroundColor="{StaticResource PrimaryDark}">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.15*"/>
-            <RowDefinition Height="0.15*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="0.15*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Barra de búsqueda -->
-        <StackLayout Grid.Row="0">
-            <Frame Margin="10">
-                <SearchBar Background="Transparent"
-                           Placeholder="Búsqueda..."
-                           PlaceholderColor="White"
-                           WidthRequest="380"
-                           CancelButtonColor="White"
-                           TextColor="White"
-                           IsTextPredictionEnabled="True"/>
-            </Frame>
-        </StackLayout>
-        <!-- Sección de filtro por fecha -->
-        <StackLayout Grid.Row="1" HorizontalOptions="Start">
-            <Frame Margin="10,0,0,0" WidthRequest="150">
-                <HorizontalStackLayout>
-                    <Label Text="Fecha:" VerticalOptions="Center"/>
-                    <DatePicker Background="Transparent"
-                                VerticalOptions="Center"
-                                Margin="10,0,0,0"
-                                WidthRequest="100"/>
-                </HorizontalStackLayout>
-            </Frame>
-        </StackLayout>
-        <!-- Lista de sesiones -->
-        <ListView ItemsSource="{Binding infoSesiones}"
+        <!-- Título -->
+        <Label Grid.Row="0"
+               Text="Mis sesiones" 
+               FontSize="24" 
+               FontAttributes="Bold" 
+               TextColor="White"
+               HorizontalOptions="Start"
+               VerticalOptions="Center"
+               Margin="10, 15, 0, 0"/>
+
+        <!-- Barra de búsqueda y filtro -->
+        <Grid Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="10,10,10,5" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Column="0" HorizontalOptions="Start">
+                <Frame HorizontalOptions="Start" VerticalOptions="Start" Padding="0">
+                    <SearchBar
+                        Placeholder="Buscar por nombre..."
+                        PlaceholderColor="White"
+                        CancelButtonColor="White"
+                        TextColor="White"
+                        IsTextPredictionEnabled="True"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Start"
+                        WidthRequest="220"/>
+                </Frame>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Grid.Column="1"  VerticalOptions="Center" Spacing="-6" Margin="10,0,0,0">
+                <Frame HorizontalOptions="Fill">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="{mi:Material Icon=Event}" />
+                        <DatePicker />
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Grid>
+
+        <!-- Lista de Sesiones -->
+        <ListView Grid.Row="2"
+                  ItemsSource="{Binding infoSesiones}"
                   x:Name="lvInfoSesiones"
-                  HorizontalOptions="Center"
-                  Grid.Row="2"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand"
                   Margin="10,0,10,0"
                   SeparatorColor="{StaticResource Primary}"
                   RowHeight="122"
@@ -50,70 +68,49 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell AutomationId="{Binding Id}">
-                        <Grid Background="Transparent" Padding="0,12,0,0">
-                            <Frame CornerRadius="5">
-                                <StackLayout Background="Transparent" Padding="5,5,5,5">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-                                        <Label Text="NOMBRE DE LA SESION"
-                                               FontAttributes="Bold"
-                                               FontFamily="Tahoma"
-                                               TextColor="White"
-                                               FontSize="12"
-                                               VerticalOptions="Center"
-                                               Grid.Column="0"/>
-                                        <ImageButton Source="{mi:Material Icon=MoreHoriz}"
-                                                     WidthRequest="30"
-                                                     HeightRequest="30"
-                                                     Clicked="ImageButton_Clicked"
-                                                     Grid.Column="1"/>
-                                    </Grid>
-
-                                    <Label Text="Sesion fuerte"
+                        <Frame Margin="0,10" CornerRadius="5" BackgroundColor="{StaticResource BackgroundFrame}">
+                            <StackLayout Padding="10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="Nombre de Sesión"
+                                           FontAttributes="Bold"
                                            FontFamily="Tahoma"
                                            TextColor="White"
-                                           FontSize="20"
-                                           Margin="0,10,0,0"
-                                           VerticalOptions="CenterAndExpand"
-                                           VerticalTextAlignment="Center"/>
+                                           FontSize="18"
+                                           VerticalOptions="Center"
+                                           Grid.Column="0"/>
+                                    <ImageButton Source="{mi:Material Icon=MoreHoriz}"
+                                                 WidthRequest="30"
+                                                 HeightRequest="30"
+                                                 Clicked="ImageButton_Clicked"
+                                                 Grid.Column="1"/>
+                                </Grid>
 
-                                    <StackLayout Orientation="Horizontal"
-                                                 VerticalOptions="EndAndExpand">
-                                        <Label Text="Entrenador: Manuel"
-                                               FontFamily="Tahoma"
-                                               FontSize="12"
-                                               TextColor="White"
-                                               VerticalOptions="EndAndExpand"/>
-                                        <StackLayout HorizontalOptions="EndAndExpand"
-                                                     Orientation="Vertical">
-                                            <Label Text="04/04/2024"
-                                                   FlowDirection="RightToLeft"
-                                                   FontFamily="Tahoma"
-                                                   TextColor="White"
-                                                   FontSize="12"
-                                                   HorizontalOptions="End"/>
-                                            <Label Text="3:00:00"
-                                                   FlowDirection="RightToLeft"
-                                                   FontFamily="Tahoma"
-                                                   TextColor="White"
-                                                   FontSize="12"
-                                                   HorizontalOptions="End"/>
-                                        </StackLayout>
+                                <StackLayout Orientation="Vertical" Spacing="8" Margin="0,4,0,0" Opacity="0.8">
+                                    <StackLayout Orientation="Horizontal" Spacing="2">
+                                        <Image Source="{mi:Material Icon=Event}" HeightRequest="20"/>
+                                        <Label Text="DD-MM-YYYY" FontFamily="Tahoma" TextColor="White" FontSize="14" />
                                     </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal" Spacing="2" >
+                                        <Image Source="{mi:Material Icon=Schedule}" HeightRequest="20"/>
+                                        <Label Text="HH:MM:SS" FontFamily="Tahoma" TextColor="White" FontSize="14" FontAttributes="Italic"/>
+                                    </StackLayout>
+
                                 </StackLayout>
-                            </Frame>
-                        </Grid>
+                            </StackLayout>
+                        </Frame>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
         <!-- Barra de botones -->
-        <HorizontalStackLayout Grid.Row="3" Background="{StaticResource BackgroundFrame}">
-            <Grid HorizontalOptions="Center" HeightRequest="50">
+        <HorizontalStackLayout Grid.Row="3" BackgroundColor="{StaticResource BackgroundFrame}" HeightRequest="50">
+            <Grid HorizontalOptions="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="140"/>
                     <ColumnDefinition Width="100"/>
@@ -121,9 +118,9 @@
                 </Grid.ColumnDefinitions>
 
                 <ImageButton Source="{mi:Material Icon=DocumentScanner}" 
-                             Margin="0,2,10,3"/>
+             Margin="0,2,10,3"/>
 
-                <Frame Grid.Column="1" Margin="10,-30,10,0" CornerRadius="150" Background="{StaticResource Primary}">
+                <Frame Grid.Column="1" Margin="10,-30,10,0" CornerRadius="150" BackgroundColor="{StaticResource Primary}">
                     <Button x:Name="btnCreateNewSession"
                             ImageSource="mas"
                             WidthRequest="50"
@@ -138,6 +135,5 @@
             </Grid>
         </HorizontalStackLayout>
     </Grid>
-
 
 </ContentPage>
