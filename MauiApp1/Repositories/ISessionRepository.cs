@@ -1,15 +1,20 @@
 ﻿using SpinningTrainer.Models;
+using System.Collections.ObjectModel;
 
 namespace SpinningTrainer.Repositories
 {
     public interface ISessionRepository
     {
         SessionModel Add(SessionModel session);
-        SessionModel Update(SessionModel session);
+        void Update(SessionModel session);
         void Delete(int id);
 
-        IEnumerable<SessionModel> GetAllByIDEntrenador(int IDEntrenador);
+        ObservableCollection<SessionModel> GetAllByIDEntrenador(int IDEntrenador);
         SessionModel GetByID(int id);
-        
+
+        ObservableCollection<SessionModel> GetSessionsByTitle(string searchTerm);
+
+        ObservableCollection<SessionModel> GetSessionsByCreationDate(DateTime fechaC);  
+
     }
 }
