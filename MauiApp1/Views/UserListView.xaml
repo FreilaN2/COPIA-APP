@@ -3,6 +3,7 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:converters="clr-namespace:SpinningTrainer.Resources.Converters"
              xmlns:viewModel="clr-namespace:SpinningTrainer.ViewModels"
+             xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
              Title="Lista de Usuarios"
              x:Class="SpinningTrainer.Views.UserListView">
 
@@ -77,24 +78,25 @@
                                            TextColor="White"
                                            Margin="0,10,0,5">
                                                 <Label.FormattedText>
-                                                    <FormattedString>
-                                                        <Span Text="Tipo de Usuario: "                                                       
-                                                      TextColor="White"/>
-                                                        <Span Text="{Binding TipoUsuario, Converter={StaticResource UserTyperConverter}}" 
+                                                <FormattedString>
+                                                    
+                                                    <Span Text="{Binding TipoUsuario, Converter={StaticResource UserTyperConverter}}" 
                                                       TextColor="White"/>
                                                     </FormattedString>
                                                 </Label.FormattedText>
                                             </Label>
+                                            
+
 
                                             <Label VerticalOptions="Center" 
                                            HorizontalOptions="StartAndExpand" 
                                            TextColor="White"
                                            Margin="0,10,0,10">
+                                                
                                                 <Label.FormattedText>
                                                     <FormattedString>
-                                                        <Span Text="Email: " 
-                                                      TextColor="White"/>
-                                                        <Span Text="{Binding Email}" 
+                                                    
+                                                    <Span Text="{Binding Email}" 
                                                       TextColor="White"/>
                                                     </FormattedString>
                                                 </Label.FormattedText>
