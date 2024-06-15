@@ -81,6 +81,7 @@
 	  <None Remove="Resources\Images\imagelogin.png" />
 	  <None Remove="Resources\Images\logoapp.png" />
 	  <None Remove="Resources\Images\mas.png" />
+	  <None Remove="Resources\Images\PDF.png" />
 	  <None Remove="Resources\Images\popupmenuicon.png" />
 	  <None Remove="Resources\Images\usuarioperfil.png" />
 	</ItemGroup>
@@ -100,6 +101,9 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.10" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.10" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.WebForms" Version="150.1652.0" />
+		<PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.Winforms" Version="150.1652.0" />
+		<PackageReference Include="Syncfusion.Pdf.Net.Core" Version="26.1.35" />
 	</ItemGroup>
 
 	<ItemGroup>
