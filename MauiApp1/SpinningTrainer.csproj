@@ -81,6 +81,7 @@
 	  <None Remove="Resources\Images\imagelogin.png" />
 	  <None Remove="Resources\Images\logoapp.png" />
 	  <None Remove="Resources\Images\mas.png" />
+	  <None Remove="Resources\Images\PDF.png" />
 	  <None Remove="Resources\Images\popupmenuicon.png" />
 	  <None Remove="Resources\Images\usuarioperfil.png" />
 	</ItemGroup>

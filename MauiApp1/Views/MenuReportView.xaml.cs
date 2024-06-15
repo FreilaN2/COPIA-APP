@@ -97,14 +97,26 @@ namespace SpinningTrainer.Views
             lvInfoSesiones.ItemsSource = infoSesiones;
         }
 
-        private async void DownloadButton_Clicked(object sender, EventArgs e)
+        private async void DownloadImage_Tapped(object sender, EventArgs e)
         {
             try
             {
-                var button = (Button)sender;
-                var session = (SessionModel)button.BindingContext; // Acceder directamente al contexto de enlace del botón
+                var image = (Image)sender;
+                var session = (SessionModel)image.BindingContext;
 
-                // Crear documento PDF
+                // Aquí va la lógica para descargar el PDF
+                await DownloadPdfAsync(session);
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"Se produjo un error al generar el PDF: {ex.Message}", "OK");
+            }
+        }
+
+        private async Task DownloadPdfAsync(SessionModel session)
+        {
+            try
+            {
                 var document = new PdfDocument();
                 var page = document.Pages.Add();
                 var graphics = page.Graphics;
@@ -175,8 +187,5 @@ namespace SpinningTrainer.Views
                 await DisplayAlert("Error", $"Se produjo un error al generar el PDF: {ex.Message}", "OK");
             }
         }
-
-
-
     }
 }
