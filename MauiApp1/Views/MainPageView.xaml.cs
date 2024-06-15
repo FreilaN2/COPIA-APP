@@ -62,4 +62,9 @@ public partial class MainPageView : ContentPage
     {
         await Navigation.PushAsync(new NewSessionView(false, 0));
     }
+
+    private async void btnViewReports_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new MenuReportView());
+    }
 }
