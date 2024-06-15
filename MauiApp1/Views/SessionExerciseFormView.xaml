@@ -2,69 +2,134 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpinningTrainer.Views.SessionExerciseFormView"
-             Title="SessionExerciseFormView">
-    <StackLayout Margin="10">
-        <StackLayout Orientation="Horizontal" Margin="30">
-            <Picker x:Name="exercisePicker" 
-                    Title="Seleccione ejercicio"
-                    BackgroundColor="{StaticResource Primary}"
-                    WidthRequest="300"
-                    TextColor="White"
-                    HeightRequest="50"
-                    ItemsSource="{Binding ExercisesList}"                            
-                    ItemDisplayBinding="{Binding Descrip}"
-                    SelectedItem="{Binding SelectedExercise}"
-                    HorizontalTextAlignment="Center"
-                    HorizontalOptions="Start"/>
-        </StackLayout>
+             xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
+             Title="SessionExerciseFormView"
+             Background="{StaticResource PrimaryDark}">
 
-        <StackLayout Orientation="Horizontal" Margin="30">
-            <Frame Margin="0,0,0,10"
-                   WidthRequest="300"
-                   BackgroundColor="{StaticResource Primary}">
-                <Entry x:Name="entMinsMove"
-                       Placeholder="Ingrese la duración en minutos"
-                       BackgroundColor="Transparent"
-                       TextColor="White"
-                       HeightRequest="50"
-                       PlaceholderColor="White"
-                       HorizontalTextAlignment="Center"
-                       VerticalOptions="Start"/>
+    <StackLayout Margin="10" HorizontalOptions="FillAndExpand">
+        <!-- Título de la sección -->
+        <Label Text="Datos de Ejercicio" TextColor="White" FontSize="20" Margin="0,0,0,20" FontAttributes="Bold"/>
+
+        <!-- Sección de selección de ejercicio -->
+        <StackLayout Orientation="Vertical" Margin="0,0,0,20">
+            <Label Text="Ejercicio" FontSize="18" Margin="0,0,0,10"/>
+            <Frame  HorizontalOptions="FillAndExpand">
+                <Grid ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="{mi:Material Icon=DirectionsBike}" Grid.Column="0" VerticalOptions="Center"/>
+                    <Picker x:Name="exercisePicker"
+                            Title="Selecciona un ejercicio"
+                            BackgroundColor="Transparent"
+                            HeightRequest="50"
+                            ItemsSource="{Binding ExercisesList}"
+                            ItemDisplayBinding="{Binding Descrip}"
+                            SelectedItem="{Binding SelectedExercise}"
+                            HorizontalOptions="FillAndExpand"
+                            Grid.Column="1"/>
+                </Grid>
             </Frame>
         </StackLayout>
 
-        <StackLayout Orientation="Horizontal" Margin="10">
-            <Entry x:Name="entRMPMed"
-                   BackgroundColor="{StaticResource Primary}"
-                   WidthRequest="150"
-                   TextColor="White"                           
-                   Text="{Binding RPMMed}"
-                   HorizontalTextAlignment="Center"
-                   HorizontalOptions="Start"/>
-            <Entry x:Name="entRPMEnd"                     
-                   BackgroundColor="{StaticResource Primary}"
-                   WidthRequest="150"
-                   TextColor="White"
-                   Text="{Binding RPMFin}"
-                   HorizontalTextAlignment="Center"
-                   HorizontalOptions="CenterAndExpand"/>
+        <!-- Sección de duración en minutos -->
+        <StackLayout Orientation="Vertical" Margin="0,0,0,20">
+            <Label Text="Duración (en minutos)" FontSize="18" Margin="0,0,0,10"/>
+            <Frame HorizontalOptions="FillAndExpand">
+                <Grid ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="{mi:Material Icon=Timelapse}" Grid.Column="0" VerticalOptions="Center"/>
+                    <Entry x:Name="entMinsMove"
+                           Placeholder="Ingresa una duración"
+                           BackgroundColor="Transparent"
+                           TextColor="White"
+                           HeightRequest="50"
+                           PlaceholderColor="White"
+                           HorizontalOptions="FillAndExpand"
+                           Grid.Column="1"/>
+                </Grid>
+            </Frame>
         </StackLayout>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
 
-            <Picker ItemsSource="{Binding HandsPositions}"
-                    SelectedItem="{Binding SelectedHandsPosition}"
-                    WidthRequest="100"
-                    HeightRequest="100"
-                    Grid.Column="0"
-                    Background="{StaticResource BackgroundFrame}"/>
-        </Grid>
+        <!-- Sección de valores RPM -->
+        <StackLayout Orientation="Vertical" Margin="0,0,0,20">
+            <Label Text="Valores RPM" FontSize="18" Margin="0,0,0,10"/>
+            <Grid ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-        <StackLayout Orientation="Horizontal" 
-                     Margin="30,10,30,10">
+                <Frame HorizontalOptions="FillAndExpand" Grid.Column="0">
+                    <Grid ColumnSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text="Medio" VerticalOptions="Center"/>
+
+
+
+                        <Entry x:Name="entRMPMed"
+                               WidthRequest="100"
+                               BackgroundColor="Transparent"
+                               TextColor="White"
+                               Text="{Binding RPMMed}"
+                               Placeholder="RPM Med."
+                               HorizontalOptions="FillAndExpand"
+                               Margin="10,0,0,0"
+                               Grid.Column="1"/>
+
+                    </Grid>
+                </Frame>
+
+                <Frame HorizontalOptions="FillAndExpand" Grid.Column="1">
+                    <Grid ColumnSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Máx." Grid.Column="0" VerticalOptions="Center"/>
+                        <Entry x:Name="entRPMEnd"
+                               WidthRequest="100"
+                               BackgroundColor="Transparent"
+                               TextColor="White"
+                               Text="{Binding RPMFin}"
+                               HorizontalOptions="FillAndExpand"
+                               Placeholder="RPM Máx."
+                               Grid.Column="1"/>
+                    </Grid>
+                </Frame>
+            </Grid>
+        </StackLayout>
+
+        <!-- Sección de posición de manos -->
+        <StackLayout Orientation="Vertical" Margin="0,0,0,20">
+            <Label Text="Posición de Manos" FontSize="18" Margin="0,0,0,10"/>
+            <Frame HorizontalOptions="FillAndExpand">
+                <Grid ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="{mi:Material Icon=SignLanguage}" Grid.Column="0" VerticalOptions="Center"/>
+                    <Picker ItemsSource="{Binding HandsPositions}"
+                            SelectedItem="{Binding SelectedHandsPosition}"
+                            BackgroundColor="Transparent"
+                            HorizontalOptions="FillAndExpand"
+                            Title="Selecciona una posición de manos"
+                            HeightRequest="50"
+                            Grid.Column="1"/>
+                </Grid>
+            </Frame>
+        </StackLayout>
+
+        <!-- Botón Agregar -->
+        <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
             <Button Text="Agregar"
                     BackgroundColor="{StaticResource Primary}"
                     TextColor="White"
