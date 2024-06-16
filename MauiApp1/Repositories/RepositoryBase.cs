@@ -87,7 +87,7 @@ namespace SpinningTrainer.Repositories
             {
                 bool usuarios, datosEmpresa;
 
-                usuarios = ComprobarObjetosBaseDeDatos("Usuarios");                
+                usuarios = ComprobarObjetosBaseDeDatos("Usuario");                
                 datosEmpresa = ComprobarObjetosBaseDeDatos("DatosEmpresa");
 
 
@@ -121,9 +121,9 @@ namespace SpinningTrainer.Repositories
             {
                 string query = "";
 
-                if (objeto == "Usuarios")
+                if (objeto == "Usuario")
                 {
-                    query = "CREATE TABLE Usuarios(\n" +
+                    query = "CREATE TABLE Usuario(\n" +
                             "[ID] [int] IDENTITY(1,1) NOT NULL,\n" +
                             "[CodUsua] [varchar](20) NOT NULL,\n" +
                             "[Descrip] [varchar](300) NOT NULL,\n" +
@@ -140,7 +140,7 @@ namespace SpinningTrainer.Repositories
                             "   [ID] ASC\n" +
                             ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\n" +
                             ") ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]\n" +                                                 
-                            "INSERT INTO Usuarios(CodUsua,Descrip,Contra,PIN,Email,Telef,FechaC,FechaR,FechaV,TipoUsuario)\n" +
+                            "INSERT INTO Usuario(CodUsua,Descrip,Contra,PIN,Email,Telef,FechaC,FechaR,FechaV,TipoUsuario)\n" +
                             "VALUES('SU', 'SUPER USUARIO', ENCRYPTBYPASSPHRASE('12345', '123456'),ENCRYPTBYPASSPHRASE('12345', '1234'), '', '', GETDATE(), '', '', 0)\n";
                 }
                 else if(objeto == "DatosEmpresa")
@@ -148,8 +148,7 @@ namespace SpinningTrainer.Repositories
                     query = "CREATE TABLE DatosEmpresa(\n" +
                             "[RIF] [varchar] (30),\n" +
                             "[Descrip] [varchar] (80),\n" +
-                            "[Direc] [varchar] (160),\n" +
-                            "[Logo] [varbinary] (MAX))\n";
+                            "[Direc] [varchar] (160),\n";
                 }
                 
                 using (SqlCommand cmd = new SqlCommand(query, connection))
