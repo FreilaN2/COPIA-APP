@@ -135,7 +135,7 @@ namespace SpinningTrainer.Repositories
                             "[FechaR] [datetime] NULL,\n" +
                             "[FechaV] [datetime] NULL,\n" +
                             "[TipoUsuario] [smallint] NULL\n" +
-                            "CONSTRAINT [PK_Usuarios_1] PRIMARY KEY CLUSTERED\n" +
+                            "CONSTRAINT [PK_Usuario_1] PRIMARY KEY CLUSTERED\n" +
                             "(\n" +
                             "   [ID] ASC\n" +
                             ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\n" +
