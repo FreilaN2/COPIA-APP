@@ -118,7 +118,7 @@
                 </Grid.ColumnDefinitions>
 
                 <ImageButton Source="{mi:Material Icon=DocumentScanner}" 
-             Margin="0,2,10,3"/>
+             Margin="0,8,10,3"/>
 
                 <Frame Grid.Column="1" Margin="10,-30,10,0" CornerRadius="150" BackgroundColor="{StaticResource Primary}">
                     <Button x:Name="btnCreateNewSession"
@@ -129,13 +129,11 @@
                             Clicked="btnCreateNewSession_Clicked"/>
                 </Frame>
 
-                <Button Grid.Column="2"
+                <ImageButton Grid.Column="2"
                         x:Name="btnViewReports"
                         BorderWidth="0"
-                        ImageSource="charticon.png"                        
-                        WidthRequest="1"
-                        HeightRequest="1"
-                        Margin="0,-10,0,0"
+                        Source="{mi:Material Icon=ReceiptLong}" 
+                        Margin="15,5,10,1"
                         Clicked="btnViewReports_Clicked"/>
             </Grid>
         </HorizontalStackLayout>

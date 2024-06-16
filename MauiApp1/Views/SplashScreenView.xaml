@@ -2,17 +2,17 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SpinningTrainer.Views.SplashScreenView"            
-             Background="{StaticResource Primary}"
+             Background="{StaticResource PrimaryDark}"
              Appearing="ContentPage_Appearing">
     <VerticalStackLayout>
         <Image Source="logoapp.png"/>
         
-        <Label Text="Spinning Trainer" 
+        <Label Text="Spin Trainer" 
                HorizontalTextAlignment="Center"
                FontSize="35"/>
 
         <Label x:Name="lblMuestraMensajeCargandoAlUsuario"
-               Text="Spinning Trainer" 
+               Text="Spin Trainer" 
                Margin="5,30,5,0"
                HorizontalTextAlignment="Center"
                FontSize="15"/>

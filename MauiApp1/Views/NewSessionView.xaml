@@ -22,7 +22,7 @@
                    TextColor="White"
                    HorizontalOptions="Start"
                    VerticalOptions="Start"
-                   Margin="0"
+                   Margin="75, 1, 1, 1"
                    FontSize="24" FontAttributes="Bold" />
 
             <!-- Sección: Nombre de la sesión -->
@@ -38,6 +38,7 @@
                                BackgroundColor="Transparent"                                
                                TextColor="White" 
                                HeightRequest="50"
+                               Margin="50,0,0,5"
                                PlaceholderColor="White"/>
                     </HorizontalStackLayout>
                 </Frame>
@@ -101,7 +102,7 @@
             <!-- Botón Siguiente -->
             <Button x:Name="btnNextStep"
                     Text="Siguiente"
-                    BackgroundColor="{StaticResource Primary}"
+                    BackgroundColor="{StaticResource PrimaryDark}"
                     CornerRadius="20"
                     HeightRequest="60"
                     TextColor="White"

@@ -19,12 +19,12 @@
         <viewModel:AppShellViewModel/>
     </Shell.BindingContext>
 
-    <Shell.FlyoutBackground>#FF7500</Shell.FlyoutBackground>
+    <Shell.FlyoutBackground>#082247</Shell.FlyoutBackground>
 
     <Shell.FlyoutHeader>
         <VerticalStackLayout>
             <Image Source="logoapp.png"/>
-            <Label Text="Spinning Trainer"
+            <Label Text="Spin Trainer"
                HorizontalTextAlignment="Center"
                VerticalTextAlignment="Center"
                FontSize="Title"

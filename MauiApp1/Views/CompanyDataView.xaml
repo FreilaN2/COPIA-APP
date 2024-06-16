@@ -6,7 +6,7 @@
              x:Class="SpinningTrainer.Views.CompanyDataView"
              Title="Datos Empresa"
              
-Background="White">
+Background="{StaticResource PrimaryDark}">
 
     <ContentPage.Resources>
         <converter:NotConverter x:Key="NotConverter"/>
@@ -23,65 +23,67 @@ Background="White">
         </Grid.RowDefinitions>
 
         <VerticalStackLayout Grid.Row="0">
-            <Label Text="RIF"
+            <Label Text="RIF:"
                    Style="{StaticResource SubHeadline}"
                    FontSize="20"
                    HorizontalOptions="StartAndExpand"
-                   TextColor="{StaticResource Primary}"
+                   TextColor="White"
                    SemanticProperties.HeadingLevel="Level2"
                    SemanticProperties.Description="Usuario"/>
 
-            <Frame Margin="0,5,0,0"
-                   VerticalOptions="Center">
+            <Frame Margin="0,10,0,0"
+                   VerticalOptions="Center"
+                   BackgroundColor="{StaticResource BackgroundFrame}">
                 <Entry Text="{Binding Rif, Mode=TwoWay}"
-                       Placeholder="RIF"                       
+                       Placeholder="Ingrese el RIF de la empresa"                       
                        MaxLength="30"
                        PlaceholderColor="White"
                        IsEnabled="{Binding EditEnable}"/>
             </Frame>
             
-            <Label Text="Descripción Fiscal"
+            <Label Text="Descripción Fiscal:"
                    Style="{StaticResource SubHeadline}"
                    Margin="0,25,0,0"
                    FontSize="20"
                    HorizontalOptions="StartAndExpand"
-                   TextColor="{StaticResource Primary}"
+                   TextColor="White"
                    SemanticProperties.HeadingLevel="Level2"
                    SemanticProperties.Description="Usuario" />
 
-            <Frame Margin="0,5,0,0"
+            <Frame Margin="0,10,0,0"
                    VerticalOptions="Center"
                    HeightRequest="60">
                 <Editor Text="{Binding Descrip, Mode=TwoWay}"
-                        Placeholder="Descripción Fiscal"                        
+                        Placeholder="Ingrese la descripción fiscal de la empresa"                        
                         PlaceholderColor="White"
                         MaxLength="80"
-                        IsEnabled="{Binding EditEnable}"/>
+                        IsEnabled="{Binding EditEnable}"
+                        Margin="0,10,0,0"/>
             </Frame>
 
-            <Label Text="Dirección Fiscal"
+            <Label Text="Dirección Fiscal:"
                    Style="{StaticResource SubHeadline}"
                    Margin="0,25,0,0"
                    FontSize="20"
                    HorizontalOptions="StartAndExpand"
-                   TextColor="{StaticResource Primary}"
+                   TextColor="White"
                    SemanticProperties.HeadingLevel="Level2"
                    SemanticProperties.Description="Usuario" />
 
-            <Frame Margin="0,5,0,0"
+            <Frame Margin="0,10,0,0"
                    VerticalOptions="Center"
                    HeightRequest="90">
                 <Editor Text="{Binding Direc, Mode=TwoWay}"
-                        Placeholder="Dirección Fiscal"                        
+                        Placeholder="Ingrese la dirección fiscal de la empresa"                        
                         PlaceholderColor="White"
                         MaxLength="120"
                         IsEnabled="{Binding EditEnable}"/>
             </Frame>
 
             <Button Command="{Binding SearchImageCommand}"
-                    Margin="0,20,0,0"                    
+                    Margin="0,30,0,0"                    
                     Text="Buscar logo"
-                    Background="{StaticResource Primary}"
+                    Background="{StaticResource PrimaryDark}"
                     IsEnabled="{Binding EditEnable}"/>
             <Image Source="{Binding Logo}"
                    WidthRequest="220"
@@ -91,7 +93,7 @@ Background="White">
         <Grid Grid.Row="1">
             <Button Text="Editar"
                     TextColor="White"
-                    BackgroundColor="{StaticResource Primary}"
+                    BackgroundColor="{StaticResource PrimaryDark}"
                     IsVisible="{Binding EditEnable, Converter={StaticResource Key=NotConverter}}"
                     Command="{Binding EnableEditCommand}"/>
 
