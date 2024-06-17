@@ -5,7 +5,7 @@
              Background="{StaticResource PrimaryDark}"
              Appearing="ContentPage_Appearing">
     <VerticalStackLayout>
-        <Image Source="logoapp.png"/>
+        <Image Source="logosplash.png"/>
         
         <Label Text="Spin Trainer" 
                HorizontalTextAlignment="Center"
