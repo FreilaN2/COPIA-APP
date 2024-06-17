@@ -4,7 +4,7 @@
              xmlns:viewModel="clr-namespace:SpinningTrainer.ViewModels"
              x:Class="SpinningTrainer.View.RecoveryLoginDataView"             
              Title="Recuperación de Usuario"
-             Background="White">
+             Background="{StaticResource PrimaryDark}">
     <ContentPage.BindingContext>
         <viewModel:RecoveryLoginDataViewModel/>
     </ContentPage.BindingContext>
@@ -17,13 +17,13 @@
                              IsVisible="{Binding ShowVslRecoveryType}">
             <Label       
                 x:Name="lblRecoveryType"
-                Text="Tipo Recuperación"
+                Text="¿Qué desea recuperar?"
                 FontAttributes="Bold"
-                TextColor="{StaticResource Primary}"/>
+                TextColor="White"/>
 
             <Frame
                 x:Name="frmRecoveryType"
-                Margin="0,5,0,0">
+                Margin="0,15,0,0">
                 <Picker 
                     x:Name="pkRecoveryType"
                     Title="¿Que desea recuperar?"                    
@@ -49,11 +49,11 @@
                 Text="{Binding HelpMessage}"
                 FontAttributes="Bold"
                 Margin="0,20,0,0"
-                TextColor="{StaticResource Primary}"/>
+                TextColor="White"/>
 
             <Frame 
                 x:Name="frmRecoveryValue"
-                Margin="0,5,0,0">
+                Margin="0,15,0,0">
                 <Entry x:Name="entRecoveryValue"
                        Text="{Binding RecoveryData, Mode=TwoWay}"
                        Placeholder="{Binding PlaceholderHelpMessage}"/>
@@ -72,13 +72,13 @@
                              IsVisible="{Binding ShowVslVerifyCode}">
             <Label             
                 x:Name="lblConfirmationCode"
-                Text="Ingresar Código de Confirmación"            
+                Text="Ingrese el código de confirmación"            
                 FontAttributes="Bold"
-                TextColor="{StaticResource Primary}"/>
+                TextColor="White"/>
 
             <Frame 
                 x:Name="frmConfirmationCode"
-                Margin="0,5,0,0">
+                Margin="0,15,0,0">
                 <Entry x:Name="entConfirmationCode"
                        Text="{Binding RecoveryCodeInput, Mode=TwoWay}"/>
             </Frame>
@@ -88,14 +88,14 @@
                     Margin="0,50,0,0"
                     Text="Verificar"
                     Command="{Binding VerifyCodeInput}"                    
-                    BackgroundColor="{StaticResource Primary}"/>
+                    BackgroundColor="{StaticResource PrimaryDark}"/>
 
             <Button x:Name="btnResendCode"
                     VerticalOptions="EndAndExpand"
                     Margin="0,25,0,0"
                     Text="Reenviar Código"
                     Command="{Binding ResendRecoveryCode}"
-                    BackgroundColor="{StaticResource Primary}"/>
+                    BackgroundColor="{StaticResource PrimaryDark}"/>
         </VerticalStackLayout>
 
         <!--Actualizar Contraseña-->
@@ -103,10 +103,10 @@
                              IsVisible="{Binding ShowVslNewPassword}">
             <Label Text="Nueva Contraseña"            
                    FontAttributes="Bold"
-                   TextColor="{StaticResource Primary}"/>
+                   TextColor="White"/>
             <Frame 
                 x:Name="frmNewPassword"
-                Margin="0,5,0,0">
+                Margin="0,15,0,0">
                 <Entry x:Name="entNewPassword"
                        Text="{Binding NewPassword, Mode=TwoWay}"
                        Placeholder="Nueva Contraseña"
@@ -116,10 +116,10 @@
             <Label Margin="0,20,0,0"
                    Text="Verificar Contraseña"            
                    FontAttributes="Bold"
-                   TextColor="{StaticResource Primary}"/>
+                   TextColor="White"/>
             <Frame 
                 x:Name="frmVerifyNewPassword"
-                Margin="0,5,0,0">
+                Margin="0,15,0,0">
                 <Entry x:Name="entVerifyNewPassword"
                        Text="{Binding ConfirmNewPassword, Mode=TwoWay}"
                        Placeholder="Verificar Contraseña"
@@ -131,7 +131,7 @@
                     Margin="0,100,0,0"
                     Text="Actualizar"
                     Command="{Binding UpdateUserPassword, Mode=TwoWay}"                    
-                    BackgroundColor="{StaticResource Primary}"/>
+                    BackgroundColor="{StaticResource PrimaryDark}"/>
         </VerticalStackLayout>
 
         <Label Text="{Binding ErrorMessage}"
