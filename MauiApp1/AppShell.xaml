@@ -102,9 +102,10 @@
         FlyoutItemIsVisible="True"/>
 
         <ShellContent
-        Title="Mi Perfil"            
-        ContentTemplate="{DataTemplate view:UserDetailsView}"            
-        Icon="usuarioperfil.png"/>
+    Title="Mi Perfil"            
+    ContentTemplate="{DataTemplate view:UserProfileView}"            
+    Icon="usuarioperfil.png"/>
+
 
         <ShellContent
     Title="Ayuda"            

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SpinningTrainer.ViewModels"
+             x:Class="SpinningTrainer.Views.UserProfileView"
+             BackgroundColor="{StaticResource PrimaryDark}"
+             Title="Mi Perfil">
+
+    <ContentPage.BindingContext>
+        <vm:UserProfileViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="20">
+            <Image Source="{Binding UserProfileImage}" 
+                   HeightRequest="100" 
+                   WidthRequest="100" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center"/>
+            <Label Text="Nombre:" 
+                   TextColor="White"/>
+            <Frame>
+                <Entry Text="{Binding UserName}" 
+                       FontSize="Medium" 
+                       BackgroundColor="Transparent" 
+                       TextColor="White"/>
+            </Frame>
+            <Label Text="Correo:" 
+                   TextColor="White"/>
+            <Frame>
+                <Entry Text="{Binding UserEmail}" 
+                       FontSize="Medium" 
+                       BackgroundColor="Transparent" 
+                       TextColor="White"/>
+            </Frame>
+            <Label Text="Teléfono:" 
+                   TextColor="White"/>
+            <Frame>
+                <Entry Text="{Binding UserPhone}" 
+                       FontSize="Medium" 
+                       BackgroundColor="Transparent" 
+                       TextColor="White"/>
+            </Frame>
+            <Button Text="Cerrar Sesión" 
+                    Command="{Binding LogoutCommand}" 
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="White"
+                    HeightRequest="60"
+                    WidthRequest="120"
+                    HorizontalOptions="Center"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

@@ -11,9 +11,19 @@ namespace SpinningTrainer.ViewModels
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public void OnPropertyChanged(string propertyName)
+        protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected bool SetProperty<T>(ref T storage, T value, [System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(storage, value))
+                return false;
+
+            storage = value;
+            OnPropertyChanged(propertyName);
+            return true;
         }
     }
 }

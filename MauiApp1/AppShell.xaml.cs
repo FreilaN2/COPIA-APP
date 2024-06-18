@@ -8,6 +8,7 @@ namespace SpinningTrainer
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(MainPageView), typeof(MainPageView));
+            Routing.RegisterRoute(nameof(UserProfileView), typeof(UserProfileView)); // Nueva ruta
         }
 
         public void SetUserType(int userType)
