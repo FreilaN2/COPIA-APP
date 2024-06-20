@@ -1,36 +1,40 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SpinningTrainer.Views.SplashScreenView"            
-             Background="{StaticResource PrimaryDark}"
-             Appearing="ContentPage_Appearing">
+<ContentPage
+    x:Class="SpinningTrainer.Views.SplashScreenView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Appearing="ContentPage_Appearing"
+    Background="{StaticResource PrimaryDark}">
     <VerticalStackLayout>
-        <Image Source="logosplash.png"/>
-        
-        <Label Text="Spin Trainer" 
-               HorizontalTextAlignment="Center"
-               FontSize="35"/>
+        <Image Source="logosplash.png" />
 
-        <Label x:Name="lblMuestraMensajeCargandoAlUsuario"
-               Text="Spin Trainer" 
-               Margin="5,30,5,0"
-               HorizontalTextAlignment="Center"
-               FontSize="15"/>
-        
-        <ProgressBar x:Name="pbLoadProgress"
-                     Margin="0,10,0,0"/>
+        <Label
+            FontSize="35"
+            HorizontalTextAlignment="Center"
+            Text="SpinTrainer" />
 
-        <Label x:Name="lblTituloConsejo"
-               Text="" 
-               Margin="5,30,5,0"
-               HorizontalTextAlignment="Center"
-               FontSize="15"
-               FontAttributes="Bold"/>
+        <Label
+            x:Name="lblMuestraMensajeCargandoAlUsuario"
+            Margin="5,30,5,0"
+            FontSize="15"
+            HorizontalTextAlignment="Center"
+            Text="Spin Trainer" />
 
-        <Label x:Name="lblConsejo"
-               Text="" 
-               Margin="5,15,5,0"
-               HorizontalTextAlignment="Center"
-               FontSize="15"/>
+        <ProgressBar x:Name="pbLoadProgress" Margin="0,10,0,0" />
+
+        <Label
+            x:Name="lblTituloConsejo"
+            Margin="5,30,5,0"
+            FontAttributes="Bold"
+            FontSize="15"
+            HorizontalTextAlignment="Center"
+            Text="" />
+
+        <Label
+            x:Name="lblConsejo"
+            Margin="5,15,5,0"
+            FontSize="15"
+            HorizontalTextAlignment="Center"
+            Text="" />
     </VerticalStackLayout>
 </ContentPage>

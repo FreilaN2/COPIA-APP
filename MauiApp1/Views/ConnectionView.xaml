@@ -1,100 +1,95 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SpinningTrainer.Views.ConnectionView"            
-             Background="{StaticResource PrimaryDark}">
-    
+<ContentPage
+    x:Class="SpinningTrainer.Views.ConnectionView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Background="{StaticResource PrimaryDark}">
+
     <StackLayout Padding="30,0,30,0">
-        <!--Encabezado-->
+        <!--  Encabezado  -->
         <Label
-            Text="Conexión BD"
-            Style="{StaticResource Headline}"
+            Margin="5,50,5,0"
             HorizontalOptions="Center"
-            SemanticProperties.HeadingLevel="Level1"
             SemanticProperties.Description="Conexión Base de Datos"
-            Margin="5,50,5,0"/>
-        
-        <!--Nombre del Servidor-->
+            SemanticProperties.HeadingLevel="Level1"
+            Style="{StaticResource Headline}"
+            Text="Conexión BD" />
+
+        <!--  Nombre del Servidor  -->
         <Label
-            Text="Servidor"
-            Style="{StaticResource SubHeadline}"
+            Margin="0,25,0,0"
             HorizontalOptions="Start"
-            SemanticProperties.HeadingLevel="Level2"
             SemanticProperties.Description="Dirección IP del Servidor"
-            Margin="0,25,0,0"/>
+            SemanticProperties.HeadingLevel="Level2"
+            Style="{StaticResource SubHeadline}"
+            Text="Servidor" />
 
         <Frame Margin="0,5,0,0">
-            <Entry 
-                x:Name="entNombreServidor"
-                Placeholder="Dirección IP del Servidor"/>
+            <Entry x:Name="entNombreServidor" Placeholder="Dirección IP del Servidor" />
         </Frame>
 
-        <!--Nombre de Base de Datos-->
+        <!--  Nombre de Base de Datos  -->
         <Label
-            Text="Base de Datos"
-            Style="{StaticResource SubHeadline}"
+            Margin="0,25,0,0"
             HorizontalOptions="Start"
-            SemanticProperties.HeadingLevel="Level3"
             SemanticProperties.Description="Base de Datos"
-            Margin="0,25,0,0"/>
-        
-        <Frame Margin="0,5,0,0">
-            <Entry 
-                x:Name="entNombreBaseDatos"
-                Placeholder="Nombre de la Base de Datos"/>
-        </Frame>
-
-        <!--Usuario de la Base de Datos-->
-        <Label            
-            Text="Usuario"
-            Style="{StaticResource SubHeadline}"
-            HorizontalOptions="Start"
             SemanticProperties.HeadingLevel="Level3"
-            SemanticProperties.Description="Usuario"
-            Margin="0,25,0,0"/>
+            Style="{StaticResource SubHeadline}"
+            Text="Base de Datos" />
 
         <Frame Margin="0,5,0,0">
-            <Entry 
-                x:Name="entUsuario"
-                Placeholder="Usuario de la Base de Datos"/>
+            <Entry x:Name="entNombreBaseDatos" Placeholder="Nombre de la Base de Datos" />
         </Frame>
 
-        <!--Contraseña del Usuario-->
+        <!--  Usuario de la Base de Datos  -->
         <Label
-            Text="Clave"
-            Style="{StaticResource SubHeadline}"
+            Margin="0,25,0,0"
             HorizontalOptions="Start"
+            SemanticProperties.Description="Usuario"
             SemanticProperties.HeadingLevel="Level3"
-            SemanticProperties.Description="Clave"
-            Margin="0,25,0,0"/>
+            Style="{StaticResource SubHeadline}"
+            Text="Usuario" />
 
         <Frame Margin="0,5,0,0">
-            <Entry 
-                x:Name="entClave"
-                Placeholder="Clave del Usuario"
-                IsPassword="True"/>
+            <Entry x:Name="entUsuario" Placeholder="Usuario de la Base de Datos" />
         </Frame>
-        
-        <!--Boton para Verificar conexión-->
-        <Button 
-            x:Name="btnVerificarConexion"          
-            Text="Verificar Conexión"
+
+        <!--  Contraseña del Usuario  -->
+        <Label
+            Margin="0,25,0,0"
+            HorizontalOptions="Start"
+            SemanticProperties.Description="Clave"
+            SemanticProperties.HeadingLevel="Level3"
+            Style="{StaticResource SubHeadline}"
+            Text="Clave" />
+
+        <Frame Margin="0,5,0,0">
+            <Entry
+                x:Name="entClave"
+                IsPassword="True"
+                Placeholder="Clave del Usuario" />
+        </Frame>
+
+        <!--  Boton para Verificar conexión  -->
+        <Button
+            x:Name="btnVerificarConexion"
             Margin="0,50,0,0"
-            Clicked="btnVerificarConexion_ClickedAsync"/>
-        
-        <!--Carga mientras se verifica la conexción-->
-        <ActivityIndicator 
+            Clicked="btnVerificarConexion_ClickedAsync"
+            Text="Verificar Conexión" />
+
+        <!--  Carga mientras se verifica la conexción  -->
+        <ActivityIndicator
             x:Name="aiConexionVerificandose"
-            IsVisible="True"            
-            Color="White"
-            Margin="0,20,0,0"/>
-        
-        <!--Boton para guardar conexión-->
-        <Button 
+            Margin="0,20,0,0"
+            IsVisible="True"
+            Color="White" />
+
+        <!--  Boton para guardar conexión  -->
+        <Button
             x:Name="btnGuardarConexion"
+            Margin="0,20,0,0"
+            Clicked="btnGuardarConexion_Clicked"
             IsVisible="False"
-            Text="Guardar Conexión"
-            Margin="0,20,0,0"            
-            Clicked="btnGuardarConexion_Clicked"/>
+            Text="Guardar Conexión" />
     </StackLayout>
 </ContentPage>

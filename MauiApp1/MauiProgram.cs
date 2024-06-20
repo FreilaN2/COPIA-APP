@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
 using SpinningTrainer.Views;
-using MauiIcons.FontAwesome;
 using MauiIcons.Material;
+using SkiaSharp.Views.Maui.Controls.Hosting;
+using Microcharts.Maui;
 
 namespace SpinningTrainer
 {
@@ -11,7 +12,11 @@ namespace SpinningTrainer
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
-            builder.UseMauiApp<App>().ConfigureFonts(fonts =>
+            builder
+                .UseMauiApp<App>()                
+                .UseMicrocharts()
+                .UseSkiaSharp()
+                .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");

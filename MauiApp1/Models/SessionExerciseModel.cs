@@ -11,14 +11,11 @@ namespace SpinningTrainer.Models
         public int ID { get; set; }
         public int IDSesion { get; set; }
         public int IDMovimiento { get; set; }
-        public int PosicionManos { get; set; }
-        public short TipoEjercicio { get; set; }
-        public int Fase { get; set; }
-
-        // public int RPMMin { get; set; } // Si se requiere, descomentar esta línea
+        public string DescripMov { get; set; }
+        public string ZonaDeEnergia { get; set; }
+        public string PosicionManos { get; set; }
         public int RPMMed { get; set; }
         public int RPMFin { get; set; }
-        public int DuracionSeg { get; set; }
-
+        public int DuracionMin { get; set; }
     }
 }

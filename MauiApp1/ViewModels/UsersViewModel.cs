@@ -200,15 +200,20 @@ namespace SpinningTrainer.ViewModels
 
             UserModel user = new UserModel()
             {
-                Id = SelectedUser.Id, CodUsua = NewCodUsua, Descrip = NewDescrip, Contra = NewContra, Email = NewEmail, PIN = NewPIN, Telef = NewTelef, TipoUsuario = NewTipoUsuario
+                CodUsua = NewCodUsua, Descrip = NewDescrip, Contra = NewContra, Email = NewEmail, PIN = NewPIN, Telef = NewTelef, TipoUsuario = NewTipoUsuario
             };
 
-            bool operationCompleted;
+            bool operationCompleted;            
 
             if (EditionEnable)
+            {
+                user.Id = SelectedUser.Id;
                 operationCompleted = _userRepository.Update(user);
+            }
             else
+            { 
                 operationCompleted = _userRepository.Add(user);
+            }
 
             if (operationCompleted)
             {

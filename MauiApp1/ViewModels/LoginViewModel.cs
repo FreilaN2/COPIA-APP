@@ -92,7 +92,7 @@ namespace SpinningTrainer.ViewModels
                 else if (tipoUsuario == 1) // Administrador
                     await Shell.Current.GoToAsync($"///AdminMenuView");
                 else if (tipoUsuario == 2) // Entrenador
-                    await Shell.Current.GoToAsync(nameof(MainPageView));
+                    await Shell.Current.GoToAsync($"///TrainerMenuView");
             }
             else
             {

@@ -8,6 +8,7 @@ public partial class NewSessionView : ContentPage
 	{
 		InitializeComponent();
         this.BindingContext = new SessionViewModel(false, editingSessionID);
+        dpkSessionDate.MinimumDate = DateTime.Now;        
 	}
 
     private void entSessionName_TextChanged(object sender, TextChangedEventArgs e)

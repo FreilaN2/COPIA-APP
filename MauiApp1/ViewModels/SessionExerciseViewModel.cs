@@ -1,7 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Reflection;
 using System.Windows.Input;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
+using Microcharts;
+using SkiaSharp;
 using SpinningTrainer.Models;
 using SpinningTrainer.Repositories;
 
@@ -12,24 +16,25 @@ namespace SpinningTrainer.ViewModels
         private readonly IExerciseRepository _exerciseRepository;
         private ISessionExerciseRepository _sessionExerciseRepository;
 
-        private ObservableCollection<ExerciseModel> _exercisesList;
+        private SessionModel _session;
         private ExerciseModel _selectedExercise;
+        private SessionExerciseModel _selectedSessionExercise;
+        private ImageSource _selectedHandsPositionImage;
 
         private ObservableCollection<SessionExerciseModel> _selectedExercisesList;
-        private ObservableCollection<string> _handsPositions;
-
-        private SessionModel _session;
+        private ObservableCollection<ExerciseModel> _exercisesList;
+        private ObservableCollection<string> _energyZoneList;
+        private ObservableCollection<string> _handsPositions;        
 
         private int _idMovimiento;
-        private int _posicionManos;
-        private short _tipoEjercicio;
-        private int _fase;
+        private int _posicionManos;        
         private int _rpmMed;
         private int _rpmFin;
-        private int _duracionSeg;
+        private int _duracionMin;
+        private short _tipoEjercicio;
         private string _selectedHandsPosition;
-
-        //private IEnumerable<ExerciseModel> _exercises
+        private string _selectedEnergyZone;
+        private bool _editionExerciseEnable;
 
         public SessionModel Session
         {
@@ -40,7 +45,6 @@ namespace SpinningTrainer.ViewModels
                 OnPropertyChanged(nameof(Session));                
             }
         }
-
         public int IDMovimiento
         {
             get => _idMovimiento;
@@ -51,7 +55,6 @@ namespace SpinningTrainer.ViewModels
                 ((ViewModelCommand)AddSessionExerciseCommand).RaiseCanExecuteChanged();
             }
         }
-
         public int PosicionManos
         {
             get => _posicionManos;
@@ -62,7 +65,6 @@ namespace SpinningTrainer.ViewModels
                 ((ViewModelCommand)AddSessionExerciseCommand).RaiseCanExecuteChanged();
             }
         }
-
         public short TipoEjercicio
         {
             get => _tipoEjercicio;
@@ -72,19 +74,7 @@ namespace SpinningTrainer.ViewModels
                 OnPropertyChanged(nameof(TipoEjercicio));
                 ((ViewModelCommand)AddSessionExerciseCommand).RaiseCanExecuteChanged();
             }
-        }
-
-        public int Fase
-        {
-            get => _fase;
-            set
-            {
-                _fase = value;
-                OnPropertyChanged(nameof(Fase));
-                ((ViewModelCommand)AddSessionExerciseCommand).RaiseCanExecuteChanged();
-            }
-        }
-
+        }        
         public int RPMMed
         {
             get => _rpmMed;
@@ -95,7 +85,6 @@ namespace SpinningTrainer.ViewModels
                 ((ViewModelCommand)AddSessionExerciseCommand).RaiseCanExecuteChanged();
             }
         }
-
         public int RPMFin
         {
             get => _rpmFin;
@@ -106,18 +95,69 @@ namespace SpinningTrainer.ViewModels
                 ((ViewModelCommand)AddSessionExerciseCommand).RaiseCanExecuteChanged();
             }
         }
-
-        public int DuracionSeg
+        public int DuracionMin
         {
-            get => _duracionSeg;
+            get => _duracionMin;
             set
             {
-                _duracionSeg = value;
-                OnPropertyChanged(nameof(DuracionSeg));
+                _duracionMin = value;
+                OnPropertyChanged(nameof(DuracionMin));
+                ((ViewModelCommand)AddSessionExerciseCommand).RaiseCanExecuteChanged();
+            }
+        }        
+        public ExerciseModel SelectedExercise
+        {
+            get => _selectedExercise;
+            set
+            {
+                if(_selectedExercise != value) 
+                {
+                    _selectedExercise = value;
+                    OnPropertyChanged(nameof(SelectedExercise));
+                    SelectExercise();
+                    ((ViewModelCommand)AddSessionExerciseCommand).RaiseCanExecuteChanged();
+                }
+            }
+        }
+        public string SelectedHandsPosition 
+        {
+            get => _selectedHandsPosition; 
+            set 
+            {
+                _selectedHandsPosition = value;
+                OnPropertyChanged(nameof(SelectedHandsPosition));
+                UpdateSelectedHandsPositionImage();
+                ((ViewModelCommand)AddSessionExerciseCommand).RaiseCanExecuteChanged();
+            } 
+        }
+        public string SelectedEnergyZone 
+        {
+            get => _selectedEnergyZone;
+            set 
+            {
+                _selectedEnergyZone = value;
+                OnPropertyChanged(nameof(SelectedEnergyZone));
                 ((ViewModelCommand)AddSessionExerciseCommand).RaiseCanExecuteChanged();
             }
         }
-
+        public ImageSource SelectedHandsPositionImage
+        {
+            get => _selectedHandsPositionImage; 
+            set 
+            {
+                _selectedHandsPositionImage = value;
+                OnPropertyChanged(nameof(SelectedHandsPositionImage));
+            }
+        }
+        public ObservableCollection<SessionExerciseModel> SelectedExercisesList
+        {
+            get => _selectedExercisesList;
+            set
+            {
+                _selectedExercisesList = value;
+                OnPropertyChanged(nameof(SelectedExercisesList));
+            }
+        }
         public ObservableCollection<ExerciseModel> ExercisesList
         {
             get => _exercisesList;
@@ -127,49 +167,56 @@ namespace SpinningTrainer.ViewModels
                 OnPropertyChanged(nameof(ExercisesList));
             }
         }
-
-        public ExerciseModel SelectedExercise
+        public ObservableCollection<string> EnergyZoneList
         {
-            get => _selectedExercise;
+            get => _energyZoneList;
             set
             {
-                _selectedExercise = value;
-                OnPropertyChanged(nameof(SelectedExercise));
-                SelectExercise();
+                _energyZoneList = value;
+                OnPropertyChanged(nameof(EnergyZoneList));
             }
         }
-
-        public ObservableCollection<string> HandsPositions 
+        public ObservableCollection<string> HandsPositions
         {
             get => _handsPositions;
-            set 
+            set
             {
-                _handsPositions = value; 
+                _handsPositions = value;
                 OnPropertyChanged(nameof(HandsPositions));
             }
         }
-
-        public string SelectedHandsPosition 
-        {
-            get => _selectedHandsPosition; 
+        public SessionExerciseModel SelectedSessionExercise 
+        { 
+            get => _selectedSessionExercise; 
             set 
             {
-                _selectedHandsPosition = value;
-                OnPropertyChanged(nameof(SelectedHandsPosition));
-            } 
+                _selectedSessionExercise = value;
+                OnPropertyChanged(nameof(SelectedSessionExercise));
+            }
         }
 
-        public ObservableCollection<SessionExerciseModel> SessionExercises { get; }
+        public bool EditionExerciseEnable 
+        {
+            get => _editionExerciseEnable; 
+            set 
+            {
+                _editionExerciseEnable = value; 
+                OnPropertyChanged(nameof(EditionExerciseEnable));  
+            }
+        }
+
         public ICommand AddSessionExerciseCommand { get; }        
+        public ICommand RemoveSessionExerciseCommand { get; }
 
         public SessionExerciseViewModel(SessionModel session, bool isEditing)
         {                        
             _sessionExerciseRepository = new SessionExerciseRepository();
             _exerciseRepository = new ExerciseRepository();
-            
-            SessionExercises = new ObservableCollection<SessionExerciseModel>();            
+
+            SelectedExercisesList = new ObservableCollection<SessionExerciseModel>();
             ExercisesList = new ObservableCollection<ExerciseModel>();
             HandsPositions = new ObservableCollection<string>();
+            EnergyZoneList = new ObservableCollection<string>();            
 
             LoadExercises();            
             Session = session;
@@ -178,19 +225,22 @@ namespace SpinningTrainer.ViewModels
                 LoadSessionExercises();
             }
 
-            AddSessionExerciseCommand = new ViewModelCommand(ExecuteAddSessionExerciseCommand, CanExecuteAddSessionExerciseCommand);                        
-        }
+            if (EditionExerciseEnable)
+            {
 
+            }
+
+            AddSessionExerciseCommand = new ViewModelCommand(ExecuteAddSessionExerciseCommand, CanExecuteAddSessionExerciseCommand);
+            RemoveSessionExerciseCommand = new ViewModelCommand(ExecuteRemoveSessionExerciseCommand);
+        }
+        
         private bool CanExecuteAddSessionExerciseCommand(object obj)
         {
-            return true;
-            //return IDMovimiento > 0 &&
-            //       PosicionManos > 0 &&
-            //       TipoEjercicio > 0 &&
-            //       Fase > 0 &&
-            //       RPMMed >= 0 &&
-            //       RPMFin >= 0 &&
-            //       DuracionSeg > 0;
+            if (SelectedExercise == null || SelectedHandsPosition == null || DuracionMin == 0 ||
+                RPMFin == 0 || RPMMed == 0 || string.IsNullOrEmpty(SelectedEnergyZone))
+                return false;
+            else
+                return true;
         }
 
         private void ExecuteAddSessionExerciseCommand(object obj)
@@ -198,16 +248,23 @@ namespace SpinningTrainer.ViewModels
             SessionExerciseModel newSessionExercise = new SessionExerciseModel
             {
                 IDSesion = this.Session.ID,
-                IDMovimiento = IDMovimiento,
-                PosicionManos = PosicionManos,
-                TipoEjercicio = TipoEjercicio,
-                Fase = Fase,
+                IDMovimiento = this.SelectedExercise.ID,
+                DescripMov = this.SelectedExercise.Descrip,
+                PosicionManos = SelectedHandsPosition,
+                ZonaDeEnergia = SelectedEnergyZone,
                 RPMMed = RPMMed,
                 RPMFin = RPMFin,
-                DuracionSeg = DuracionSeg
+                DuracionMin = DuracionMin
             };
 
-            SessionExerciseModel addedSessionMovement = _sessionExerciseRepository.Add(newSessionExercise);
+            SelectedExercisesList.Add(newSessionExercise);
+            ClearSelection();
+        }
+
+        private async void ExecuteRemoveSessionExerciseCommand(object obj)
+        {
+            SelectedExercisesList.Remove(SelectedSessionExercise);
+            await App.Current.MainPage.Navigation.PopAsync();
         }
 
         private async void LoadSessionExercises()
@@ -217,10 +274,10 @@ namespace SpinningTrainer.ViewModels
                 try
                 {
                     var exercises = _sessionExerciseRepository.GetAllBySessionID(Session.ID);
-                    SessionExercises.Clear();
+                    SelectedExercisesList.Clear();
                     foreach (var exercise in exercises)
                     {
-                        SessionExercises.Add(exercise);
+                        SelectedExercisesList.Add(exercise);
                     }
                 }
                 catch (Exception ex)
@@ -246,23 +303,66 @@ namespace SpinningTrainer.ViewModels
 
         private void SelectExercise()
         {
-            RPMMed = this.SelectedExercise.RPMMin;
-            RPMFin = this.SelectedExercise.RPMMax;
+            try
+            {                
+                RPMMed = this.SelectedExercise.RPMMin;
+                RPMFin = this.SelectedExercise.RPMMax;
 
-            var arrayHandsPositions = this.SelectedExercise.PosicionesDeManos.Split(",");
+                var arrayHandsPositions = this.SelectedExercise.PosicionesDeManos.Split(",");
 
-            foreach (var item in arrayHandsPositions)
+                HandsPositions.Clear();
+                foreach (var item in arrayHandsPositions)
+                {
+                    HandsPositions.Add(item);
+                }
+
+                var arrayEnergyZone = this.SelectedExercise.ZonasDeEnergia.Split(",");
+
+                EnergyZoneList.Clear();
+                foreach (var item in arrayEnergyZone)
+                {
+                    EnergyZoneList.Add(item);
+                }
+            }
+            catch (Exception ex)
             {
-                HandsPositions.Add(item);
+                Console.WriteLine(ex.Message);
             }            
+        }
+
+        private void UpdateSelectedHandsPositionImage()
+        {
+            if (!string.IsNullOrEmpty(SelectedHandsPosition))
+            {
+                string resourceID = $"SpinningTrainer.Resources.Images.HandsPositions.hp1.jpeg";
+                SelectedHandsPositionImage = ImageSource.FromResource(resourceID, typeof(SessionExerciseViewModel).GetTypeInfo().Assembly);
+            }
         }
 
         public void EnableEdit(SessionExerciseModel sessionExercise)
         {
-            this.SelectedExercise = _exerciseRepository.GetById(sessionExercise.ID);            
+            var exercise = _exerciseRepository.GetById(sessionExercise.IDMovimiento);
+
+            this.EditionExerciseEnable = true;
+            this.SelectedSessionExercise = sessionExercise;
+            this.SelectedExercise = ExercisesList.FirstOrDefault(item => item.Descrip == exercise.Descrip);
+            this.SelectedHandsPosition = sessionExercise.PosicionManos.ToString();
+            this.SelectedEnergyZone = sessionExercise.ZonaDeEnergia;            
             this.RPMMed = sessionExercise.RPMMed;
             this.RPMFin = sessionExercise.RPMFin;
-            this.SelectedHandsPosition = sessionExercise.PosicionManos.ToString();
+            this.DuracionMin = sessionExercise.DuracionMin;
+        }
+
+        public void ClearSelection()
+        {            
+            this.RPMFin = 0;
+            this.RPMMed = 0;            
+            this.DuracionMin = 0;
+            this.SelectedHandsPosition = null;
+            this.SelectedEnergyZone = null;
+            this.SelectedExercise = null;
+            this.SelectedSessionExercise = null;
+            this.EditionExerciseEnable = false;
         }
     }
 }

@@ -1,51 +1,65 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
-             xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
-             x:Class="SpinningTrainer.Views.MainPageView"             
-             Title="Spinning Trainer"
-             Background="{StaticResource PrimaryDark}">
+<ContentPage
+    x:Class="SpinningTrainer.Views.MainPageView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
+    Title="Spinning Trainer"
+    Background="{StaticResource PrimaryDark}">
 
     <Grid Padding="0" BackgroundColor="{StaticResource PrimaryDark}">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!-- Título -->
-        <Label Grid.Row="0"
-               Text="Mis sesiones" 
-               FontSize="24" 
-               FontAttributes="Bold" 
-               TextColor="White"
-               HorizontalOptions="Start"
-               VerticalOptions="Center"
-               Margin="10, 15, 0, 0"/>
+        <!--  Título  -->
+        <Label
+            Grid.Row="0"
+            Margin="10,15,0,0"
+            FontAttributes="Bold"
+            FontSize="24"
+            HorizontalOptions="Start"
+            Text="Mis sesiones"
+            TextColor="White"
+            VerticalOptions="Center" />
 
-        <!-- Barra de búsqueda y filtro -->
-        <Grid Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="10,10,10,5" >
+        <!--  Barra de búsqueda y filtro  -->
+        <Grid
+            Grid.Row="1"
+            Margin="10,10,10,5"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="Center">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <StackLayout Grid.Column="0" HorizontalOptions="Start">
-                <Frame HorizontalOptions="Start" VerticalOptions="Start" Padding="0">
+                <Frame
+                    Padding="0"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start">
                     <SearchBar
+                        CancelButtonColor="White"
+                        HorizontalOptions="Start"
+                        IsTextPredictionEnabled="True"
                         Placeholder="Buscar por nombre..."
                         PlaceholderColor="White"
-                        CancelButtonColor="White"
                         TextColor="White"
-                        IsTextPredictionEnabled="True"
-                        HorizontalOptions="Start"
                         VerticalOptions="Start"
-                        WidthRequest="220"/>
+                        WidthRequest="220" />
                 </Frame>
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal" Grid.Column="1"  VerticalOptions="Center" Spacing="-6" Margin="10,0,0,0">
+            <StackLayout
+                Grid.Column="1"
+                Margin="10,0,0,0"
+                Orientation="Horizontal"
+                Spacing="-6"
+                VerticalOptions="Center">
                 <Frame HorizontalOptions="Fill">
                     <StackLayout Orientation="Horizontal">
                         <Image Source="{mi:Material Icon=Event}" />
@@ -55,49 +69,68 @@
             </StackLayout>
         </Grid>
 
-        <!-- Lista de Sesiones -->
-        <ListView Grid.Row="2"
-                  ItemsSource="{Binding infoSesiones}"
-                  x:Name="lvInfoSesiones"
-                  HorizontalOptions="FillAndExpand"
-                  VerticalOptions="FillAndExpand"
-                  Margin="10,0,10,0"
-                  SeparatorColor="{StaticResource Primary}"
-                  RowHeight="122"
-                  SelectionMode="None">
+        <!--  Lista de Sesiones  -->
+        <ListView
+            x:Name="lvInfoSesiones"
+            Grid.Row="2"
+            Margin="10,0,10,0"
+            HorizontalOptions="FillAndExpand"
+            ItemsSource="{Binding infoSesiones}"
+            RowHeight="122"
+            SelectionMode="None"
+            SeparatorColor="Transparent"
+            VerticalOptions="FillAndExpand">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell AutomationId="{Binding Id}">
-                        <Frame Margin="0,10" CornerRadius="5" BackgroundColor="{StaticResource BackgroundFrame}">
+                        <Frame
+                            Margin="0,10"
+                            BackgroundColor="{StaticResource BackgroundFrame}"
+                            CornerRadius="5">
                             <StackLayout Padding="10">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <Label Text="Nombre de Sesión"
-                                           FontAttributes="Bold"
-                                           FontFamily="Tahoma"
-                                           TextColor="White"
-                                           FontSize="18"
-                                           VerticalOptions="Center"
-                                           Grid.Column="0"/>
-                                    <ImageButton Source="{mi:Material Icon=MoreHoriz}"
-                                                 WidthRequest="30"
-                                                 HeightRequest="30"
-                                                 Clicked="ImageButton_Clicked"
-                                                 Grid.Column="1"/>
+                                    <Label
+                                        Grid.Column="0"
+                                        FontAttributes="Bold"
+                                        FontFamily="Tahoma"
+                                        FontSize="18"
+                                        Text="Nombre de Sesión"
+                                        TextColor="White"
+                                        VerticalOptions="Center" />
+                                    <ImageButton
+                                        Grid.Column="1"
+                                        Clicked="ImageButton_Clicked"
+                                        HeightRequest="30"
+                                        Source="{mi:Material Icon=MoreHoriz}"
+                                        WidthRequest="30" />
                                 </Grid>
 
-                                <StackLayout Orientation="Vertical" Spacing="8" Margin="0,4,0,0" Opacity="0.8">
+                                <StackLayout
+                                    Margin="0,4,0,0"
+                                    Opacity="0.8"
+                                    Orientation="Vertical"
+                                    Spacing="8">
                                     <StackLayout Orientation="Horizontal" Spacing="2">
-                                        <Image Source="{mi:Material Icon=Event}" HeightRequest="20"/>
-                                        <Label Text="DD-MM-YYYY" FontFamily="Tahoma" TextColor="White" FontSize="14" />
+                                        <Image HeightRequest="20" Source="{mi:Material Icon=Event}" />
+                                        <Label
+                                            FontFamily="Tahoma"
+                                            FontSize="14"
+                                            Text="DD-MM-YYYY"
+                                            TextColor="White" />
                                     </StackLayout>
 
-                                    <StackLayout Orientation="Horizontal" Spacing="2" >
-                                        <Image Source="{mi:Material Icon=Schedule}" HeightRequest="20"/>
-                                        <Label Text="HH:MM:SS" FontFamily="Tahoma" TextColor="White" FontSize="14" FontAttributes="Italic"/>
+                                    <StackLayout Orientation="Horizontal" Spacing="2">
+                                        <Image HeightRequest="20" Source="{mi:Material Icon=Schedule}" />
+                                        <Label
+                                            FontAttributes="Italic"
+                                            FontFamily="Tahoma"
+                                            FontSize="14"
+                                            Text="HH:MM:SS"
+                                            TextColor="White" />
                                     </StackLayout>
 
                                 </StackLayout>
@@ -108,33 +141,41 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <!-- Barra de botones -->
-        <HorizontalStackLayout Grid.Row="3" BackgroundColor="{StaticResource BackgroundFrame}" HeightRequest="50">
+        <!--  Barra de botones  -->
+        <HorizontalStackLayout
+            Grid.Row="3"
+            BackgroundColor="{StaticResource BackgroundFrame}"
+            HeightRequest="50">
             <Grid HorizontalOptions="Center">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="140"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="140"/>
+                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="140" />
                 </Grid.ColumnDefinitions>
 
-                <ImageButton Source="{mi:Material Icon=DocumentScanner}" 
-             Margin="0,8,10,3"/>
+                <ImageButton Margin="0,8,10,3" Source="{mi:Material Icon=DocumentScanner}" />
 
-                <Frame Grid.Column="1" Margin="10,-30,10,0" CornerRadius="150" BackgroundColor="{StaticResource Primary}">
-                    <Button x:Name="btnCreateNewSession"
-                            ImageSource="mas"
-                            WidthRequest="50"
-                            HeightRequest="50"
-                            BorderWidth="0"
-                            Clicked="btnCreateNewSession_Clicked"/>
+                <Frame
+                    Grid.Column="1"
+                    Margin="10,-30,10,0"
+                    BackgroundColor="{StaticResource Primary}"
+                    CornerRadius="150">
+                    <Button
+                        x:Name="btnCreateNewSession"
+                        BorderWidth="0"
+                        Clicked="btnCreateNewSession_Clicked"
+                        HeightRequest="50"
+                        ImageSource="mas"
+                        WidthRequest="50" />
                 </Frame>
 
-                <ImageButton Grid.Column="2"
-                        x:Name="btnViewReports"
-                        BorderWidth="0"
-                        Source="{mi:Material Icon=ReceiptLong}" 
-                        Margin="15,5,10,1"
-                        Clicked="btnViewReports_Clicked"/>
+                <ImageButton
+                    x:Name="btnViewReports"
+                    Grid.Column="2"
+                    Margin="15,5,10,1"
+                    BorderWidth="0"
+                    Clicked="btnViewReports_Clicked"
+                    Source="{mi:Material Icon=ReceiptLong}" />
             </Grid>
         </HorizontalStackLayout>
     </Grid>

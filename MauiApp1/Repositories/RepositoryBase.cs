@@ -85,19 +85,34 @@ namespace SpinningTrainer.Repositories
 
             try
             {
-                bool usuarios, datosEmpresa;
+                bool usuario, datoEmpresa, movimiento, sesion, movimientoSesion;
 
-                usuarios = ComprobarObjetosBaseDeDatos("Usuario");                
-                datosEmpresa = ComprobarObjetosBaseDeDatos("DatosEmpresa");
+                usuario = ComprobarObjetosBaseDeDatos("Usuario");                
+                datoEmpresa = ComprobarObjetosBaseDeDatos("DatosEmpresa");
+                movimiento = ComprobarObjetosBaseDeDatos("Movimiento");
+                sesion = ComprobarObjetosBaseDeDatos("Sesion");
+                movimientoSesion = ComprobarObjetosBaseDeDatos("MovimientoSesion ");
 
 
-                if (!usuarios)
+                if (!usuario)
                 {
-                    CreaObjetosBaseDatos("Usuarios");
+                    CreaObjetosBaseDatos("Usuario");
                 }
-                if (!datosEmpresa)
+                if (!datoEmpresa)
                 {
                     CreaObjetosBaseDatos("DatosEmpresa");
+                }
+                if (!movimiento)
+                {
+                    CreaObjetosBaseDatos("Movimiento");
+                }
+                if (!sesion)
+                {
+                    CreaObjetosBaseDatos("Sesion");
+                }
+                if (!movimientoSesion)
+                {
+                    CreaObjetosBaseDatos("MovimientoSesion");
                 }
 
                 comprobacionExitosa = true;
@@ -123,32 +138,68 @@ namespace SpinningTrainer.Repositories
 
                 if (objeto == "Usuario")
                 {
-                    query = "CREATE TABLE Usuario(\n" +
-                            "[ID] [int] IDENTITY(1,1) NOT NULL,\n" +
-                            "[CodUsua] [varchar](20) NOT NULL,\n" +
-                            "[Descrip] [varchar](300) NOT NULL,\n" +
-                            "[Contra] [varbinary](max) NULL,\n" +
-                            "[PIN] [varbinary](max) NULL,\n" +
-                            "[Email] [varchar](120) NULL,\n" +
-                            "[Telef] [varchar](20) NULL,\n" +
-                            "[FechaC] [datetime] NULL,\n" +
-                            "[FechaR] [datetime] NULL,\n" +
-                            "[FechaV] [datetime] NULL,\n" +
-                            "[TipoUsuario] [smallint] NULL\n" +
-                            "CONSTRAINT [PK_Usuario_1] PRIMARY KEY CLUSTERED\n" +
-                            "(\n" +
-                            "   [ID] ASC\n" +
-                            ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\n" +
-                            ") ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]\n" +                                                 
+                    query = "CREATE TABLE Usuario (\n" +
+                            "   ID INT IDENTITY(0,1) PRIMARY KEY NOT NULL ,\n" +
+                            "   CodUsua VARCHAR(20),\n" +
+                            "   Descrip VARCHAR(300) NOT NULL,\n" +
+                            "   Contra VARBINARY(MAX) NOT NULL,\n" +
+                            "   PIN VARBINARY(MAX),\n" +
+                            "   Email VARCHAR(120) NOT NULL,\n" +
+                            "   Telef VARCHAR(20) NULL,\n" +
+                            "   FechaC DATETIME NOT NULL,\n" +
+                            "   FechaR DATETIME NOT NULL,\n" +
+                            "   FechaV DATETIME NOT NULL,\n" +
+                            "   TipoUsuario SMALLINT NOT NULL,\n" +
+                            ");\n" +                                                 
                             "INSERT INTO Usuario(CodUsua,Descrip,Contra,PIN,Email,Telef,FechaC,FechaR,FechaV,TipoUsuario)\n" +
                             "VALUES('SU', 'SUPER USUARIO', ENCRYPTBYPASSPHRASE('12345', '123456'),ENCRYPTBYPASSPHRASE('12345', '1234'), '', '', GETDATE(), '', '', 0)\n";
                 }
                 else if(objeto == "DatosEmpresa")
                 {
-                    query = "CREATE TABLE DatosEmpresa(\n" +
-                            "[RIF] [varchar] (30),\n" +
-                            "[Descrip] [varchar] (80),\n" +
-                            "[Direc] [varchar] (160),\n";
+                    query = "CREATE TABLE DatosEmpresa (\n" +
+                            "   Rif VARCHAR(30) PRIMARY KEY NOT NULL,\n" +
+                            "   Descrip VARCHAR(80) NOT NULL,\n" +
+                            "   Direccion VARCHAR(160),\n" +
+                            ");\n";
+                }
+                else if(objeto == "Movimiento")
+                {
+                    query = "CREATE TABLE Movimiento (\n" +
+                            "   ID INT IDENTITY(0,1) PRIMARY KEY NOT NULL,\n" +
+                            "   Descrip VARCHAR(60) NOT NULL,\n" +
+                            "   ZonasDeEnergia VARCHAR(160) NOT NULL,\n" +
+                            "   RPMMin INT NOT NULL,\n" +
+                            "   RPMMax INT NOT NULL,\n" +
+                            "   PosicionesDeManos VARCHAR(50) NOT NULL\n" +
+                            ");\n";
+                }
+                else if(objeto == "Sesion")
+                {
+                    query = "CREATE TABLE Sesion (\n" +
+                            "   ID INT IDENTITY(0,1) PRIMARY KEY NOT NULL,\n" +
+                            "   IDEntrenador INT NOT NULL,\n" +
+                            "   Descrip VARCHAR(120) NOT NULL,\n" +
+                            "   FechaC DATETIME NOT NULL,\n" +
+                            "   FechaI DATETIME NOT NULL,\n" +
+                            "   Duracion INT NOT NULL,\n" +
+                            "   EsPlantilla SMALLINT NOT NULL,\n" +
+                            "   FOREIGN KEY (IDEntrenador) REFERENCES Usuario(ID) ON DELETE CASCADE -- Relación con la tabla Usuario\n" +
+                            ");\n";
+                }
+                else if(objeto == "MovimientoSesion")
+                {
+                    query = "CREATE TABLE MovimientoSesion (\n" +
+                            "   ID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,\n" +
+                            "   IDSesion INT NOT NULL,\n" +
+                            "   IDMovimiento INT NOT NULL,\n" +
+                            "   ZonaDeEnergia VARCHAR(160) NOT NULL,\n" +
+                            "   PosicionManos INT NOT NULL,\n" +
+                            "   RPMMed INT NOT NULL,\n" +
+                            "   RPMFin INT NOT NULL,\n" +
+                            "   DuracionMin INT NOT NULL,\n" +
+                            "   FOREIGN KEY (IDSesion) REFERENCES Sesion(ID) ON DELETE CASCADE, -- Relación con la tabla Sesiones\n" +
+                            "   FOREIGN KEY (IDMovimiento) REFERENCES Movimiento(ID) ON DELETE CASCADE, -- Relación con la tabla Movimientos\n" +
+                            ");\n";
                 }
                 
                 using (SqlCommand cmd = new SqlCommand(query, connection))

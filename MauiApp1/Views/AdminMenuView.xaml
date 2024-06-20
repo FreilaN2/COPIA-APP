@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SpinningTrainer.Views.AdminMenuView"
-             Title="Administrador">
+<ContentPage
+    x:Class="SpinningTrainer.Views.AdminMenuView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Administrador">
     <Grid BackgroundColor="{StaticResource PrimaryDark}">
-        
-        <StackLayout HorizontalOptions="Center" 
-                     Spacing="75"
-                     Margin="0,300,0,0">
 
-            <Button Text="Gestión de Empresa" 
-                    Background="{StaticResource PrimaryDark}" 
-                    TextColor="White" 
-                    FontSize="26" 
-                    CornerRadius="20" 
-                    WidthRequest="300" 
-                    HeightRequest="80" 
-                    HorizontalOptions="Center"
-                    x:Name="btnOpenDataManagment"
-                    Clicked="btnOpenDataManagment_Clicked"/>
+        <StackLayout
+            Margin="0,300,0,0"
+            HorizontalOptions="Center"
+            Spacing="75">
+
+            <Button
+                x:Name="btnOpenDataManagment"
+                Background="{StaticResource PrimaryDark}"
+                Clicked="btnOpenDataManagment_Clicked"
+                CornerRadius="20"
+                FontSize="26"
+                HeightRequest="80"
+                HorizontalOptions="Center"
+                Text="Gestión de Empresa"
+                TextColor="White"
+                WidthRequest="300" />
         </StackLayout>
 
     </Grid>

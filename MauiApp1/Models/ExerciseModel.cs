@@ -10,10 +10,12 @@ namespace SpinningTrainer.Models
     {
         public int ID { get; set; }
         public string Descrip { get; set; }
-        public short TipoMov { get; set; }
+        public string ZonasDeEnergia { get; set; }
         public int RPMMin { get; set; }
-        // public int RPMMed { get; set; } // Si se requiere, descomentar esta línea
+
         public int RPMMax { get; set; }
         public string PosicionesDeManos { get; set; }
+
+        
     }
 }

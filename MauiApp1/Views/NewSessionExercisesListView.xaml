@@ -36,21 +36,10 @@
                     x:Name="lvSessionExercises"
                     Margin="10,0"
                     BackgroundColor="Transparent"
+                    ItemTapped="lvSessionExercises_ItemTapped"
+                    ItemsSource="{Binding SelectedExercisesList}"
+                    SelectedItem="{Binding SelectedSessionExercise}"
                     VerticalOptions="FillAndExpand">
-                    <ListView.Header>
-                        <Grid Padding="5" BackgroundColor="{StaticResource Primary}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="{mi:Material Icon=DirectionsBike}" HeightRequest="24" VerticalOptions="Center" />
-                            <Label Grid.Column="1" Text="Duración (min)" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" />
-                            <Label Grid.Column="2" Text="RPM Inicial" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" />
-                            <Label Grid.Column="3" Text="RPM Final" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" />
-                        </Grid>
-                    </ListView.Header>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -61,10 +50,26 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Image Grid.Column="0" Source="{mi:Material Icon=DirectionsBike}" HeightRequest="24" VerticalOptions="Center" />
-                                    <Label Grid.Column="1" Text="{Binding Duration}" HorizontalOptions="Center" VerticalOptions="Center" />
-                                    <Label Grid.Column="2" Text="{Binding StartRPM}" HorizontalOptions="Center" VerticalOptions="Center" />
-                                    <Label Grid.Column="3" Text="{Binding FinalRPM}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="0"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding DescripMov}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="1"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding DuracionMin}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="2"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding RPMMed}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="3"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding RPMFin}"
+                                        VerticalOptions="Center" />
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>

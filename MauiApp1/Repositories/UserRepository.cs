@@ -127,7 +127,7 @@ namespace SpinningTrainer.Repositories
                                "WHERE CodUsua = @username";
 
                 using (SqlCommand cmd = new SqlCommand(query, connection))
-                {
+                {   
                     try
                     {
                         cmd.Parameters.AddWithValue("@username", username);
@@ -143,7 +143,12 @@ namespace SpinningTrainer.Repositories
                 }
             }
         }
-
+        
+        /// <summary>
+        /// Actualiza el usuario en la base de datos.
+        /// </summary>
+        /// <param name="userModel">Modelo de datos del usuario a actualizar.</param>
+        /// <returns>True si fue exitoso, false si no.</returns>
         public bool Update(UserModel userModel)
         {
             try
@@ -182,7 +187,8 @@ namespace SpinningTrainer.Repositories
                 return false;
             }
         }
-
+             
+       
         public bool Add(UserModel userModel)
         {
             try

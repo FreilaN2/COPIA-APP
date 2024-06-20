@@ -1,121 +1,128 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
- x:Class="SpinningTrainer.AppShell"
- xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
- xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"    
- xmlns:view="clr-namespace:SpinningTrainer.Views"
- xmlns:viewModel="clr-namespace:SpinningTrainer.ViewModels"
- Shell.FlyoutBehavior="Flyout"
- Shell.FlyoutBackdrop="Transparent"
- Shell.BackgroundColor="{StaticResource Primary}"
- Shell.ForegroundColor="White"
- Shell.TitleColor="White"
- Shell.FlyoutWidth="250"   
- Shell.NavBarHasShadow="True"    
- Shell.TabBarIsVisible="False"    
- Title="SpinningTrainer">
+    x:Class="SpinningTrainer.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:view="clr-namespace:SpinningTrainer.Views"
+    xmlns:viewModel="clr-namespace:SpinningTrainer.ViewModels"
+    Title="SpinningTrainer"
+    Shell.BackgroundColor="{StaticResource Primary}"
+    Shell.FlyoutBackdrop="Transparent"
+    Shell.FlyoutBehavior="Flyout"
+    Shell.FlyoutWidth="250"
+    Shell.ForegroundColor="White"
+    Shell.NavBarHasShadow="True"
+    Shell.TabBarIsVisible="False"
+    Shell.TitleColor="White">
 
     <Shell.BindingContext>
-        <viewModel:AppShellViewModel/>
+        <viewModel:AppShellViewModel />
     </Shell.BindingContext>
 
     <Shell.FlyoutBackground>#082247</Shell.FlyoutBackground>
 
     <Shell.FlyoutHeader>
         <VerticalStackLayout>
-            <Image Source="logoapp.png"/>
-            <Label Text="Spin Trainer"
-               HorizontalTextAlignment="Center"
-               VerticalTextAlignment="Center"
-               FontSize="Title"
-               Margin="0,-20,0,20"/>
+            <Image Source="logosplash.png" />
+            <Label
+                Margin="0,-20,0,20"
+                FontSize="Title"
+                HorizontalTextAlignment="Center"
+                Text="SpinTrainer"
+                VerticalTextAlignment="Center" />
         </VerticalStackLayout>
     </Shell.FlyoutHeader>
 
-    <ShellContent                
-    ContentTemplate="{DataTemplate view:SplashScreenView}"
-    Route="SplashScreenView"             
-    Shell.FlyoutBehavior="Disabled"
-    FlyoutItemIsVisible="False"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate view:SplashScreenView}"
+        FlyoutItemIsVisible="False"
+        Route="SplashScreenView"
+        Shell.FlyoutBehavior="Disabled" />
 
-    <ShellContent                    
-    ContentTemplate="{DataTemplate view:LoginView}"
-    Route="LoginView"        
-    Shell.FlyoutBehavior="Disabled"
-    FlyoutItemIsVisible="False"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate view:LoginView}"
+        FlyoutItemIsVisible="False"
+        Route="LoginView"
+        Shell.FlyoutBehavior="Disabled" />
 
-    <ShellContent            
-    ContentTemplate="{DataTemplate view:ConnectionView}"
-    Route="ConnectionView"
-    Shell.FlyoutBehavior="Disabled"
-    FlyoutItemIsVisible="False"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate view:ConnectionView}"
+        FlyoutItemIsVisible="False"
+        Route="ConnectionView"
+        Shell.FlyoutBehavior="Disabled" />
 
-    <ShellContent            
-    ContentTemplate="{DataTemplate view:NewSessionView}"
-    Route="NewSessionView"
-    Shell.FlyoutBehavior="Disabled"
-    FlyoutItemIsVisible="False"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate view:NewSessionView}"
+        FlyoutItemIsVisible="False"
+        Route="NewSessionView"
+        Shell.FlyoutBehavior="Disabled" />
 
-    <ShellContent                
-    ContentTemplate="{DataTemplate view:NewUserView}"
-    Route="NewUserView"             
-    Shell.FlyoutBehavior="Disabled"
-    FlyoutItemIsVisible="False"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate view:NewUserView}"
+        FlyoutItemIsVisible="False"
+        Route="NewUserView"
+        Shell.FlyoutBehavior="Disabled" />
 
-
-
-    <FlyoutItem x:Name="SuperUserMenu" Route="SuperUserMenuView" FlyoutDisplayOptions="AsMultipleItems">
-
-        <ShellContent            
-        Title="Menu Super Usuario"            
-        ContentTemplate="{DataTemplate view:SuperUserMenuView}"            
-        Icon="casa.png"
-        FlyoutItemIsVisible="True"/>
+    <FlyoutItem
+        x:Name="SuperUserMenu"
+        FlyoutDisplayOptions="AsMultipleItems"
+        Route="SuperUserMenuView">
 
         <ShellContent
-        Title="Ayuda"            
-        ContentTemplate="{DataTemplate view:WebView}"            
-        Icon="help.png"/>
+            Title="Menu Super Usuario"
+            ContentTemplate="{DataTemplate view:SuperUserMenuView}"
+            FlyoutItemIsVisible="True"
+            Icon="casa.png" />
+
+        <ShellContent
+            Title="Ayuda"
+            ContentTemplate="{DataTemplate view:WebView}"
+            Icon="help.png" />
     </FlyoutItem>
 
-    <FlyoutItem x:Name="AdminMenu" Route="AdminMenuView" FlyoutDisplayOptions="AsMultipleItems">
-
-        <ShellContent            
-    Title="Menu Administrador"            
-    ContentTemplate="{DataTemplate view:AdminMenuView}"            
-    Icon="casa.png"
-    FlyoutItemIsVisible="True"/>
+    <FlyoutItem
+        x:Name="AdminMenu"
+        FlyoutDisplayOptions="AsMultipleItems"
+        Route="AdminMenuView">
 
         <ShellContent
-    Title="Ayuda"            
-    ContentTemplate="{DataTemplate view:WebView}"            
-    Icon="help.png"/>
+            Title="Menu Administrador"
+            ContentTemplate="{DataTemplate view:AdminMenuView}"
+            FlyoutItemIsVisible="True"
+            Icon="casa.png" />
+
+        <ShellContent
+            Title="Ayuda"
+            ContentTemplate="{DataTemplate view:WebView}"
+            Icon="help.png" />
 
     </FlyoutItem>
 
-    <FlyoutItem x:Name="TrainerMenu" Route="TrainerMenuView" FlyoutDisplayOptions="AsMultipleItems">
-
-        <ShellContent            
-        Title="Menu Principal"            
-        ContentTemplate="{DataTemplate view:MainPageView}"            
-        Icon="casa.png"
-        FlyoutItemIsVisible="True"/>
+    <FlyoutItem
+        x:Name="TrainerMenu"
+        FlyoutDisplayOptions="AsMultipleItems"
+        Route="TrainerMenuView">
 
         <ShellContent
-    Title="Mi Perfil"            
-    ContentTemplate="{DataTemplate view:UserProfileView}"            
-    Icon="usuarioperfil.png"/>
-
+            Title="Menu Principal"
+            ContentTemplate="{DataTemplate view:MainPageView}"
+            FlyoutItemIsVisible="True"
+            Icon="casa.png" />
 
         <ShellContent
-    Title="Ayuda"            
-    ContentTemplate="{DataTemplate view:WebView}"            
-    Icon="help.png"/>
+            Title="Mi Perfil"
+            ContentTemplate="{DataTemplate view:UserDetailsView}"
+            Icon="usuarioperfil.png" />
+
+        <ShellContent
+            Title="Ayuda"
+            ContentTemplate="{DataTemplate view:WebView}"
+            Icon="help.png" />
 
     </FlyoutItem>
 
     <MenuItem
-    Text="Salir"
-    IconImageSource="out.png"
-    Command="{Binding LogoutCommand}" />
+        Command="{Binding LogoutCommand}"
+        IconImageSource="out.png"
+        Text="Salir" />
 </Shell>

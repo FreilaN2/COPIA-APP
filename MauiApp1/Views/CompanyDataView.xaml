@@ -1,121 +1,135 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModel="clr-namespace:SpinningTrainer.ViewModels"
-             xmlns:converter="clr-namespace:SpinningTrainer.Resources.Converters"
-             x:Class="SpinningTrainer.Views.CompanyDataView"
-             Title="Datos Empresa"
-             
-Background="{StaticResource PrimaryDark}">
+<ContentPage
+    x:Class="SpinningTrainer.Views.CompanyDataView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converter="clr-namespace:SpinningTrainer.Resources.Converters"
+    xmlns:viewModel="clr-namespace:SpinningTrainer.ViewModels"
+    Title="Datos Empresa"
+    Background="{StaticResource PrimaryDark}">
 
     <ContentPage.Resources>
-        <converter:NotConverter x:Key="NotConverter"/>
+        <converter:NotConverter x:Key="NotConverter" />
     </ContentPage.Resources>
-    
+
     <ContentPage.BindingContext>
-        <viewModel:CompanyDataViewModel/>
+        <viewModel:CompanyDataViewModel />
     </ContentPage.BindingContext>
-    
+
     <Grid Padding="20">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="0.1*" />
         </Grid.RowDefinitions>
 
         <VerticalStackLayout Grid.Row="0">
-            <Label Text="RIF:"
-                   Style="{StaticResource SubHeadline}"
-                   FontSize="20"
-                   HorizontalOptions="StartAndExpand"
-                   TextColor="White"
-                   SemanticProperties.HeadingLevel="Level2"
-                   SemanticProperties.Description="Usuario"/>
+            <Label
+                FontSize="20"
+                HorizontalOptions="StartAndExpand"
+                SemanticProperties.Description="Usuario"
+                SemanticProperties.HeadingLevel="Level2"
+                Style="{StaticResource SubHeadline}"
+                Text="RIF:"
+                TextColor="White" />
 
-            <Frame Margin="0,10,0,0"
-                   VerticalOptions="Center"
-                   BackgroundColor="{StaticResource BackgroundFrame}">
-                <Entry Text="{Binding Rif, Mode=TwoWay}"
-                       Placeholder="Ingrese el RIF de la empresa"                       
-                       MaxLength="30"
-                       PlaceholderColor="White"
-                       IsEnabled="{Binding EditEnable}"/>
-            </Frame>
-            
-            <Label Text="Descripción Fiscal:"
-                   Style="{StaticResource SubHeadline}"
-                   Margin="0,25,0,0"
-                   FontSize="20"
-                   HorizontalOptions="StartAndExpand"
-                   TextColor="White"
-                   SemanticProperties.HeadingLevel="Level2"
-                   SemanticProperties.Description="Usuario" />
-
-            <Frame Margin="0,10,0,0"
-                   VerticalOptions="Center"
-                   HeightRequest="60">
-                <Editor Text="{Binding Descrip, Mode=TwoWay}"
-                        Placeholder="Ingrese la descripción fiscal de la empresa"                        
-                        PlaceholderColor="White"
-                        MaxLength="80"
-                        IsEnabled="{Binding EditEnable}"
-                        Margin="0,10,0,0"/>
+            <Frame
+                Margin="0,10,0,0"
+                BackgroundColor="{StaticResource BackgroundFrame}"
+                VerticalOptions="Center">
+                <Entry
+                    IsEnabled="{Binding EditEnable}"
+                    MaxLength="30"
+                    Placeholder="Ingrese el RIF de la empresa"
+                    PlaceholderColor="White"
+                    Text="{Binding Rif, Mode=TwoWay}" />
             </Frame>
 
-            <Label Text="Dirección Fiscal:"
-                   Style="{StaticResource SubHeadline}"
-                   Margin="0,25,0,0"
-                   FontSize="20"
-                   HorizontalOptions="StartAndExpand"
-                   TextColor="White"
-                   SemanticProperties.HeadingLevel="Level2"
-                   SemanticProperties.Description="Usuario" />
+            <Label
+                Margin="0,25,0,0"
+                FontSize="20"
+                HorizontalOptions="StartAndExpand"
+                SemanticProperties.Description="Usuario"
+                SemanticProperties.HeadingLevel="Level2"
+                Style="{StaticResource SubHeadline}"
+                Text="Descripción Fiscal:"
+                TextColor="White" />
 
-            <Frame Margin="0,10,0,0"
-                   VerticalOptions="Center"
-                   HeightRequest="90">
-                <Editor Text="{Binding Direc, Mode=TwoWay}"
-                        Placeholder="Ingrese la dirección fiscal de la empresa"                        
-                        PlaceholderColor="White"
-                        MaxLength="120"
-                        IsEnabled="{Binding EditEnable}"/>
+            <Frame
+                Margin="0,10,0,0"
+                HeightRequest="60"
+                VerticalOptions="Center">
+                <Editor
+                    Margin="0,10,0,0"
+                    IsEnabled="{Binding EditEnable}"
+                    MaxLength="80"
+                    Placeholder="Ingrese la descripción fiscal de la empresa"
+                    PlaceholderColor="White"
+                    Text="{Binding Descrip, Mode=TwoWay}" />
             </Frame>
 
-            <Button Command="{Binding SearchImageCommand}"
-                    Margin="0,30,0,0"                    
-                    Text="Buscar logo"
-                    Background="{StaticResource PrimaryDark}"
-                    IsEnabled="{Binding EditEnable}"/>
-            <Image Source="{Binding Logo}"
-                   WidthRequest="220"
-                   HeightRequest="220"/>
+            <Label
+                Margin="0,25,0,0"
+                FontSize="20"
+                HorizontalOptions="StartAndExpand"
+                SemanticProperties.Description="Usuario"
+                SemanticProperties.HeadingLevel="Level2"
+                Style="{StaticResource SubHeadline}"
+                Text="Dirección Fiscal:"
+                TextColor="White" />
+
+            <Frame
+                Margin="0,10,0,0"
+                HeightRequest="90"
+                VerticalOptions="Center">
+                <Editor
+                    IsEnabled="{Binding EditEnable}"
+                    MaxLength="120"
+                    Placeholder="Ingrese la dirección fiscal de la empresa"
+                    PlaceholderColor="White"
+                    Text="{Binding Direc, Mode=TwoWay}" />
+            </Frame>
+
+            <Button
+                Margin="0,30,0,0"
+                Background="{StaticResource PrimaryDark}"
+                Command="{Binding SearchImageCommand}"
+                IsEnabled="{Binding EditEnable}"
+                Text="Buscar logo" />
+            <Image
+                HeightRequest="220"
+                Source="{Binding Logo}"
+                WidthRequest="220" />
         </VerticalStackLayout>
 
         <Grid Grid.Row="1">
-            <Button Text="Editar"
-                    TextColor="White"
-                    BackgroundColor="{StaticResource PrimaryDark}"
-                    IsVisible="{Binding EditEnable, Converter={StaticResource Key=NotConverter}}"
-                    Command="{Binding EnableEditCommand}"/>
+            <Button
+                BackgroundColor="{StaticResource PrimaryDark}"
+                Command="{Binding EnableEditCommand}"
+                IsVisible="{Binding EditEnable, Converter={StaticResource Key=NotConverter}}"
+                Text="Editar"
+                TextColor="White" />
 
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                
-                <Button Text="Aceptar"
-                        TextColor="White"
-                        BackgroundColor="Green"
-                        IsVisible="{Binding EditEnable}"
-                        Command="{Binding SaveDataCommand}"
-                        Grid.Column="0"/>
 
-                <Button Text="Cancelar"
-                        TextColor="White"
-                        BackgroundColor="Red"
-                        IsVisible="{Binding EditEnable}"
-                        Command="{Binding CancelEditCommand}"
-                        Grid.Column="1"/>
+                <Button
+                    Grid.Column="0"
+                    BackgroundColor="Green"
+                    Command="{Binding SaveDataCommand}"
+                    IsVisible="{Binding EditEnable}"
+                    Text="Aceptar"
+                    TextColor="White" />
+
+                <Button
+                    Grid.Column="1"
+                    BackgroundColor="Red"
+                    Command="{Binding CancelEditCommand}"
+                    IsVisible="{Binding EditEnable}"
+                    Text="Cancelar"
+                    TextColor="White" />
             </Grid>
         </Grid>
     </Grid>
